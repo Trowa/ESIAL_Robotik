@@ -1,3 +1,12 @@
-Repository du club ESIAL Robotik participant à la coupe de france de robotique chaque année.
+Repository du club ESIAL Robotik participant a la coupe de france de robotique chaque annee.
 
-Avant d'utiliser le dépôt, merci de lire le guide d'utilisation ci-dessous
+Avant d'utiliser le depot, merci de lire le guide d'utilisation ci-dessous
+
+/**************************************************************************/
+/*								Branches								  */
+/**************************************************************************/
+	- La branche master contient des fichiers annee.txt contiendront eux la liste des
+		projets realises dans une annee, ainsi qu'une breve description.
+		
+	- Les autres branches sont les annees (ex : 2010, 2011, etc.) et contiennent les travaux realises
+		durant cette annee et les documentations associees
