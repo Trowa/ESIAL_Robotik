@@ -10,3 +10,16 @@ Avant d'utiliser le depot, merci de lire le guide d'utilisation ci-dessous.
 		
 	- Les autres branches sont les annees (ex : 2010, 2011, etc.) et contiennent les travaux realises
 		durant cette annee et les documentations associees
+		
+
+
+/**************************************************************************/
+/*								Lecon importantes						  */
+/**************************************************************************/		
+	- La base du robot DOIT etre correctement faite (donc pas decoupe a la main), c'est a dire un vrai 
+		rectangle ou carre, avec les moteurs bien centres. Sans cela, positionner le robot au depart est 
+		tres difficile. Le callage bordure est egalement un outil indispensable pour bien placer le robot 
+		et initialiser l'asservissement.
+
+	- Pour utiliser des capteurs a ultrasons, il est indispensable d'utiliser une balise cylindrique pour 
+		ne pas avoir d'angle mort dans la detection
