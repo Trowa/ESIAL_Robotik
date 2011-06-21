@@ -1,0 +1,92 @@
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+/////////////												////////////
+/////////////				README ASTAR					////////////
+/////////////					by Hiro						////////////
+/////////////												////////////
+////////////////////////////////////////////////////////////////////////
+
+Dernière mise a jour: 21 Juin 
+___________
+I Principe \
+
+L'algorithme AStar est un algorithme de recherche du plus court chemin 
+entre deux points A et B.
+Il fonctionne a partir d'une grille de position appelee "Table". Cette 
+Table et ces positions sont implementes sous la forme de structures car 
+initialement prevu pour du C.
+
+______________________________
+II Les differentes structures \
+
+a)les Positions
+
+		//	typedef struct position_struct {
+		//		
+		//		Point* pointsAtteignables;
+		//		struct position_struct* father;
+		//		unsigned int nbPoints;
+		//		unsigned char selectionable;
+		//		unsigned char inClosedList;
+		//		unsigned char inOpenedList;
+		//		unsigned char posX, posY;
+		//
+		//		//Rappel Poids=Poids pour aller jusqu'a l'etape precedente
+		//      // + dist2 + cout2
+		//
+		//		int poids;
+		//		//dist est la distance euclidienne LAISSEE au CARRE
+		//		int dist2;
+		// 	   //le cout du trajet jusqu'a la position
+		//		int cout;
+		//	} Position;
+
+
+
+Une position est une representation un emplacement spacial donne dont
+les coordonnees sont contenues dans les champs posX et posY.
+
+Une position contient :
+
+	-une liste de points atteignables a partir de cette
+	 position. On sait donc ou l'on peut aller à partir de n'importe 
+	 quelle position.
+
+	-le nombre de points contenus dans la liste precedente
+	
+	-un pointeur "father" sur la position precedente appelee position 
+	 pere
+	 
+	-un renseignement sur la possibilite de selection d'une position.
+	 Autrement dit, si une position est non selectionnable, elle ne peut
+	 etre choisi comme partie du chemin.
+	 
+	-un renseignement sur la presence de cette position dans la liste
+	 ouverte
+	 
+	-un renseignement sur la presence de cette position dans la liste
+	 fermee
+	 
+	-le poids de la position. Ainsi si le poids de la position est trop
+	 eleve, l'algorithme l'evitera si possible. Ce poids est modifiable
+	 via la methode setPoids(Position *a,int poids)
+	 Lorsque ce 
+	 
+	-la distance euclidienne LAISSEE AU CARRE entre cette position et le
+	 points d'arrivee
+
+
+b) Les Points
+
+		//	typedef struct point_struct {
+		//		unsigned char destX;
+		//		unsigned char destY;
+		//	} Point;
+
+Un point est une representation simplifiee d'une position afin de 
+reduire la taille memoire du programme.
+
+Un point est un couple de coordonnees x et y. Le nom des champs sont 
+respectivement destX et destX.
+Ils ne sont utilises que dans la structure "Position".
+
