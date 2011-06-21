@@ -1,6 +1,6 @@
-//      tout.c
+//      AStar.cpp
 //      
-//      Copyright 2011 Guillaume DI FRANCO <hiro@debian>
+//      Copyright 2011 Guillaume DI FRANCO <guillaume.di-franco@esial.net>
 //      
 //      This program is free software; you can redistribute it and/or modify
 //      it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include <stdlib.h>
 
 
-#define DEBUG //à réctiver pour ajouter les prompt débug
+//#define DEBUG //à réctiver pour ajouter les prompt débug
 using namespace std;
 
 	    int  tableWidth=3000,
@@ -49,10 +49,12 @@ typedef struct position_struct {
     unsigned char inClosedList;
     unsigned char inOpenedList;
     unsigned char posX, posY;
-    //Rappel Poids=Poids pour aller jusqu'a l'etape precedante + dist2 + cout2
+    //Rappel Poids=Poids pour aller jusqu'a l'etape precedente + dist2 + cout2
     int poids;
     //dist est la distance euclidienne LAISSEE au CARRE
     int dist2;
+    //le cout du trajet jusqu'a la position
+    int cout;
 
 
 } Position;
@@ -72,6 +74,7 @@ int calculatePoids(Position *a, Point b, int currentPoids) {
     printf("\npos.posX vaut: %d\n",pos.posX);
     printf("pos.posY vaut: %d\n",pos.posY);
     printf("pos.poids vaut: %d\n",pos.poids);
+    printf("pos.cout vaut: %d\n",pos.cout);
     printf("b.destX vaut: %d\n",b.destX);
     printf("b.destY vaut: %d\n",b.destY);
     
@@ -562,7 +565,7 @@ void Astar(Position ***table, Point *maPos, Point *maCible) {
                     tab[currentX][currentY].inOpenedList=1;
 
                     //et on met renseigne son poids
-                    tab[currentX][currentY].poids=currentPoids;
+                    tab[currentX][currentY].cout=currentPoids;
 
                     //on met &#65533; jour l'info sur le p&#65533;re
                     tab[currentX][currentY].father=&tab[posX][posY];
@@ -577,17 +580,17 @@ void Astar(Position ***table, Point *maPos, Point *maCible) {
 
                     //si il est dans l'Openlist on verifie son poids
 
-                    if (tab[currentX][currentY].poids>currentPoids) {
+                    if (tab[currentX][currentY].cout>currentPoids) {
 
-                        //si le coup est inf&#65533;rieur alors
-                        //on met &#65533; jour le poids et le p&#65533;re
+                        //si le coup est inferieur alors
+                        //on met a jour le poids et le pere
                         tab[currentX][currentY].father=&tab[posX][posY];
-                        tab[currentX][currentY].poids=currentPoids;
+                        tab[currentX][currentY].cout=currentPoids;
                         
                     } else {//on laisse telle quel
                     }
                 }
-            } else {//on fait rien puisque on passe d&#65533;j&#65533; par l&#65533; ou qu'on a dej&#65533; essay&#65533;
+            } else {//on fait rien puisque on passe deja; par la ou qu'on a deja essaye;
 
 #ifdef DEBUG
                 fprintf(handler2,"le point %d,%d est dans la liste ferm&#65533;e\n",currentX,currentY);
@@ -602,8 +605,8 @@ void Astar(Position ***table, Point *maPos, Point *maCible) {
         posX=bestX;
         posY=bestY;
         previousPoids=bestPoids;
-        //On place cette position dans la liste ferm&#65533;e
-        //on met a jour le poids et le p&#65533;re
+        //On place cette position dans la liste fermee
+        //on met a jour le poids et le pere
         tab[posX][posY].inClosedList=1;
 
 #ifdef DEBUG
