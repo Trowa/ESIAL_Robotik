@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <stack>
 #include <stdlib.h>
-
+#include <allegro.h>
 
 //#define DEBUG //à réctiver pour ajouter les prompt débug
 using namespace std;
@@ -417,7 +417,7 @@ void deroule(Position*** table, Point* posInit, Point* cible, stack<int>* pile) 
     *pile=maPile;
 }//deroule()
 
-void giveOrder(stack<int> *pile) {
+void giveOrder(stack<int> *pile, BITMAP* buffer) {
 
     //recupere les coordonnees de la prochaine destination
 
@@ -436,7 +436,7 @@ void giveOrder(stack<int> *pile) {
     //il faudra implementer la commande qui discute avec l'asservissement
     //
     //////////////////////////////////////////////////////////////////////
-    
+    circlefill(buffer, (int)x*SCREEN_W/nbColonneMax+6, (int)y*SCREEN_H/nbLigneMax+6, 5, makecol(0,255,0));
 
     //MaJ de la pile
     *pile=maPile;
@@ -633,10 +633,9 @@ void Astar(Position ***table, Point *maPos, Point *maCible) {
 
 
 
-
 int main(int argc, char **argv)
 {
-	
+	BITMAP* buffer;
 	
 		
 	    /////////////////////////////////////////////////////
@@ -665,21 +664,101 @@ int main(int argc, char **argv)
 	//printf("poids du point apres: %d\n",getPoids(&table[9][0]));
 	 printf("///////////////////////////////\n//////    ASTAR   ////////\n");
 	 Astar(&table,&maPos,&maCible);
-	 	
+	 
+	 
+	   //TODO lancer allegro
+        
+  allegro_init() ;
+  
+    //installation du clavier et de la souris
+  install_keyboard() ;
+  
+  if(install_mouse() == -1) {
+        
+    //si erreur de chargement de la souris
+    allegro_message("Erreur avec la souris! %s", allegro_error) ;
+    return 1 ;
+  }
+	 
+	 
+	   set_color_depth(16) ;
+  if(set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640, 480, 0, 0) != 0) {
+    set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
+    allegro_message("Impossible d’initialiser le mode vidéo !\n%s\n", allegro_error);
+    return 1;
+  }
+  
+    buffer = create_bitmap(SCREEN_W, SCREEN_H);
+  if (!buffer) {
+    set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
+    allegro_message ("Erreur : imposible de créer le buffer!");
+    return 1;
+  }
+  
+  for(int i=0;i<nbColonneMax;i++){
+	  
+	
+	  
+		  for(int j=0;j<nbLigneMax;j++){
+			  
+			  if(i%2==1 && j%2==1){
+					
+				 //printf("j=%d est divisible par 2",j);
+				 vline(buffer,(int)i*SCREEN_W/nbColonneMax+6,0,SCREEN_H, makecol(255,255,255));
+				 hline(buffer,0,(int)j*SCREEN_H/nbLigneMax+6,SCREEN_W, makecol(255,255,255));
+				  }
+			  
+			  /*  if(i%2==1){
+					
+				 //printf("j=%d est divisible par 2",j);
+				 vline(buffer,(int)i*SCREEN_H/nbLigneMax+6,0,SCREEN_H, makecol(255,255,255));
+				  
+				  }
+			  
+			  if(j%2==1){
+				  //printf("j=%d est divisible par 2",j);
+				 hline(buffer,0,(int)j*SCREEN_H/nbLigneMax+6,SCREEN_W, makecol(255,255,255));
+				  
+				  }*/
+			  if(table[i][j].selectionable){
+				  
+				circlefill(buffer, (int)i*SCREEN_W/nbColonneMax+6, (int)j*SCREEN_H/nbLigneMax+6, 5, makecol(255,255,255));
+			}else{
+				circlefill(buffer, (int)i*SCREEN_W/nbColonneMax+6, (int)j*SCREEN_H/nbLigneMax+6, 7, makecol(255,255,255));
+				circlefill(buffer, (int)i*SCREEN_W/nbColonneMax+6, (int)j*SCREEN_H/nbLigneMax+6, 5, makecol(255,0,0));
+				
+			}
+  
+			}
+}
+	 
+	 
      printf("///////////////////////////////\n//////    DEROULE   ////////\n");
      stack<int> maPile;
      deroule(&table,&maPos,&maCible,&maPile);
      
+     blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H) ;
      
      printf("///////////////////////////////\n//////    Give order   ////////\n");
      while (maPile.size()>0) {
+		 
+         while(!key[KEY_SPACE]);
+         while(key[KEY_SPACE]);
          //donne les ordres ? l'asservissement
-         giveOrder(&maPile);
+         giveOrder(&maPile,buffer);
+         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H) ;
+
      }
+	
+	//textprintf_ex(buffer, font,0,0,	makecol(150,255, 100), -1 , "Appuyez sur ECHAP pour quitter");
+	
+	
+	while(!key[KEY_ESC]);
 	
 	
 	free(table);
-	
+	destroy_bitmap(buffer);
+	set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
 	return 0;
 }
 
