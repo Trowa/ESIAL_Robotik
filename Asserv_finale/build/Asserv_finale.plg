@@ -1,0 +1,18 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Documents and Settings\francois\Bureau\Robotik Git\ESIAL_Robotik\Asserv_finale\Asserv_Finale.uvproj
+Project File Date:  09/19/2011
+
+<h2>Output:</h2>
+Build target 'mbed NXP LPC1768'
+compiling main.cpp...
+linking...
+Program Size: Code=9716 RO-data=876 RW-data=228 ZI-data=112  
+User command #1: fromelf --bin -o Asserv_finale.bin .\build\Asserv_finale.axf
+".\build\Asserv_finale.axf" - 0 Error(s), 0 Warning(s).
+Clean started: Project: 'Asserv_Finale'
+   deleting intermediate output files for target 'mbed NXP LPC1768'
+   deleting intermediate output files for target 'mbed NXP LPC2368'
