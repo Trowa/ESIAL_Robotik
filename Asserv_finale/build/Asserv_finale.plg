@@ -8,11 +8,10 @@ Project File Date:  09/19/2011
 
 <h2>Output:</h2>
 Build target 'mbed NXP LPC1768'
-compiling main.cpp...
+compiling odometrie.cpp...
+asserv\odometrie\odometrie.cpp(3): warning:  #951-D: return type of function "main" must be "int"
+asserv\odometrie\odometrie.cpp(5): warning:  #1-D: last line of file ends without a newline
 linking...
-Program Size: Code=9716 RO-data=876 RW-data=228 ZI-data=112  
+Program Size: Code=912 RO-data=228 RW-data=204 ZI-data=4  
 User command #1: fromelf --bin -o Asserv_finale.bin .\build\Asserv_finale.axf
-".\build\Asserv_finale.axf" - 0 Error(s), 0 Warning(s).
-Clean started: Project: 'Asserv_Finale'
-   deleting intermediate output files for target 'mbed NXP LPC1768'
-   deleting intermediate output files for target 'mbed NXP LPC2368'
+".\build\Asserv_finale.axf" - 0 Error(s), 2 Warning(s).

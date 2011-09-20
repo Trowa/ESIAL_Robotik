@@ -1,9 +1,9 @@
 *** Creating Trace Output File '.\build\Asserv_finale.tra' Ok.
 ### Preparing for ADS-LD.
 ### Creating ADS-LD Command Line
-### List of Objects: adding '".\build\main.o"'
+### List of Objects: adding '".\build\odometrie.o"'
 ### ADS-LD Command completed:
---cpu Cortex-M3 ".\build\main.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
+--cpu Cortex-M3 ".\build\odometrie.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
 .\mbed\LPC1768\startup_LPC17xx.o
 .\mbed\LPC1768\system_LPC17xx.o
 .\mbed\LPC1768\stackheap.o
@@ -16,7 +16,7 @@
 ### ADS-LD Output File: '.\build\Asserv_finale.axf'
 ### ADS-LD Command File: '.\build\Asserv_finale.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x00000288
+### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x0000065C
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\build\Asserv_finale.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.
