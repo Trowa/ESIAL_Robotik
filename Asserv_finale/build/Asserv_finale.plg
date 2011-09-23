@@ -4,14 +4,353 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 C:\Documents and Settings\francois\Bureau\Robotik Git\ESIAL_Robotik\Asserv_finale\Asserv_Finale.uvproj
-Project File Date:  09/19/2011
+Project File Date:  09/21/2011
 
 <h2>Output:</h2>
 Build target 'mbed NXP LPC1768'
-compiling odometrie.cpp...
-asserv\odometrie\odometrie.cpp(3): warning:  #951-D: return type of function "main" must be "int"
-asserv\odometrie\odometrie.cpp(5): warning:  #1-D: last line of file ends without a newline
+compiling Pid.cpp...
+asserv\filtres\Pid\Pid.cpp(2): error:  #5: cannot open source input file "../Utils/Utils.h": No such file or directory
+compiling Utils.cpp...
+asserv\Utils\Utils.h(12): warning:  #1-D: last line of file ends without a newline
+asserv\Utils\Utils.cpp(13): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+asserv\filtres\Pid\Pid.cpp(2): error:  #5: cannot open source input file "../Utils/Utils.h": No such file or directory
+compiling Utils.cpp...
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+asserv\filtres\Pid\Pid.cpp(34): error:  #20: identifier "integral" is undefined
+compiling Utils.cpp...
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+asserv\filtres\Pid\Pid.cpp(36): error:  #20: identifier "integral" is undefined
+compiling Utils.cpp...
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
 linking...
-Program Size: Code=912 RO-data=228 RW-data=204 ZI-data=4  
-User command #1: fromelf --bin -o Asserv_finale.bin .\build\Asserv_finale.axf
-".\build\Asserv_finale.axf" - 0 Error(s), 2 Warning(s).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Clean started: Project: 'Asserv_Finale'
+   deleting intermediate output files for target 'mbed NXP LPC1768'
+   deleting intermediate output files for target 'mbed NXP LPC2368'
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_QUAD_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol ANGLE_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KI multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_KP multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_INTEGRAL multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_MAX_OUTPUT multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_OUT_RATIO multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_NEG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_1ST_POS multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AR_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_ACC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_2ND_DEC multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_QUAD_AV_ANTICIPATION_GAIN_COEF multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol DIST_TAILLE_FENETRE_ARRIVEE multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol inverseCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol swapCodeurs multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurG multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol frontParMetreCodeurD multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol distRoues multiply defined (by pid.o and odometrie.o).
+.\build\Asserv_finale.axf: Error: L6200E: Symbol uOParFront multiply defined (by pid.o and odometrie.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6218E: Undefined symbol main (referred from rtentry2.o).
+Target not created

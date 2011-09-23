@@ -393,9 +393,54 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>main.cpp</FileName>
+              <FileName>Filtre.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\filtres\Filtre.h</FilePath>
+            </File>
+            <File>
+              <FileName>Odometrie.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\odometrie\Odometrie.h</FilePath>
+            </File>
+            <File>
+              <FileName>Odometrie.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\main.cpp</FilePath>
+              <FilePath>.\asserv\odometrie\Odometrie.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\filtres\Pid\Pid.h</FilePath>
+            </File>
+            <File>
+              <FileName>Pid.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\filtres\Pid\Pid.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\Utils\Utils.h</FilePath>
+            </File>
+            <File>
+              <FileName>Utils.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\Utils\Utils.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\config.h</FilePath>
+            </File>
+            <File>
+              <FileName>QuadRampDerivee.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.h</FilePath>
+            </File>
+            <File>
+              <FileName>QuadRampDerivee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -790,9 +835,54 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>main.cpp</FileName>
+              <FileName>Filtre.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\filtres\Filtre.h</FilePath>
+            </File>
+            <File>
+              <FileName>Odometrie.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\odometrie\Odometrie.h</FilePath>
+            </File>
+            <File>
+              <FileName>Odometrie.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\main.cpp</FilePath>
+              <FilePath>.\asserv\odometrie\Odometrie.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Pid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\filtres\Pid\Pid.h</FilePath>
+            </File>
+            <File>
+              <FileName>Pid.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\filtres\Pid\Pid.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\Utils\Utils.h</FilePath>
+            </File>
+            <File>
+              <FileName>Utils.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\Utils\Utils.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\config.h</FilePath>
+            </File>
+            <File>
+              <FileName>QuadRampDerivee.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.h</FilePath>
+            </File>
+            <File>
+              <FileName>QuadRampDerivee.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.cpp</FilePath>
             </File>
           </Files>
         </Group>
