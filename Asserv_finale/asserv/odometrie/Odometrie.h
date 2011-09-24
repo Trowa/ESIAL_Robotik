@@ -1,8 +1,6 @@
 #ifndef ODOMETRIE
 #define ODOMETRIE
 
-#define PI 3.14159265358979
-
 #include "../config.h"
 
 class Odometrie
@@ -37,6 +35,7 @@ class Odometrie
     // Variation de la position depuis la derniere mise a jour
     double getDeltaTheta() { return deltaTheta; } // Variation du cap du robot 
     int64_t getDeltaDist() { return deltaDist; } // Variation de la distance du robot
+    int64_t getDeltaThetaBrut() { return compteurD - compteurG; } // Variation d'angle en UO donnée par la différence de compte entre les codeurs
 
     // Getteurs config
     double getFrontParMetre() { return frontParMetre; }

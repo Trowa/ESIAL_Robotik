@@ -12,6 +12,10 @@ class QuadRampDerivee : public Filtre
     ~QuadRampDerivee();
     bool isRampFinished() { return arrivee; }
 
+    void setVitesseMarcheArriere(int64_t vitesse) {
+      derivee_1ier_neg = vitesse;
+    }
+
     int64_t filtre(int64_t consigne, int64_t position_actuelle , int64_t vitesse);     
  
   private:

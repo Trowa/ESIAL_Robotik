@@ -11,3 +11,13 @@ int64_t Utils::constrain(int64_t value , int64_t valeurMin , int64_t valeurMax)
         
     return value;
 }
+
+// Conversion mm vers UO
+int64_t Utils::mmToUO(Odometrie *odo, int64_t valeur) {
+  return valeur/1000*(odo->getFrontParMetre())*uOParFront;
+}
+
+// Conversion degres en UO
+int64_t Utils::degToUO(Odometrie *odo, int64_t valeur) {
+  return (PI * valeur/180) * odo->getDistanceRouesUO();
+}

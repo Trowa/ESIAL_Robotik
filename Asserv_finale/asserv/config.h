@@ -4,6 +4,8 @@
 /***************************
 *       ODOMETRIE          *
 ****************************/
+  
+  #define PI 3.14159265358979
 
   // Définition des variables pour l'odométrie
   static double frontParMetreCodeurG = 0; // Nombre de tics codeurs en 1m pour codeur gauche

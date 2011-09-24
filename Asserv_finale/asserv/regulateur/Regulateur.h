@@ -28,6 +28,10 @@ class Regulateur
     bool isRampFinished() {
       return filtreQuadRampDerivee.isRampFinished();
     }
+
+    void setVitesseMarcheArriere(int64_t vitesse) {
+      filtreQuadRampDerivee.setVitesseMarcheArriere(vitesse);
+    }
      
   private:
     // Filtres utilises 
