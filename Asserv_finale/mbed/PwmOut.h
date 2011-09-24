@@ -31,6 +31,12 @@ namespace mbed {
  * >         }
  * >     }
  * > }
+ *
+ *  Note that on the LPC1768 and LPC2368, the PWMs all share the same
+ *  period - if you change the period for one, you change it for all.
+ *  Although routines that change the period maintain the duty cycle
+ *  for its PWM, all other PWMs will require their duty cycle to be
+ *  refreshed.
  */
 class PwmOut : public Base {
 
@@ -69,32 +75,42 @@ public:
     float read();
     
     /* Function: period
-     *  Set the PWM period, specified in seconds (float)
+     *  Set the PWM period, specified in seconds (float), keeping the
+     *  duty cycle the same.
+     *
+     *  Note:
+     *   The resolution is currently in microseconds; periods smaller than this
+     *   will be set to zero.
      */
     void period(float seconds);
 
     /* Function: period_ms
-     *  Set the PWM period, specified in milli-seconds (int)
+     *  Set the PWM period, specified in milli-seconds (int), keeping the
+     *  duty cycle the same.
      */
     void period_ms(int ms);
 
     /* Function: period_us
-     *  Set the PWM period, specified in micro-seconds (int)
+     *  Set the PWM period, specified in micro-seconds (int), keeping the
+     *  duty cycle the same.
      */
     void period_us(int us);
 
     /* Function: pulsewidth
-     *  Set the PWM pulsewidth, specified in seconds (float)
+     *  Set the PWM pulsewidth, specified in seconds (float), keeping the
+     *  period the same.
      */
     void pulsewidth(float seconds);
 
     /* Function: pulsewidth_ms
-     *  Set the PWM pulsewidth, specified in milli-seconds (int)
+     *  Set the PWM pulsewidth, specified in milli-seconds (int), keeping
+     *  the period the same.
      */
     void pulsewidth_ms(int ms);
 
     /* Function: pulsewidth_us
-     *  Set the PWM pulsewidth, specified in micro-seconds (int)
+     *  Set the PWM pulsewidth, specified in micro-seconds (int), keeping
+     *  the period the same.
      */
     void pulsewidth_us(int us);
 

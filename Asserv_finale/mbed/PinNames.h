@@ -86,6 +86,7 @@ enum PinMode {
     PullUp = 0
     , PullDown = 3
     , PullNone = 2
+    , OpenDrain = 4
 };
 
 #ifdef __cplusplus

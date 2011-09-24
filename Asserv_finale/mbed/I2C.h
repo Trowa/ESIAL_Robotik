@@ -17,7 +17,7 @@ namespace mbed {
  *  An I2C Master, used for communicating with I2C slave devices
  *
  * Example:
- * > // Read from I2C slave at address 0x1234
+ * > // Read from I2C slave at address 0x62
  * >
  * > #include "mbed.h"
  * >
@@ -32,6 +32,18 @@ namespace mbed {
 class I2C : public Base {
 
 public:
+
+    enum RxStatus {
+        NoData
+        , MasterGeneralCall
+        , MasterWrite
+        , MasterRead
+    };
+
+    enum Acknowledge {
+          NoACK = 0
+        , ACK   = 1
+    };
 
     /* Constructor: I2C
      *  Create an I2C Master interface, connected to the specified pins
@@ -60,9 +72,19 @@ public:
      *  address - 8-bit I2C slave address [ addr | 1 ]
      *  data - Pointer to the byte-array to read data in to 
      *  length - Number of bytes to read
+     *  repeated - Repeated start, true - don't send stop at end
      *  returns - 0 on success (ack), or non-0 on failure (nack)
      */ 
-    int read(int address, char *data, int length); 
+    int read(int address, char *data, int length, bool repeated = false); 
+
+    /* Function: read
+     *  Read a single byte from the I2C bus
+     *
+     * Variables:
+     *  ack - indicates if the byte is to be acknowledged (1 = acknowledge)
+     *  returns - the byte read
+     */
+    int read(int ack);
 
     /* Function: write
      *  Write to an I2C slave
@@ -74,17 +96,38 @@ public:
      *  address - 8-bit I2C slave address [ addr | 0 ]
      *  data - Pointer to the byte-array data to send 
      *  length - Number of bytes to send
+     *  repeated - Repeated start, true - do not send stop at end
      *  returns - 0 on success (ack), or non-0 on failure (nack)
      */ 
-    int write(int address, const char *data, int length);
-    
+    int write(int address, const char *data, int length, bool repeated = false);
+
+    /* Function: write
+     *  Write single byte out on the I2C bus
+     *
+     * Variables:
+     *  data - data to write out on bus
+     *  returns - a '1' if an ACK was received, a '0' otherwise
+     */
+    int write(int data);
+
+    /* Function: start
+     *  Creates a start condition on the I2C bus
+     */
+
+    void start(void);
+
+    /* Function: stop
+     *  Creates a stop condition on the I2C bus
+     */
+    void stop(void);
+
 protected:
 
-    I2CName _i2c;
-    
     void aquire();
-    static I2C *_owner;
-    int _hz;
+
+    I2CName     _i2c;
+    static I2C  *_owner;
+    int         _hz;
 
 };
 

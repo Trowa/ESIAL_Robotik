@@ -52,6 +52,14 @@ public:
      */
     virtual ~Ethernet();
 
+    enum Mode {
+        AutoNegotiate
+        , HalfDuplex10
+        , FullDuplex10
+        , HalfDuplex100
+        , FullDuplex100
+    };
+
     /* Function: write
      *  Writes into an outgoing ethernet packet.
      *
@@ -115,13 +123,43 @@ public:
     void address(char *mac);
 
     /* Function: link
-     *  Returns if an ethernet link is pressent or not.
+     *  Returns if an ethernet link is pressent or not. It takes a wile after Ethernet initializion to show up.
      * 
      * Returns:
      *  0 - If no ethernet link is pressent.
      *  1 - If an ethernet link is pressent.
+     *
+     * Example:
+     * > // Using the Ethernet link function
+     * > #include "mbed.h"
+     * >
+     * > Ethernet eth;
+     * >
+     * > int main() {
+     * >     wait(1); // Needed after startup.
+     * >     if(eth.link()) {
+     * >         printf("online\n");
+     * >     } else {
+     * >          printf("offline\n");
+     * >     }
+     * > }
+     *
      */
     int link();
+
+    /* Function: set_link
+     *  Sets the speed and duplex parameters of an ethernet link
+     *
+     *  Variables:
+     *   mode - the speed and duplex mode to set the link to:
+     *
+     * > AutoNegotiate      Auto negotiate speed and duplex
+     * > HalfDuplex10       10 Mbit, half duplex
+     * > FullDuplex10       10 Mbit, full duplex
+     * > HalfDuplex100      100 Mbit, half duplex
+     * > FullDuplex100      100 Mbit, full duplex
+     */
+    void set_link(Mode mode);
 
 };
 

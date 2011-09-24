@@ -12,6 +12,7 @@
 #include "PeripheralNames.h"
 
 #include "can_helper.h" 
+#include "FunctionPointer.h"
 
 #include <string.h>
 
@@ -152,8 +153,9 @@ public:
      *
      * Variables:
      *  hz - The bus frequency in hertz
+     *  returns - 1 if successful, 0 otherwise
      */
-    void frequency(int hz);
+    int frequency(int hz);
     
     /* Function: write
      *  Write a CANMessage to the bus.
@@ -185,6 +187,14 @@ public:
      * To use after error overflow.
      */
     void reset();
+
+    /* Function: monitor
+     *  Puts or removes the CAN interface into silent monitoring mode
+     *
+     * Variables:
+     *  silent - boolean indicating whether to go into silent mode or not
+     */
+    void monitor(bool silent);
     
     /* Function: rderror
      *  Returns number of read errors to detect read overflow errors.
@@ -195,10 +205,34 @@ public:
      *  Returns number of write errors to detect write overflow errors.
      */
     unsigned char tderror();
+
+    /* Function: attach
+     *  Attach a function to call whenever a CAN frame received interrupt is
+     *  generated.
+     *
+     * Variables:
+     *  fptr - A pointer to a void function, or 0 to set as none
+     */
+    void attach(void (*fptr)(void));
+   
+   /* Function attach
+    *  Attach a member function to call whenever a CAN frame received interrupt
+    *  is generated.
+    *
+    * Variables:
+    *  tptr - pointer to the object to call the member function on
+    *  mptr - pointer to the member function to be called
+    */
+   template<typename T>
+   void attach(T* tptr, void (T::*mptr)(void));
     
 private:
 
     CANName _id;
+    FunctionPointer _rxirq;
+
+    void setup_interrupt(void);
+    void remove_interrupt(void);
 };
 
 } // namespace mbed
