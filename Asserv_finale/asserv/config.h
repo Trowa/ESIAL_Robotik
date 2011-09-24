@@ -17,6 +17,12 @@
   static bool swapCodeurs = false;
 
 /***************************
+*         Moteurs          *
+****************************/
+  static int64_t V_MAX_POS_MOTOR = 90;   // MD22 : 1 a 127, vitesse maximum positive
+  static int64_t V_MAX_NEG_MOTOR = -90;  // MD22 : -1 a -128, vitesse maximum negative
+
+/***************************
 *           PID            *
 ****************************/
   // PID en distance
