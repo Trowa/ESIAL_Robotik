@@ -35,7 +35,13 @@ public:
      *  value - An integer specifying the pin output value, 
      *      0 for logical 0 and 1 (or any other non-zero value) for logical 1 
      */
-    void write(int value);
+    void write(int value) {
+        if(value) {
+            _gpio->FIOSET = _mask;
+        } else {
+            _gpio->FIOCLR = _mask;
+        }
+    }
 
     /* Function: read
      *  Return the output setting, represented as 0 or 1 (int)
@@ -44,7 +50,10 @@ public:
      *  returns - An integer representing the output setting of the pin if it is an output, 
      *      or read the input if set as an input
      */
-    int read();
+    int read() {
+        return ((_gpio->FIOPIN & _mask) ? 1 : 0);
+    }
+
 
     /* Function: output
      *  Set as an output
@@ -60,7 +69,7 @@ public:
      *  Set the input pin mode
      *
      * Variables:
-     *  mode - PullUp, PullDown, PullNone
+     *  mode - PullUp, PullDown, PullNone, OpenDrain
      */
     void mode(PinMode pull);
     
@@ -68,13 +77,22 @@ public:
     /* Function: operator=
      *  A shorthand for <write>
      */
-    DigitalInOut& operator= (int v);
-    DigitalInOut& operator= (DigitalInOut& rhs);
-    
+    DigitalInOut& operator= (int value) {
+        write(value);
+        return *this;
+    }
+
+    DigitalInOut& operator= (DigitalInOut& rhs) {
+        write(rhs.read());
+        return *this;
+    }
+
     /* Function: operator int()
      *  A shorthand for <read>
      */
-    operator int();
+    operator int() {
+        return read();
+    }
 #endif
 
 #ifdef MBED_RPC
@@ -84,7 +102,9 @@ public:
 
 protected:
 
-    PinName _pin;
+    PinName             _pin;
+    LPC_GPIO_TypeDef    *_gpio;
+    uint32_t            _mask;
 
 };
 

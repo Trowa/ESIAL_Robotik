@@ -1,5 +1,5 @@
 /* mbed Microcontroller Library - SPI
- * Copyright (c) 2006-2009 ARM Limited. All rights reserved. 
+ * Copyright (c) 2010 ARM Limited. All rights reserved. 
  * sford
  */
 
@@ -48,7 +48,7 @@ public:
      * Pin Options:
      *  (5, 6, 7) or (11, 12, 13)
      *
-     *  mosi or miso can be specfied as NOT_CONNECTED if not used
+     *  mosi or miso can be specfied as NC if not used
      */
     SPI(PinName mosi, PinName miso, PinName sclk, const char *name = NULL);
 
@@ -83,7 +83,8 @@ public:
      *  value - Data to be sent to the SPI slave
      *  returns - Response from the SPI slave
     */
-    int write(int value);
+    virtual int write(int value);
+
 
 #ifdef MBED_RPC
     virtual const struct rpc_method *get_rpc_methods();
@@ -94,7 +95,7 @@ protected:
 
 	SPIName _spi;
 	
-	void aquire();
+	void aquire(void);
     static SPI *_owner; 
     int _bits;
     int _mode;

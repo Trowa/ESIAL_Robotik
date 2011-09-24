@@ -1,8 +1,8 @@
 #ifndef MOTORCONTROLLER
 #define MOTORCONTROLLER
 
-#include "../config.h"
 #include "mbed.h"
+#include "../config.h"
 
 // interface du controleur de moteurs
 

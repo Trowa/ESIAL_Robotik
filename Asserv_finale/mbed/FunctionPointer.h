@@ -6,7 +6,7 @@
 #ifndef MBED_FUNCTIONPOINTER_H
 #define MBED_FUNCTIONPOINTER_H
 
-#include "string.h"
+#include <string.h>
 
 namespace mbed { 
 
