@@ -2,7 +2,6 @@
 
 Pid::Pid(bool isDistance)
 {
-  prev_value = 0;
   integrale = 0;
 
   if (isDistance) {
@@ -24,7 +23,7 @@ Pid::Pid(bool isDistance)
 
 Pid::~Pid() {}
 
-int64_t Pid::filtre(int64_t erreur , int64_t value2 , int64_t value3)
+int64_t Pid::filtre(int64_t erreur , int64_t feedback_odometrie , int64_t value3)
 {
     // Calcul de la Proportionnelle
     int64_t P = erreur * kp;
@@ -36,11 +35,7 @@ int64_t Pid::filtre(int64_t erreur , int64_t value2 , int64_t value3)
   
 
     // Calcul de la Derivee
-    int64_t derivee = erreur - prev_value;
-    int64_t D = derivee * kd;
-
-    // On sauvegarde l'erreur pour le pas suivant
-    prev_value = erreur;
+    int64_t D = feedback_odometrie * kd;
   
     //On calcul la Sortie qui est la somme des trois valeurs multipliée par le ratio de sortie
     int64_t sortie = P + I + D;
