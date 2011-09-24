@@ -21,6 +21,8 @@ class Md22 : public MotorsController
     
         // Constructor
         Md22( PinName I2CsdaPin , PinName I2CsclPin);
+        // Destructor
+        ~Md22();
        
         // set speed methods
         void vitesseG(int vitMoteurG);

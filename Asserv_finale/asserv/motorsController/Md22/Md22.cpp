@@ -37,6 +37,9 @@ Md22::Md22( PinName I2CsdaPin , PinName I2CsclPin)
 
 }
 
+Md22::~Md22() {
+}
+
 void Md22::vitesseG(int vitMoteurG)
 {
     if(inverseMoteurG)
