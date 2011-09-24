@@ -4,8 +4,10 @@
 ### List of Objects: adding '".\build\odometrie.o"'
 ### List of Objects: adding '".\build\pid.o"'
 ### List of Objects: adding '".\build\utils.o"'
+### List of Objects: adding '".\build\quadrampderivee.o"'
+### List of Objects: adding '".\build\regulateur.o"'
 ### ADS-LD Command completed:
---cpu Cortex-M3 ".\build\odometrie.o" ".\build\pid.o" ".\build\utils.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
+--cpu Cortex-M3 ".\build\odometrie.o" ".\build\pid.o" ".\build\utils.o" ".\build\quadrampderivee.o" ".\build\regulateur.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
 .\mbed\LPC1768\startup_LPC17xx.o
 .\mbed\LPC1768\system_LPC17xx.o
 .\mbed\LPC1768\stackheap.o
@@ -18,7 +20,7 @@
 ### ADS-LD Output File: '.\build\Asserv_finale.axf'
 ### ADS-LD Command File: '.\build\Asserv_finale.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x000003F4
+### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x00000474
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\build\Asserv_finale.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.
