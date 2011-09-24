@@ -105,3 +105,80 @@ Target not created
 Clean started: Project: 'Asserv_Finale'
    deleting intermediate output files for target 'mbed NXP LPC1768'
    deleting intermediate output files for target 'mbed NXP LPC2368'
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+asserv\odometrie\../config.h(22): error:  #65: expected a ";"
+asserv\odometrie\../config.h(29): warning:  #12-D: parsing restarts here after previous syntax error
+compiling Pid.cpp...
+asserv\filtres\Pid\../../config.h(22): error:  #65: expected a ";"
+asserv\filtres\Pid\../../config.h(29): warning:  #12-D: parsing restarts here after previous syntax error
+asserv\filtres\Pid\Pid.cpp(8): error:  #20: identifier "DIST_KP" is undefined
+compiling Utils.cpp...
+compiling QuadRampDerivee.cpp...
+asserv\filtres\QuadRampDerivee\../../config.h(22): error:  #65: expected a ";"
+asserv\filtres\QuadRampDerivee\../../config.h(29): warning:  #12-D: parsing restarts here after previous syntax error
+compiling Regulateur.cpp...
+asserv\regulateur\../filtres/Pid/../../config.h(22): error:  #65: expected a ";"
+asserv\regulateur\../filtres/Pid/../../config.h(29): warning:  #12-D: parsing restarts here after previous syntax error
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+compiling QuadRampDerivee.cpp...
+compiling Regulateur.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6218E: Undefined symbol main (referred from rtentry2.o).
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+compiling QuadRampDerivee.cpp...
+compiling Regulateur.cpp...
+compiling Md22.cpp...
+asserv\motorsController\Md22\Md22_config.h(25): warning:  #1-D: last line of file ends without a newline
+asserv\motorsController\Md22\../../config.h(11): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(22): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(23): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(29): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(30): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(31): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(33): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(34): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(37): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(38): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(39): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(41): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(42): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(45): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(46): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(47): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(48): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(49): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(50): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(51): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(52): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(53): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(55): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(56): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(57): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(58): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../../config.h(59): error:  #20: identifier "int64_t" is undefined
+asserv\motorsController\Md22\../MotorsController.h(25): warning:  #1-D: last line of file ends without a newline
+asserv\motorsController\Md22\Md22.h(28): warning:  #1300-D: vitesseG inherits implicit virtual
+asserv\motorsController\Md22\Md22.h(29): warning:  #1300-D: vitesseD inherits implicit virtual
+asserv\motorsController\Md22\Md22.h(37): warning:  #1-D: last line of file ends without a newline
+asserv\motorsController\Md22\Md22.cpp(12): error:  #135: class "mbed::I2C" has no member "start"
+asserv\motorsController\Md22\Md22.cpp(13): error:  #165: too few arguments in function call
+asserv\motorsController\Md22\Md22.cpp(14): error:  #165: too few arguments in function call
+Target not created
+Build target 'mbed NXP LPC1768'
+compiling Odometrie.cpp...
+compiling Pid.cpp...
+compiling Utils.cpp...
+compiling QuadRampDerivee.cpp...
+compiling Regulateur.cpp...
+linking...
+.\build\Asserv_finale.axf: Error: L6218E: Undefined symbol main (referred from rtentry2.o).
+Target not created

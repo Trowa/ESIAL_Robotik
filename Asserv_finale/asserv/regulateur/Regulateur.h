@@ -20,6 +20,14 @@ class Regulateur
     void reset_accumulator() {
       accumulateur = 0;
     }
+
+    int64_t getAccumulateur() {
+      return accumulateur;
+    }
+
+    bool isRampFinished() {
+      return filtreQuadRampDerivee.isRampFinished();
+    }
      
   private:
     // Filtres utilises 
