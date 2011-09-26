@@ -8,8 +8,10 @@
 ### List of Objects: adding '".\build\regulateur.o"'
 ### List of Objects: adding '".\build\md22.o"'
 ### List of Objects: adding '".\build\consigncontroller.o"'
+### List of Objects: adding '".\build\commandmanager.o"'
+### List of Objects: adding '".\build\cmdlist.o"'
 ### ADS-LD Command completed:
---cpu Cortex-M3 ".\build\odometrie.o" ".\build\pid.o" ".\build\utils.o" ".\build\quadrampderivee.o" ".\build\regulateur.o" ".\build\md22.o" ".\build\consigncontroller.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
+--cpu Cortex-M3 ".\build\odometrie.o" ".\build\pid.o" ".\build\utils.o" ".\build\quadrampderivee.o" ".\build\regulateur.o" ".\build\md22.o" ".\build\consigncontroller.o" ".\build\commandmanager.o" ".\build\cmdlist.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
 .\mbed\LPC1768\startup_LPC17xx.o
 .\mbed\LPC1768\system_LPC17xx.o
 .\mbed\LPC1768\stackheap.o
@@ -22,7 +24,7 @@
 ### ADS-LD Output File: '.\build\Asserv_finale.axf'
 ### ADS-LD Command File: '.\build\Asserv_finale.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x00000470
+### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x000003AC
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\build\Asserv_finale.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

@@ -117,4 +117,3 @@ void ConsignController::perform() {
   motors->vitesseD(VmoteurD);
   
 }
-

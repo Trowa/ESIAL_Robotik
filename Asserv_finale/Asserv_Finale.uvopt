@@ -317,10 +317,10 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>51</ColumnNumber>
+      <ColumnNumber>33</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>1</TopLine>
-      <CurrentLine>24</CurrentLine>
+      <CurrentLine>13</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\asserv\odometrie\Odometrie.cpp</PathWithFileName>
       <FilenameWithoutPath>Odometrie.cpp</FilenameWithoutPath>
@@ -345,10 +345,10 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>4</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\asserv\filtres\Pid\Pid.cpp</PathWithFileName>
       <FilenameWithoutPath>Pid.cpp</FilenameWithoutPath>
@@ -375,8 +375,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>4</TopLine>
+      <CurrentLine>29</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\asserv\Utils\Utils.cpp</PathWithFileName>
       <FilenameWithoutPath>Utils.cpp</FilenameWithoutPath>
@@ -415,13 +415,181 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>1</ColumnNumber>
+      <ColumnNumber>28</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>76</TopLine>
-      <CurrentLine>85</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>1</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.cpp</PathWithFileName>
       <FilenameWithoutPath>QuadRampDerivee.cpp</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>11</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\regulateur\Regulateur.h</PathWithFileName>
+      <FilenameWithoutPath>Regulateur.h</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>12</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\regulateur\Regulateur.cpp</PathWithFileName>
+      <FilenameWithoutPath>Regulateur.cpp</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>13</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\motorsController\MotorsController.h</PathWithFileName>
+      <FilenameWithoutPath>MotorsController.h</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>14</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\motorsController\Md22\Md22_config.h</PathWithFileName>
+      <FilenameWithoutPath>Md22_config.h</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>15</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>53</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>74</TopLine>
+      <CurrentLine>82</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\motorsController\Md22\Md22.cpp</PathWithFileName>
+      <FilenameWithoutPath>Md22.cpp</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>16</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\motorsController\Md22\Md22.h</PathWithFileName>
+      <FilenameWithoutPath>Md22.h</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>17</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\consignController\ConsignController.h</PathWithFileName>
+      <FilenameWithoutPath>ConsignController.h</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>18</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>110</TopLine>
+      <CurrentLine>120</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\consignController\ConsignController.cpp</PathWithFileName>
+      <FilenameWithoutPath>ConsignController.cpp</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>0</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>74</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>174</TopLine>
+      <CurrentLine>196</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\commandManager\CommandManager.cpp</PathWithFileName>
+      <FilenameWithoutPath>CommandManager.cpp</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>0</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\commandManager\CommandManager.h</PathWithFileName>
+      <FilenameWithoutPath>CommandManager.h</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>0</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\commandManager\CMDList\CMDList.h</PathWithFileName>
+      <FilenameWithoutPath>CMDList.h</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>0</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>54</TopLine>
+      <CurrentLine>55</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\asserv\commandManager\CMDList\CMDList.cpp</PathWithFileName>
+      <FilenameWithoutPath>CMDList.cpp</FilenameWithoutPath>
     </File>
   </Group>
 
@@ -430,49 +598,31 @@
     <ActiveMDIGroup>0</ActiveMDIGroup>
     <MDIGroup>
       <Size>100</Size>
-      <ActiveTab>6</ActiveTab>
+      <ActiveTab>3</ActiveTab>
       <Documents>
         <Doc>
-          <Name>asserv\odometrie\../config.h</Name>
-          <ColumnNumber>8</ColumnNumber>
+          <Name>.\asserv\commandManager\CommandManager.cpp</Name>
+          <ColumnNumber>74</ColumnNumber>
+          <TopLine>174</TopLine>
+          <CurrentLine>196</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>asserv\filtres\Pid\../../Utils/Utils.h</Name>
+          <ColumnNumber>22</ColumnNumber>
           <TopLine>1</TopLine>
-          <CurrentLine>23</CurrentLine>
+          <CurrentLine>17</CurrentLine>
         </Doc>
         <Doc>
-          <Name>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.h</Name>
-          <ColumnNumber>0</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>1</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.cpp</Name>
-          <ColumnNumber>1</ColumnNumber>
-          <TopLine>76</TopLine>
-          <CurrentLine>85</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>.\asserv\odometrie\Odometrie.h</Name>
-          <ColumnNumber>17</ColumnNumber>
-          <TopLine>4</TopLine>
-          <CurrentLine>8</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>.\asserv\filtres\Pid\Pid.h</Name>
-          <ColumnNumber>0</ColumnNumber>
-          <TopLine>1</TopLine>
+          <Name>asserv\commandManager\CommandManager.h</Name>
+          <ColumnNumber>78</ColumnNumber>
+          <TopLine>3</TopLine>
           <CurrentLine>11</CurrentLine>
         </Doc>
         <Doc>
-          <Name>.\asserv\filtres\Filtre.h</Name>
-          <ColumnNumber>22</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>5</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>.\asserv\odometrie\Odometrie.cpp</Name>
-          <ColumnNumber>51</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>24</CurrentLine>
+          <Name>.\asserv\Utils\Utils.cpp</Name>
+          <ColumnNumber>0</ColumnNumber>
+          <TopLine>4</TopLine>
+          <CurrentLine>29</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

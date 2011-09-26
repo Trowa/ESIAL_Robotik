@@ -21,3 +21,8 @@ int64_t Utils::mmToUO(Odometrie *odo, int64_t valeur) {
 int64_t Utils::degToUO(Odometrie *odo, int64_t valeur) {
   return (PI * valeur/180) * odo->getDistanceRouesUO();
 }
+
+// Conversion radians en UO
+int64_t Utils::radToUO(Odometrie *odo, int64_t valeur) {
+  return valeur * odo->getDistanceRouesUO();
+}

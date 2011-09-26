@@ -25,8 +25,8 @@ class Md22 : public MotorsController
         ~Md22();
        
         // set speed methods
-        void vitesseG(int vitMoteurG);
-        void vitesseD(int vitMoteurD);
+        virtual void vitesseG(int vitMoteurG);
+        virtual void vitesseD(int vitMoteurD);
         
     private:
         

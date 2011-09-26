@@ -442,6 +442,66 @@
               <FileType>8</FileType>
               <FilePath>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Regulateur.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\regulateur\Regulateur.h</FilePath>
+            </File>
+            <File>
+              <FileName>Regulateur.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\regulateur\Regulateur.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MotorsController.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\MotorsController.h</FilePath>
+            </File>
+            <File>
+              <FileName>Md22_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Md22\Md22_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>Md22.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\Md22\Md22.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Md22.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Md22\Md22.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConsignController.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\consignController\ConsignController.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConsignController.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\consignController\ConsignController.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CommandManager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\commandManager\CommandManager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CommandManager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\commandManager\CommandManager.h</FilePath>
+            </File>
+            <File>
+              <FileName>CMDList.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\commandManager\CMDList\CMDList.h</FilePath>
+            </File>
+            <File>
+              <FileName>CMDList.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\commandManager\CMDList\CMDList.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -883,6 +943,66 @@
               <FileName>QuadRampDerivee.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\asserv\filtres\QuadRampDerivee\QuadRampDerivee.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Regulateur.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\regulateur\Regulateur.h</FilePath>
+            </File>
+            <File>
+              <FileName>Regulateur.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\regulateur\Regulateur.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MotorsController.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\MotorsController.h</FilePath>
+            </File>
+            <File>
+              <FileName>Md22_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Md22\Md22_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>Md22.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\Md22\Md22.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Md22.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Md22\Md22.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConsignController.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\consignController\ConsignController.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConsignController.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\consignController\ConsignController.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CommandManager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\commandManager\CommandManager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CommandManager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\commandManager\CommandManager.h</FilePath>
+            </File>
+            <File>
+              <FileName>CMDList.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\commandManager\CMDList\CMDList.h</FilePath>
+            </File>
+            <File>
+              <FileName>CMDList.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\commandManager\CMDList\CMDList.cpp</FilePath>
             </File>
           </Files>
         </Group>
