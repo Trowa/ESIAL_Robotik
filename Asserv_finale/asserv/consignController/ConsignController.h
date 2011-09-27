@@ -10,7 +10,10 @@
 
 class ConsignController {
 public:
+    // Constructeur prenant en paramètre un objet Odometrie et un objet MotorsController créer à l'initialisation de l'asserv
     ConsignController(Odometrie *odo, MotorsController *mot );
+    
+    // Desctructeur
     ~ConsignController();
     
     // On ajoute une valeur à la consigne courante
@@ -18,11 +21,11 @@ public:
     void add_angle_consigne(int64_t delta);
     void add_dist_consigne(int64_t delta);
     
-    // Fixe la consigne à atteindre
+    // On fixe la consigne à atteindre
     void set_angle_consigne(int64_t consigne);
     void set_dist_consigne(int64_t consigne);
     
-    // Rafraichie la consigne a realiser
+    // Rafraichie la consigne a realiser et on donne les ordres aux moteurs en conséquence
     void perform();
 
     /*
@@ -35,6 +38,7 @@ public:
     void angle_Regu_Off() { angle_regu_on = false; }
     void dist_Regu_Off() { dist_regu_on = false; }
     
+    // TODO Rien à foutre ici ça !!!!
     void calage_bordure(int sens);
     
     /*
@@ -54,7 +58,7 @@ public:
         angle_consigne = 0;
     }
 
-    // Methode permettant au CommandManager de savoir si la derniere consigne est finie ou non.
+    // Methode permettant au CommandManager de savoir si la QuadRamp est finie ou non.
     bool  areRampsFinished() {
         return angle_regu.isRampFinished() && dist_regu.isRampFinished();
     }

@@ -3,8 +3,7 @@
 
 #include "../config.h"
 
-class Odometrie
-{
+class Odometrie {
 
   public:
     // Constructeur
@@ -25,12 +24,12 @@ class Odometrie
         
     //Position en unites arbritraires ( Unite Odometrie [UO] pour les distances, et rad pour l'angle)
     /*
-    * Pour passer des UO au mm, la formule est : valeur_en_UO/(frontParMetre*uOParFront)*1000
-    * Pour passer des radians au degrés : theta*180/PI
+    * La classe Utils contient les méthodes de conversions pour que les mesures soient humainement compréhensible
     */
-    int64_t getX() {return x;}
-    int64_t getY() {return y;}
-    double getTheta() {return theta;}
+    int64_t getX() {return x;} // Renvoie la position en X par rapport au point de départ
+    int64_t getY() {return y;} // Renvoie la position en Y par rapport au point de départ
+    // TODO vérifier le theta !!
+    double getTheta() {return theta;} // Renvoie l'angle par rapport au cap de départ
         
     // Variation de la position depuis la derniere mise a jour
     double getDeltaTheta() { return deltaTheta; } // Variation du cap du robot 
@@ -41,7 +40,7 @@ class Odometrie
     double getFrontParMetre() { return frontParMetre; }
     double getDistanceRouesUO() { return distanceRouesUO; }
         
-    //Inversion logicielle des codeurs
+    //Inversion logicielle des codeurs, des fois qu'on ai fait de la merde dans le cablage ....
     void inverseCodeurDroit() {inverseCodeurD=!inverseCodeurD; } //sens de rotation inverse pour le codeur droit
     void inverseCodeurGauche() {inverseCodeurG=!inverseCodeurG; } //idem, pour le codeur gauche
     void echangeCodeurs() {swapCodeurs=!swapCodeurs; } // codeurGauche <-> codeurDroit

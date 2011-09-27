@@ -4,8 +4,7 @@
 #include "mbed.h"
 #include "../odometrie/Odometrie.h"
 
-class Utils
-{
+class Utils {
   public :
     
     //Limitation d'une valeur a un intervalle [valeurMin , valeurMax]

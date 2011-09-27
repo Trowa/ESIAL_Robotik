@@ -1,9 +1,11 @@
 #include "Pid.h"
 
-Pid::Pid(bool isDistance)
-{
+// Constructeur
+Pid::Pid(bool isDistance) {
+  // L'intégrale est nulle au départ
   integrale = 0;
-
+  
+  // En fonction du type de PID on ne récupère pas les même paramètres
   if (isDistance) {
     kp = DIST_KP;
     ki = DIST_KI;
@@ -21,14 +23,16 @@ Pid::Pid(bool isDistance)
   }
 }
 
+// Destructeur
 Pid::~Pid() {}
 
+// On filtre l'erreur pour calculer la sortie à donner aux moteurs
 int64_t Pid::filtre(int64_t erreur , int64_t feedback_odometrie , int64_t value3)
 {
     // Calcul de la Proportionnelle
     int64_t P = erreur * kp;
   
-    //Calcul de l'Integrale
+    //Calcul de l'Integrale que l'on oublie pas de borner
     integrale += erreur; 
     integrale = Utils::constrain(integrale, -maxIntegral , maxIntegral);
     int64_t I = integrale * ki;
@@ -41,7 +45,7 @@ int64_t Pid::filtre(int64_t erreur , int64_t feedback_odometrie , int64_t value3
     int64_t sortie = P + I + D;
     sortie = sortie * outRatio;
   
-    // Saturation de la sortie
+    // Saturation de la sortie pour ne pas allez trop vite non plus
     sortie = Utils::constrain(sortie , -maxOutput , maxOutput);
   
     return sortie;

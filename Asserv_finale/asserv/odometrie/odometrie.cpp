@@ -6,7 +6,6 @@
 * Lors de la création de l'objet, on calcul la distance entre les roues en UO et le nombre d'UO par front
 * Les infos nécessaires au calcul sont dans config.h
 */
-// TODO Changera surement de forme avec la carte dédié aux codeurs et ajouter un destructeur
 Odometrie::Odometrie() {
 
   // Initialisation des compteurs
@@ -50,7 +49,7 @@ Odometrie::~Odometrie() {}
 // Mise a jour de la position du robot
 void Odometrie::refresh() {
 
-  // TODO récupération des comptes des codeurs
+  // TODO récupération des comptes des codeurs sur la carte dédiée
   compteurG = 0;
   compteurD = 0;
   // Fin TODO

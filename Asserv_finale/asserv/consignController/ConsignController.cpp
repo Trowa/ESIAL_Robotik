@@ -5,6 +5,7 @@
     #include "../UDPData.h"
 #endif
 
+// Constructeur prenant deux objets initialiser avec l'asserv en paramètre
 ConsignController::ConsignController(Odometrie *odo, MotorsController *mot ) 
   : angle_regu(false), dist_regu(true) {
     
@@ -12,6 +13,7 @@ ConsignController::ConsignController(Odometrie *odo, MotorsController *mot )
   angle_consigne = 0;
   dist_consigne = 0;
 
+  // On set l'odométrie et le controlle des moteurs
   odometrie = odo;
   motors = mot;
 
@@ -19,29 +21,34 @@ ConsignController::ConsignController(Odometrie *odo, MotorsController *mot )
   angle_regu_on = true;
   dist_regu_on = true;
 
-  // Heu ... Pk on désactive la QuadRampDerivee en angle ????
+  // TODO : Heu ... Pk on désactive la QuadRampDerivee en angle ????
   angle_regu.setfiltreQuadRampDeriveeON(false);
     
 }
 
+// Destructeur
 ConsignController::~ConsignController() {}
 
-void ConsignController::add_angle_consigne(int64_t delta) {
-    angle_consigne += delta;
+/*
+ * Les consignes, que ce soit des add ou des set sont en UO !!!!
+ */
+void ConsignController::add_angle_consigne(int64_t deltaUO) {
+    angle_consigne += deltaUO;
 }
 
-void ConsignController::add_dist_consigne(int64_t delta) {
-    dist_consigne += delta;
+void ConsignController::add_dist_consigne(int64_t deltaUO) {
+    dist_consigne += deltaUO;
 }
 
-void ConsignController::set_angle_consigne(int64_t consigne) {
-    angle_consigne = consigne;
+void ConsignController::set_angle_consigne(int64_t consigneUO) {
+    angle_consigne = consigneUO;
 }
 
-void ConsignController::set_dist_consigne(int64_t consigne) {
-    dist_consigne = consigne;
+void ConsignController::set_dist_consigne(int64_t consigneUO) {
+    dist_consigne = consigneUO;
 }
 
+// TODO ce truc n'a rien à foutre ici ... Il devrait être dans le CommandManager
 void ConsignController::calage_bordure(int sens) {
     
   dist_regu.setVitesseMarcheArriere(DIST_QUAD_1ST_NEG/2 );
@@ -96,23 +103,26 @@ void ConsignController::calage_bordure(int sens) {
 
 }
 
+// On recalcule la consigne à appliquer aux moteurs et on leur envois l'ordre
 void ConsignController::perform() {
   
-  int64_t dist_output = 0;
-  int64_t angle_output = 0;
+  int64_t dist_output = 0; // Calcul de la sortie moteur en distance
+  int64_t angle_output = 0; // Calcul de la sortie moteur en angle
   
+  // Si le régulateur d'angle est actif, il doit calculer la consigne angulaire en fonction de la différence des tics codeurs (variation d'angle en UO)
   if ( angle_regu_on ) {
     angle_output = angle_regu.manage(angle_consigne, odometrie->getDeltaThetaBrut() );
   }
+  // Si le régu de distance est actif, il doit calculer la consigne de distance en fonction de la moyenne des tics codeurs (variation de distance en UO)
   if ( dist_regu_on ) {
     dist_output = dist_regu.manage(dist_consigne, odometrie->getDeltaDist() );
   }
 
-  //Calcul des vitesses a appliquer
+  //Calcul des vitesses a appliquer en les bornant évidemment
   int64_t VmoteurD = Utils::constrain( dist_output + angle_output , V_MAX_NEG_MOTOR , V_MAX_POS_MOTOR);
   int64_t VmoteurG = Utils::constrain( dist_output - angle_output, V_MAX_NEG_MOTOR , V_MAX_POS_MOTOR);
 
-  // On donne l'ordre aux moteurs
+  // On donne l'ordre aux moteurs et roulez jeunesse !!
   motors->vitesseG(VmoteurG);
   motors->vitesseD(VmoteurD);
   
