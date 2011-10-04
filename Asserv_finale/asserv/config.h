@@ -2,6 +2,11 @@
 #define CONFIG
 
 /***************************
+*       CommandManager     *
+****************************/
+  static double angleThreshold = 0; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
+
+/***************************
 *       ODOMETRIE          *
 ****************************/
   

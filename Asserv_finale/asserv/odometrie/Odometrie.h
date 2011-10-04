@@ -28,7 +28,6 @@ class Odometrie {
     */
     int64_t getX() {return x;} // Renvoie la position en X par rapport au point de départ
     int64_t getY() {return y;} // Renvoie la position en Y par rapport au point de départ
-    // TODO vérifier le theta !!
     double getTheta() {return theta;} // Renvoie l'angle par rapport au cap de départ
         
     // Variation de la position depuis la derniere mise a jour

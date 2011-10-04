@@ -20,9 +20,6 @@ ConsignController::ConsignController(Odometrie *odo, MotorsController *mot )
   // Les 2 regu sont actifs par defaut
   angle_regu_on = true;
   dist_regu_on = true;
-
-  // TODO : Heu ... Pk on désactive la QuadRampDerivee en angle ????
-  angle_regu.setfiltreQuadRampDeriveeON(false);
     
 }
 

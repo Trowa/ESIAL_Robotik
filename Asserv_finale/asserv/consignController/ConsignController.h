@@ -6,6 +6,7 @@
 #include "../motorsController/MotorsController.h"
 #include "../regulateur/Regulateur.h"
 #include "../Utils/Utils.h"
+#include "../config.h"
 
 
 class ConsignController {

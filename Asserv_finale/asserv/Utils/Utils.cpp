@@ -22,6 +22,6 @@ int64_t Utils::degToUO(Odometrie *odo, int64_t valeur) {
 }
 
 // Conversion radians en UO
-int64_t Utils::radToUO(Odometrie *odo, int64_t valeur) {
+int64_t Utils::radToUO(Odometrie *odo, double valeur) {
   return valeur * odo->getDistanceRouesUO();
 }
