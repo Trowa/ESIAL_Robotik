@@ -13,10 +13,10 @@
   #define PI 3.14159265358979
 
   // Définition des variables pour l'odométrie
-  static double frontParMetreCodeurG = 0; // Nombre de tics codeurs en 1m pour codeur gauche
-  static double frontParMetreCodeurD = 0; // Nombre de tics codeurs en 1m pour codeur droite
-  static int64_t distRoues = 0; // Distance entre les roues codeuses en mm
-  static double uOParFront = 0; // Nombre d'UO pour un tic de codeur
+  static double frontParMetreCodeurG = 25661.444; // Nombre de tics codeurs en 1m pour codeur gauche
+  static double frontParMetreCodeurD = 25703.778; // Nombre de tics codeurs en 1m pour codeur droite
+  static int64_t distRoues = 284; // Distance entre les roues codeuses en mm
+  static double uOParFront = 512; // Nombre d'UO pour un tic de codeur
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseCodeurG = false;

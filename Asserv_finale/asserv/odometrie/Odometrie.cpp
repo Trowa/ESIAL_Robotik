@@ -6,7 +6,7 @@
 * Lors de la création de l'objet, on calcul la distance entre les roues en UO et le nombre d'UO par front
 * Les infos nécessaires au calcul sont dans config.h
 */
-Odometrie::Odometrie() {
+Odometrie::Odometrie() : codeurG(p25,p26), codeurD(p15,p16) {
 
   // Initialisation des compteurs
   compteurG = 0;
