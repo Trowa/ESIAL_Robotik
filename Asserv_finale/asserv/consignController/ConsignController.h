@@ -43,14 +43,24 @@ public:
     void calage_bordure(int sens);
     
     /*
+     * Permet d'activer ou de désactiver les QuadRampDerivee
+     */
+     void setQuadRamp_Angle(bool on) {
+       angle_regu.setfiltreQuadRampDeriveeON(false);
+     }
+
+     void setQuadRamp_Dist(bool on) {
+       dist_regu.setfiltreQuadRampDeriveeON(false);
+     }
+
+    /*
     * Méthodes permettant de réinitialiser les régulateurs. On met donc l'accumulateur
     * à 0 pour réinitialiser la position courante du point de vue du filtre. On met
     * aussi la consigne à atteindre à 0 sinon l'asserv va vouloir atteindre la position
     */
-    void reset_regu_dist() 
-    { 
-        dist_regu.reset_accumulator(); 
-        dist_consigne = 0;
+    void reset_regu_dist() { 
+      dist_regu.reset_accumulator(); 
+      dist_consigne = 0;
     }
     
     void reset_regu_angle() 

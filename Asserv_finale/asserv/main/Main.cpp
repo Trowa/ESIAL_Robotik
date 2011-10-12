@@ -14,6 +14,9 @@ int main() {
   consignController = new ConsignController(odometrie, motorController);
   commandManager = new CommandManager(50, consignController, odometrie);
 
+  consignController->setQuadRamp_Dist(false);
+  consignController->setQuadRamp_Angle(false);
+
   // On attache l'interruption timer à la méthode Live_isr
   Live.attach(Live_isr, 0.005);
 }

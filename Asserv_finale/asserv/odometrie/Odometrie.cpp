@@ -48,7 +48,7 @@ Odometrie::~Odometrie() {}
         
 // Mise a jour de la position du robot
 void Odometrie::refresh() {
-
+  
   // TODO récupération des comptes des codeurs sur la carte dédiée
   __disable_irq();
   compteurG = codeurG.getCount();
@@ -89,7 +89,7 @@ void Odometrie::refresh() {
   */
   deltaDist = (compteurG + compteurD)/2; // En UO
   int64_t diffCount = compteurD - compteurG; // On conserve la difference entre les comptes en UO
-  deltaTheta = diffCount / distanceRouesUO; // En radian
+  deltaTheta = (double)diffCount / (double)distanceRouesUO; // En radian
 
   if ( abs(diffCount) < 1 ) { // On considere le mouvement comme une ligne droite
     // Mise a jour de la position

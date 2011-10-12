@@ -19,11 +19,11 @@
   static double frontParMetreCodeurG = 25661.444; // Nombre de tics codeurs en 1m pour codeur gauche
   static double frontParMetreCodeurD = 25703.778; // Nombre de tics codeurs en 1m pour codeur droite
   static int64_t distRoues = 284; // Distance entre les roues codeuses en mm
-  static double uOParFront = 512; // Nombre d'UO pour un tic de codeur
+  static int64_t uOParFront = 512; // Nombre d'UO pour un tic de codeur
 
   //Booleens gerant une eventuelle inversion des codeurs
-  static bool inverseCodeurG = false;
-  static bool inverseCodeurD = false;
+  static bool inverseCodeurG = true;
+  static bool inverseCodeurD = true;
   static bool swapCodeurs = false;
 
 /***************************
@@ -32,13 +32,18 @@
   static int64_t V_MAX_POS_MOTOR = 90;   // MD22 : 1 a 127, vitesse maximum positive
   static int64_t V_MAX_NEG_MOTOR = -90;  // MD22 : -1 a -128, vitesse maximum negative
 
+  //Booleens gerant une eventuelle inversion des codeurs
+  static bool inverseMoteurG = true;
+  static bool inverseMoteurD = false;
+  static bool swapMoteurs = false;
+
 /***************************
 *           PID            *
 ****************************/
   // PID en distance
   static int64_t DIST_KP = 70; // Coeff proportionelle
   static int64_t DIST_KI = 0; // Coeff intégrale
-  static int64_t DIST_KD = 250; // Coeff dérivée
+  static int64_t DIST_KD = 0; // Coeff dérivée
   static double DIST_OUT_RATIO = 0.00001; // Coeff permettant de diminuer les valeurs du PID
   static int64_t DIST_MAX_OUTPUT = 90; // Valeur de sortie maximum pour le moteur
   static int64_t DIST_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)
@@ -46,7 +51,7 @@
 
   static int64_t ANGLE_KP = 90; // Coeff proportionelle
   static int64_t ANGLE_KI = 0; // Coeff intégrale
-  static int64_t ANGLE_KD = 1250; // Coeff dérivée
+  static int64_t ANGLE_KD = 0; // Coeff dérivée
   static double ANGLE_OUT_RATIO = 0.000005; // Coeff permettant de diminuer les valeurs du PID
   static int64_t ANGLE_MAX_OUTPUT = 50; // Valeur de sortie maximum pour le moteur
   static int64_t ANGLE_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)

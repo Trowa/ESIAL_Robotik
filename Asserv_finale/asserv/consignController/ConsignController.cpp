@@ -114,7 +114,7 @@ void ConsignController::perform() {
   if ( dist_regu_on ) {
     dist_output = dist_regu.manage(dist_consigne, odometrie->getDeltaDist() );
   }
-
+  
   //Calcul des vitesses a appliquer en les bornant évidemment
   int64_t VmoteurD = Utils::constrain( dist_output + angle_output , V_MAX_NEG_MOTOR , V_MAX_POS_MOTOR);
   int64_t VmoteurG = Utils::constrain( dist_output - angle_output, V_MAX_NEG_MOTOR , V_MAX_POS_MOTOR);
@@ -122,5 +122,4 @@ void ConsignController::perform() {
   // On donne l'ordre aux moteurs et roulez jeunesse !!
   motors->vitesseG(VmoteurG);
   motors->vitesseD(VmoteurD);
-  
 }

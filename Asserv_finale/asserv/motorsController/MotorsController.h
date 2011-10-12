@@ -15,11 +15,6 @@ class MotorsController {
     void inverseMoteurDroit() { inverseMoteurG = !inverseMoteurG; }
     void inverseMoteurGauche() { inverseMoteurD = !inverseMoteurD; }
     void echangeMoteurs() { swapMoteurs = !swapMoteurs; }
-        
-  protected:
-    bool inverseMoteurG;
-    bool inverseMoteurD;
-    bool swapMoteurs;
 };
 
 #endif
