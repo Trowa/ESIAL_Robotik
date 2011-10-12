@@ -163,7 +163,7 @@
             <DriverSelection>4096</DriverSelection>
           </Flash1>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"copy" (@L.bin F:\)</Flash3>
+          <Flash3>"cp" (@L.bin F:\)</Flash3>
           <Flash4></Flash4>
         </Utilities>
         <TargetArmAds>
@@ -501,6 +501,26 @@
               <FileName>CMDList.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\asserv\commandManager\CMDList\CMDList.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Codeur.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\Codeur.h</FilePath>
+            </File>
+            <File>
+              <FileName>Codeur.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\codeurs\Codeur.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\main\Main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\main\Main.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1003,6 +1023,26 @@
               <FileName>CMDList.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\asserv\commandManager\CMDList\CMDList.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Codeur.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\Codeur.h</FilePath>
+            </File>
+            <File>
+              <FileName>Codeur.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\codeurs\Codeur.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\main\Main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\main\Main.h</FilePath>
             </File>
           </Files>
         </Group>

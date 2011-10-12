@@ -50,8 +50,12 @@ Odometrie::~Odometrie() {}
 void Odometrie::refresh() {
 
   // TODO récupération des comptes des codeurs sur la carte dédiée
-  compteurG = 0;
-  compteurD = 0;
+  __disable_irq();
+  compteurG = codeurG.getCount();
+  compteurD = codeurD.getCount();
+  codeurG.reset();
+  codeurD.reset();
+  __enable_irq();
   // Fin TODO
 
   // On ajuste le sens des codeurs en cas de problème de cablage
@@ -70,7 +74,7 @@ void Odometrie::refresh() {
   //On transforme ces valeurs en Unites Odometrique
   compteurD = compteurD * uOParFront;
   compteurG = compteurG * uOParFront;
-
+  
   // On applique le ratio pour prendre en compte la différence entre les codeurs
   if(applyRatioOnG) {
     compteurG = compteurG * ratioCodeurs;

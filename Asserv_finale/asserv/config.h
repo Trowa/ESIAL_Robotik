@@ -1,6 +1,9 @@
 #ifndef CONFIG
 #define CONFIG
 
+  // Retour PC
+  static Serial pc(USBTX, USBRX);
+
 /***************************
 *       CommandManager     *
 ****************************/

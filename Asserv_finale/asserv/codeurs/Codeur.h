@@ -1,7 +1,9 @@
 #ifndef CODEUR
 #define CODEUR
 
-#include "../mbed.h"
+#include "mbed.h"
+#include "../config.h"
+
 
 class Codeur
 {

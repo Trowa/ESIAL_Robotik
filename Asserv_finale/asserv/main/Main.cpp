@@ -16,8 +16,6 @@ int main() {
 
   // On attache l'interruption timer à la méthode Live_isr
   Live.attach(Live_isr, 0.005);
-
-  pc.printf("GO\n");
 }
 
 void resetAsserv() {
@@ -35,5 +33,4 @@ void resetAsserv() {
 void Live_isr() {   
   odometrie->refresh();      
   consignController->perform();
-  pc.printf("Live_isr\n");
 }

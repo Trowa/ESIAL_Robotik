@@ -39,7 +39,6 @@ void Codeur::handleInterruptA(void) {
             count++;
         }
     }
-
 }
 
 void Codeur::handleInterruptB(void) {
@@ -57,5 +56,4 @@ void Codeur::handleInterruptB(void) {
             count--;
         }
     }
-
 }

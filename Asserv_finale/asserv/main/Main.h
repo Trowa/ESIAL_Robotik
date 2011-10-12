@@ -22,7 +22,4 @@
   ConsignController *consignController;
   CommandManager *commandManager;
 
-  // Retour PC
-  Serial pc(USBTX, USBRX);
-
 #endif
