@@ -14,8 +14,9 @@ int main() {
   consignController = new ConsignController(odometrie, motorController);
   commandManager = new CommandManager(50, consignController, odometrie);
 
-  consignController->setQuadRamp_Dist(false);
+  //consignController->setQuadRamp_Dist(false);
   consignController->setQuadRamp_Angle(false);
+  //consignController->angle_Regu_Off();
 
   // On attache l'interruption timer à la méthode Live_isr
   Live.attach(Live_isr, 0.005);
@@ -36,4 +37,8 @@ void resetAsserv() {
 void Live_isr() {   
   odometrie->refresh();      
   consignController->perform();
+}
+
+// On écoute la liaison série
+void ecouteSerie() {
 }

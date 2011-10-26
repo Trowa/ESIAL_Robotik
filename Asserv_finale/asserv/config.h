@@ -23,7 +23,7 @@
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseCodeurG = true;
-  static bool inverseCodeurD = true;
+  static bool inverseCodeurD = false;
   static bool swapCodeurs = false;
 
 /***************************
@@ -34,7 +34,7 @@
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseMoteurG = true;
-  static bool inverseMoteurD = false;
+  static bool inverseMoteurD = true;
   static bool swapMoteurs = false;
 
 /***************************
@@ -43,15 +43,15 @@
   // PID en distance
   static int64_t DIST_KP = 70; // Coeff proportionelle
   static int64_t DIST_KI = 0; // Coeff intégrale
-  static int64_t DIST_KD = 0; // Coeff dérivée
+  static int64_t DIST_KD = 242; // Coeff dérivée
   static double DIST_OUT_RATIO = 0.00001; // Coeff permettant de diminuer les valeurs du PID
   static int64_t DIST_MAX_OUTPUT = 90; // Valeur de sortie maximum pour le moteur
   static int64_t DIST_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)
 
 
-  static int64_t ANGLE_KP = 90; // Coeff proportionelle
+  static int64_t ANGLE_KP = 250; // Coeff proportionelle
   static int64_t ANGLE_KI = 0; // Coeff intégrale
-  static int64_t ANGLE_KD = 0; // Coeff dérivée
+  static int64_t ANGLE_KD = 300; // Coeff dérivée
   static double ANGLE_OUT_RATIO = 0.000005; // Coeff permettant de diminuer les valeurs du PID
   static int64_t ANGLE_MAX_OUTPUT = 50; // Valeur de sortie maximum pour le moteur
   static int64_t ANGLE_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)

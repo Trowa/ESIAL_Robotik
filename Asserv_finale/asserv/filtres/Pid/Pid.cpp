@@ -42,7 +42,7 @@ int64_t Pid::filtre(int64_t erreur , int64_t feedback_odometrie , int64_t value3
     int64_t D = feedback_odometrie * kd;
   
     //On calcul la Sortie qui est la somme des trois valeurs multipliée par le ratio de sortie
-    int64_t sortie = P + I + D;
+    int64_t sortie = P + I - D;
     sortie = sortie * outRatio;
   
     // Saturation de la sortie pour ne pas allez trop vite non plus

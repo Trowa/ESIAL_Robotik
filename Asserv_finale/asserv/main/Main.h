@@ -15,6 +15,7 @@
   // Méthodes utiles
   int main();
   void resetAsserv();
+  void ecouteSerie();
 
   // Objets qui vont bien pour asservir le bestiau
   Odometrie *odometrie;
