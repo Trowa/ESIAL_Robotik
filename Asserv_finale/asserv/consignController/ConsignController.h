@@ -19,12 +19,12 @@ public:
     
     // On ajoute une valeur à la consigne courante
     // Utile pour une marcher arrière de quelques cm par exemple, ou pour tourner sur place
-    void add_angle_consigne(int64_t delta);
-    void add_dist_consigne(int64_t delta);
+    void add_angle_consigne(int64_t deltaUO);
+    void add_dist_consigne(int64_t deltaUO);
     
     // On fixe la consigne à atteindre
-    void set_angle_consigne(int64_t consigne);
-    void set_dist_consigne(int64_t consigne);
+    void set_angle_consigne(int64_t consigneUO);
+    void set_dist_consigne(int64_t consigneUO);
     
     // Rafraichie la consigne a realiser et on donne les ordres aux moteurs en conséquence
     void perform();
@@ -78,6 +78,9 @@ public:
     // puisse definir des consignes de distance et d'angle
     int64_t getAccuAngle() { return angle_regu.getAccumulateur(); }
     int64_t getAccuDist() { return dist_regu.getAccumulateur(); }
+
+    int64_t getDistConsigne() { return dist_consigne; }
+    int64_t getAngleConsigne() { return angle_consigne; }
 
   private:
     

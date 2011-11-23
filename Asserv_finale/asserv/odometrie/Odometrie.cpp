@@ -105,10 +105,11 @@ void Odometrie::refresh() {
     theta += deltaTheta;
 
     // On limite le cap a +/- PI afin de ne pouvoir tourner dans les deux sens et pas dans un seul
-    if ( theta > PI )
+    if ( theta > PI ) {
       theta -= 2 * PI ;
-    else if ( theta <= -PI )
+    } else if ( theta <= -PI ) {
       theta += 2 * PI ;
     }
+  }
 
 }

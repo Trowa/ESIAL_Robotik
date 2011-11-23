@@ -7,7 +7,8 @@
 /***************************
 *       CommandManager     *
 ****************************/
-  static double angleThreshold = 0; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
+  static double angleThreshold = 0.05; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
+  static int64_t returnThreshold = 50; // Distance en dessous de laquelle on revient en marche arriere si on depasse, sinon demi-tour
 
 /***************************
 *       ODOMETRIE          *
@@ -29,8 +30,8 @@
 /***************************
 *         Moteurs          *
 ****************************/
-  static int64_t V_MAX_POS_MOTOR = 90;   // MD22 : 1 a 127, vitesse maximum positive
-  static int64_t V_MAX_NEG_MOTOR = -90;  // MD22 : -1 a -128, vitesse maximum negative
+  static int64_t V_MAX_POS_MOTOR = 70;   // MD22 : 1 a 127, vitesse maximum positive
+  static int64_t V_MAX_NEG_MOTOR = -70;  // MD22 : -1 a -128, vitesse maximum negative
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseMoteurG = true;
@@ -61,11 +62,11 @@
   static int64_t DIST_QUAD_1ST_NEG = 150000; // Vitesse max en marche arrière
   static int64_t DIST_QUAD_AV_2ND_ACC = 1600; // Accélération max en marche avant
   static int64_t DIST_QUAD_AV_2ND_DEC = 8000; // Décélération max en marche avant
-  static int64_t DIST_QUAD_AV_ANTICIPATION_GAIN_COEF = 42; // Coeff déterminant le début de la rampe de décélération en marche avant
+  static int64_t DIST_QUAD_AV_ANTICIPATION_GAIN_COEF = 20; // Coeff déterminant le début de la rampe de décélération en marche avant
   static int64_t DIST_QUAD_AR_2ND_ACC = 6000; // Accélération max en marche arrière
   static int64_t DIST_QUAD_AR_2ND_DEC = 1000; // Décélération max en marche arrière
-  static int64_t DIST_QUAD_AR_ANTICIPATION_GAIN_COEF = 80; // Coeff déterminant le début de la rampe de décélération en marche arrière
-  static int64_t DIST_TAILLE_FENETRE_ARRIVEE = 300000; // Largeur de la zone où l'on considère être arrivé (UO)
+  static int64_t DIST_QUAD_AR_ANTICIPATION_GAIN_COEF = 100; // Coeff déterminant le début de la rampe de décélération en marche arrière
+  static int64_t DIST_TAILLE_FENETRE_ARRIVEE = 100000; // Largeur de la zone où l'on considère être arrivé (UO)
 
   static int64_t ANGLE_QUAD_1ST_POS = 70000; // Vitesse max en rotation
   static int64_t ANGLE_QUAD_2ND_ACC = 600; // Accélération max en rotation

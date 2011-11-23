@@ -45,7 +45,6 @@ bool CommandManager::addGoToAngle(int64_t posXInmm, int64_t posYInmm) {
  * Fonction de mise a jour...
  */
 void CommandManager::perform() {
-
   /*
   * On demande un arrêt d'urgence, donc on fixe la consigne à atteindre sur la position courante
   */
@@ -78,11 +77,11 @@ void CommandManager::perform() {
     //currCMD = nextCMD; // La consigne suivante devient la consigne courante
     //nextCMD = liste.dequeue(); // On essaye de recuperer la prochaine consigne
     currCMD = liste.dequeue(); // On essaye de recuperer la prochaine consigne
-    
+
     // On vient de terminer la consigne courrante, on le signale en haut lieu
     if(currentConsignFinished == false) {
       //iaCom.printf("d\n");
-      printf("D sent \n");
+      pc.printf("D sent \n");
     }
         
     currentConsignFinished = false;
@@ -121,7 +120,7 @@ void CommandManager::computeGoTo(){
   // Valeur absolue de la distance à parcourir en allant tout droit pour atteindre la consigne
   int64_t deltaDist = 0;
   if (max != 0) {
-    deltaDist = max * sqrt (1.0 + ( min / max ) * ( min / max ) );
+    deltaDist = (int64_t)(max * sqrt (1.0 + ( min / max ) * ( min / max ) ));
   }
     
   // Cap que doit atteindre le robot
@@ -139,7 +138,7 @@ void CommandManager::computeGoTo(){
     deltaTheta += 2.0*PI;
   }
         
-  //TODO a tester en conditions réelles et extrêmes de mauvaises utilisations
+  /*//TODO a tester en conditions réelles et extrêmes de mauvaises utilisations
   if ( abs(deltaTheta) < angleThreshold ) { // Si on est dans la fenêtre de départ en angle
     // La consigne est la somme de la distance à parcourir et de notre position dans l'accu
     int64_t consigne_dist = deltaDist + cnsgCtrl->getAccuDist();
@@ -148,25 +147,26 @@ void CommandManager::computeGoTo(){
   // Dans tout les cas, on essaie d'atteindre le bon cap
   // La consigne a atteindre en angle est la somme du deltaTheta en UO et de l'accumulateur du régu
   int64_t consigne_angle = Utils::radToUO(odometrie, deltaTheta) + cnsgCtrl->getAccuAngle();
-  cnsgCtrl->set_angle_consigne( consigne_angle ); // On set la consigne
+  cnsgCtrl->set_angle_consigne( consigne_angle ); // On set la consigne*/
 
-  /*  Ancienne version, juste au cas où. A virer une fois opérationnelle
+  //  Ancienne version, juste au cas où. A virer une fois opérationnelle
   // On projette la distance à parcourir sur l'axe X du repaire mobile du robot
-  int64_t projectedDist = deltaDist * cos(deltaTheta);
-  if ( deltaDist < cnsgCtrl->getOdometrie()->mmToUO(returnThreshold) ){
-        consigne_d = projectedDist + cnsgCtrl->getAccuDist() ;
-        cnsgCtrl->set_dist_consigne( consigne_d );
+  double projectedDist = deltaDist * cos(deltaTheta);
+  int64_t consigne_dist;
+  if ( deltaDist < Utils::mmToUO(odometrie, returnThreshold) ){
+        consigne_dist = projectedDist + cnsgCtrl->getAccuDist() ;
+        cnsgCtrl->set_dist_consigne( consigne_dist );
   } else {
         cnsgCtrl->set_angle_consigne(
-            cnsgCtrl->getOdometrie()->radToUO( d ) + cnsgCtrl->getAccuAngle()
+            Utils::radToUO(odometrie, deltaTheta) + cnsgCtrl->getAccuAngle()
             ) ; //on se met dans la bonne direction
-        if( abs( thetaCible - cnsgCtrl->getOdometrie()->getTheta() ) < angleThreshold ) {
-            consigne_d = deltaDist + cnsgCtrl->getAccuDist();
+        if( abs( thetaCible - odometrie->getTheta() ) < angleThreshold ) {
+            consigne_dist = deltaDist + cnsgCtrl->getAccuDist();
         } else {
-            consigne_d = cnsgCtrl->getAccuDist();
+            consigne_dist = cnsgCtrl->getAccuDist();
         }
-        cnsgCtrl->set_dist_consigne( consigne_d );
-  } */
+        cnsgCtrl->set_dist_consigne( consigne_dist );
+  }
 
 }
 

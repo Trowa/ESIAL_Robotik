@@ -4,9 +4,6 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 C:\Documents and Settings\francois\Bureau\Robotik\ESIAL_Robotik\Asserv_finale\Asserv_Finale.uvproj
-Project File Date:  10/26/2011
+Project File Date:  11/09/2011
 
 <h2>Output:</h2>
-Clean started: Project: 'Asserv_Finale'
-   deleting intermediate output files for target 'mbed NXP LPC1768'
-   deleting intermediate output files for target 'mbed NXP LPC2368'
