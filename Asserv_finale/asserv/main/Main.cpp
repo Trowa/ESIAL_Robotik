@@ -28,9 +28,12 @@ int main() {
 
 void resetAsserv() {
   // On détruit tout les objets (sauf les moteurs, on s'en fiche de ça)
-  odometrie->~Odometrie();
-  consignController->~ConsignController();
-  commandManager->~CommandManager();
+  delete odometrie;
+  odometrie = NULL;
+  delete consignController;
+  consignController = NULL;
+  delete commandManager;
+  commandManager = NULL;
   // Et on les refait !!!
   odometrie = new Odometrie();
   consignController = new ConsignController(odometrie, motorController);
