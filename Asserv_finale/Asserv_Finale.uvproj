@@ -382,7 +382,8 @@
 .\mbed\LPC1768\core_cm3.o
 .\mbed\LPC1768\cmsis_nvic.o
 .\mbed\LPC1768\capi.ar
-.\mbed\LPC1768\mbed.ar</Misc>
+.\mbed\LPC1768\mbed.ar
+.\mbed\LPC1768\EthernetNetIf.ar</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -521,6 +522,31 @@
               <FileName>Main.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\asserv\main\Main.h</FilePath>
+            </File>
+            <File>
+              <FileName>DebugUDP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\debug\DebugUDP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DebugUDP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\debug\DebugUDP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Qik.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\Qik\Qik.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Qik.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Qik\Qik.h</FilePath>
+            </File>
+            <File>
+              <FileName>Qik_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Qik\Qik_config.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1043,6 +1069,31 @@
               <FileName>Main.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\asserv\main\Main.h</FilePath>
+            </File>
+            <File>
+              <FileName>DebugUDP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\debug\DebugUDP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DebugUDP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\debug\DebugUDP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Qik.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\Qik\Qik.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Qik.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Qik\Qik.h</FilePath>
+            </File>
+            <File>
+              <FileName>Qik_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\Qik\Qik_config.h</FilePath>
             </File>
           </Files>
         </Group>

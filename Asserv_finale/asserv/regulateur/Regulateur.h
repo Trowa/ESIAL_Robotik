@@ -3,6 +3,7 @@
 
 #include "../filtres/Pid/Pid.h"
 #include "../filtres/QuadRampDerivee/QuadRampDerivee.h"
+#include "../config.h"
 
 class Regulateur {
   public:
@@ -52,7 +53,11 @@ class Regulateur {
      
     // Permet de désactiver la QuadRampDerivee
     bool filtreQuadRampDeriveeON;
-  
+  	
+	#ifdef DEBUG
+  		bool isDistance; //permet de savoir si cette instance de régulateur est utilisée pour la régulation de distance
+  	#endif
+	
 };
 
 

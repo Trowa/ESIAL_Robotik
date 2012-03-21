@@ -3,6 +3,8 @@
 
 #include "../Filtre.h"
 #include "../../Utils/Utils.h"
+#include "../../config.h"
+
 
 class QuadRampDerivee : public Filtre {
   public:
@@ -49,6 +51,9 @@ class QuadRampDerivee : public Filtre {
     // Permet de connaitre l'etat de la consigne actuelle ( on est arrivee ou non... )
     bool arrivee;
 
+	#ifdef DEBUG
+  		bool isDistance; //permet de savoir si cette instance de la quadramp est utilisée pour la régulation de distance
+  	#endif
  };
  
  #endif

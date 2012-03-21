@@ -1,9 +1,17 @@
 #include "Regulateur.h"
 
+#ifdef DEBUG
+#include "../debug/DebugUDP.h"
+	extern DebugUDP *debugUdp;
+#endif
+
 // Constructeur
 Regulateur::Regulateur(bool isDistance) : filtreQuadRampDerivee(isDistance), filtrePid(isDistance) {
   filtreQuadRampDeriveeON = true;
   accumulateur = 0;
+  #ifdef DEBUG
+  	this->isDistance = isDistance;
+  #endif
 }
 
 // Destructeur
@@ -32,6 +40,33 @@ int64_t Regulateur::manage(int64_t consigne, int64_t feedback_odometrie) {
   // On envoit l'erreur au PID qui va la filtrer par rapport aux paramètres du robot et aux coefficients d'asservissement
   // On obtient alors la vitesse a envoyer aux moteurs pour corriger l'erreur courante
   int64_t erreurFiltree = filtrePid.filtre(erreur, feedback_odometrie);
+  
+  //débug
+  #ifdef DEBUG
+
+	char name[32];
+
+	strcpy(name, "consigne");
+	name[8]=(isDistance?'D':'A');
+	name[9]=0;
+	debugUdp->addData(name, (double) consigne );
+	
+	strcpy(name, "accu");
+	name[4]=(isDistance?'D':'A');
+	name[5]=0;
+	debugUdp->addData(name, (double) accumulateur );
+	
+	strcpy(name, "consigneFiltree");
+	name[15]=(isDistance?'D':'A');
+	name[16]=0;
+	debugUdp->addData(name, (double) consigneFiltree );
+	
+	strcpy(name, "erreurFiltree");
+	name[13]=(isDistance?'D':'A');
+	name[14]=0;
+	debugUdp->addData(name, (double) erreurFiltree );
+
+  #endif
   
   return erreurFiltree;
 }

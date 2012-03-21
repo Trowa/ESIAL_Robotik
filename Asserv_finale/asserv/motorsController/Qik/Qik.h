@@ -18,8 +18,8 @@ class Qik : public MotorsController
     public :
         Qik(PinName txPinToQik, PinName rxPinToQik);
         
-        void vitesseG(int vitMoteurG);
-        void vitesseD(int vitMoteurD);
+        virtual void vitesseG(int vitMoteurG);
+        virtual void vitesseD(int vitMoteurD);
         
     private :
     

@@ -4,6 +4,10 @@
   // Retour PC
   static Serial pc(USBTX, USBRX);
 
+
+  //Débug ou pas ?
+#define DEBUG DEBUG
+
 /***************************
 *       CommandManager     *
 ****************************/
@@ -18,12 +22,12 @@
   // Définition des variables pour l'odométrie
   static double frontParMetreCodeurG = 25661.444; // Nombre de tics codeurs en 1m pour codeur gauche
   static double frontParMetreCodeurD = 25703.778; // Nombre de tics codeurs en 1m pour codeur droite
-  static int64_t distRoues = 284; // Distance entre les roues codeuses en mm
+  static int64_t distRoues = 285; // Distance entre les roues codeuses en mm
   static int64_t uOParFront = 512; // Nombre d'UO pour un tic de codeur
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseCodeurG = true;
-  static bool inverseCodeurD = true;
+  static bool inverseCodeurD = false;
   static bool swapCodeurs = false;
 
 /***************************
@@ -34,7 +38,7 @@
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseMoteurG = true;
-  static bool inverseMoteurD = false;
+  static bool inverseMoteurD = true;
   static bool swapMoteurs = false;
 
 /***************************
@@ -43,13 +47,13 @@
   // PID en distance
   static int64_t DIST_KP = 70; // Coeff proportionelle
   static int64_t DIST_KI = 0; // Coeff intégrale
-  static int64_t DIST_KD = 0; // Coeff dérivée
+  static int64_t DIST_KD = -150; // Coeff dérivée
   static double DIST_OUT_RATIO = 0.00001; // Coeff permettant de diminuer les valeurs du PID
   static int64_t DIST_MAX_OUTPUT = 90; // Valeur de sortie maximum pour le moteur
   static int64_t DIST_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)
 
 
-  static int64_t ANGLE_KP = 90; // Coeff proportionelle
+  static int64_t ANGLE_KP = 50; // Coeff proportionelle
   static int64_t ANGLE_KI = 0; // Coeff intégrale
   static int64_t ANGLE_KD = 0; // Coeff dérivée
   static double ANGLE_OUT_RATIO = 0.000005; // Coeff permettant de diminuer les valeurs du PID
