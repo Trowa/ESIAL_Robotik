@@ -12,7 +12,8 @@
 *       CommandManager     *
 ****************************/
   static double angleThreshold = 0; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
-
+  static int64_t returnThreshold = 50; // Distance en dessous de laquelle on revient en marche arriere si on depasse, sinon demi-tour
+  
 /***************************
 *       ODOMETRIE          *
 ****************************/
