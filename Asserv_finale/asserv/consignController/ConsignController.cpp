@@ -2,7 +2,7 @@
 
 //#define DEBUG
 #ifdef DEBUG
-    #include "../UDPData.h"
+    #include "../debug/DebugUDP.h"
 #endif
 
 // Constructeur prenant deux objets initialiser avec l'asserv en paramètre
@@ -122,4 +122,8 @@ void ConsignController::perform() {
   // On donne l'ordre aux moteurs et roulez jeunesse !!
   motors->vitesseG(VmoteurG);
   motors->vitesseD(VmoteurD);
+/*
+  pc.printf("VG=%d  ", VmoteurG);
+  pc.printf("VD=%d\n", VmoteurD);
+*/
 }

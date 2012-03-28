@@ -1,6 +1,11 @@
 #include "mbed.h"
 #include "odometrie.h"
 
+#ifdef DEBUG
+#include "../debug/DebugUDP.h"
+	extern DebugUDP *debugUdp;
+#endif
+
 // Constructeur
 /*
 * Lors de la création de l'objet, on calcul la distance entre les roues en UO et le nombre d'UO par front
@@ -109,7 +114,33 @@ void Odometrie::refresh() {
       theta -= 2 * PI ;
     } else if ( theta <= -PI ) {
       theta += 2 * PI ;
-    }
+	}
   }
 
+	//Si le debug est en route
+	#ifdef DEBUG 
+   	if(debugUdp->getDebugSend()) {
+   /* on ajoute les valeurs et on les envoies */
+    	//uint64_t XMM =  this->getXmm();
+        //uint64_t YMM =  this->getYmm();
+		debugUdp->addData("X", (double) x);
+		debugUdp->addData("Y", (double) y);
+		debugUdp->addData("Theta", (double) theta);
+		debugUdp->addData("deltaDist", (double) deltaDist);
+		debugUdp->addData("deltaTheta", (double) deltaTheta);
+   /*	udp_data_add("X",XMM);
+       	udp_data_add("Y", YMM);
+       	udp_data_add("T", this->getThetaDeg() );
+       	udp_data_add("Vl", deltaDist/(frontParMetre*uOParFront)*1000 );
+       	udp_data_add("Va", deltaTheta*180/PI );
+	*/
+	}
+    #endif
+
+
+	//pc.printf("x=%lld-y=%lld\n", x, y);
+	/*
+	pc.printf("y=%d  ",y);
+	pc.printf("theta=%f\n",theta);
+	*/
 }

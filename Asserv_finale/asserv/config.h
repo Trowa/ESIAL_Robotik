@@ -4,12 +4,16 @@
   // Retour PC
   static Serial pc(USBTX, USBRX);
 
+
+  //Débug ou pas ?
+#define DEBUG DEBUG
+
 /***************************
 *       CommandManager     *
 ****************************/
-  static double angleThreshold = 0.05; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
+  static double angleThreshold = 0; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
   static int64_t returnThreshold = 50; // Distance en dessous de laquelle on revient en marche arriere si on depasse, sinon demi-tour
-
+  
 /***************************
 *       ODOMETRIE          *
 ****************************/
@@ -19,7 +23,7 @@
   // Définition des variables pour l'odométrie
   static double frontParMetreCodeurG = 25661.444; // Nombre de tics codeurs en 1m pour codeur gauche
   static double frontParMetreCodeurD = 25703.778; // Nombre de tics codeurs en 1m pour codeur droite
-  static int64_t distRoues = 284; // Distance entre les roues codeuses en mm
+  static int64_t distRoues = 285; // Distance entre les roues codeuses en mm
   static int64_t uOParFront = 512; // Nombre d'UO pour un tic de codeur
 
   //Booleens gerant une eventuelle inversion des codeurs
@@ -30,8 +34,8 @@
 /***************************
 *         Moteurs          *
 ****************************/
-  static int64_t V_MAX_POS_MOTOR = 70;   // MD22 : 1 a 127, vitesse maximum positive
-  static int64_t V_MAX_NEG_MOTOR = -70;  // MD22 : -1 a -128, vitesse maximum negative
+  static int64_t V_MAX_POS_MOTOR = 90;   // MD22 : 1 a 127, vitesse maximum positive
+  static int64_t V_MAX_NEG_MOTOR = -90;  // MD22 : -1 a -128, vitesse maximum negative
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseMoteurG = true;
@@ -44,15 +48,15 @@
   // PID en distance
   static int64_t DIST_KP = 70; // Coeff proportionelle
   static int64_t DIST_KI = 0; // Coeff intégrale
-  static int64_t DIST_KD = 242; // Coeff dérivée
+  static int64_t DIST_KD = -150; // Coeff dérivée
   static double DIST_OUT_RATIO = 0.00001; // Coeff permettant de diminuer les valeurs du PID
   static int64_t DIST_MAX_OUTPUT = 90; // Valeur de sortie maximum pour le moteur
   static int64_t DIST_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)
 
 
-  static int64_t ANGLE_KP = 250; // Coeff proportionelle
+  static int64_t ANGLE_KP = 50; // Coeff proportionelle
   static int64_t ANGLE_KI = 0; // Coeff intégrale
-  static int64_t ANGLE_KD = 300; // Coeff dérivée
+  static int64_t ANGLE_KD = 0; // Coeff dérivée
   static double ANGLE_OUT_RATIO = 0.000005; // Coeff permettant de diminuer les valeurs du PID
   static int64_t ANGLE_MAX_OUTPUT = 50; // Valeur de sortie maximum pour le moteur
   static int64_t ANGLE_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)
@@ -62,11 +66,11 @@
   static int64_t DIST_QUAD_1ST_NEG = 150000; // Vitesse max en marche arrière
   static int64_t DIST_QUAD_AV_2ND_ACC = 1600; // Accélération max en marche avant
   static int64_t DIST_QUAD_AV_2ND_DEC = 8000; // Décélération max en marche avant
-  static int64_t DIST_QUAD_AV_ANTICIPATION_GAIN_COEF = 20; // Coeff déterminant le début de la rampe de décélération en marche avant
+  static int64_t DIST_QUAD_AV_ANTICIPATION_GAIN_COEF = 42; // Coeff déterminant le début de la rampe de décélération en marche avant
   static int64_t DIST_QUAD_AR_2ND_ACC = 6000; // Accélération max en marche arrière
   static int64_t DIST_QUAD_AR_2ND_DEC = 1000; // Décélération max en marche arrière
-  static int64_t DIST_QUAD_AR_ANTICIPATION_GAIN_COEF = 100; // Coeff déterminant le début de la rampe de décélération en marche arrière
-  static int64_t DIST_TAILLE_FENETRE_ARRIVEE = 100000; // Largeur de la zone où l'on considère être arrivé (UO)
+  static int64_t DIST_QUAD_AR_ANTICIPATION_GAIN_COEF = 80; // Coeff déterminant le début de la rampe de décélération en marche arrière
+  static int64_t DIST_TAILLE_FENETRE_ARRIVEE = 300000; // Largeur de la zone où l'on considère être arrivé (UO)
 
   static int64_t ANGLE_QUAD_1ST_POS = 70000; // Vitesse max en rotation
   static int64_t ANGLE_QUAD_2ND_ACC = 600; // Accélération max en rotation
