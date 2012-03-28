@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "scale.h"
 
 class Curve
 {
@@ -11,10 +12,14 @@ public:
 
     void update();
     void draw(sf::RenderTarget* p_target) const;
-    void drawCursorText(sf::RenderWindow* p_window, int id) const;
+    void drawScale(sf::RenderWindow* p_window, int p_k) const;
+    void drawScaleT(sf::RenderWindow* p_window) const;
 
     void display(bool p);
     bool isDisplayed() const;
+
+    float getMin(float p_tMin, float p_tMax) const;
+    float getMax(float p_tMin, float p_tMax) const;
 
     void setColor(const std::string& p);
 
@@ -25,11 +30,7 @@ private:
     sf::VertexArray m_vertexArray;
     sf::Color m_color;
     sf::View m_view;
-    float m_minV;
-    float m_maxV;
-    static float m_minT;
-    static float m_maxT;
-    static float m_deltaT;
+    Scale m_scale;
 };
 
 #endif // CURVE_H

@@ -82,13 +82,15 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setPalette(palette);
 
     // On connecte les signaux aux slots
-    //connect(m_plot, SIGNAL(newVar(QString)), m_dock, SLOT(addNewVar(QString)));
-    //connect(m_dock, SIGNAL(varChanged(QString, Qt::CheckState)), m_plot, SLOT(changeVar(QString, Qt::CheckState)));
-    //connect(m_dock, SIGNAL(colorChanged(QString,QString)), m_plot, SLOT(changeColor(QString, QString)));
-
     connect(m_canvas, SIGNAL(newVar(QString)), m_dock, SLOT(addNewVar(QString)));
     connect(m_dock, SIGNAL(varChanged(QString, Qt::CheckState)), m_canvas, SLOT(changeVar(QString, Qt::CheckState)));
     connect(m_dock, SIGNAL(colorChanged(QString,QString)), m_canvas, SLOT(changeColor(QString, QString)));
+
+    m_canvas->appendPoint("Youhou", 220);
+    m_canvas->appendPoint("auie", 0.3);
+    m_canvas->setTime(10);
+    m_canvas->appendPoint("Youhou", 301);
+    m_canvas->appendPoint("auie", 0.4);
 
     QMessageBox::information(this, "Attention", " - Ne pas redimensionner la fenêtre si des courbes sont déjà dessinées !\n - Ne surtout pas ouvrir un fichier autre qu'un fichier créé par ce programme.");
 }
@@ -154,6 +156,7 @@ QToolBar *MainWindow::toolBar()
 
     // Lorsque le signal ordre est envoyé, on l?envoie au serveur.
     connect(this, SIGNAL(ordre(QString)), m_server, SLOT(donnerOrdre(QString)));
+
 
     // On retourne la toolbar qu?on a créée
     return toolBarStart;

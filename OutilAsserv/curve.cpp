@@ -1,18 +1,12 @@
 #include "curve.h"
-#include <cfloat>
 #include <sstream>
+#include <cfloat>
 
-
-
-float Curve::m_minT = FLT_MAX;
-float Curve::m_maxT = 1;
-float Curve::m_deltaT = 90;
 
 Curve::Curve(std::string p_nom, const sf::View& p_view) :
     m_vertexArray(sf::LinesStrip, 0),
     m_view(p_view),
-    m_minV(FLT_MAX),
-    m_maxV(-FLT_MAX),
+
     m_display(false)
 {
 
@@ -23,10 +17,36 @@ bool Curve::isDisplayed() const
     return m_display;
 }
 
+float Curve::getMin(float p_tMin, float p_tMax) const
+{
+    float min = FLT_MAX;
+    for(int i=0; i<m_vertexArray.getVertexCount(); ++i)
+    {
+        if(m_vertexArray[i].position.x >= p_tMin && m_vertexArray[i].position.x <= p_tMax)
+        {
+            if(m_vertexArray[i].position.y < min) min = m_vertexArray[i].position.y;
+        }
+    }
+    return min;
+}
+
+float Curve::getMax(float p_tMin, float p_tMax) const
+{
+    float max = FLT_MAX;
+    for(int i=0; i<m_vertexArray.getVertexCount(); ++i)
+    {
+        if(m_vertexArray[i].position.x >= p_tMin && m_vertexArray[i].position.x <= p_tMax)
+        {
+            if(m_vertexArray[i].position.y > max) max = m_vertexArray[i].position.y;
+        }
+    }
+    return max;
+}
+
 void Curve::update()
 {
-    m_view.setCenter((m_maxT-m_minT<m_deltaT/2.f*(1+0.8f))?m_minT+m_deltaT/2.f:m_maxT-(m_deltaT/2.f)*0.8, (m_maxV+m_minV)/2.f);
-    m_view.setSize(m_deltaT, (m_maxV-m_minV)*1.2f);
+    m_view.setCenter(m_scale.getCenter());
+    m_view.setSize(m_scale.getSize());
 }
 
 void Curve::draw(sf::RenderTarget* p_target) const
@@ -40,18 +60,26 @@ void Curve::draw(sf::RenderTarget* p_target) const
     }
 }
 
-void Curve::drawCursorText(sf::RenderWindow* p_window, int id) const
+void Curve::drawScale(sf::RenderWindow* p_window, int p_k) const
 {
-    sf::Vector2i v = sf::Mouse::getPosition(*p_window);
-    sf::Vector2f coordonnees = p_window->convertCoords(v.x, v.y, m_view);
+    if(m_display)
+    {
+        p_window->setView(m_view);
+        sf::Transform t = sf::Transform::Identity;
+        t.translate((p_k%2==0)?(p_k/2)*40.f:p_window->getSize().x-(p_k/2+1)*40.f, 0);
+        p_window->draw(m_scale, t);
+        p_window->setView(p_window->getDefaultView());
+    }
+}
 
-    std::ostringstream flux;
-    flux << coordonnees.y;
-    sf::Text t(flux.str());
-    t.setColor(m_color);
-    t.setScale(0.4f, 0.4f);
-    t.setPosition(v.x, v.y-13*id);
-    p_window->draw(t);
+void Curve::drawScaleT(sf::RenderWindow* p_window) const
+{
+    if(m_display)
+    {
+        p_window->setView(m_view);
+        Scale::drawScaleT(*p_window);
+        p_window->setView(p_window->getDefaultView());
+    }
 }
 
 void Curve::display(bool p)
@@ -84,6 +112,7 @@ void Curve::setColor(const std::string& p)
     {
         m_vertexArray[i].color = m_color;
     }
+    m_scale.setColor(m_color);
 }
 
 void Curve::append(float p_time, float p_info)
@@ -94,9 +123,5 @@ void Curve::append(float p_time, float p_info)
     vertex.color = m_color;
     m_vertexArray.append(vertex);
 
-    if(m_minV > p_info) m_minV = p_info;
-    if(m_maxV < p_info) m_maxV = p_info;
-
-    if(m_maxT < p_time) m_maxT = p_time;
-    if(m_minT > p_time) m_minT = p_time;
+    m_scale.update(p_time, p_info);
 }

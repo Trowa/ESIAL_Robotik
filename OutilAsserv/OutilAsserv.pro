@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     curveform.cpp \
     sfmlCanvas.cpp \
     canvasplot.cpp \
-    curve.cpp
+    curve.cpp \
+    scale.cpp
 
 HEADERS  += \
     server.h \
@@ -32,22 +33,13 @@ HEADERS  += \
     curveform.h \
     sfmlCanvas.h \
     canvasplot.h \
-    curve.h
+    curve.h \
+    scale.h
 
-CONFIG += qwt
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../usr/local/qwt-6.0.1/lib/release/ -lqwt -lsfml-graphics -lsfml-window -lsfml-system
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../../usr/local/qwt-6.0.1/lib/debug/ -lqwt -lsfml-graphics -lsfml-window -lsfml-system
-else:symbian: LIBS += -lqwt -lsfml-graphics -lsfml-window -lsfml-system
-else:unix: LIBS += -L$$PWD/../../../../../../usr/local/qwt-6.0.1/lib/ -lqwt -lsfml-graphics -lsfml-window -lsfml-system -lX11
-
-INCLUDEPATH += $$PWD/../../../../../../usr/local/qwt-6.0.1/include
-DEPENDPATH += $$PWD/../../../../../../usr/local/qwt-6.0.1/include
-
-
-
-
-
+win32:CONFIG(release, debug|release): LIBS += -lsfml-graphics -lsfml-window -lsfml-system
+else:win32:CONFIG(debug, debug|release): LIBS += -lsfml-graphics -lsfml-window -lsfml-system
+else:symbian: LIBS += -lsfml-graphics -lsfml-window -lsfml-system
+else:unix: LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lX11
 
 
 

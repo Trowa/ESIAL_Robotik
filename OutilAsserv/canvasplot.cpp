@@ -4,7 +4,8 @@
 
 CanvasPlot::CanvasPlot(QWidget* Parent) : SfmlCanvas(Parent), m_time(0)
 {
-    setCursor(Qt::BlankCursor);
+
+
 }
 
 // Méthode pour actualiser le temps
@@ -46,15 +47,32 @@ void CanvasPlot::onUpdate()
         i->second->draw(this);
     }
 
-    int id=1;
+
+
+    sf::VertexArray cursor(sf::Lines, 4);
+    cursor[0].position.x = (float)sf::Mouse::getPosition(*this).x - this->getSize().x*2;
+    cursor[0].position.y = (float)sf::Mouse::getPosition(*this).y;
+    cursor[1].position.x = (float)sf::Mouse::getPosition(*this).x + this->getSize().x*2;
+    cursor[1].position.y = (float)sf::Mouse::getPosition(*this).y;
+    cursor[2].position.x = (float)sf::Mouse::getPosition(*this).x;
+    cursor[2].position.y = (float)sf::Mouse::getPosition(*this).y - this->getSize().y*2;
+    cursor[3].position.x = (float)sf::Mouse::getPosition(*this).x;
+    cursor[3].position.y = (float)sf::Mouse::getPosition(*this).y + this->getSize().y*2;
+
+    this->setView(this->getDefaultView());
+
+    int k=0;
     for(std::map<std::string, Curve*>::iterator i = m_curves.begin(); i != m_curves.end(); i++)
     {
         if(i->second->isDisplayed())
         {
-            ++id;
-            i->second->drawCursorText(this, id);
+            if(k==0) i->second->drawScaleT(this);
+            i->second->drawScale(this, k);
+            ++k;
         }
     }
+
+    this->draw(cursor);
 }
 
 // L’état (affiché/caché) d’une var a changé, on attache/détache la courbe
