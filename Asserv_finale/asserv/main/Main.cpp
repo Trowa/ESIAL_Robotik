@@ -10,7 +10,8 @@ int main() {
 
   // On initialise les objets qui vont bien pour l'asserv
   odometrie = new Odometrie();
-  motorController = new Qik(p9, p10);
+  //motorController = new Qik(p9, p10);
+  motorController = new PololuSMCs(p9, p10, p28, p27);
   consignController = new ConsignController(odometrie, motorController);
   commandManager = new CommandManager(50, consignController, odometrie);
   #ifdef DEBUG

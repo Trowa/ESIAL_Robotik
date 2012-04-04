@@ -6,6 +6,7 @@
 #include "../odometrie/Odometrie.h"
 #include "../motorsController/Md22/Md22.h"
 #include "../motorsController/Qik/Qik.h"
+#include "../motorsController/PololuSMCs/PololuSMCs.h"
 #include "../consignController/ConsignController.h"
 #include "../commandManager/CommandManager.h"
 #include "../debug/DebugUDP.h"
