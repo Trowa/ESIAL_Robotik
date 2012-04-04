@@ -548,6 +548,26 @@
               <FileType>5</FileType>
               <FilePath>.\asserv\motorsController\Qik\Qik_config.h</FilePath>
             </File>
+            <File>
+              <FileName>PololuSMCs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\PololuSMCs.h</FilePath>
+            </File>
+            <File>
+              <FileName>OnePololuSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\OnePololuSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OnePololuSMC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\OnePololuSMC.h</FilePath>
+            </File>
+            <File>
+              <FileName>PololuSMCs.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\PololuSMCs.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1094,6 +1114,26 @@
               <FileName>Qik_config.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\asserv\motorsController\Qik\Qik_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>PololuSMCs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\PololuSMCs.h</FilePath>
+            </File>
+            <File>
+              <FileName>OnePololuSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\OnePololuSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OnePololuSMC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\OnePololuSMC.h</FilePath>
+            </File>
+            <File>
+              <FileName>PololuSMCs.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\motorsController\PololuSMCs\PololuSMCs.cpp</FilePath>
             </File>
           </Files>
         </Group>

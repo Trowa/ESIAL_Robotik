@@ -14,8 +14,10 @@
 ### List of Objects: adding '".\build\main.o"'
 ### List of Objects: adding '".\build\debugudp.o"'
 ### List of Objects: adding '".\build\qik.o"'
+### List of Objects: adding '".\build\onepololusmc.o"'
+### List of Objects: adding '".\build\pololusmcs.o"'
 ### ADS-LD Command completed:
---cpu Cortex-M3 ".\build\odometrie.o" ".\build\pid.o" ".\build\utils.o" ".\build\quadrampderivee.o" ".\build\regulateur.o" ".\build\md22.o" ".\build\consigncontroller.o" ".\build\commandmanager.o" ".\build\cmdlist.o" ".\build\codeur.o" ".\build\main.o" ".\build\debugudp.o" ".\build\qik.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
+--cpu Cortex-M3 ".\build\odometrie.o" ".\build\pid.o" ".\build\utils.o" ".\build\quadrampderivee.o" ".\build\regulateur.o" ".\build\md22.o" ".\build\consigncontroller.o" ".\build\commandmanager.o" ".\build\cmdlist.o" ".\build\codeur.o" ".\build\main.o" ".\build\debugudp.o" ".\build\qik.o" ".\build\onepololusmc.o" ".\build\pololusmcs.o" --strict --scatter ".\mbed\LPC1768\LPC1768.sct" 
 .\mbed\LPC1768\startup_LPC17xx.o
 .\mbed\LPC1768\system_LPC17xx.o
 .\mbed\LPC1768\stackheap.o
@@ -29,7 +31,7 @@
 ### ADS-LD Output File: '.\build\Asserv_finale.axf'
 ### ADS-LD Command File: '.\build\Asserv_finale.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x00000330
+### Creating CmdFile '.\build\Asserv_finale.lnp', Handle=0x000001FC
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\build\Asserv_finale.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.
