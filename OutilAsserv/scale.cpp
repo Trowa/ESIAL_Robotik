@@ -15,6 +15,18 @@ Scale::Scale() :
 
 }
 
+void Scale::setMinMaxT(float min, float max)
+{
+    m_minT = min;
+    m_maxT = max;
+}
+
+void Scale::setMinMax(float min, float max)
+{
+    m_min = min;
+    m_max = max;
+}
+
 float Scale::getMin()
 {
     return m_min;

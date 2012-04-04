@@ -17,6 +17,17 @@ bool Curve::isDisplayed() const
     return m_display;
 }
 
+void Curve::updateScale(float minY, float maxY)
+{
+    m_scale.setMinMax(minY, maxY);
+    update();
+}
+
+const sf::View& Curve::getView() const
+{
+    return m_view;
+}
+
 float Curve::getMin(float p_tMin, float p_tMax) const
 {
     float min = FLT_MAX;
@@ -32,7 +43,7 @@ float Curve::getMin(float p_tMin, float p_tMax) const
 
 float Curve::getMax(float p_tMin, float p_tMax) const
 {
-    float max = FLT_MAX;
+    float max = -FLT_MAX;
     for(int i=0; i<m_vertexArray.getVertexCount(); ++i)
     {
         if(m_vertexArray[i].position.x >= p_tMin && m_vertexArray[i].position.x <= p_tMax)

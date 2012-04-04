@@ -1,8 +1,9 @@
 #include "canvasplot.h"
 
 #include <SFML/Graphics.hpp>
+#include <QMouseEvent>
 
-CanvasPlot::CanvasPlot(QWidget* Parent) : SfmlCanvas(Parent), m_time(0)
+CanvasPlot::CanvasPlot(QWidget* Parent) : SfmlCanvas(Parent), m_time(0), m_mouseClick(false)
 {
 
 
@@ -48,7 +49,6 @@ void CanvasPlot::onUpdate()
     }
 
 
-
     sf::VertexArray cursor(sf::Lines, 4);
     cursor[0].position.x = (float)sf::Mouse::getPosition(*this).x - this->getSize().x*2;
     cursor[0].position.y = (float)sf::Mouse::getPosition(*this).y;
@@ -72,7 +72,88 @@ void CanvasPlot::onUpdate()
         }
     }
 
+    if(m_mouseClick)
+    {
+        sf::VertexArray array(sf::TrianglesFan, 4);
+        array[0].position.x = m_lastPoint.x();
+        array[0].position.y = m_lastPoint.y();
+        array[0].color = sf::Color(255,255,255,128);
+
+        array[1].position.x = m_lastPoint.x();
+        array[1].position.y = m_movingPoint.y();
+        array[1].color = sf::Color(255,255,255,128);
+
+        array[2].position.x = m_movingPoint.x();
+        array[2].position.y = m_movingPoint.y();
+        array[2].color = sf::Color(255,255,255,128);
+
+        array[3].position.x = m_movingPoint.x();
+        array[3].position.y = m_lastPoint.y();
+        array[3].color = sf::Color(255,255,255,128);
+
+
+
+        sf::View tmp;
+        tmp = this->getView();
+        this->setView(this->getDefaultView());
+        this->draw(array);
+        this->setView(tmp);
+    }
+
     this->draw(cursor);
+}
+
+void CanvasPlot::mouseReleaseEvent ( QMouseEvent * e )
+{
+    if(m_mouseClick)
+    {
+        // Si la souris a bougé
+        if((e->pos() != m_lastPoint) && e->button() == Qt::LeftButton)
+        {
+            // <IOCCC>
+            float maxY, maxT;
+            float minY = (m_lastPoint.y()<e->pos().y())?(maxY=m_lastPoint.y(),e->pos().y()):(maxY=e->pos().y(),m_lastPoint.y()); // Pas logique, mais c’est parce que SFML a un axe vertical descendant
+            float minT = (m_lastPoint.x()>e->pos().x())?(maxT=m_lastPoint.x(),e->pos().x()):(maxT=e->pos().x(),m_lastPoint.x());
+            // </IOCCC>
+
+
+            for(std::map<std::string, Curve*>::iterator i = m_curves.begin(); i != m_curves.end(); i++)
+            {
+                sf::Vector2f mins = convertCoords(minT, minY, i->second->getView());
+                sf::Vector2f maxs = convertCoords(maxT, maxY, i->second->getView());
+
+                Scale::setMinMaxT(mins.x, maxs.x);
+                Scale::setDeltaT(maxs.x-mins.x);
+                i->second->updateScale(mins.y, maxs.y);
+            }
+        }
+        else
+        {
+            Scale::setMinMaxT(0, m_time);
+            Scale::setDeltaT(90);
+            for(std::map<std::string, Curve*>::iterator i = m_curves.begin(); i != m_curves.end(); i++)
+            {
+                i->second->updateScale(i->second->getMin(0,m_time), i->second->getMax(0,m_time));
+            }
+        }
+    }
+
+    m_mouseClick = false;
+}
+
+void CanvasPlot::mouseMoveEvent(QMouseEvent * e)
+{
+    if(m_mouseClick)
+    {
+        m_movingPoint = e->pos();
+    }
+}
+
+void CanvasPlot::mousePressEvent ( QMouseEvent * e )
+{
+    m_lastPoint = e->pos();
+    m_movingPoint = m_lastPoint;
+    m_mouseClick = true;
 }
 
 // L’état (affiché/caché) d’une var a changé, on attache/détache la courbe

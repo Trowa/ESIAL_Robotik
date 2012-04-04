@@ -9,10 +9,13 @@ public:
     Scale();
     float getMin();
     float getMax();
-    float getMinT();
-    float getMaxT();
+    static float getMinT();
+    static float getMaxT();
 
-    void setDeltaT(float p);
+    void setMinMax(float min, float max);
+    static void setMinMaxT(float min, float max);
+
+    static void setDeltaT(float p);
     void update(float p_time, float p_info);
     void setColor(const sf::Color& p_color);
 

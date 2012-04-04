@@ -23,19 +23,27 @@ public slots :
     void changeVar(QString p_var, Qt::CheckState p_state);
     void changeColor(QString p_var, QString p_color);
 
+    void mouseMoveEvent(QMouseEvent* e);
+    void mouseReleaseEvent ( QMouseEvent * e );
+    void mousePressEvent ( QMouseEvent * e );
+
 
 signals :
     void newVar(QString); // Un signal envoyé lors de la création d’une nouvelle variable
+    void mouseClickEvent();
 
 
 private :
-
     virtual void onInit();
 
     virtual void onUpdate();
 
     float m_time;
     std::map<std::string, Curve*> m_curves;
+
+    bool m_mouseClick;
+    QPoint m_lastPoint;
+    QPoint m_movingPoint;
 };
 
 

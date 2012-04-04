@@ -15,8 +15,12 @@ public:
     void drawScale(sf::RenderWindow* p_window, int p_k) const;
     void drawScaleT(sf::RenderWindow* p_window) const;
 
+    void updateScale(float minY, float maxY);
+
     void display(bool p);
     bool isDisplayed() const;
+
+    const sf::View& getView() const;
 
     float getMin(float p_tMin, float p_tMax) const;
     float getMax(float p_tMin, float p_tMax) const;
