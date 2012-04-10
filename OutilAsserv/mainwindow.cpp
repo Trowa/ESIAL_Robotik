@@ -1,19 +1,11 @@
 #include "mainwindow.h"
-#include <qwt/qwt_plot.h>
-#include <qwt/qwt_plot_curve.h>
 
-#include "incrementalplot.h"
 #include <QAction>
 #include <QToolBar>
 
 #include "server.h"
 #include "dockcurves.h"
 #include "dockconst.h"
-
-#include <qwt/qwt_plot_zoomer.h>
-#include <qwt/qwt_plot_panner.h>
-#include <qwt/qwt_plot_picker.h>
-#include <qwt/qwt_picker_machine.h>
 
 #include "CommandDialog.h"
 #include <QInputDialog>
@@ -23,32 +15,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-
-/* ********************************************************************
-  Classe qui n?a rien à faire ici? Mais c?est plus simple comme ça :p
-  ******************************************************************** */
-
-class Zoomer: public QwtPlotZoomer
-{
-    public:
-        Zoomer(int xAxis, int yAxis, QwtPlotCanvas *canvas) :
-            QwtPlotZoomer(xAxis, yAxis, canvas)
-        {
-            setTrackerMode(QwtPicker::AlwaysOff);
-            setRubberBand(QwtPicker::NoRubberBand);
-
-            // RightButton: zoom out by 1
-            // Ctrl+RightButton: zoom out to full size
-
-            setMousePattern(QwtEventPattern::MouseSelect2,
-                Qt::RightButton, Qt::ControlModifier);
-            setMousePattern(QwtEventPattern::MouseSelect3,
-                Qt::RightButton);
-        }
-};
-
 /* ***************************************************************************************
-    Classe qui a quelque chose à faire ici et que je dois donc mieux commenter? Et merde !
+    Classe qui a quelque chose à faire ici
   *************************************************************************************** */
 
 // Constructeur de la fenêtre principale
@@ -86,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_dock, SIGNAL(varChanged(QString, Qt::CheckState)), m_canvas, SLOT(changeVar(QString, Qt::CheckState)));
     connect(m_dock, SIGNAL(colorChanged(QString,QString)), m_canvas, SLOT(changeColor(QString, QString)));
 
+
     QMessageBox::information(this, "Attention", " - Ne pas redimensionner la fenêtre si des courbes sont déjà dessinées !\n - Ne surtout pas ouvrir un fichier autre qu'un fichier créé par ce programme.");
 }
 
@@ -120,10 +89,6 @@ QToolBar *MainWindow::toolBar()
 
     m_expectAction = new QAction("Soumettre un ordre", toolBarStart);
     toolBarStart->addAction(m_expectAction);
-
-    //m_zoomAction = new QAction("Zoomer", toolBarStart);
-    //m_zoomAction->setCheckable(true); // Le bouton zoomer est un bouton qui peut être activé ou désactivé
-    //toolBarStart->addAction(m_zoomAction);
 
     // On connecte les signaux et les slots de chaque action
     connect(m_startAction, SIGNAL(triggered()), this, SLOT(activerTrace()));
@@ -228,13 +193,10 @@ void MainWindow::charger()
     m_dockCst->loadFrom(&file);
 }
 
-#include <iostream>
-
 void MainWindow::enregistrer()
 {
     QString filename = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", "test.cstsPrincesse", "*.cstsPrincesse");
     QFile file(filename);
 
-    std::cout << filename.toStdString() << std::endl;
     m_dockCst->saveIn(&file);
 }

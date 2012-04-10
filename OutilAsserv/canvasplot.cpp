@@ -6,7 +6,6 @@
 CanvasPlot::CanvasPlot(QWidget* Parent) : SfmlCanvas(Parent), m_time(0), m_mouseClick(false)
 {
 
-
 }
 
 // Méthode pour actualiser le temps
@@ -25,6 +24,8 @@ void CanvasPlot::appendPoint(const std::string & p, double p_value)
 
         emit newVar(QString::fromStdString(p)); // On prévient qu’on crée une nouvelle variable (pour actualiser le dock de courbes)
     }
+
+
 
 
     // Maintenant on est sûr que la courbe existe, on ajoute le point à la courbe qui correspond
@@ -119,8 +120,8 @@ void CanvasPlot::mouseReleaseEvent ( QMouseEvent * e )
 
             for(std::map<std::string, Curve*>::iterator i = m_curves.begin(); i != m_curves.end(); i++)
             {
-                sf::Vector2f mins = convertCoords(minT, minY, i->second->getView());
-                sf::Vector2f maxs = convertCoords(maxT, maxY, i->second->getView());
+                sf::Vector2f mins = convertCoords(sf::Vector2i(minT, minY), i->second->getView());
+                sf::Vector2f maxs = convertCoords(sf::Vector2i(maxT, maxY), i->second->getView());
 
                 Scale::setMinMaxT(mins.x, maxs.x);
                 Scale::setDeltaT(maxs.x-mins.x);
