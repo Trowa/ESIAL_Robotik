@@ -4,14 +4,10 @@ int main() {
   // Retour PC pour controlle
   pc.baud(115200);
   pc.printf("Initialisation\n");
-
-  // On change la priorité de l'interruption timer pour quelle soit plus basse que celle des ticks codeurs
-  NVIC_SetPriority(TIMER3_IRQn, 1);
-
   // On initialise les objets qui vont bien pour l'asserv
   odometrie = new Odometrie();
   //motorController = new Qik(p9, p10);
-  motorController = new PololuSMCs(p9, p10, p28, p27);
+  motorController = new PololuSMCs(p13, p14, p28, p27);
   consignController = new ConsignController(odometrie, motorController);
   commandManager = new CommandManager(50, consignController, odometrie);
   #ifdef DEBUG
@@ -21,12 +17,16 @@ int main() {
 	receiveLed = 0;
 	liveLed = 0;
   #endif
-
+  
+  
   consignController->setQuadRamp_Dist(true);
   consignController->setQuadRamp_Angle(false);
 
   // On attache l'interruption timer à la méthode Live_isr
   Live.attach(Live_isr, 0.005);
+  
+  //On est prêt !
+  pc.printf("GOGO !");
   
   /*while(1) {
     ecouteSerie();
@@ -109,3 +109,4 @@ void Live_isr() {
 	liveLed = 1 - liveLed;
   #endif
 }
+
