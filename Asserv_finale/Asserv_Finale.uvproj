@@ -568,6 +568,31 @@
               <FileType>8</FileType>
               <FilePath>.\asserv\motorsController\PololuSMCs\PololuSMCs.cpp</FilePath>
             </File>
+            <File>
+              <FileName>CodeursDirects.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\CodeursDirects.h</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursDirects.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\codeurs\CodeursDirects.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursInterface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\CodeursInterface.h</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursAVR.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\CodeursAVR.h</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursAVR.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\codeurs\CodeursAVR.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1134,6 +1159,31 @@
               <FileName>PololuSMCs.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\asserv\motorsController\PololuSMCs\PololuSMCs.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursDirects.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\CodeursDirects.h</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursDirects.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\codeurs\CodeursDirects.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursInterface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\CodeursInterface.h</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursAVR.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\asserv\codeurs\CodeursAVR.h</FilePath>
+            </File>
+            <File>
+              <FileName>CodeursAVR.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\asserv\codeurs\CodeursAVR.cpp</FilePath>
             </File>
           </Files>
         </Group>
