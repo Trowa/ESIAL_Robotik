@@ -6,7 +6,7 @@
 
 
   //Débug ou pas ?
-#define DEBUG DEBUG
+#define DEBUG
 
 /***************************
 *       CommandManager     *
@@ -27,7 +27,7 @@
   static int64_t uOParFront = 512; // Nombre d'UO pour un tic de codeur
 
   //Booleens gerant une eventuelle inversion des codeurs
-  static bool inverseCodeurG = true;
+  static bool inverseCodeurG = false;
   static bool inverseCodeurD = false;
   static bool swapCodeurs = false;
 
@@ -38,7 +38,7 @@
   static int64_t V_MAX_NEG_MOTOR = -90;  // MD22 : -1 a -128, vitesse maximum negative
 
   //Booleens gerant une eventuelle inversion des codeurs
-  static bool inverseMoteurG = true;
+  static bool inverseMoteurG = false;
   static bool inverseMoteurD = true;
   static bool swapMoteurs = false;
 
