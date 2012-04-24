@@ -1,6 +1,6 @@
-#ifndef QIK2S9V1
+#ifndef QIK
 #define QIK
-
+/*
 #include "Qik_config.h"
 #include "../MotorsController.h"
 
@@ -26,5 +26,5 @@ class Qik : public MotorsController
         Serial qikSerial;
         
 };
-
+*/
 #endif

@@ -1,6 +1,6 @@
 #ifndef MD22
 #define MD22
-
+/*
 #include "Md22_config.h"
 #include "../MotorsController.h"
 
@@ -33,5 +33,5 @@ class Md22 : public MotorsController
         // I2C link between mbed and MD22
         I2C i2cLink;
  };
- 
+ */
  #endif

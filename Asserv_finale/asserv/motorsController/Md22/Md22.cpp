@@ -1,3 +1,4 @@
+/*
 #include "Md22.h"
 
 
@@ -84,3 +85,4 @@ void Md22::vitesseD(int vitMoteurD)
     i2cLink.write(vitMoteurD);
     i2cLink.stop();
 }
+*/

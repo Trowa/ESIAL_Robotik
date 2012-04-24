@@ -1,6 +1,6 @@
 #ifndef MD22_CONFIG
 #define MD22_CONFIG
-
+/*
 //--------------------------------------------------------
 //      Configuration for the MD22 motor controller
 //--------------------------------------------------------
@@ -21,5 +21,5 @@
 #define md22acc 0x00        //Acceleration
 
 
-
+*/
 #endif
