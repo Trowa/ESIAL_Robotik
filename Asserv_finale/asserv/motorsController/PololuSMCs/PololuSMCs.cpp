@@ -28,6 +28,9 @@ PololuSMCs::PololuSMCs(char idMotorG, char idMotorD, PinName smcSerialTX, PinNam
 
 
 void PololuSMCs::vitesseG(int speed) {
+	if(inverseMoteurG) {
+		speed = -speed;
+	}
     if(!swapMoteurs) {
         motorG->setSpeed(speed);
     } else {
@@ -36,7 +39,10 @@ void PololuSMCs::vitesseG(int speed) {
 }
 
 void PololuSMCs::vitesseD(int speed) {
-    if(!swapMoteurs) {
+    if(inverseMoteurD) {
+		speed = -speed;
+	}
+	if(!swapMoteurs) {
         motorD->setSpeed(speed);
     } else {
         motorG->setSpeed(speed);
