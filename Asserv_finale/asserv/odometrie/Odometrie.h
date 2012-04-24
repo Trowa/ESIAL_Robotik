@@ -2,8 +2,7 @@
 #define ODOMETRIE
 
 #include "../config.h"
-// ToDo a virer
-#include "../codeurs/Codeur.h"
+#include "../codeurs/CodeursInterface.h"
 
 class Odometrie {
 
@@ -64,9 +63,9 @@ class Odometrie {
     int64_t compteurG; // Nombre de tics codeur G depuis dernier refresh
     int64_t compteurD; // Nombre de tics codeur D depuis dernier refresh
     
-    // ToDo à virer
-    Codeur codeurG;
-    Codeur codeurD;
+	//Codeurs
+	CodeursInterface* codeurs;
+    
 };
 
 #endif

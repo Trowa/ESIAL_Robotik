@@ -4,6 +4,7 @@
 #include "mbed.h"
 #include "../config.h"
 
+//Un codeur branché directement sur la Mbed
 
 class Codeur
 {

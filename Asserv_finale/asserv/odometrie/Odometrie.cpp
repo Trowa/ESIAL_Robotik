@@ -1,5 +1,7 @@
 #include "mbed.h"
 #include "odometrie.h"
+#include "../codeurs/CodeursDirects.h"
+#include "../codeurs/CodeursAVR.h"
 
 #ifdef DEBUG
 #include "../debug/DebugUDP.h"
@@ -11,7 +13,11 @@
 * Lors de la création de l'objet, on calcul la distance entre les roues en UO et le nombre d'UO par front
 * Les infos nécessaires au calcul sont dans config.h
 */
-Odometrie::Odometrie() : codeurG(p25,p26), codeurD(p15,p16) {
+Odometrie::Odometrie() {
+
+  //Instanciation des codeurs
+  //codeurs = new CodeursDirects(p25, p26, p15, p16); //Avec des codeurs branchés directement sur la Mbed
+  codeurs = new CodeursAVR(p5, p6, p7, p8); //OU avec des codeurs branchés sur un AVR avec lequel on communique en SPI
 
   // Initialisation des compteurs
   compteurG = 0;
@@ -54,28 +60,9 @@ Odometrie::~Odometrie() {}
 // Mise a jour de la position du robot
 void Odometrie::refresh() {
   
-  // TODO récupération des comptes des codeurs sur la carte dédiée
-  __disable_irq();
-  compteurG = codeurG.getCount();
-  compteurD = codeurD.getCount();
-  codeurG.reset();
-  codeurD.reset();
-  __enable_irq();
-  // Fin TODO
-
-  // On ajuste le sens des codeurs en cas de problème de cablage
-  if(swapCodeurs) { //inversion des deux codeurs
-    int64_t temp = compteurG;
-    compteurG = compteurD;
-    compteurD = temp;
-  }
-  if(inverseCodeurD) { //Changement de sens de rotation du codeur droit
-    compteurD = -compteurD;
-  }
-  if(inverseCodeurG) { //Changement de sens de rotation du codeur gauche
-    compteurG = -compteurG;
-  }
-
+  //Récupération des comptes des codeurs
+  codeurs->getCounts(&compteurG, &compteurD);
+  
   //On transforme ces valeurs en Unites Odometrique
   compteurD = compteurD * uOParFront;
   compteurG = compteurG * uOParFront;
