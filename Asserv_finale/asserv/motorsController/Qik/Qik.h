@@ -1,7 +1,8 @@
 #ifndef QIK
 #define QIK
+
 /*
-#include "Qik_config.h"
+
 #include "../MotorsController.h"
 
 // Adress definition
@@ -26,5 +27,7 @@ class Qik : public MotorsController
         Serial qikSerial;
         
 };
+
 */
+
 #endif

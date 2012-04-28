@@ -1,5 +1,6 @@
-#include "OnePololuSMC.h"
 #include "../../config.h"
+
+#include "OnePololuSMC.h"
 
 //Un premier contructeur, permettant de gerer un PololuSMC sur une connexion serie
 OnePololuSMC::OnePololuSMC(PinName smcSerialTX, PinName smcSerialRX) {
@@ -47,3 +48,4 @@ void OnePololuSMC::setSpeed(int speed) {
     smcSerial->putc((uint8_t)(abs(speed)<=100 ? abs(speed) : 100));
     
 }
+

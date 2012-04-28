@@ -1,3 +1,5 @@
+#include "../../config.h"
+
 #include "PololuSMCs.h"
 
 //deux pololuSMCs sur deux series differentes

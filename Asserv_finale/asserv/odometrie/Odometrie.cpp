@@ -60,8 +60,13 @@ Odometrie::~Odometrie() {}
 // Mise a jour de la position du robot
 void Odometrie::refresh() {
   
+  //ATTENTION : CODE A DECOMMENTER EN FONCTIONNEMENT NORMAL
+  
   //Récupération des comptes des codeurs
   codeurs->getCounts(&compteurG, &compteurD);
+  
+  //pc.printf("CG=%lld \tCD=%lld\n", compteurG, compteurD);
+  //pc.printf(compteurD==0 ? "***\n" : ".\n");
   
   //On transforme ces valeurs en Unites Odometrique
   compteurD = compteurD * uOParFront;
@@ -73,7 +78,29 @@ void Odometrie::refresh() {
   } else {
     compteurD = compteurD * ratioCodeurs;
   }
-
+  
+  //FIN ATTENTION
+  
+  //ATTENTION : CODE A COMMENTER EN FONCTIONNEMENT NORMAL
+  /*
+  // Bout de code permettant de mesurer le nombre de tics codeurs par mètre.
+  // Si ce code n'est PAS commenté, l'asservissement fera N'IMPORTE QUOI ! Vous êtes prévenu !
+  
+  //Déclaration temporaire pour les comptes des codeurs
+  int64_t tempCompteG;
+  int64_t tempCompteD;
+  //Récupération des comptes des codeurs
+  codeurs->getCounts(&tempCompteG, &tempCompteD);
+  
+  //On rajoute le compte récupéré au total
+  compteurD += tempCompteD;
+  compteurG += tempCompteG;
+  
+  //renvoi des résultats sur la série
+  pc.printf("CG=%lld \tCD=%lld\n", compteurG, compteurD);
+  */
+  //FIN ATTENTION
+  
   /* 
   * deltaDist = la distance parcourue par le robot pendant l'iteration = moyenne des distances des codeurs
   * deltaTheta = la variation de l'angle pendant l'iteration = rapport de la différence des distances codeurs sur la 

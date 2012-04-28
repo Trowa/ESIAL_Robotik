@@ -1,10 +1,8 @@
 /*
+
 #include "Md22.h"
 
-
-
-// Constructor for a MD22 instance
-// parameters are defined in MD22_config.h
+// Constructeur d'une instance de MD22
 Md22::Md22( PinName I2CsdaPin , PinName I2CsclPin)
 : i2cLink( I2CsdaPin , I2CsclPin ) // I2C link
 {
@@ -85,4 +83,5 @@ void Md22::vitesseD(int vitMoteurD)
     i2cLink.write(vitMoteurD);
     i2cLink.stop();
 }
+
 */

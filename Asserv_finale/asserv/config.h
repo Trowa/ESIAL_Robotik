@@ -1,6 +1,8 @@
 #ifndef CONFIG
 #define CONFIG
 
+#include "mbed.h"
+
   // Retour PC
   static Serial pc(USBTX, USBRX);
 
@@ -28,20 +30,21 @@
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseCodeurG = false;
-  static bool inverseCodeurD = false;
+  static bool inverseCodeurD = true;
   static bool swapCodeurs = false;
 
 /***************************
 *         Moteurs          *
 ****************************/
-  static int64_t V_MAX_POS_MOTOR = 90;   // MD22 : 1 a 127, vitesse maximum positive
-  static int64_t V_MAX_NEG_MOTOR = -90;  // MD22 : -1 a -128, vitesse maximum negative
+  static int64_t V_MAX_POS_MOTOR = 60;   // MD22 : 1 a 127, vitesse maximum positive
+  static int64_t V_MAX_NEG_MOTOR = -60;  // MD22 : -1 a -128, vitesse maximum negative
 
-  //Booleens gerant une eventuelle inversion des codeurs
+  //Booleens gerant une eventuelle inversion des moteurs
   static bool inverseMoteurG = false;
   static bool inverseMoteurD = true;
   static bool swapMoteurs = false;
-
+  
+  
 /***************************
 *           PID            *
 ****************************/

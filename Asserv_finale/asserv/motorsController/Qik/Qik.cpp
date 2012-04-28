@@ -1,4 +1,5 @@
 /*
+
 #include "Qik.h"
 
 Qik::Qik(PinName txPinToQik, PinName rxPinToQik)
@@ -78,4 +79,5 @@ void Qik::vitesseG(int vitMoteurG)
         qikSerial.putc(-vitMoteurG);
     }
 }
+
 */

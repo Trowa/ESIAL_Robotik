@@ -459,11 +459,6 @@
               <FilePath>.\asserv\motorsController\MotorsController.h</FilePath>
             </File>
             <File>
-              <FileName>Md22_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\asserv\motorsController\Md22\Md22_config.h</FilePath>
-            </File>
-            <File>
               <FileName>Md22.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\asserv\motorsController\Md22\Md22.cpp</FilePath>
@@ -542,11 +537,6 @@
               <FileName>Qik.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\asserv\motorsController\Qik\Qik.h</FilePath>
-            </File>
-            <File>
-              <FileName>Qik_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\asserv\motorsController\Qik\Qik_config.h</FilePath>
             </File>
             <File>
               <FileName>PololuSMCs.h</FileName>
@@ -1051,11 +1041,6 @@
               <FilePath>.\asserv\motorsController\MotorsController.h</FilePath>
             </File>
             <File>
-              <FileName>Md22_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\asserv\motorsController\Md22\Md22_config.h</FilePath>
-            </File>
-            <File>
               <FileName>Md22.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\asserv\motorsController\Md22\Md22.cpp</FilePath>
@@ -1134,11 +1119,6 @@
               <FileName>Qik.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\asserv\motorsController\Qik\Qik.h</FilePath>
-            </File>
-            <File>
-              <FileName>Qik_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\asserv\motorsController\Qik\Qik_config.h</FilePath>
             </File>
             <File>
               <FileName>PololuSMCs.h</FileName>

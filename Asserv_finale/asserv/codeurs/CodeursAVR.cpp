@@ -6,13 +6,13 @@ CodeursAVR::CodeursAVR(PinName mosi, PinName miso, PinName sck, PinName ss) :
 {
 	slaveSelect = 1;
 	spiToAVR.format(8,3);
-	spiToAVR.frequency(250000);
+	spiToAVR.frequency(1000000);
 }
 
 void CodeursAVR::getCounts(int64_t* countG, int64_t* countD) {
 	slaveSelect = 0; //On passe le slave select à 0, ce qui déclenche le gestionnaire du SPI sur l'AVR
 	int8_t answerG = spiToAVR.write(0x00); //On récupère le compte gauche
-	wait_us(65); //On attend un peu, que l'AVR ait le temps de charger le registre avec le compte codeur droit
+	wait_us(8); //On attend un peu, que l'AVR ait le temps de charger le registre avec le compte codeur droit
 	int8_t answerD = spiToAVR.write(0x00); //On récupère le compte droit
 	slaveSelect = 1; //On reset le Slave Select
 	
@@ -25,6 +25,6 @@ void CodeursAVR::getCounts(int64_t* countG, int64_t* countD) {
 	*countD = answerD;
 	
 	//Debug
-	pc.printf("Cg:%lld - Cd:%lld\n", *countG, *countD);
+	//pc.printf("Cg:%lld - Cd:%lld\n", *countG, *countD);
 	
 }
