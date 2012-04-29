@@ -8,6 +8,8 @@ CodeursDirects::CodeursDirects(PinName pinChanA_G, PinName pinChanB_G, PinName p
   	NVIC_SetPriority(TIMER3_IRQn, 1);
 }
 
+CodeursDirects::~CodeursDirects() { }
+
 void CodeursDirects::getCounts(int64_t* countG, int64_t* countD) {
 	__disable_irq(); //On désactive les interruptions
   	*countD = codeurD.getCount(); //On récupère le compte des codeurs

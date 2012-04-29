@@ -13,6 +13,7 @@ Codeur::Codeur( PinName pinChanA , PinName pinChanB)
     pinChannelB.fall(this, &Codeur::handleInterruptB );
 }
 
+Codeur::~Codeur() { }
 
 void Codeur::reset(void) {
     count = 0;

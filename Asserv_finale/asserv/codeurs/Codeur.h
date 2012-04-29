@@ -12,6 +12,7 @@ class Codeur
     public:
     
         Codeur(PinName pinChanA , PinName pinChanB );
+		~Codeur();
         int getCount();
         void reset();
                 

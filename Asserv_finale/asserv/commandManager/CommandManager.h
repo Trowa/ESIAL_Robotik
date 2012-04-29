@@ -11,6 +11,7 @@ class CommandManager {
 
   public:
     CommandManager(int capacity , ConsignController *ctrlr, Odometrie *odo);
+	~CommandManager();
   
     bool addStraightLine(int64_t valueInmm);
     bool addTurn(int64_t angleInDeg);
@@ -27,7 +28,7 @@ class CommandManager {
     void computeGoToAngle();
         
   private:
-    CMDList liste; //File d'attente des commandes
+    CMDList *liste; //File d'attente des commandes
     ConsignController *cnsgCtrl;
     Odometrie *odometrie; // Odométrie, pour pouvoir faire les conversion et calculer la cible
     CMD currCMD; //commande courante

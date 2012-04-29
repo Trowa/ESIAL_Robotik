@@ -9,6 +9,10 @@ CMDList::CMDList(int capacity ) {
   capa = capacity;
 }
 
+CMDList::~CMDList() {
+	free((char*)list);
+}
+
 bool CMDList::enqueue(typeCMD cmd , int64_t val, int64_t val2) {
   if( full ) {
     return false;

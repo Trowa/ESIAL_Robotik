@@ -11,7 +11,8 @@
  */
  
  
-CommandManager::CommandManager(int capacity , ConsignController *ctrlr, Odometrie *odo) : liste(capacity) {
+CommandManager::CommandManager(int capacity , ConsignController *ctrlr, Odometrie *odo) {
+  liste = new CMDList(capacity);
   cnsgCtrl = ctrlr;
   odometrie = odo;
   currCMD.type = CMD_NULL;
@@ -20,24 +21,28 @@ CommandManager::CommandManager(int capacity , ConsignController *ctrlr, Odometri
   currentConsignFinished = true;
 }
 
+CommandManager::~CommandManager() {
+	delete liste;
+}
+
 /*
  * Pour ajouter des commandes à la file, on donne la position à parcourir en mm ou en degré, 
  * le commandManager fait les convertion en UO lui même
  */
 bool CommandManager::addStraightLine(int64_t valueInmm) {
-  return liste.enqueue( CMD_GO , Utils::mmToUO(odometrie, valueInmm), 0 );
+  return liste->enqueue( CMD_GO , Utils::mmToUO(odometrie, valueInmm), 0 );
 }
 
 bool CommandManager::addTurn(int64_t angleInDeg) {
-  return liste.enqueue( CMD_TURN , Utils::degToUO(odometrie, angleInDeg) , 0);
+  return liste->enqueue( CMD_TURN , Utils::degToUO(odometrie, angleInDeg) , 0);
 }
 
 bool CommandManager::addGoTo(int64_t posXInmm, int64_t posYInmm) {
-  return liste.enqueue( CMD_GOTO ,Utils::mmToUO(odometrie, posXInmm) ,Utils::mmToUO(odometrie, posYInmm) );
+  return liste->enqueue( CMD_GOTO ,Utils::mmToUO(odometrie, posXInmm) ,Utils::mmToUO(odometrie, posYInmm) );
 }
 
 bool CommandManager::addGoToAngle(int64_t posXInmm, int64_t posYInmm) {
-  return liste.enqueue( CMD_GOTOANGLE ,Utils::mmToUO(odometrie, posXInmm) ,Utils::mmToUO(odometrie, posYInmm) );
+  return liste->enqueue( CMD_GOTOANGLE ,Utils::mmToUO(odometrie, posXInmm) ,Utils::mmToUO(odometrie, posYInmm) );
 }
 
 
@@ -76,7 +81,7 @@ void CommandManager::perform() {
     // ToDo Réfléchir à l'enchainement de commande pour ne pas s'arrêter au moment de calculer la suivante    
     //currCMD = nextCMD; // La consigne suivante devient la consigne courante
     //nextCMD = liste.dequeue(); // On essaye de recuperer la prochaine consigne
-    currCMD = liste.dequeue(); // On essaye de recuperer la prochaine consigne
+    currCMD = liste->dequeue(); // On essaye de recuperer la prochaine consigne
 
     // On vient de terminer la consigne courrante, on le signale en haut lieu
     if(currentConsignFinished == false) {
@@ -209,7 +214,7 @@ void CommandManager::setEmergencyStop() { //Gestion d'un eventuel arret d'urgenc
     cnsgCtrl->set_dist_consigne(cnsgCtrl->getAccuDist());
     cnsgCtrl->set_angle_consigne(cnsgCtrl->getAccuAngle());
     while(currCMD.type != CMD_NULL) {
-      currCMD = liste.dequeue();
+      currCMD = liste->dequeue();
     }   
     currentConsignFinished = true;
 }

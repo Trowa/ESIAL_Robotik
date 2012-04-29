@@ -26,6 +26,7 @@ class CMDList {
     bool enqueue(typeCMD cmd , int64_t val, int64_t val2=0);
     CMD dequeue();
     int size();
+	~CMDList();
         
   private:
     CMD *list;
