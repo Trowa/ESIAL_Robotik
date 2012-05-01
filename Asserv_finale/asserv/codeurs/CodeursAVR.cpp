@@ -23,9 +23,13 @@ void CodeursAVR::getCounts(int64_t* countG, int64_t* countD) {
     //answerD = (answerD>128?answerD-256:answerD);
 	
 	//Et on affecte
-	*countG = answerG;
-	*countD = answerD;
-	
+	if(!swapCodeurs) {
+		*countG = (inverseCodeurG ? -1 : 1) * answerG;
+		*countD = (inverseCodeurD ? -1 : 1) * answerD;
+	} else {
+		*countG = (inverseCodeurG ? -1 : 1) * answerD;
+		*countD = (inverseCodeurD ? -1 : 1) * answerG;
+	}
 	//Debug
 	//pc.printf("Cg:%lld - Cd:%lld\n", *countG, *countD);
 	
