@@ -95,8 +95,8 @@ void Odometrie::refresh() {
   codeurs->getCounts(&tempCompteG, &tempCompteD);
   
   //On rajoute les comptes récupérés aux totaux
-  compteurD += (inverseCodeurD ? -1 : 1) * tempCompteD;
-  compteurG += (inverseCodeurG ? -1 : 1) * tempCompteG;
+  compteurD += tempCompteD;
+  compteurG += tempCompteG;
   
   //renvoi des résultats sur la série
   pc.printf("CG=%lld \tCD=%lld\n", compteurG, compteurD);
