@@ -55,7 +55,9 @@ Odometrie::Odometrie() {
 }
 
 // Destructeur
-Odometrie::~Odometrie() {}
+Odometrie::~Odometrie() {
+	delete codeurs;
+}
         
 // Mise a jour de la position du robot
 void Odometrie::refresh() {
@@ -92,7 +94,7 @@ void Odometrie::refresh() {
   //Récupération des comptes des codeurs
   codeurs->getCounts(&tempCompteG, &tempCompteD);
   
-  //On rajoute le compte récupéré au total
+  //On rajoute les comptes récupérés aux totaux
   compteurD += tempCompteD;
   compteurG += tempCompteG;
   

@@ -9,6 +9,8 @@ CodeursAVR::CodeursAVR(PinName mosi, PinName miso, PinName sck, PinName ss) :
 	spiToAVR.frequency(1000000);
 }
 
+CodeursAVR::~CodeursAVR() { }
+
 void CodeursAVR::getCounts(int64_t* countG, int64_t* countD) {
 	slaveSelect = 0; //On passe le slave select à 0, ce qui déclenche le gestionnaire du SPI sur l'AVR
 	int8_t answerG = spiToAVR.write(0x00); //On récupère le compte gauche
@@ -21,9 +23,13 @@ void CodeursAVR::getCounts(int64_t* countG, int64_t* countD) {
     //answerD = (answerD>128?answerD-256:answerD);
 	
 	//Et on affecte
-	*countG = answerG;
-	*countD = answerD;
-	
+	if(!swapCodeurs) {
+		*countG = (inverseCodeurG ? -1 : 1) * answerG;
+		*countD = (inverseCodeurD ? -1 : 1) * answerD;
+	} else {
+		*countG = (inverseCodeurG ? -1 : 1) * answerD;
+		*countD = (inverseCodeurD ? -1 : 1) * answerG;
+	}
 	//Debug
 	//pc.printf("Cg:%lld - Cd:%lld\n", *countG, *countD);
 	

@@ -27,6 +27,13 @@ DebugUDP::DebugUDP(CommandManager* c, Odometrie* o) {
 	sendDebugData = false; //pour l'instant, on n'envoie rien
 }
 
+void DebugUDP::setNewObjectPointers(CommandManager* c, Odometrie* o) {
+	
+	//reparamétrage des pointeurs si les objets sont recréés
+	this->commandManager = c;
+    this->odometrie = o;
+}
+
 void DebugUDP::setDebugSend(bool b) {
 	sendDebugData = b;
 	dropCurrentData();
@@ -72,7 +79,8 @@ void onUDPSocketEvent(UDPSocketEvent e) {
 
 			while(buffer[0]!=0) {
 
-				name = buffer[0];          
+				name = buffer[0];
+				pc.printf("%c ", name);
 	
 	            switch(name) {    /*todo: ajouter appel setters*/
 	            
@@ -107,7 +115,9 @@ void onUDPSocketEvent(UDPSocketEvent e) {
 					// PID en distance
 					
 					case 'g': // Coeff proportionelle
+						printf("\navant : %lld\n", DIST_KP);
 						sscanf(buffer, "%c=%lld", &name, &DIST_KP);
+						printf("après : %lld\n", DIST_KP);
 						break;
 						
 					case 'h':  // Coeff integrale
@@ -318,6 +328,10 @@ void onUDPSocketEvent(UDPSocketEvent e) {
 			}
             break;
     }
+	
+	resetAsserv();
+	pc.printf(" RESET!\n");
+	
 	if(buffer != NULL) {
 		free(buffer);
 	}

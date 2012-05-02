@@ -15,6 +15,7 @@ extern Odometrie *odometrie;
 extern CommandManager *commandManager;
 extern UDPSocket udp;
 extern DigitalOut receiveLed;
+extern void resetAsserv();
 
 class DebugUDP {
 	
@@ -24,6 +25,8 @@ class DebugUDP {
 		void addData(char* name, int64_t value); // ajoute une valeur entière au paquet courant
 		void sendData(); // envoie le paquet de donnees sur l'ethernet
 		void dropCurrentData(); //vire les données courantes du buffer
+		
+		void setNewObjectPointers(CommandManager* c, Odometrie* o); //Reparamétrage des pointeurs
 
 		void setDebugSend(bool b); //Paramètre l'envoi des données de debug
 		bool getDebugSend(); //Doit-on envoyer les données ?

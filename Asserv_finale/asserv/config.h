@@ -10,6 +10,11 @@
   //Débug ou pas ?
 #define DEBUG
 
+
+//Vitesse de rafraichissement de l'asservissement
+#define ASSERV_REFRESH_RATE 200
+#define ASSERV_REFRESH_PERIOD (1.0/((double)ASSERV_REFRESH_RATE))
+
 /***************************
 *       CommandManager     *
 ****************************/
@@ -23,15 +28,15 @@
   #define PI 3.14159265358979
 
   // Définition des variables pour l'odométrie
-  static double frontParMetreCodeurG = 25661.444; // Nombre de tics codeurs en 1m pour codeur gauche
-  static double frontParMetreCodeurD = 25703.778; // Nombre de tics codeurs en 1m pour codeur droite
+  static double frontParMetreCodeurG = 12842.0; // Nombre de tics codeurs en 1m pour codeur gauche
+  static double frontParMetreCodeurD = 12831.667; // Nombre de tics codeurs en 1m pour codeur droite
   static int64_t distRoues = 285; // Distance entre les roues codeuses en mm
   static int64_t uOParFront = 512; // Nombre d'UO pour un tic de codeur
 
   //Booleens gerant une eventuelle inversion des codeurs
   static bool inverseCodeurG = false;
   static bool inverseCodeurD = true;
-  static bool swapCodeurs = false;
+  static bool swapCodeurs = true;
 
 /***************************
 *         Moteurs          *
@@ -41,7 +46,7 @@
 
   //Booleens gerant une eventuelle inversion des moteurs
   static bool inverseMoteurG = false;
-  static bool inverseMoteurD = true;
+  static bool inverseMoteurD = false;
   static bool swapMoteurs = false;
   
   
@@ -49,17 +54,17 @@
 *           PID            *
 ****************************/
   // PID en distance
-  static int64_t DIST_KP = 70; // Coeff proportionelle
+  static int64_t DIST_KP = 100; // Coeff proportionelle
   static int64_t DIST_KI = 0; // Coeff intégrale
-  static int64_t DIST_KD = -150; // Coeff dérivée
+  static int64_t DIST_KD = 142; // Coeff dérivée
   static double DIST_OUT_RATIO = 0.00001; // Coeff permettant de diminuer les valeurs du PID
   static int64_t DIST_MAX_OUTPUT = 90; // Valeur de sortie maximum pour le moteur
   static int64_t DIST_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)
 
 
-  static int64_t ANGLE_KP = 50; // Coeff proportionelle
+  static int64_t ANGLE_KP = 100; // Coeff proportionelle
   static int64_t ANGLE_KI = 0; // Coeff intégrale
-  static int64_t ANGLE_KD = 0; // Coeff dérivée
+  static int64_t ANGLE_KD = 400; // Coeff dérivée
   static double ANGLE_OUT_RATIO = 0.000005; // Coeff permettant de diminuer les valeurs du PID
   static int64_t ANGLE_MAX_OUTPUT = 50; // Valeur de sortie maximum pour le moteur
   static int64_t ANGLE_MAX_INTEGRAL = 0; // Valeur maximum de l'intégrale (0 = filtre PD)

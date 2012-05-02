@@ -14,6 +14,7 @@ class CodeursAVR : public CodeursInterface {
 
 	public:
 		CodeursAVR(PinName mosi, PinName miso, PinName sck, PinName ss);
+		~CodeursAVR();
 		virtual void getCounts(int64_t* countG, int64_t* countD);
 	
 	private:
