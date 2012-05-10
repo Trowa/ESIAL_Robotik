@@ -1,5 +1,10 @@
 package ia;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 import gpio.Interrupteur;
 import chrono.Chrono;
 
@@ -10,6 +15,20 @@ public class IA {
 	protected static Interrupteur selecteurCouleur;
 	
 	public static void main(String[] args) {
+		
+		// Redirection de la sortie vers un fichier de log
+		File file  = new File("/root/sysout.log");
+		PrintStream printStream;
+	    try {
+			printStream = new PrintStream(new FileOutputStream(file));
+			System.setOut(printStream);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		
+		
 		// Initialisation
 		System.out.println("Debut Initialisation");
 		chrono = new Chrono();
@@ -24,8 +43,14 @@ public class IA {
 		
 		
 		// Phase 1 : On attend le retrait de la tirette
+		System.out.println("Attente tirette");
 		while(!tirette.checkInterrupteur());
 		
+		// Phase 2
+		System.out.println("Debut Match : tirette tiree");
+		
+		// Dernière phase : fin du match
+		finDuMatch();
 	}
 	
 	public static void finDuMatch() {
