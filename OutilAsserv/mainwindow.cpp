@@ -15,10 +15,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-/* ***************************************************************************************
-    Classe qui a quelque chose à faire ici
-  *************************************************************************************** */
-
 // Constructeur de la fenêtre principale
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -56,6 +52,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     QMessageBox::information(this, "Attention", " - Ne pas redimensionner la fenêtre si des courbes sont déjà dessinées !\n - Ne surtout pas ouvrir un fichier autre qu'un fichier créé par ce programme.");
+/*
+    m_canvas->appendPoint("Test", 12);
+    m_canvas->setTime(90);
+    m_canvas->appendPoint("Test", 2000);*/
 }
 
 // Destructeur

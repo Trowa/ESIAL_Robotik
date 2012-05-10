@@ -3,7 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
-class Scale : public sf::Drawable
+#include "sfmlCanvas.h"
+
+class Scale
 {
 public:
     Scale();
@@ -22,8 +24,8 @@ public:
     sf::Vector2f getCenter();
     sf::Vector2f getSize();
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    static void drawScaleT(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default);
+    virtual void draw(SfmlCanvas& target, sf::RenderStates states = sf::RenderStates::Default) const;
+    static void drawScaleT(SfmlCanvas& target, sf::RenderStates states = sf::RenderStates::Default);
 
 private :
     float m_min;

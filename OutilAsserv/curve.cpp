@@ -60,36 +60,36 @@ void Curve::update()
     m_view.setSize(m_scale.getSize());
 }
 
-void Curve::draw(sf::RenderTarget* p_target) const
+void Curve::draw(SfmlCanvas* p_target) const
 {
     if(m_display)
     {
         p_target->setView(m_view);
         p_target->draw(m_vertexArray);
 
-        p_target->setView(p_target->getDefaultView());
+        p_target->setView(p_target->getMyView());
     }
 }
 
-void Curve::drawScale(sf::RenderWindow* p_window, int p_k) const
+void Curve::drawScale(SfmlCanvas* p_window, int p_k) const
 {
     if(m_display)
     {
         p_window->setView(m_view);
         sf::Transform t = sf::Transform::Identity;
         t.translate((p_k%2==0)?(p_k/2)*40.f:p_window->getSize().x-(p_k/2+1)*40.f, 0);
-        p_window->draw(m_scale, t);
-        p_window->setView(p_window->getDefaultView());
+        m_scale.draw(*p_window,t);
+        p_window->setView(p_window->getMyView());
     }
 }
 
-void Curve::drawScaleT(sf::RenderWindow* p_window) const
+void Curve::drawScaleT(SfmlCanvas* p_window) const
 {
     if(m_display)
     {
         p_window->setView(m_view);
         Scale::drawScaleT(*p_window);
-        p_window->setView(p_window->getDefaultView());
+        p_window->setView(p_window->getMyView());
     }
 }
 
