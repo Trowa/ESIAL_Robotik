@@ -34,9 +34,9 @@ public class Interrupteur {
 		try {
 			// On export les GPIOs
 			PrintWriter export = new PrintWriter(new BufferedWriter(new FileWriter("/sys/class/gpio/export", false)));
-			export.println(out);
+			export.write(out);
 			export.flush();
-			export.println(in);
+			export.write(in);
 			export.flush();
 			export.close();
 			// On met le premier en sortie

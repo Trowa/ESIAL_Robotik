@@ -9,7 +9,7 @@ public class Asserv
 {
 	private SerialMbed mbed;
 	private ArrayList<String> list; // Liste des ordres
-	private int current; // Dernier ordre donné à la Mbed et atteint par le robot	
+	private int current; // Dernier ordre donne a� la Mbed et atteint par le robot	
 
 	public Asserv()
 	{
