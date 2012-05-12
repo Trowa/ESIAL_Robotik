@@ -34,9 +34,9 @@ public class Interrupteur {
 		try {
 			// On export les GPIOs
 			PrintWriter export = new PrintWriter(new BufferedWriter(new FileWriter("/sys/class/gpio/export", false)));
-			export.write(out);
+			export.write(""+out);
 			export.flush();
-			export.write(in);
+			export.write(""+in);
 			export.flush();
 			export.close();
 			// On met le premier en sortie
@@ -49,7 +49,7 @@ public class Interrupteur {
 			export.close();
 			// On met la sortie a 1
 			export = new PrintWriter(new BufferedWriter(new FileWriter("/sys/class/gpio/gpio" + out + "/value", false)));
-			export.write(1);
+			export.write("1");
 			export.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,9 +61,9 @@ public class Interrupteur {
 		try {
 			// On unexport les GPIOs
 			PrintWriter export = new PrintWriter(new BufferedWriter(new FileWriter("/sys/class/gpio/unexport", false)));
-			export.println(out);
+			export.println(""+out);
 			export.flush();
-			export.println(in);
+			export.println(""+in);
 			export.flush();
 			export.close();
 		} catch (IOException e) {
@@ -77,7 +77,10 @@ public class Interrupteur {
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);
 			String value = br.readLine();
-			System.out.println(value);
+			//System.out.println("'"+value+"'");
+			br.close();
+			ipsr.close();
+			ips.close();
 			return (value != null && value.equals("1"))?true:false;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

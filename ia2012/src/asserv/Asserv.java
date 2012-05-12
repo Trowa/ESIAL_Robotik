@@ -9,7 +9,7 @@ public class Asserv
 {
 	private SerialMbed mbed;
 	private ArrayList<String> list; // Liste des ordres
-	private int current; // Dernier ordre donne a  la Mbed et atteint par le robot	
+	private int current; // Dernier ordre donne a la Mbed et atteint par le robot	
 
 	public Asserv()
 	{
@@ -49,13 +49,13 @@ public class Asserv
 	
 	public void halt()
 	{
-		list.add("h\n");
+		list.add("h");
 		sendLastCommand();
 	}
 	
 	public void resetHalt()
 	{
-		list.add("r\n");
+		list.add("r");
 		sendLastCommand();
 	}
 	
@@ -68,7 +68,8 @@ public class Asserv
 			e.printStackTrace();
 		}
 	}
-
+	
+	/*
 	public String refresh()
 	{
 		try {
@@ -81,6 +82,16 @@ public class Asserv
 			e.printStackTrace();
 		}
 		return null;
+	}
+	*/
+
+	public void calageBordure(boolean sens) {
+		try {
+			mbed.send("c" + (sens ? "1" : "0") + "g");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

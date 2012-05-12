@@ -33,7 +33,12 @@ public class Chrono {
 		public void run() {
 			// TODO Fin du chrono, on stop tout
 			System.out.println("Fin du chrono");
-			IA.finDuMatch();
+			try {
+				IA.finDuMatch();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.exit(0);
 		}
 
