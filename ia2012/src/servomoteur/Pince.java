@@ -4,6 +4,7 @@ public class Pince {
 	PololuMicroMaestro p;
 	
 	public Pince(){
+		// TODO LE MAAAAAAAAALLLLLLLLLEEEEEEE (comme Virus)
 		p = new PololuMicroMaestro("/dev/ttyACM0", "/dev/ttyACM1", 12);
 		p.setMinPosms(1,1357);// Pince AVG
 		//p.setMaxPosms(1,2450);
