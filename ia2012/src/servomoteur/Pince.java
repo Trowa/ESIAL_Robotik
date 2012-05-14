@@ -6,16 +6,16 @@ public class Pince {
 	public Pince(){
 		// TODO LE MAAAAAAAAALLLLLLLLLEEEEEEE (comme Virus)
 		p = new PololuMicroMaestro("/dev/ttyACM0", "/dev/ttyACM1", 12);
-		p.setMinPosms(1,1357);// Pince AVG
+		p.setMinPosms(1,1224);// Pince AVG
 		//p.setMaxPosms(1,2450);
 		p.setMaxPosms(1,2142);
 		//p.setMinPosms(2,928);  // Pince AVD
 		p.setMinPosms(2,1025);
-		p.setMaxPosms(2,1804);
+		p.setMaxPosms(2,1952);
 		//p.setMinPosms(3,992); //Pince ARG
 		p.setMinPosms(3,1118);
 		p.setMaxPosms(3,2000);
-		p.setMinPosms(4,800); //Pince ARD
+		p.setMinPosms(4,847); //Pince ARD
 		//p.setMaxPosms(4,2000);
 		p.setMaxPosms(4,1715);
 		p.setMinPosms(5,1050);
@@ -23,20 +23,37 @@ public class Pince {
 	}
 	
 	public void openPinceAv(){
+		p.setMaxPosms(1,2600);
+		p.setMinPosms(2,800);
+		p.setPositionms(1,p.getMaxPosms(1));
+		p.setPositionms(2,p.getMinPosms(2));
+	}
+	
+	public void openPinceAvForEject(){
+		p.setMaxPosms(1,2142);
+		p.setMinPosms(2,1025);
 		p.setPositionms(1,p.getMaxPosms(1));
 		p.setPositionms(2,p.getMinPosms(2));
 	}
 		
 	public void closePinceAv(){
-		p.setPositionms(1,p.getMinPosms(1));
-		try{
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
 		p.setPositionms(2,p.getMaxPosms(2));
+		p.setPositionms(1,p.getMinPosms(1));
 	}
+	
 		
 	public void openPinceAr(){
+		p.setMaxPosms(4,2000);
+		p.setMinPosms(3,992);
+		p.setPositionms(3,p.getMinPosms(3));
+		p.setPositionms(4,p.getMaxPosms(4));
+		
+			
+	}
+	
+	public void openPinceArForEject(){
+		p.setMinPosms(3,1118);
+		p.setMaxPosms(4,1715);
 		p.setPositionms(3,p.getMinPosms(3));
 		p.setPositionms(4,p.getMaxPosms(4));
 			
@@ -44,12 +61,6 @@ public class Pince {
 		
 	public void closePinceAr(){
 		p.setPositionms(3,p.getMaxPosms(3));
-		
-		try{
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
-
 		p.setPositionms(4,p.getMinPosms(4));
 	}
 	
