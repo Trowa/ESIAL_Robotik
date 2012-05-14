@@ -13,17 +13,18 @@ import java.util.TimerTask;
 public class Chrono {
 
 	protected Timer timer;
+	protected int tpsMatch; // Temps de declenchement du timer en millisecond
 
-	public Chrono() {
+	public Chrono(int tpsMatch) {
 		System.out.println("Creation chrono");
 		this.timer = new Timer();
+		this.tpsMatch = tpsMatch;
 	}
 
 	// Demarrage du chrono en configurant la TimerTask
 	public void startChrono() {
 		System.out.println("Demarrage chrono");
-		//this.timer.schedule(new ChronoTask(), 89 * 1000);
-		this.timer.schedule(new ChronoTask(), 10 * 1000);
+		this.timer.schedule(new ChronoTask(), tpsMatch);
 	}
 
 	private class ChronoTask extends TimerTask {
@@ -32,7 +33,12 @@ public class Chrono {
 		public void run() {
 			// TODO Fin du chrono, on stop tout
 			System.out.println("Fin du chrono");
-			IA.finDuMatch();
+			try {
+				IA.finDuMatch();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.exit(0);
 		}
 

@@ -11,9 +11,9 @@ public:
     Curve(std::string p_nom, const sf::View& p_view);
 
     void update();
-    void draw(sf::RenderTarget* p_target) const;
-    void drawScale(sf::RenderWindow* p_window, int p_k) const;
-    void drawScaleT(sf::RenderWindow* p_window) const;
+    void draw(SfmlCanvas* p_target) const;
+    void drawScale(SfmlCanvas* p_window, int p_k) const;
+    void drawScaleT(SfmlCanvas* p_window) const;
 
     void updateScale(float minY, float maxY);
 

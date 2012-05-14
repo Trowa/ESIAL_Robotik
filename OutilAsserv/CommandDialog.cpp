@@ -48,7 +48,7 @@ CommandDialog::CommandDialog(QWidget* p_parent) : QDialog(p_parent),
     grid->addWidget(m_angle, 3,1);
 
     grid->addWidget(m_lDistance, 4, 0);
-    grid->addWidget(m_lAngle, 4,1);
+    grid->addWidget(m_distance, 4,1);
 
     m_angle->hide();
     m_distance->hide();

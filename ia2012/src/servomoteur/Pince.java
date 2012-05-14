@@ -36,10 +36,6 @@ public class Pince {
 	}
 		
 	public void closePinceAv(){
-		/*try{
-			Thread.currentThread().sleep(500);
-		} catch (InterruptedException e) {
-		}*/
 		p.setPositionms(2,p.getMaxPosms(2));
 		p.setPositionms(1,p.getMinPosms(1));
 	}
@@ -64,12 +60,6 @@ public class Pince {
 		
 	public void closePinceAr(){
 		p.setPositionms(3,p.getMaxPosms(3));
-		
-		/*try{
-			Thread.currentThread().sleep(500);
-		} catch (InterruptedException e) {
-		}*/
-
 		p.setPositionms(4,p.getMinPosms(4));
 	}
 	
@@ -82,7 +72,7 @@ public class Pince {
 		p.setPositionms(5,p.getMaxPosms(5));
 	}
 	
-	public void FermerBenne(){
+	public void fermerBenne(){
 		p.setPositionms(5,p.getMinPosms(5));
 	}
 	

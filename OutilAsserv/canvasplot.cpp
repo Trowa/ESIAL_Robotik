@@ -20,13 +20,10 @@ void CanvasPlot::appendPoint(const std::string & p, double p_value)
     // Si la courbe n’existe pas, on la crée
     if(m_curves.find(p) == m_curves.end())
     {
-        m_curves[p] = new Curve(p, this->getDefaultView());
+        m_curves[p] = new Curve(p, this->getMyView());
 
         emit newVar(QString::fromStdString(p)); // On prévient qu’on crée une nouvelle variable (pour actualiser le dock de courbes)
     }
-
-
-
 
     // Maintenant on est sûr que la courbe existe, on ajoute le point à la courbe qui correspond
     m_curves[p]->append(m_time, p_value);
@@ -49,7 +46,6 @@ void CanvasPlot::onUpdate()
         i->second->draw(this);
     }
 
-
     sf::VertexArray cursor(sf::Lines, 4);
     cursor[0].position.x = (float)sf::Mouse::getPosition(*this).x - this->getSize().x*2;
     cursor[0].position.y = (float)sf::Mouse::getPosition(*this).y;
@@ -60,7 +56,7 @@ void CanvasPlot::onUpdate()
     cursor[3].position.x = (float)sf::Mouse::getPosition(*this).x;
     cursor[3].position.y = (float)sf::Mouse::getPosition(*this).y + this->getSize().y*2;
 
-    this->setView(this->getDefaultView());
+    this->setView(this->getMyView());
 
     int k=0;
     for(std::map<std::string, Curve*>::iterator i = m_curves.begin(); i != m_curves.end(); i++)
@@ -96,11 +92,12 @@ void CanvasPlot::onUpdate()
 
         sf::View tmp;
         tmp = this->getView();
-        this->setView(this->getDefaultView());
+        this->setView(this->getMyView());
         this->draw(array);
         this->setView(tmp);
     }
 
+    this->setView(this->getMyView());
     this->draw(cursor);
 }
 

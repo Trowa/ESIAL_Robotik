@@ -1,14 +1,26 @@
 #include "sfmlCanvas.h"
+#include <QResizeEvent>
 
 SfmlCanvas::SfmlCanvas(QWidget* Parent) :
-QWidget       (Parent),
-myInitialized (false)
+    QWidget       (Parent),
+    myInitialized (false),
+    m_defaultView(this->getDefaultView().getCenter(), this->getDefaultView().getSize())
 {
     // Mise en place de quelques options pour autoriser le rendu direct dans le widget
     setAttribute(Qt::WA_PaintOnScreen);
+    setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
+/*
+    m_defaultView.setViewport(this->getDefaultView().getViewport());
+    setView(m_defaultView);
+*/
 
     myTimer.setInterval(60);
+}
+
+SfmlCanvas::~SfmlCanvas()
+{
+    myTimer.stop();
 }
 
 #ifdef Q_WS_X11
@@ -40,8 +52,21 @@ void SfmlCanvas::showEvent(QShowEvent*)
     }
 }
 
+const sf::View& SfmlCanvas::getMyView()
+{
+    return this->getDefaultView();
+    return m_defaultView;
+}
+
+QPaintEngine* SfmlCanvas::paintEngine() const
+{
+    return 0;
+}
+
 void SfmlCanvas::paintEvent(QPaintEvent*)
 {
+    m_defaultView.setSize(getSize().x, getSize().y);
+
     // On laisse la classe dérivée faire sa tambouille
     onUpdate();
 
@@ -51,9 +76,12 @@ void SfmlCanvas::paintEvent(QPaintEvent*)
 
 void SfmlCanvas::resizeEvent ( QResizeEvent * event )
 {
+    // Sous X11, il faut valider les commandes qui ont été envoyées au serveur
+    // afin de s'assurer que SFML aura une vision à jour de la fenêtre
     #ifdef Q_WS_X11
         XFlush(QX11Info::display());
     #endif
 
+    // On crée la fenêtre SFML avec l'identificateur du widget
     sf::RenderWindow::create(winId());
 }

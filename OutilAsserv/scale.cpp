@@ -76,7 +76,7 @@ void Scale::setColor(const sf::Color& p_color)
     m_color = p_color;
 }
 
-void Scale::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Scale::draw(SfmlCanvas& target, sf::RenderStates states) const
 {
     sf::View tmp_view = target.getView();
     sf::VertexArray array(sf::Lines, 400);
@@ -90,7 +90,7 @@ void Scale::draw(sf::RenderTarget& target, sf::RenderStates states) const
     std::ostringstream flux;
     t.setColor(m_color);
 
-    target.setView(target.getDefaultView());
+    target.setView(target.getMyView());
 
     float top = target.getViewport(tmp_view).top;
     float height = (float)target.getViewport(tmp_view).height;
@@ -126,7 +126,7 @@ void Scale::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(array, states);
 }
 
-void Scale::drawScaleT(sf::RenderTarget& target, sf::RenderStates states)
+void Scale::drawScaleT(SfmlCanvas& target, sf::RenderStates states)
 {
     sf::View tmp_view = target.getView();
     sf::VertexArray array(sf::Lines, 400);
@@ -140,7 +140,7 @@ void Scale::drawScaleT(sf::RenderTarget& target, sf::RenderStates states)
     std::ostringstream flux;
     t.setColor(sf::Color::Black);
 
-    target.setView(target.getDefaultView());
+    target.setView(target.getMyView());
 
     float bottom = target.getViewport(tmp_view).top + target.getViewport(tmp_view).height;
     float left = target.getViewport(tmp_view).left;
