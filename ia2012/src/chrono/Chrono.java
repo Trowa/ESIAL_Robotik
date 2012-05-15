@@ -16,14 +16,14 @@ public class Chrono {
 	protected int tpsMatch; // Temps de declenchement du timer en millisecond
 
 	public Chrono(int tpsMatch) {
-		System.out.println("Creation chrono");
+		System.out.println("Création chrono");
 		this.timer = new Timer();
 		this.tpsMatch = tpsMatch;
 	}
 
 	// Demarrage du chrono en configurant la TimerTask
 	public void startChrono() {
-		System.out.println("Demarrage chrono");
+		System.out.println("Démarrage chrono");
 		this.timer.schedule(new ChronoTask(), tpsMatch);
 	}
 

@@ -23,14 +23,14 @@ public class Interrupteur {
 	public int in; // Numero de la pin en entree qui check l'interrupteur
 
 	public Interrupteur(int out, int in) {
-		System.out.println("New Interrupteur : Out = "+out+", In = "+in);
+		//System.out.println("New Interrupteur : Out = "+out+", In = "+in);
 		this.out = out;
 		this.in = in;
 		this.configGpios();
 	}
 	
 	public void configGpios() {
-		System.out.println("Configuration Interrupteur Gpios "+this.out+" et "+this.in);
+		//System.out.println("Configuration Interrupteur Gpios "+this.out+" et "+this.in);
 		try {
 			// On export les GPIOs
 			PrintWriter export = new PrintWriter(new BufferedWriter(new FileWriter("/sys/class/gpio/export", false)));
@@ -57,7 +57,7 @@ public class Interrupteur {
 	}
 
 	public void closeGpios() {
-		System.out.println("Fermeture Interrupteur Gpios "+this.out+" et "+this.in);
+		//System.out.println("Fermeture Interrupteur Gpios "+this.out+" et "+this.in);
 		try {
 			// On unexport les GPIOs
 			PrintWriter export = new PrintWriter(new BufferedWriter(new FileWriter("/sys/class/gpio/unexport", false)));

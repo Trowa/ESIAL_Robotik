@@ -17,7 +17,6 @@ public class Asserv
 		try {
 			mbed = new SerialMbed();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		current = 0;
@@ -59,12 +58,14 @@ public class Asserv
 		sendLastCommand();
 	}
 	
-	private void sendLastCommand()
+	public void sendLastCommand()
 	{
 		try {
-			mbed.send(list.get(list.size()-1));
+			if(current == list.size()-1) {
+				mbed.send(list.get(current));
+				System.out.println("'" + list.get(current) + "'");
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -78,7 +79,6 @@ public class Asserv
 				return list.get(current++);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -89,9 +89,27 @@ public class Asserv
 		try {
 			mbed.send("c" + (sens ? "1" : "0") + "g");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public void emptyReceptionBuffer() {
+		while(mbed.ready()) {
+			mbed.skip();
+		}
+	}
+
+	public boolean lastCommandFinished() {
+		if(mbed.ready()) {
+			char recu = mbed.getc();
+			System.out.println("recu : '"+recu+"'");
+			if(recu=='d') {
+				current++;
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
 
