@@ -4,6 +4,8 @@ import gpio.Interrupteur;
 
 import java.io.IOException;
 
+import mbed.SerialMbed;
+
 import servomoteur.Pince;
 import asserv.Asserv;
 import chrono.Chrono;
@@ -87,7 +89,7 @@ public class IA {
 		System.out.println("Veuillez mettre la tirette");
 		while(tirette.checkInterrupteur());
 		System.out.println("Tirette remise : PRET POUR MATCH !");
-		asservissement.emptyReceptionBuffer(); //On vide le buffer de la mbed
+		//asservissement.emptyReceptionBuffer(); //On vide le buffer de la mbed
 		Thread.sleep(1000); //On attend pour etre sur que la tirette soit bien mise
 		
 		// Phase 4 : LE MATCH !
@@ -163,6 +165,22 @@ public class IA {
 				
 			}
 		}
+		
+		
+		
+		
+		/*
+		try {
+			mbed.send("g518#128\n");
+			mbed.send("g518#673\n");
+			mbed.send("g278#673\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		*/
+		
+		
+		
 	}
 	
 	public static void finDuMatch() throws InterruptedException {

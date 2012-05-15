@@ -8,62 +8,70 @@ import mbed.SerialMbed;
 public class Asserv
 {
 	private SerialMbed mbed;
-	private ArrayList<String> list; // Liste des ordres
-	private int current; // Dernier ordre donne a la Mbed et atteint par le robot	
+	private String commande; // Dernière commande
+	private boolean lastCommandFinished;
 
 	public Asserv()
 	{
-		list = new ArrayList<String>();
+		commande = "";
 		try {
 			mbed = new SerialMbed();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		current = 0;
+		lastCommandFinished = true;
 	}
 
 	public void gotoPosition(double x, double y)
 	{
-		list.add("g"+x+"#"+y+"\n");
-		sendLastCommand();
+		commande = "g"+x+"#"+y+"\n";
+		sendCommand();
 	}
 	
 	public void face(double x, double y)
 	{
-		list.add("f"+x+"#"+y+"\n");
-		sendLastCommand();
+		commande = "f"+x+"#"+y+"\n";
+		sendCommand();
 	}
 	
 	public void go(double d)
 	{
-		list.add("v"+d+"\n");
-		sendLastCommand();
+		commande = "v"+d+"\n";
+		sendCommand();
 	}
 	
 	public void turn(double a)
 	{
-		list.add("t"+a+"\n");
-		sendLastCommand();
+		commande = "t"+a+"\n";
+		sendCommand();
 	}
 	
 	public void halt()
 	{
-		list.add("h");
-		sendLastCommand();
+		try {
+			mbed.send("h");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void resetHalt()
 	{
-		list.add("r");
-		sendLastCommand();
+		try {
+			mbed.send("r");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void sendLastCommand()
+	public void sendCommand()
 	{
+		System.out.println("sending : "+commande);
 		try {
-			if(current == list.size()-1) {
-				mbed.send(list.get(current));
-				System.out.println("'" + list.get(current) + "'");
+			synchronized (this) {
+				mbed.send(commande);
+				lastCommandFinished = false;
+				launchFinishedChecker();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,30 +93,43 @@ public class Asserv
 	}
 	*/
 
+	private void launchFinishedChecker() {
+		Thread checker = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while(!lastCommandFinished) {
+					//System.out.println("On check");
+					if(mbed.ready()) {
+						char check = mbed.getc();
+						System.out.println("reçu : " + check);
+						if(check == 'd') {
+							lastCommandFinished = true;
+						}
+					} else {
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		});
+		checker.start();
+	}
+
 	public void calageBordure(boolean sens) {
 		try {
 			mbed.send("c" + (sens ? "1" : "0") + "g");
+			mbed.emptyBuffer();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void emptyReceptionBuffer() {
-		while(mbed.ready()) {
-			mbed.skip();
-		}
-	}
 
 	public boolean lastCommandFinished() {
-		if(mbed.ready()) {
-			char recu = mbed.getc();
-			System.out.println("recu : '"+recu+"'");
-			if(recu=='d') {
-				current++;
-				return true;
-			}
-		}
-		return false;
+		return lastCommandFinished;
 	}
 	
 }

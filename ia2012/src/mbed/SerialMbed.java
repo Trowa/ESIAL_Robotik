@@ -11,7 +11,7 @@ import java.io.OutputStream;
 
 public class SerialMbed {
 	private OutputStream deviceOut;
-	private BufferedReader deviceIn;
+	private FileInputStream deviceIn;
 	
 	/*
 	 * Pour l'instant, les deux fichiers à tester sont :
@@ -30,7 +30,7 @@ public class SerialMbed {
 			if(!mbedFile.exists()) {
 				throw new FileNotFoundException();
 			}
-			deviceIn = new BufferedReader(new InputStreamReader(new FileInputStream(mbedFile)));
+			deviceIn = new FileInputStream(mbedFile);
 			deviceOut = new FileOutputStream(mbedFile);
 			Runtime.getRuntime().exec("stty -F " + mbedFile.getAbsolutePath() + " ispeed 115200 ospeed 115200");
 		} catch(FileNotFoundException e) {
@@ -38,16 +38,18 @@ public class SerialMbed {
 			if(!mbedFile.exists()) {
 				throw new FileNotFoundException();
 			}
-			deviceIn = new BufferedReader(new InputStreamReader(new FileInputStream(mbedFile)));
+			deviceIn = new FileInputStream(mbedFile);
 			deviceOut = new FileOutputStream(mbedFile);
 			Runtime.getRuntime().exec("stty -F " + mbedFile.getAbsolutePath() + " ispeed 115200 ospeed 115200");
 		}
 		//System.out.println("Mbed sur "+pandaFile.getAbsolutePath());
 	}
 	
+	/*
 	public String readLine() throws Exception {
 		return deviceIn.readLine();
 	}
+	*/
 	
 	public char getc() {
 		try {
@@ -61,7 +63,7 @@ public class SerialMbed {
 	
 	public boolean ready() {
 		try {
-			return deviceIn.ready();
+			return deviceIn.available()>0;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,20 +73,25 @@ public class SerialMbed {
 		
 	public void send(String s) throws Exception
 	{
-		synchronized(this) {
-			deviceOut.write(s.getBytes());
-			System.out.println("'" + s + "'");
-			deviceOut.flush();
-		}
+		deviceOut.write(s.getBytes());
+		System.out.println("envoyé : '" + s + "'");
+		deviceOut.flush();
+		System.out.println("flush");
+		
 	}
 
-	public void skip() {
-		try {
-			deviceIn.skip(1);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void emptyBuffer() {
+		while(ready()) {
+			try {
+				deviceIn.read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
+	
+	
+
 }
 
