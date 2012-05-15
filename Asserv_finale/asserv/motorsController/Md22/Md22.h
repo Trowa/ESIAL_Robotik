@@ -1,8 +1,6 @@
 #ifndef MD22
 #define MD22
 
-/*
-
 #include "../MotorsController.h"
 
 // Définition des adresses
@@ -36,6 +34,6 @@ class Md22 : public MotorsController
         I2C i2cLink;
  };
  
-*/
+
  
- #endif
+#endif

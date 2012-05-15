@@ -1,3 +1,5 @@
+/*
+
 #include "CodeursAVR.h"
 
 CodeursAVR::CodeursAVR(PinName mosi, PinName miso, PinName sck, PinName ss) :
@@ -34,3 +36,5 @@ void CodeursAVR::getCounts(int64_t* countG, int64_t* countD) {
 	//pc.printf("Cg:%lld - Cd:%lld\n", *countG, *countD);
 	
 }
+
+*/

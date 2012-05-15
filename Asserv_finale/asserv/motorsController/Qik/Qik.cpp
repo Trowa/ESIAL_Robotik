@@ -1,4 +1,4 @@
-/*
+
 
 #include "Qik.h"
 
@@ -80,4 +80,4 @@ void Qik::vitesseG(int vitMoteurG)
     }
 }
 
-*/
+

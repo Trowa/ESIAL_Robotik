@@ -1,6 +1,6 @@
 #ifndef ONE_POLOLU_SMC
 #define ONE_POLOLU_SMC
-
+/*
 #include "../../config.h"
 
 #include "mbed.h"
@@ -21,5 +21,5 @@ class OnePololuSMC {
   Serial* smcSerial;
   
 };
-
+*/
 #endif

@@ -2,7 +2,7 @@
 #define COMMAND_MANAGER
 
 #include "mbed.h"
-#include "../ConsignController/ConsignController.h"
+#include "../consignController/ConsignController.h"
 #include "CMDList/CMDList.h"
 #include "../Utils/Utils.h"
 #include "../config.h"
@@ -11,7 +11,7 @@ class CommandManager {
 
   public:
     CommandManager(int capacity , ConsignController *ctrlr, Odometrie *odo);
-	~CommandManager();
+    ~CommandManager();
   
     bool addStraightLine(int64_t valueInmm);
     bool addTurn(int64_t angleInDeg);
@@ -19,18 +19,22 @@ class CommandManager {
     bool addGoToAngle(int64_t posXInmm, int64_t posYInmm);
     void perform();
         
-    // Gestion d'un éventuel arret d'urgence
+    // Gestion d'un &#65533;ventuel arret d'urgence
     void setEmergencyStop();
     void resetEmergencyStop();
     
-    // GoTo là om on veut   
+    //Calage bordure
+    void calageBordureGros(int sens);
+    void calageBordurePetit(int sens);
+    
+    // GoTo l&#65533; om on veut   
     void computeGoTo();
     void computeGoToAngle();
         
   private:
     CMDList *liste; //File d'attente des commandes
     ConsignController *cnsgCtrl;
-    Odometrie *odometrie; // Odométrie, pour pouvoir faire les conversion et calculer la cible
+    Odometrie *odometrie; // Odom&#65533;trie, pour pouvoir faire les conversion et calculer la cible
     CMD currCMD; //commande courante
     CMD nextCMD; //commande suivante
         

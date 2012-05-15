@@ -1,3 +1,5 @@
+
+/*
 #include "../../config.h"
 
 #include "PololuSMCs.h"
@@ -50,3 +52,5 @@ void PololuSMCs::vitesseD(int speed) {
         motorG->setSpeed(speed);
     }
 }
+
+*/

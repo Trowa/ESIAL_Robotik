@@ -1,6 +1,6 @@
 #ifndef POLOLU_SMCS
 #define POLOLU_SMCS
-
+/*
 #include "../../config.h"
 
 #include "OnePololuSMC.h"
@@ -32,5 +32,5 @@ class PololuSMCs : public MotorsController {
   
   
 };
-
+*/
 #endif

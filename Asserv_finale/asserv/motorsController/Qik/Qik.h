@@ -1,7 +1,7 @@
 #ifndef QIK
 #define QIK
 
-/*
+
 
 #include "../MotorsController.h"
 
@@ -28,6 +28,6 @@ class Qik : public MotorsController
         
 };
 
-*/
+
 
 #endif
