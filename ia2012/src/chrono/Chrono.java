@@ -13,7 +13,7 @@ import java.util.TimerTask;
 public class Chrono {
 
 	protected Timer timer;
-	protected int tpsMatch; // Temps de declenchement du timer en millisecond
+	protected int tpsMatch; // Temps de declenchement du timer en millisecondes
 
 	public Chrono(int tpsMatch) {
 		System.out.println("Création chrono");
@@ -31,12 +31,10 @@ public class Chrono {
 
 		@Override
 		public void run() {
-			// TODO Fin du chrono, on stop tout
 			System.out.println("Fin du chrono");
 			try {
 				IA.finDuMatch();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.exit(0);

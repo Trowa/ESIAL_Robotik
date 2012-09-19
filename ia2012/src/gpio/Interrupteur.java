@@ -77,10 +77,10 @@ public class Interrupteur {
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);
 			String value = br.readLine();
-			//System.out.println("'"+value+"'");
 			br.close();
 			ipsr.close();
 			ips.close();
+			//System.out.println(value);
 			return (value != null && value.equals("1"))?true:false;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

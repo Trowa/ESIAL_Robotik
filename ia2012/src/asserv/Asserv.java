@@ -1,6 +1,4 @@
 package asserv;
-import java.util.ArrayList;
-
 import mbed.SerialMbed;
 
 
@@ -24,25 +22,25 @@ public class Asserv
 
 	public void gotoPosition(double x, double y)
 	{
-		commande = "g"+x+"#"+y+"\n";
+		commande = "g"+x+"#"+y+"!";
 		sendCommand();
 	}
 	
 	public void face(double x, double y)
 	{
-		commande = "f"+x+"#"+y+"\n";
+		commande = "f"+x+"#"+y+"!";
 		sendCommand();
 	}
 	
 	public void go(double d)
 	{
-		commande = "v"+d+"\n";
+		commande = "v"+d+"!";
 		sendCommand();
 	}
 	
 	public void turn(double a)
 	{
-		commande = "t"+a+"\n";
+		commande = "t"+a+"!";
 		sendCommand();
 	}
 	
@@ -70,6 +68,38 @@ public class Asserv
 		try {
 			synchronized (this) {
 				mbed.send(commande);
+				lastCommandFinished = false;
+				launchFinishedChecker();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eviteAdversaireDevant()
+	{
+		System.out.println("sending : "+commande);
+		try {
+			synchronized (this) 
+			{
+				resetHalt();
+				mbed.send("v-50!");
+				lastCommandFinished = false;
+				launchFinishedChecker();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eviteAdversaireDerriere()
+	{
+		System.out.println("sending : "+commande);
+		try {
+			synchronized (this) 
+			{
+				resetHalt();
+				mbed.send("v50!");
 				lastCommandFinished = false;
 				launchFinishedChecker();
 			}

@@ -1,11 +1,9 @@
 package mbed;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 
@@ -74,7 +72,7 @@ public class SerialMbed {
 	public void send(String s) throws Exception
 	{
 		deviceOut.write(s.getBytes());
-		System.out.println("envoyé : '" + s + "'");
+		//System.out.println("envoyé : '" + s + "'");
 		deviceOut.flush();
 		System.out.println("flush");
 		

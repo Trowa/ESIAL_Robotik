@@ -4,8 +4,8 @@ public class Pince {
 	PololuMicroMaestro p;
 	
 	public Pince(){
-		// TODO LE MAAAAAAAAALLLLLLLLLEEEEEEE (comme Virus)
-		p = new PololuMicroMaestro("/dev/ttyACM0", "/dev/ttyACM1", 12);
+		p = new PololuMicroMaestro("/dev/serial/by-id/usb-Pololu_Corporation_Pololu_Micro_Maestro_6-Servo_Controller_00026569-if00", 
+					"/dev/serial/by-id/usb-Pololu_Corporation_Pololu_Micro_Maestro_6-Servo_Controller_00026569-if02", 12);
 		p.setMinPosms(1,1224);// Pince AVG
 		//p.setMaxPosms(1,2450);
 		p.setMaxPosms(1,2142);
@@ -23,13 +23,15 @@ public class Pince {
 	}
 	
 	public void openPinceAv(){
-		p.setMaxPosms(1,2600);
+		System.out.println("Ouverture pince avant");
+		p.setMaxPosms(1,2450);
 		p.setMinPosms(2,800);
 		p.setPositionms(1,p.getMaxPosms(1));
 		p.setPositionms(2,p.getMinPosms(2));
 	}
 	
 	public void openPinceAvForEject(){
+		System.out.println("Ouverture pince avant pour éjection");
 		p.setMaxPosms(1,2142);
 		p.setMinPosms(2,1025);
 		p.setPositionms(1,p.getMaxPosms(1));
@@ -37,12 +39,14 @@ public class Pince {
 	}
 		
 	public void closePinceAv(){
-		p.setPositionms(2,p.getMaxPosms(2));
+		System.out.println("Fermeture pince avant");
 		p.setPositionms(1,p.getMinPosms(1));
+		p.setPositionms(2,p.getMaxPosms(2));
 	}
 	
 		
 	public void openPinceAr(){
+		System.out.println("ouverture pince arrière");
 		p.setMaxPosms(4,2000);
 		p.setMinPosms(3,992);
 		p.setPositionms(3,p.getMinPosms(3));
@@ -52,6 +56,7 @@ public class Pince {
 	}
 	
 	public void openPinceArForEject(){
+		System.out.println("ouverture pince arrière pour éjection");
 		p.setMinPosms(3,1118);
 		p.setMaxPosms(4,1715);
 		p.setPositionms(3,p.getMinPosms(3));
@@ -60,6 +65,7 @@ public class Pince {
 	}
 		
 	public void closePinceAr(){
+		System.out.println("fermeture pince arrière");
 		p.setPositionms(3,p.getMaxPosms(3));
 		p.setPositionms(4,p.getMinPosms(4));
 	}
@@ -70,10 +76,12 @@ public class Pince {
 	}
 
 	public void ejecter(){
+		System.out.println("éjection");
 		p.setPositionms(5,p.getMaxPosms(5));
 	}
 	
 	public void fermerBenne(){
+		System.out.println("fermeture benne");
 		p.setPositionms(5,p.getMinPosms(5));
 	}
 	
