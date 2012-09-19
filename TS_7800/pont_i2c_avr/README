@@ -1,0 +1,26 @@
+Code AVR permettant de faire un pont Serial <-> I2C
+
+Si tu as lu la doc de la TS7800 (ha ha !) tu n'es pas sans savoir
+qu'elle ne dispose pas de bus I2C accessible.
+Ce code permet à un AVR de faire un pont entre un des ports séries
+de la TS7800 vers un bus I2C.
+Le seul usage prévu de la chose est d'utiliser la carte de contrôle
+moteur MD22 directement sur la TS7800.
+
+Nous allons définir le protocole suivant, qui va, a priori, uniquement
+supporter ce cas d'utilisation:
+
+* 0x2C -> Serial
+	Condition "start" sur l'I2C
+	Attente de 3 caracères depuis la série :
+
+* [périphérique] -> Serial
+	[périphérique] -> I2C
+
+* [adresse] -> Serial
+	[adresse] -> I2C
+
+* [valeur] -> Serial
+	[valeur] -> I2C
+	condititon "stop" sur l'I2C
+
