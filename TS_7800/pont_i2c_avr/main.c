@@ -1,6 +1,16 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/power.h>
+#include "i2ctools.h"
+
+// prototypes
+int main(void);
+
+
+//données I2C
+uint8_t device_addr;
+uint8_t register_addr;
+uint8_t data;
 
 int main() {
 

@@ -1,27 +1,29 @@
 CC=avr-gcc
-FILE=main
 OBJCOPY=avr-objcopy
 CFLAG=-g -mmcu=atmega88 -Wall -Wstrict-prototypes -Os -mcall-prologues -DF_CPU=1000000
 
 
 
-all:	$(FILE).hex
+all:	main.hex
 
-$(FILE).hex:	$(FILE).out
-	$(OBJCOPY) -R .eeprom -O ihex $(FILE).out $(FILE).hex
+main.hex:	main.out
+	$(OBJCOPY) -R .eeprom -O ihex main.out main.hex
 
-$(FILE).out:	$(FILE).o
-	$(CC) $(CFLAG) -o $(FILE).out -Wl,-Map,$(FILE).map $(FILE).o
+main.out:	main.o i2ctools.o
+	$(CC) $(CFLAG) -o main.out -Wl,-Map,main.map main.o i2ctools.o
 
-$(FILE).o:  $(FILE).c
-	$(CC) $(CFLAG) -c $(FILE).c
+main.o:  main.c i2ctools.h
+	$(CC) $(CFLAG) -c main.c
 
-clean:	
+i2ctools.o:  i2ctools.c i2ctools.h
+	$(CC) $(CFLAG) -c i2ctools.c
+
+clean:
 	rm -f *.o *.map *.out
 
 flash:
-	avrdude -c stk500 -P /dev/ttyUSB0 -p m88 -U flash:w:$(FILE).hex
-	
+	avrdude -c stk500 -P /dev/ttyUSB0 -p m88 -U flash:w:main.hex
+
 
 verif:
-	avrdude -c stk500 -P /dev/ttyUSB0 -p m88 -U flash:v:$(FILE).hex
+	avrdude -c stk500 -P /dev/ttyUSB0 -p m88 -U flash:v:main.hex
