@@ -9,14 +9,17 @@ all:	main.hex
 main.hex:	main.out
 	$(OBJCOPY) -R .eeprom -O ihex main.out main.hex
 
-main.out:	main.o i2ctools.o
-	$(CC) $(CFLAG) -o main.out -Wl,-Map,main.map main.o i2ctools.o
+main.out:	main.o i2ctools.o serialtools.o
+	$(CC) $(CFLAG) -o main.out -Wl,-Map,main.map main.o i2ctools.o serialtools.o
 
 main.o:  main.c i2ctools.h
 	$(CC) $(CFLAG) -c main.c
 
 i2ctools.o:  i2ctools.c i2ctools.h
 	$(CC) $(CFLAG) -c i2ctools.c
+
+serialtools.o:	serialtools.c serialtools.h
+	$(CC) $(CFLAG) -c serialtools.c
 
 clean:
 	rm -f *.o *.map *.out

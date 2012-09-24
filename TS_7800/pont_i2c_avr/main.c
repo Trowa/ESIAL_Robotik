@@ -2,6 +2,7 @@
 #include <avr/interrupt.h>
 #include <avr/power.h>
 #include "i2ctools.h"
+#include "serialtools.h"
 
 // prototypes
 int main(void);
