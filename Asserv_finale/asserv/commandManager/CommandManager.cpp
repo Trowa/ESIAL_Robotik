@@ -125,8 +125,8 @@ void CommandManager::computeGoTo(){
   double deltaY = currCMD.secValue - odometrie->getY();  // Difference entre la cible et le robot selon Y
   
   // On a besoin de min et max pour le calcul de l'angle entre le cap cible et le cap courant
-  double max = abs(deltaX)>abs(deltaY) ? abs(deltaX) : abs(deltaY);
-  double min = abs(deltaX)<=abs(deltaY) ? abs(deltaX) : abs(deltaY);
+  double max = fabs(deltaX)>fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
+  double min = fabs(deltaX)<=fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
 
   // Valeur absolue de la distance a parcourir en allant tout droit pour atteindre la consigne
   int64_t deltaDist = 0;
@@ -150,7 +150,7 @@ void CommandManager::computeGoTo(){
   }
         
   /*//TODO a tester en conditions reelles et extremes de mauvaises utilisations
-  if ( abs(deltaTheta) < angleThreshold ) { // Si on est dans la fenetre de depart en angle
+  if ( fabs(deltaTheta) < angleThreshold ) { // Si on est dans la fenetre de depart en angle
     // La consigne est la somme de la distance a parcourir et de notre position dans l'accu
     int64_t consigne_dist = deltaDist + cnsgCtrl->getAccuDist();
     cnsgCtrl->set_dist_consigne( consigne_dist ); // On set la consigne
@@ -173,8 +173,8 @@ void CommandManager::computeGoTo(){
             Utils::radToUO(odometrie, deltaTheta) + cnsgCtrl->getAccuAngle()
             ) ; //on se met dans la bonne direction
         //pc.printf("dT=%ldd - ",Utils::radToUO(odometrie, deltaTheta) + cnsgCtrl->getAccuAngle());
-        //pc.printf("Td=%f - aT=%f\n", abs( thetaCible - odometrie->getTheta()), angleThreshold);
-        if( abs( thetaCible - odometrie->getTheta() ) < angleThreshold ) {
+        //pc.printf("Td=%f - aT=%f\n", fabs( thetaCible - odometrie->getTheta()), angleThreshold);
+        if( fabs( thetaCible - odometrie->getTheta() ) < angleThreshold ) {
             consigne_dist = deltaDist + cnsgCtrl->getAccuDist();
         } else {
             consigne_dist = cnsgCtrl->getAccuDist();
@@ -194,8 +194,8 @@ void CommandManager::computeGoToAngle(){
   double deltaY = currCMD.secValue - odometrie->getY();  // Diff&#65533;rence entre la cible et le robot selon Y
   
   // On a besoin de min et max pour le calcul de l'angle entre le cap cible et le cap courant
-  double max = abs(deltaX)>abs(deltaY) ? abs(deltaX) : abs(deltaY);
-  double min = abs(deltaX)<=abs(deltaY) ? abs(deltaX) : abs(deltaY);
+  double max = fabs(deltaX)>fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
+  double min = fabs(deltaX)<=fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
     
   // Cap que doit atteindre le robot
   double thetaCible = atan2(deltaY, deltaX);

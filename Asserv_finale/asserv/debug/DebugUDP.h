@@ -4,9 +4,9 @@
 #include "LPC1768/if/eth/EthernetNetIf.h"
 #include "LPC1768/api/UDPSocket.h"
 #include "LPC1768/core/host.h"
-#include "../Odometrie/Odometrie.h"
-#include "../ConsignController/ConsignController.h"
-#include "../CommandManager/CommandManager.h"
+#include "../odometrie/Odometrie.h"
+#include "../consignController/ConsignController.h"
+#include "../commandManager/CommandManager.h"
 #include "../config.h"
 
 #ifdef DEBUG

@@ -112,7 +112,7 @@ void Odometrie::refresh() {
   int64_t diffCount = compteurD - compteurG; // On conserve la difference entre les comptes en UO
   deltaTheta = (double)diffCount / (double)distanceRouesUO; // En radian
 
-  if ( abs(diffCount) < 1 ) { // On considere le mouvement comme une ligne droite
+  if ( llabs(diffCount) < 1 ) { // On considere le mouvement comme une ligne droite
     // Mise a jour de la position
     x += deltaDist * cos(theta);
     y += deltaDist * sin(theta);

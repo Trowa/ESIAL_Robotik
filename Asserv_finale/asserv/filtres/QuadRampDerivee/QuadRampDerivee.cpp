@@ -73,9 +73,9 @@ int64_t QuadRampDerivee::filtre(int64_t consigne, int64_t position_actuelle , in
   char sens = ( consigne - position_actuelle >= 0 ) ? 1 : -1;
   int64_t position_pivot;
   if(sens == 1) {
-    position_pivot = consigne + ( ( vitesse >= 0 ) ? -1 : 1) * ( ((vitesse * vitesse )/(2*derivee_2nd_neg_av)) + abs(vitesse) * gainAnticipation_av );
+    position_pivot = consigne + ( ( vitesse >= 0 ) ? -1 : 1) * ( ((vitesse * vitesse )/(2*derivee_2nd_neg_av)) + llabs(vitesse) * gainAnticipation_av );
   } else {
-    position_pivot = consigne + ( ( vitesse >= 0 ) ? -1 : 1) * ( ((vitesse * vitesse )/(2*derivee_2nd_neg_ar)) + abs(vitesse) * gainAnticipation_ar );
+    position_pivot = consigne + ( ( vitesse >= 0 ) ? -1 : 1) * ( ((vitesse * vitesse )/(2*derivee_2nd_neg_ar)) + llabs(vitesse) * gainAnticipation_ar );
   }
     
   //Calcul de la consigne d'acceleration  qui dépend dans le sens dans lequelle on roule et vient de config.h
@@ -111,7 +111,7 @@ int64_t QuadRampDerivee::filtre(int64_t consigne, int64_t position_actuelle , in
   #endif
     
   // On verifie si on est dans la fenetre d'arrivee et si oui, on est arrivé à la fin de la rampe
-  if ( abs(consigne-position_actuelle) < tailleFenetreArrivee ) {
+  if ( llabs(consigne-position_actuelle) < tailleFenetreArrivee ) {
     prevConsigneVitesse = 0; // On reset la consigne precedente 
     arrivee = true;
     return consigne;
