@@ -7,30 +7,30 @@
 #include "../MotorsController.h"
 
 class PololuSMCs : public MotorsController {
-  
+
   public:
-  
-  //Deux pololuSMCs sur une série
+
+  //Deux pololuSMCs sur une sÃ©rie
   PololuSMCs(char idMotorG, char idMotorD, PinName smcSerialTX, PinName smcSerialRX);
-  
-  //Deux pololuSMCs sur deux séries
+
+  //Deux pololuSMCs sur deux sÃ©ries
   PololuSMCs(PinName smcSerialTXG, PinName smcSerialRXG, PinName smcSerialTXD, PinName smcSerialRXD);
-  
+
   virtual void vitesseG(int vitMoteurG);
   virtual void vitesseD(int vitMoteurD);
-  
+
   void inverseMoteurDroit() { motorD->inverseMotor(); }
   void inverseMoteurGauche() { motorG->inverseMotor(); }
-  
+
   private:
-  
+
   Serial* smcSerial;
-  
+
   OnePololuSMC* motorG;
   OnePololuSMC* motorD;
-  
-  
-  
+
+
+
 };
 */
 #endif

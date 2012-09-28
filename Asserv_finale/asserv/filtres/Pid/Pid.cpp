@@ -2,10 +2,10 @@
 
 // Constructeur
 Pid::Pid(bool isDistance) {
-  // L'intégrale est nulle au départ
+  // L'intÃ©grale est nulle au dÃ©part
   integrale = 0;
-  
-  // En fonction du type de PID on ne récupère pas les même paramètres
+
+  // En fonction du type de PID on ne rÃ©cupÃ¨re pas les mÃªme paramÃ¨tres
   if (isDistance) {
     kp = DIST_KP;
     ki = DIST_KI;
@@ -26,31 +26,31 @@ Pid::Pid(bool isDistance) {
 // Destructeur
 Pid::~Pid() {}
 
-// On filtre l'erreur pour calculer la sortie à donner aux moteurs
+// On filtre l'erreur pour calculer la sortie Ã  donner aux moteurs
 int64_t Pid::filtre(int64_t erreur , int64_t feedback_odometrie , int64_t value3)
 {
     // Calcul de la Proportionnelle
     int64_t P = erreur * kp;
-	
-	//pc.printf("P=%d ", P);
-	  
+
+  //pc.printf("P=%d ", P);
+
     //Calcul de l'Integrale que l'on oublie pas de borner
-    integrale += erreur; 
+    integrale += erreur;
     integrale = Utils::constrain(integrale, -maxIntegral , maxIntegral);
     int64_t I = integrale * ki;
-  
+
 
     // Calcul de la Derivee
     int64_t D = feedback_odometrie * kd;
-  
-	//pc.printf("D=%d ", D);
 
-    //On calcul la Sortie qui est la somme des trois valeurs multipliée par le ratio de sortie
+  //pc.printf("D=%d ", D);
+
+    //On calcul la Sortie qui est la somme des trois valeurs multipliÃ©e par le ratio de sortie
     int64_t sortie = P + I - D;
     sortie = sortie * outRatio;
-  
+
     // Saturation de la sortie pour ne pas allez trop vite non plus
     sortie = Utils::constrain(sortie , -maxOutput , maxOutput);
-  
+
     return sortie;
 }

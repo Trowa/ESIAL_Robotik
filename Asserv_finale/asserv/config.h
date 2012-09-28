@@ -15,11 +15,11 @@
 ****************************/
   static double angleThreshold = 0.1; // Fen�tre de l'angle dans lequel on consid�re que le GoTo peut commencer � avancer
   static int64_t returnThreshold = 50; // Distance en dessous de laquelle on revient en marche arriere si on depasse, sinon demi-tour
-  
+
 /***************************
 *       ODOMETRIE          *
 ****************************/
-  
+
   #define PI 3.14159265358979
 
   // D�finition des variables pour l'odom�trie
@@ -43,8 +43,8 @@
   static bool inverseMoteurG = true;
   static bool inverseMoteurD = true;
   static bool swapMoteurs = false;
-  
-  
+
+
 /***************************
 *           PID            *
 ****************************/
@@ -64,7 +64,7 @@
   static int64_t ANGLE_MAX_OUTPUT = 90; // Valeur de sortie maximum pour le moteur
   static int64_t ANGLE_MAX_INTEGRAL = 0; // Valeur maximum de l'int�grale (0 = filtre PD)
 
-  // QUADRAMPDerivee                        
+  // QUADRAMPDerivee
   static int64_t DIST_QUAD_1ST_POS = 800000; // Vitesse max en marche avant
   static int64_t DIST_QUAD_1ST_NEG = 800000; // Vitesse max en marche arri�re
   static int64_t DIST_QUAD_AV_2ND_ACC = 6000; // Acc�l�ration max en marche avant

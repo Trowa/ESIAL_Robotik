@@ -18,27 +18,27 @@ extern DigitalOut receiveLed;
 extern void resetAsserv();
 
 class DebugUDP {
-	
-	public:
-		DebugUDP(CommandManager* c, Odometrie* o);
-		void addData(char* name, double value); // ajoute une valeur au paquet courant
-		void addData(char* name, int64_t value); // ajoute une valeur entière au paquet courant
-		void sendData(); // envoie le paquet de donnees sur l'ethernet
-		void dropCurrentData(); //vire les données courantes du buffer
-		
-		void setNewObjectPointers(CommandManager* c, Odometrie* o); //Reparamétrage des pointeurs
 
-		void setDebugSend(bool b); //Paramètre l'envoi des données de debug
-		bool getDebugSend(); //Doit-on envoyer les données ?
-		Host* getDebuggerHost() { return debuggerHost; }
+  public:
+    DebugUDP(CommandManager* c, Odometrie* o);
+    void addData(char* name, double value); // ajoute une valeur au paquet courant
+    void addData(char* name, int64_t value); // ajoute une valeur entiÃ¨re au paquet courant
+    void sendData(); // envoie le paquet de donnees sur l'ethernet
+    void dropCurrentData(); //vire les donnÃ©es courantes du buffer
 
-	private:
-		EthernetNetIf *eth;
-		Host* debuggerHost;
-		bool sendDebugData; //Doit-on envoyer les données ?
-		char trame[4096];
-		CommandManager* commandManager;
-	    Odometrie* odometrie;
+    void setNewObjectPointers(CommandManager* c, Odometrie* o); //ReparamÃ©trage des pointeurs
+
+    void setDebugSend(bool b); //ParamÃ¨tre l'envoi des donnÃ©es de debug
+    bool getDebugSend(); //Doit-on envoyer les donnÃ©es ?
+    Host* getDebuggerHost() { return debuggerHost; }
+
+  private:
+    EthernetNetIf *eth;
+    Host* debuggerHost;
+    bool sendDebugData; //Doit-on envoyer les donnÃ©es ?
+    char trame[4096];
+    CommandManager* commandManager;
+      Odometrie* odometrie;
 };
 
 extern DebugUDP *debugUdp;
@@ -46,7 +46,7 @@ extern DebugUDP *debugUdp;
 void onUDPSocketEvent(UDPSocketEvent e);
 
 char* index(const char *s, int c);
-	
+
 #endif
 
 #endif

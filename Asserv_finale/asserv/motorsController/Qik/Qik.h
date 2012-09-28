@@ -18,14 +18,14 @@ class Qik : public MotorsController
 
     public :
         Qik(PinName txPinToQik, PinName rxPinToQik);
-        
+
         virtual void vitesseG(int vitMoteurG);
         virtual void vitesseD(int vitMoteurD);
-        
+
     private :
-    
+
         Serial qikSerial;
-        
+
 };
 
 

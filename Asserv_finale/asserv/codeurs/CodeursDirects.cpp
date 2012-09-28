@@ -1,35 +1,35 @@
 #include "CodeursDirects.h"
 
 CodeursDirects::CodeursDirects(PinName pinChanA_G, PinName pinChanB_G, PinName pinChanA_D, PinName pinChanB_D) :
-	codeurG(pinChanA_G , pinChanB_G ),
-	codeurD(pinChanA_D , pinChanB_D )
-{	
-	// On change la priorité de l'interruption timer pour quelle soit plus basse que celle des ticks codeurs
-  	NVIC_SetPriority(TIMER3_IRQn, 1);
+  codeurG(pinChanA_G , pinChanB_G ),
+  codeurD(pinChanA_D , pinChanB_D )
+{
+  // On change la prioritÃ© de l'interruption timer pour quelle soit plus basse que celle des ticks codeurs
+    NVIC_SetPriority(TIMER3_IRQn, 1);
 }
 
 CodeursDirects::~CodeursDirects() { }
 
 void CodeursDirects::getCounts(int64_t* countG, int64_t* countD) {
-	__disable_irq(); //On désactive les interruptions
-  	*countD = codeurD.getCount(); //On récupère le compte des codeurs
-  	*countG = codeurG.getCount();
-  	codeurD.reset(); //On reset les comptes
-  	codeurG.reset();
-  	__enable_irq(); //on réactive les interruptions
-	
-	// On ajuste le sens des codeurs en cas de problème de cablage
-  	if(swapCodeurs) { //inversion des deux codeurs
-	    int64_t temp = *countG;
-	    *countG = *countD;
-	    *countD = temp;
-  	}
-	
-	if(inverseCodeurD) { //Changement de sens de rotation du codeur droit
-    	*countD = -(*countD);
-  	}
-  	if(inverseCodeurG) { //Changement de sens de rotation du codeur gauche
-    	*countG = -(*countG);
-  	}
-	
+  __disable_irq(); //On dÃ©sactive les interruptions
+    *countD = codeurD.getCount(); //On rÃ©cupÃ¨re le compte des codeurs
+    *countG = codeurG.getCount();
+    codeurD.reset(); //On reset les comptes
+    codeurG.reset();
+    __enable_irq(); //on rÃ©active les interruptions
+
+  // On ajuste le sens des codeurs en cas de problÃ¨me de cablage
+    if(swapCodeurs) { //inversion des deux codeurs
+      int64_t temp = *countG;
+      *countG = *countD;
+      *countD = temp;
+    }
+
+  if(inverseCodeurD) { //Changement de sens de rotation du codeur droit
+      *countD = -(*countD);
+    }
+    if(inverseCodeurG) { //Changement de sens de rotation du codeur gauche
+      *countG = -(*countG);
+    }
+
 }

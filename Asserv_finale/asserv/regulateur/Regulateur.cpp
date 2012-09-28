@@ -2,7 +2,7 @@
 
 #ifdef DEBUG
 #include "../debug/DebugUDP.h"
-	extern DebugUDP *debugUdp;
+  extern DebugUDP *debugUdp;
 #endif
 
 // Constructeur
@@ -10,7 +10,7 @@ Regulateur::Regulateur(bool isDistance) : filtreQuadRampDerivee(isDistance), fil
   filtreQuadRampDeriveeON = true;
   accumulateur = 0;
   #ifdef DEBUG
-  	this->isDistance = isDistance;
+    this->isDistance = isDistance;
   #endif
 }
 
@@ -20,53 +20,53 @@ Regulateur::~Regulateur() {
 
 // Calcul de l'erreur
 int64_t Regulateur::manage(int64_t consigne, int64_t feedback_odometrie) {
-                          
-  // On ajoute dans l'accumulateur la variation de déplacement mesuré par l'odométrie
+
+  // On ajoute dans l'accumulateur la variation de dÃ©placement mesurÃ© par l'odomÃ©trie
   accumulateur += feedback_odometrie;
-    
-  // On filtre la consigne a l'aide de la QuadRampeDerivee pour savoir si l'on est en phase d'accélération, constante ou de décélération
-  // Cette étape permet d'avoir un comportement linéaire au lieu de binaire (= soit à l'arrêt, soit à fond) qui provoque des secouses et peut 
-  // renverser le robot. A la place, on accélère et déccélère tranquillement et ça, c'est beau :p
-  int64_t consigneFiltree = filtreQuadRampDerivee.filtre(consigne, accumulateur, feedback_odometrie); 
-    
-  // On calcul l'erreur, c'est à dire la différence entre la consigne à suivre et la position réelle stockée dans l'accumulateur
+
+  // On filtre la consigne a l'aide de la QuadRampeDerivee pour savoir si l'on est en phase d'accÃ©lÃ©ration, constante ou de dÃ©cÃ©lÃ©ration
+  // Cette Ã©tape permet d'avoir un comportement linÃ©aire au lieu de binaire (= soit Ã  l'arrÃªt, soit Ã  fond) qui provoque des secouses et peut
+  // renverser le robot. A la place, on accÃ©lÃ¨re et dÃ©ccÃ©lÃ¨re tranquillement et Ã§a, c'est beau :p
+  int64_t consigneFiltree = filtreQuadRampDerivee.filtre(consigne, accumulateur, feedback_odometrie);
+
+  // On calcul l'erreur, c'est Ã  dire la diffÃ©rence entre la consigne Ã  suivre et la position rÃ©elle stockÃ©e dans l'accumulateur
   int64_t erreur;
   if ( filtreQuadRampDeriveeON ) {
     erreur = consigneFiltree - accumulateur;
   } else {
-    erreur = consigne - accumulateur;  
+    erreur = consigne - accumulateur;
   }
-  
-  // On envoit l'erreur au PID qui va la filtrer par rapport aux paramètres du robot et aux coefficients d'asservissement
+
+  // On envoit l'erreur au PID qui va la filtrer par rapport aux paramÃ¨tres du robot et aux coefficients d'asservissement
   // On obtient alors la vitesse a envoyer aux moteurs pour corriger l'erreur courante
   int64_t erreurFiltree = filtrePid.filtre(erreur, feedback_odometrie);
-  
-  //débug
+
+  //dÃ©bug
   #ifdef DEBUG
 
-	char name[32];
+  char name[32];
 
-	strcpy(name, "consigne");
-	name[8]=(isDistance?'D':'A');
-	name[9]=0;
-	debugUdp->addData(name, (double) consigne );
-	
-	strcpy(name, "accu");
-	name[4]=(isDistance?'D':'A');
-	name[5]=0;
-	debugUdp->addData(name, (double) accumulateur );
-	
-	strcpy(name, "consigneFiltree");
-	name[15]=(isDistance?'D':'A');
-	name[16]=0;
-	debugUdp->addData(name, (double) consigneFiltree );
-	
-	strcpy(name, "erreurFiltree");
-	name[13]=(isDistance?'D':'A');
-	name[14]=0;
-	debugUdp->addData(name, (double) erreurFiltree );
+  strcpy(name, "consigne");
+  name[8]=(isDistance?'D':'A');
+  name[9]=0;
+  debugUdp->addData(name, (double) consigne );
+
+  strcpy(name, "accu");
+  name[4]=(isDistance?'D':'A');
+  name[5]=0;
+  debugUdp->addData(name, (double) accumulateur );
+
+  strcpy(name, "consigneFiltree");
+  name[15]=(isDistance?'D':'A');
+  name[16]=0;
+  debugUdp->addData(name, (double) consigneFiltree );
+
+  strcpy(name, "erreurFiltree");
+  name[13]=(isDistance?'D':'A');
+  name[14]=0;
+  debugUdp->addData(name, (double) erreurFiltree );
 
   #endif
-  
+
   return erreurFiltree;
 }

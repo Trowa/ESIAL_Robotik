@@ -40,10 +40,10 @@ Odometrie::Odometrie() {
       max = frontParMetreCodeurD;
       applyRatioOnG = true;
     }
-        
+
     ratioCodeurs = max/min;
     frontParMetre = max;
-           
+
   } else {
     ratioCodeurs = 1;
     frontParMetre = frontParMetreCodeurD;
@@ -58,54 +58,54 @@ Odometrie::Odometrie() {
 Odometrie::~Odometrie() {
     delete codeurs;
 }
-        
+
 // Mise a jour de la position du robot
 void Odometrie::refresh() {
-  
+
   //ATTENTION : CODE A DECOMMENTER EN FONCTIONNEMENT NORMAL
-  
+
   //R&#65533;cup&#65533;ration des comptes des codeurs
   codeurs->getCounts(&compteurG, &compteurD);
-  
+
   //pc.printf("CG=%lld CD=%lld\n", compteurG, compteurD);
   //pc.printf(compteurD==0 ? "***\n" : ".\n");
-  
+
   //On transforme ces valeurs en Unites Odometrique
   compteurD = compteurD * uOParFront;
   compteurG = compteurG * uOParFront;
-  
+
   // On applique le ratio pour prendre en compte la diff&#65533;rence entre les codeurs
   if(applyRatioOnG) {
     compteurG = compteurG * ratioCodeurs;
   } else {
     compteurD = compteurD * ratioCodeurs;
   }
-  
+
   //FIN ATTENTION
-  
+
   //ATTENTION : CODE A COMMENTER EN FONCTIONNEMENT NORMAL
   /*
   // Bout de code permettant de mesurer le nombre de tics codeurs par m&#65533;tre.
   // Si ce code n'est PAS comment&#65533;, l'asservissement fera N'IMPORTE QUOI ! Vous &#65533;tes pr&#65533;venu !
-  
+
   //D&#65533;claration temporaire pour les comptes des codeurs
   int64_t tempCompteG;
   int64_t tempCompteD;
   //R&#65533;cup&#65533;ration des comptes des codeurs
   codeurs->getCounts(&tempCompteG, &tempCompteD);
-  
+
   //On rajoute les comptes r&#65533;cup&#65533;r&#65533;s aux totaux
   compteurD += tempCompteD;
   compteurG += tempCompteG;
-  
+
   //renvoi des r&#65533;sultats sur la s&#65533;rie
   pc.printf("CG=%lld \tCD=%lld\n", compteurG, compteurD);
   */
   //FIN ATTENTION
-  
-  /* 
+
+  /*
   * deltaDist = la distance parcourue par le robot pendant l'iteration = moyenne des distances des codeurs
-  * deltaTheta = la variation de l'angle pendant l'iteration = rapport de la diff&#65533;rence des distances codeurs sur la 
+  * deltaTheta = la variation de l'angle pendant l'iteration = rapport de la diff&#65533;rence des distances codeurs sur la
   *               distance entre les roues
   */
   deltaDist = (compteurG + compteurD)/2; // En UO
@@ -134,7 +134,7 @@ void Odometrie::refresh() {
   }
 
     //Si le debug est en route
-    #ifdef DEBUG 
+    #ifdef DEBUG
        if(debugUdp->getDebugSend()) {
    /* on ajoute les valeurs et on les envoies */
         //uint64_t XMM =  this->getXmm();
