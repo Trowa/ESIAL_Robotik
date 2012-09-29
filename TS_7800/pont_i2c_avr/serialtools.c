@@ -23,8 +23,8 @@ void serial_init(uint32_t baudrate) {
  * @param data Donnée à envoyer
  */
 void serial_putc(uint8_t data) {
-  while( !(UCSRnA & (1<<UDREn)) ); // Attente d'une éventuelle communication non terminée
-  UDRn = data; // Met la donnée dans le buffer et commence l'envoi
+  while( !(UCSR0A & (1<<UDRE0)) ); // Attente d'une éventuelle communication non terminée
+  UDR0 = data; // Met la donnée dans le buffer et commence l'envoi
 }
 
 /**
@@ -33,8 +33,14 @@ void serial_putc(uint8_t data) {
  * @return Le caractère reçu
  */
 uint8_t serial_getc(void) {
-  while( !(UCSRnA & (1<<RXCn)) ); // On attend que la donnée arrive
-  return UDRn // On renvoie ce qu'il y a dans le buffer
+  while( !(UCSR0A & (1<<RXC0)) ); // On attend que la donnée arrive
+  return UDR0; // On renvoie ce qu'il y a dans le buffer
 }
 
-
+/**
+ * Vérifie si un caractère est disponible sur la série
+ * @return 1 si un caractère est immédiatement disponible à la lecture, sinon 0.
+ */
+inline int serial_avail(void) {
+  return (UCSR0A & (1<<RXC0));
+}
