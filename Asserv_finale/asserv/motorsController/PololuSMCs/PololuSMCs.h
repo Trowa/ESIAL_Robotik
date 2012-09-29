@@ -1,7 +1,7 @@
 #ifndef POLOLU_SMCS
 #define POLOLU_SMCS
 /*
-#include "../../config.h"
+#include "../config/config.h"
 
 #include "OnePololuSMC.h"
 #include "../MotorsController.h"

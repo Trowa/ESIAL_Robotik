@@ -3,7 +3,7 @@
 
 #include "../filtres/Pid/Pid.h"
 #include "../filtres/QuadRampDerivee/QuadRampDerivee.h"
-#include "../config.h"
+#include "../config/config.h"
 
 class Regulateur {
   public:

@@ -2,7 +2,7 @@
 #define MOTORCONTROLLER
 
 #include "mbed.h"
-#include "../config.h"
+#include "../config/config.h"
 
 // interface du contrôleur de moteurs
 

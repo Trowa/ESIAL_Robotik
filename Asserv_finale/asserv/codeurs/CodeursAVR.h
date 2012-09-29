@@ -2,7 +2,7 @@
 #define CODEUR_AVR
 /*
 #include "mbed.h"
-#include "../config.h"
+#include "../config/config.h"
 #include "CodeursInterface.h"
 #include "Codeur.h"
 

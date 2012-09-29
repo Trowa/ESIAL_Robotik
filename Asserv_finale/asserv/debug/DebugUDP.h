@@ -7,7 +7,7 @@
 #include "../odometrie/Odometrie.h"
 #include "../consignController/ConsignController.h"
 #include "../commandManager/CommandManager.h"
-#include "../config.h"
+#include "../config/config.h"
 
 #ifdef DEBUG
 

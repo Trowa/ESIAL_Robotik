@@ -2,7 +2,7 @@
 #define MAIN
 
 #include "mbed.h"
-#include "../config.h"
+#include "../config/config.h"
 #include "../odometrie/Odometrie.h"
 #include "../motorsController/Md22/Md22.h"
 //#include "../motorsController/Qik/Qik.h"

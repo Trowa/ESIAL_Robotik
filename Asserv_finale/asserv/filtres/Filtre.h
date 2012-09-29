@@ -2,7 +2,7 @@
 #define FILTRE
 
 #include "mbed.h"
-#include "../config.h"
+#include "../config/config.h"
 
 
 // "interface" représentant les filtres

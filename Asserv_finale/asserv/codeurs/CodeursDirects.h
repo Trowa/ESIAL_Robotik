@@ -2,7 +2,7 @@
 #define CODEUR_DIRECT
 
 #include "mbed.h"
-#include "../config.h"
+#include "../config/config.h"
 #include "CodeursInterface.h"
 #include "Codeur.h"
 

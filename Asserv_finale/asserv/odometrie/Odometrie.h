@@ -1,7 +1,7 @@
 #ifndef ODOMETRIE
 #define ODOMETRIE
 
-#include "../config.h"
+#include "../config/config.h"
 #include "../codeurs/CodeursInterface.h"
 
 class Odometrie {

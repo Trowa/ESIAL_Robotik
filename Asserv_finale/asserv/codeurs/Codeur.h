@@ -2,7 +2,7 @@
 #define CODEUR
 
 #include "mbed.h"
-#include "../config.h"
+#include "../config/config.h"
 
 //Un codeur branché directement sur la Mbed
 

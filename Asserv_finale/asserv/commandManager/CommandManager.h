@@ -5,7 +5,7 @@
 #include "../consignController/ConsignController.h"
 #include "CMDList/CMDList.h"
 #include "../Utils/Utils.h"
-#include "../config.h"
+#include "../config/config.h"
 
 class CommandManager {
 

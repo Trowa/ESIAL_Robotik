@@ -3,7 +3,7 @@
 
 #include "../Filtre.h"
 #include "../../Utils/Utils.h"
-#include "../../config.h"
+#include "../config/config.h"
 
 
 class QuadRampDerivee : public Filtre {
