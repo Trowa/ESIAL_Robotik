@@ -17,7 +17,7 @@ class Regulateur {
     Regulateur(bool isDistance);
     ~Regulateur();
 
-    // Permet de calculer l'erreur par rapport à la consigne grâce aux filtres et à la position fournit par l'odométrie
+    // Permet de calculer l'erreur par rapport à la consigne grâce aux filtres et à la position fournie par l'odométrie
     int64_t manage(int64_t consigne, int64_t feedback_odometrie);
 
     // Permet d'activer ou de désactiver la QuadRampDerivee
@@ -25,7 +25,7 @@ class Regulateur {
       filtreQuadRampDeriveeON = val;
     }
 
-    // Réinitialisation de l'accumulateur (distance en UO parcouru depuis l'origine)
+    // Réinitialisation de l'accumulateur (distance en UO parcourue depuis l'origine)
     void reset_accumulator() {
       accumulateur = 0;
     }
@@ -34,18 +34,18 @@ class Regulateur {
       return accumulateur;
     }
 
-    // Détermine si la QuandRampDerivee est terminée et donc si le robot à atteint sa cible
+    // Détermine si la QuandRampDerivee est terminée et donc si le robot a atteint sa cible
     bool isRampFinished() {
       return filtreQuadRampDerivee.isRampFinished();
     }
 
-    // Permet de modifier dynamiquement la vitesse de la marche arrière, pour le callage bordure notamment
+    // Permet de modifier dynamiquement la vitesse de la marche arrière, pour le calage bordure notamment
     void setVitesseMarcheArriere(int64_t vitesse) {
       filtreQuadRampDerivee.setVitesseMarcheArriere(vitesse);
     }
 
   private:
-    // Filtres utilises
+    // Filtres utilisés
     QuadRampDerivee filtreQuadRampDerivee;
     Pid filtrePid;
     // Accumulateur des UO parcourues depuis le point de départ

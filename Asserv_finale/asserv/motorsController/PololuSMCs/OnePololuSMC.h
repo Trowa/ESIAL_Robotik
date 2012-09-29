@@ -9,8 +9,8 @@ class OnePololuSMC {
 
  public:
 
-  OnePololuSMC(PinName smcSerialTX, PinName smcSerialRX); //Un premier contructeur, permettant de gerer un PololuSMC sur une connexion serie
-  OnePololuSMC(uint8_t id, Serial* smcSerial); //Un deuxieme constructeur, pour pouvoir gerer plusieurs PololuSMC grace a la classe PololuSMCs
+  OnePololuSMC(PinName smcSerialTX, PinName smcSerialRX); //Un premier contructeur, permettant de gérer un PololuSMC sur une connexion série
+  OnePololuSMC(uint8_t id, Serial* smcSerial); //Un deuxième constructeur, pour pouvoir gérer plusieurs PololuSMC grâce à la classe PololuSMCs
   void setSpeed(int speed);
   void inverseMotor();
 

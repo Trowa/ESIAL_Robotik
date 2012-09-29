@@ -5,7 +5,7 @@
 #include "../config.h"
 
 
-// "interface" representant les filtres
+// "interface" représentant les filtres
 
 class Filtre
 {

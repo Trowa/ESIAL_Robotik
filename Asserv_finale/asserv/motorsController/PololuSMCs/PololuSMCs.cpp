@@ -4,7 +4,7 @@
 
 #include "PololuSMCs.h"
 
-//deux pololuSMCs sur deux series differentes
+//deux pololuSMCs sur deux séries différentes
 PololuSMCs::PololuSMCs(PinName smcSerialTXG, PinName smcSerialRXG, PinName smcSerialTXD, PinName smcSerialRXD) {
 
     //Tout est fait dans les constructeurs des PololuSMC
@@ -14,20 +14,20 @@ PololuSMCs::PololuSMCs(PinName smcSerialTXG, PinName smcSerialRXG, PinName smcSe
 
 }
 
-//Deux pololuSMCs sur une seule serie
+//Deux pololuSMCs sur une seule série
 PololuSMCs::PololuSMCs(char idMotorG, char idMotorD, PinName smcSerialTX, PinName smcSerialRX) {
 
     smcSerial = new Serial(smcSerialTX, smcSerialRX);
     motorG = new OnePololuSMC(idMotorG, smcSerial);
     motorD = new OnePololuSMC(idMotorD, smcSerial);
 
-    smcSerial->baud(9600); //on initialise la connexion serie
-    smcSerial->putc(0xAA); //on envoie l'octet d'init, pour que les cartes detectent le bitrate
+    smcSerial->baud(9600); //on initialise la connexion série
+    smcSerial->putc(0xAA); //on envoie l'octet d'init, pour que les cartes détectent le bitrate
     wait(0.1);
-    smcSerial->putc(0x85); //parametrage de la vitesse vers l'avant
+    smcSerial->putc(0x85); //paramétrage de la vitesse vers l'avant
     smcSerial->putc(0); //octet de poids faible
     smcSerial->putc(0); //octet de poids fort
-    smcSerial->putc(0x83); //autorisation de demarrage
+    smcSerial->putc(0x83); //autorisation de démarrage
 }
 
 

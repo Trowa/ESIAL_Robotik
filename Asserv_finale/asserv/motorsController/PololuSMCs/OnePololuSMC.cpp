@@ -4,21 +4,21 @@
 
 #include "OnePololuSMC.h"
 
-//Un premier contructeur, permettant de gerer un PololuSMC sur une connexion serie
+//Un premier contructeur, permettant de gérer un PololuSMC sur une connexion série
 OnePololuSMC::OnePololuSMC(PinName smcSerialTX, PinName smcSerialRX) {
 
   smcSerial = new Serial(smcSerialTX, smcSerialRX);
   id = 0;
-  smcSerial->baud(9600); //on initialise la connexion serie
-    smcSerial->putc(0xAA); //on envoie l'octet d'init, pour que la carte detecte le bitrate
+  smcSerial->baud(9600); //on initialise la connexion série
+    smcSerial->putc(0xAA); //on envoie l'octet d'init, pour que la carte détecte le bitrate
     wait(0.1);
-  smcSerial->putc(0x85); //parametrage de la vitesse vers l'avant
+  smcSerial->putc(0x85); //paramétrage de la vitesse vers l'avant
     smcSerial->putc(0); //octet de poids faible
     smcSerial->putc(0); //octet de poids fort
-    smcSerial->putc(0x83); //autorisation de demarrage
+    smcSerial->putc(0x83); //autorisation de démarrage
 }
 
-//Un deuxieme constructeur, pour pouvoir gerer plusieurs PololuSMC grace a la classe PololuSMCs
+//Un deuxième constructeur, pour pouvoir gérer plusieurs PololuSMC grâce à la classe PololuSMCs
 OnePololuSMC::OnePololuSMC(uint8_t id, Serial* smcSerial) {
     this->smcSerial = smcSerial;
     this->id = id;
@@ -41,9 +41,9 @@ void OnePololuSMC::setSpeed(int speed) {
     }
 
     if(speed >= 0) {
-        smcSerial->putc( id==0 ? 0x85 : 0x05); //parametrage de la vitesse vers l'avant
+        smcSerial->putc( id==0 ? 0x85 : 0x05); //paramétrage de la vitesse vers l'avant
     } else {
-        smcSerial->putc( id==0 ? 0x86 : 0x06);  //parametrage de la vitesse vers l'arriere
+        smcSerial->putc( id==0 ? 0x86 : 0x06);  //paramétrage de la vitesse vers l'arrière
     }
 
     smcSerial->putc(0); //octet de poids faible

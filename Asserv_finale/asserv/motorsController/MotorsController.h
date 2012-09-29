@@ -4,7 +4,7 @@
 #include "mbed.h"
 #include "../config.h"
 
-// interface du controleur de moteurs
+// interface du contrôleur de moteurs
 
 class MotorsController {
 

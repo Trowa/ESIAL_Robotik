@@ -7,7 +7,7 @@
 
 DebugUDP::DebugUDP(CommandManager* c, Odometrie* o) {
 
-  // Odometrie et ConsignController de l'asserv
+  // Odométrie et ConsignController de l'asserv
   this->commandManager = c;
     this->odometrie = o;
 
@@ -84,7 +84,7 @@ void onUDPSocketEvent(UDPSocketEvent e) {
 
               switch(name) {    /*todo: ajouter appel setters*/
 
-          // Definition des variables pour l'odometrie
+          // Definition des variables pour l'odométrie
 
           case 'a': // Nombre de tics codeurs en 1m pour codeur gauche
             sscanf(buffer, "%c=%lf", &name, &frontParMetreCodeurG);
@@ -120,11 +120,11 @@ void onUDPSocketEvent(UDPSocketEvent e) {
             printf("après : %lld\n", DIST_KP);
             break;
 
-          case 'h':  // Coeff integrale
+          case 'h':  // Coeff intégrale
             sscanf(buffer, "%c=%lld", &name, &DIST_KI);
             break;
 
-          case 'i': // Coeff derivee
+          case 'i': // Coeff dérivée
             sscanf(buffer, "%c=%lld", &name, &DIST_KD);
             break;
 
@@ -136,7 +136,7 @@ void onUDPSocketEvent(UDPSocketEvent e) {
             sscanf(buffer, "%c=%lld", &name, &DIST_MAX_OUTPUT);
             break;
 
-          case 'l': // Valeur maximum de l'integrale (0 = filtre PD)
+          case 'l': // Valeur maximum de l'intégrale (0 = filtre PD)
             sscanf(buffer, "%c=%lld", &name, &DIST_MAX_INTEGRAL);
             break;
 
@@ -152,7 +152,7 @@ void onUDPSocketEvent(UDPSocketEvent e) {
             sscanf(buffer, "%c=%lld", &name, &ANGLE_KI);
             break;
 
-          case 'o': // Coeff derivee
+          case 'o': // Coeff dérivée
             sscanf(buffer, "%c=%lld", &name, &ANGLE_KD);
             break;
 
@@ -164,11 +164,11 @@ void onUDPSocketEvent(UDPSocketEvent e) {
             sscanf(buffer, "%c=%lld", &name, &ANGLE_MAX_OUTPUT);
             break;
 
-          case 'r': // Valeur maximum de l'integrale (0 = filtre PD)
+          case 'r': // Valeur maximum de l'intégrale (0 = filtre PD)
             sscanf(buffer, "%c=%lld", &name, &ANGLE_MAX_INTEGRAL);
             break;
 
-          case 's': // Fenetre de l'angle dans lequel on considere que le GoTo peut commencer a avancer
+          case 's': // Fenêtre de l'angle dans lequel on considere que le GoTo peut commencer a avancer
             sscanf(buffer, "%c=%lf", &name, &angleThreshold);
             break;
 
@@ -178,35 +178,35 @@ void onUDPSocketEvent(UDPSocketEvent e) {
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_1ST_POS);
             break;
 
-          case 'B': // Vitesse max en marche arriÃ¨re
+          case 'B': // Vitesse max en marche arrière
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_1ST_NEG);
             break;
 
-          case 'C': // Acceleration max en marche avant
+          case 'C': // Accélération max en marche avant
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_AV_2ND_ACC);
             break;
 
-          case 'D': // Deceleration max en marche avant
+          case 'D': // Décélération max en marche avant
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_AV_2ND_DEC);
             break;
 
-          case 'E': // Coeff determinant le debut de la rampe de deceleration en marche avant
+          case 'E': // Coeff déterminant le début de la rampe de décélération en marche avant
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_AV_ANTICIPATION_GAIN_COEF);
             break;
 
-          case 'F': // Acceleration max en marche arriere
+          case 'F': // Accélération max en marche arrière
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_AR_2ND_ACC);
             break;
 
-          case 'G': // Deceleration max en marche arriere
+          case 'G': // Décélération max en marche arrière
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_AR_2ND_DEC);
             break;
 
-          case 'H': // Coeff determinant le debut de la rampe de deceleration en marche arriere
+          case 'H': // Coeff déterminant le début de la rampe de décélération en marche arrière
             sscanf(buffer, "%c=%lld", &name, &DIST_QUAD_AR_ANTICIPATION_GAIN_COEF);
             break;
 
-          case 'I': // Largeur de la zone ou l'on considere etre arrive (UO)
+          case 'I': // Largeur de la zone ou l'on considère être arrivé (UO)
             sscanf(buffer, "%c=%lld", &name, &DIST_TAILLE_FENETRE_ARRIVEE);
             break;
 
@@ -215,19 +215,19 @@ void onUDPSocketEvent(UDPSocketEvent e) {
             sscanf(buffer, "%c=%lld", &name, &ANGLE_QUAD_1ST_POS);
             break;
 
-          case 'K': // Acceleration max en rotation
+          case 'K': // Accélération max en rotation
             sscanf(buffer, "%c=%lld", &name, &ANGLE_QUAD_2ND_ACC);
             break;
 
-          case 'L': // Deceleration max en rotation
+          case 'L': // Décélération max en rotation
             sscanf(buffer, "%c=%lld", &name, &ANGLE_QUAD_2ND_DEC);
             break;
 
-          case 'M': // Coeff determinant le debut de la rampe de deceleration en rotation
+          case 'M': // Coeff déterminant le début de la rampe de décélération en rotation
             sscanf(buffer, "%c=%lld", &name, &ANGLE_QUAD_ANTICIPATION_GAIN_COEF);
             break;
 
-          case 'N': // Largeur de la zone ou l'on considere etre arrive (UO)
+          case 'N': // Largeur de la zone ou l'on considère être arrivé (UO)
             sscanf(buffer, "%c=%lld", &name, &ANGLE_TAILLE_FENETRE_ARRIVEE);
             break;
 

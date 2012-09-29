@@ -23,7 +23,7 @@ class DebugUDP {
     DebugUDP(CommandManager* c, Odometrie* o);
     void addData(char* name, double value); // ajoute une valeur au paquet courant
     void addData(char* name, int64_t value); // ajoute une valeur entière au paquet courant
-    void sendData(); // envoie le paquet de donnees sur l'ethernet
+    void sendData(); // envoie le paquet de données sur l'ethernet
     void dropCurrentData(); //vire les données courantes du buffer
 
     void setNewObjectPointers(CommandManager* c, Odometrie* o); //Reparamétrage des pointeurs

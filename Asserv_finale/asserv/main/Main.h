@@ -15,7 +15,7 @@
   Ticker Live;
   void Live_isr(void);
 
-  // M&#65533;thodes utiles
+  // Méthodes utiles
   int main();
   void resetAsserv();
   void ecouteSerie();

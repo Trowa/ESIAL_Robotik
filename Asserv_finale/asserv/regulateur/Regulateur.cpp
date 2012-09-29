@@ -24,7 +24,7 @@ int64_t Regulateur::manage(int64_t consigne, int64_t feedback_odometrie) {
   // On ajoute dans l'accumulateur la variation de déplacement mesuré par l'odométrie
   accumulateur += feedback_odometrie;
 
-  // On filtre la consigne a l'aide de la QuadRampeDerivee pour savoir si l'on est en phase d'accélération, constante ou de décélération
+  // On filtre la consigne à l'aide de la QuadRampeDerivee pour savoir si l'on est en phase d'accélération, constante ou de décélération
   // Cette étape permet d'avoir un comportement linéaire au lieu de binaire (= soit à l'arrêt, soit à fond) qui provoque des secouses et peut
   // renverser le robot. A la place, on accélère et déccélère tranquillement et ça, c'est beau :p
   int64_t consigneFiltree = filtreQuadRampDerivee.filtre(consigne, accumulateur, feedback_odometrie);
@@ -37,8 +37,8 @@ int64_t Regulateur::manage(int64_t consigne, int64_t feedback_odometrie) {
     erreur = consigne - accumulateur;
   }
 
-  // On envoit l'erreur au PID qui va la filtrer par rapport aux paramètres du robot et aux coefficients d'asservissement
-  // On obtient alors la vitesse a envoyer aux moteurs pour corriger l'erreur courante
+  // On envoie l'erreur au PID qui va la filtrer par rapport aux paramètres du robot et aux coefficients d'asservissement
+  // On obtient alors la vitesse à envoyer aux moteurs pour corriger l'erreur courante
   int64_t erreurFiltree = filtrePid.filtre(erreur, feedback_odometrie);
 
   //débug

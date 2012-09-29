@@ -19,7 +19,7 @@ class CommandManager {
     bool addGoToAngle(int64_t posXInmm, int64_t posYInmm);
     void perform();
 
-    // Gestion d'un &#65533;ventuel arret d'urgence
+    // Gestion d'un éventuel arrêt d'urgence
     void setEmergencyStop();
     void resetEmergencyStop();
 
@@ -27,20 +27,20 @@ class CommandManager {
     void calageBordureGros(int sens);
     void calageBordurePetit(int sens);
 
-    // GoTo l&#65533; om on veut
+    // GoTo là où on veut
     void computeGoTo();
     void computeGoToAngle();
 
   private:
     CMDList *liste; //File d'attente des commandes
     ConsignController *cnsgCtrl;
-    Odometrie *odometrie; // Odom&#65533;trie, pour pouvoir faire les conversion et calculer la cible
+    Odometrie *odometrie; // Odométrie, pour pouvoir faire les conversion et calculer la cible
     CMD currCMD; //commande courante
     CMD nextCMD; //commande suivante
 
-    bool emergencyStop; //arret d'urgence : si le robot adverse est dans les parages
+    bool emergencyStop; //arrêt d'urgence : si le robot adverse est dans les parages
 
-    bool currentConsignFinished; //signale si la consigne courante est terminee. Reste a vrai tant qu'une nouvelle consigne n'est pas arrivee.
+    bool currentConsignFinished; //signale si la consigne courante est terminée. Reste à vrai tant qu'une nouvelle consigne n'est pas arrivée.
 };
 
 #endif

@@ -34,13 +34,13 @@ int64_t Pid::filtre(int64_t erreur , int64_t feedback_odometrie , int64_t value3
 
   //pc.printf("P=%d ", P);
 
-    //Calcul de l'Integrale que l'on oublie pas de borner
+    //Calcul de l'Intégrale que l'on oublie pas de borner
     integrale += erreur;
     integrale = Utils::constrain(integrale, -maxIntegral , maxIntegral);
     int64_t I = integrale * ki;
 
 
-    // Calcul de la Derivee
+    // Calcul de la Dérivée
     int64_t D = feedback_odometrie * kd;
 
   //pc.printf("D=%d ", D);

@@ -4,7 +4,7 @@ CodeursDirects::CodeursDirects(PinName pinChanA_G, PinName pinChanB_G, PinName p
   codeurG(pinChanA_G , pinChanB_G ),
   codeurD(pinChanA_D , pinChanB_D )
 {
-  // On change la priorité de l'interruption timer pour quelle soit plus basse que celle des ticks codeurs
+  // On change la priorité de l'interruption timer pour qu'elle soit plus basse que celle des ticks codeurs
     NVIC_SetPriority(TIMER3_IRQn, 1);
 }
 

@@ -20,10 +20,10 @@ class Odometrie {
     void resetY() { y = 0;}
     void resetTheta() { theta = 0;}
 
-    // Mise a jour de la position du robot
+    // Mise à jour de la position du robot
     void refresh();
 
-    //Position en unites arbritraires ( Unite Odometrie [UO] pour les distances, et rad pour l'angle)
+    //Position en unités arbritraires ( Unite Odometrie [UO] pour les distances, et rad pour l'angle)
     /*
     * La classe Utils contient les méthodes de conversions pour que les mesures soient humainement compréhensible
     */
@@ -31,7 +31,7 @@ class Odometrie {
     int64_t getY() {return y;} // Renvoie la position en Y par rapport au point de départ
     double getTheta() {return theta;} // Renvoie l'angle par rapport au cap de départ
 
-    // Variation de la position depuis la derniere mise a jour
+    // Variation de la position depuis la derniàre mise à jour
     double getDeltaTheta() { return deltaTheta; } // Variation du cap du robot
     int64_t getDeltaDist() { return deltaDist; } // Variation de la distance du robot
     int64_t getDeltaThetaBrut() { return compteurD - compteurG; } // Variation d'angle en UO donnée par la différence de compte entre les codeurs
@@ -40,14 +40,14 @@ class Odometrie {
     double getFrontParMetre() { return frontParMetre; }
     double getDistanceRouesUO() { return distanceRouesUO; }
 
-    //Inversion logicielle des codeurs, des fois qu'on ai fait de la merde dans le cablage ....
+    //Inversion logicielle des codeurs, des fois qu'on ait fait de la merde dans le cablage ...
     void inverseCodeurDroit() {inverseCodeurD=!inverseCodeurD; } //sens de rotation inverse pour le codeur droit
     void inverseCodeurGauche() {inverseCodeurG=!inverseCodeurG; } //idem, pour le codeur gauche
     void echangeCodeurs() {swapCodeurs=!swapCodeurs; } // codeurGauche <-> codeurDroit
 
   private:
 
-    // Donnees sur les codeurs
+    // Données sur les codeurs
     double frontParMetre; // Nombre de tics codeurs pour un mètre parcouru
     int64_t distanceRouesUO; // Distance entre les roues en UO
     double ratioCodeurs; // Ratio frontParMetreCodeurMax / frontParMetreCodeurMin pour compenser la différence physique entre codeur

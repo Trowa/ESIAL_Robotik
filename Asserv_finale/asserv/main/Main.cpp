@@ -1,7 +1,7 @@
 #include "Main.h"
 
 int main() {
-  // Retour PC pour controlle
+  // Retour PC pour contrôle
   pc.baud(115200);
   //pc.printf("Initialisation\n");
   // On initialise les objets qui vont bien pour l'asserv
@@ -26,10 +26,10 @@ int main() {
   //consignController->setQuadRamp_Dist(false);
   //consignController->setQuadRamp_Angle(false);
 
-  // On attache l'interruption timer &#65533; la m&#65533;thode Live_isr
+  // On attache l'interruption timer à la méthode Live_isr
   Live.attach(Live_isr, 0.005);
 
-  //On est pr&#65533;t !
+  //On est prêt !
   //pc.printf("GOGO !");
 
   while(1) {
@@ -50,7 +50,7 @@ void ecouteSerie() {
     c = pc.getc();
 
     switch(c) {
-      //Test de d&#65533;bug
+      //Test de débug
       /*
       case 'z' :
         // Go 10cm
@@ -78,19 +78,19 @@ void ecouteSerie() {
         break;
       */
 
-      //Arr&#65533;t d'urgence
+      //Arrêt d'urgence
       case 'h': //Halte!
         commandManager->setEmergencyStop();
         //pc.putc('h');
         break;
 
-      //Reset de l'arr&#65533;t d'urgence
+      //Reset de l'arrêt d'urgence
       case 'r':
         commandManager->resetEmergencyStop();
         //pc.putc('r');
         break;
 
-      case 'g': //Go : va &#65533; un point pr&#65533;cis
+      case 'g': //Go : va à un point précis
         gotoLed = !gotoLed;
           bufferConsigne = (char*) malloc(64);
         readLineFromSerie(bufferConsigne, 64);
@@ -107,7 +107,7 @@ void ecouteSerie() {
         //pc.printf("v%lf\n", consigneValue1);
         break;
 
-      case 't': //Tourne d'un certain angle en degr&#65533;s
+      case 't': //Tourne d'un certain angle en degrés
         bufferConsigne = (char*) malloc(48);
         readLineFromSerie(bufferConsigne, 48);
         sscanf(bufferConsigne, "%lf", &consigneValue1);
@@ -115,7 +115,7 @@ void ecouteSerie() {
         //pc.printf("t%lf\n", consigneValue1);
         break;
 
-      case 'f': //faire Face &#65533; un point pr&#65533;cis, mais ne pas y aller, juste se tourner
+      case 'f': //faire Face à un point précis, mais ne pas y aller, juste se tourner
           bufferConsigne = (char*) malloc(64);
         readLineFromSerie(bufferConsigne, 64);
           sscanf(bufferConsigne, "%lf#%lf", &consigneValue1, &consigneValue2); //X, Y
@@ -173,10 +173,10 @@ void readLineFromSerie(char* buffer, int bufferSize) {
 
 
 void resetAsserv() {
-  //On arr&#65533;te le traitement de l'asserv
+  //On arrête le traitement de l'asserv
   Live.detach();
 
-  // On d&#65533;truit tout les objets (sauf les moteurs, on s'en fiche de &#65533;a)
+  // On détruit tout les objets (sauf les moteurs, on s'en fiche de ça)
   delete odometrie;
   odometrie = NULL;
   delete consignController;
@@ -192,10 +192,10 @@ void resetAsserv() {
   #endif
 
   //On reprend l'asserv
-  Live.attach(Live_isr, 0.05);
+  Live.attach(Live_isr, 0.005);
 }
 
-// On rafraichie l'asservissement r&#65533;guli&#65533;rement
+// On rafraichit l'asservissement régulièrement
 void Live_isr() {
   odometrie->refresh();
   consignController->perform();
