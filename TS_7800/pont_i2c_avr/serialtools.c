@@ -13,3 +13,14 @@ void serial_init(uint32_t baudrate) {
   UCSR0B = (1<<RXEN0)|(1<<TXEN0); // Activation des pins RX et TX
   UCSR0C = (3<<UCSZ00)|(0<<USBS0); // 8 bits par frame, 1 bit de stop
 }
+
+void serial_putc(uint8_t data) {
+  while( !(UCSRnA & (1<<UDREn)) ); // Attente d'une éventuelle communication non terminée
+  UDRn = data; // Met la donnée dans le buffer et commence l'envoi
+}
+uint8_t serial_getc(void) {
+  while( !(UCSRnA & (1<<RXCn)) ); // On attend que la donnée arrive
+  return UDRn // On renvoie ce qu'il y a dans le buffer
+}
+
+
