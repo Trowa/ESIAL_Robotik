@@ -33,14 +33,8 @@ public:
      * Methodes pour arrêter les régulateurs indépendamment ( par exemple, pour faire un calage bordure .. )
      * Nan mais là c'est tellement gros de pas utiliser un setter que je laisse cette connerie
      */
-    void angle_Regu_On() { angle_regu_on = true; }
-    void dist_Regu_On() { dist_regu_on = true; }
-
-    void angle_Regu_Off() { angle_regu_on = false; }
-    void dist_Regu_Off() { dist_regu_on = false; }
-
-    // TODO Rien à foutre ici ça !!!!
-    void calage_bordure(int sens);
+    void angle_Regu_On(bool enable) { angle_regu_on = enable; }
+    void dist_Regu_On(bool enable) { dist_regu_on = enable; }
 
     /*
      * Permet d'activer ou de désactiver les QuadRampDerivee
