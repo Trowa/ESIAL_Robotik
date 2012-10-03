@@ -235,7 +235,6 @@ void CommandManager::resetEmergencyStop() {
     //cnsgCtrl->dist_Regu_On();
 }
 
-// TODO ce truc n'a rien à foutre ici ... Il devrait être dans le CommandManager
 void CommandManager::calageBordureGros(int sens) {
 
   cnsgCtrl->setLowSpeed(true);
