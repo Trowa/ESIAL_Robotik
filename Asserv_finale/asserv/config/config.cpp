@@ -65,10 +65,10 @@
   int64_t DIST_QUAD_1ST_NEG = 800000; // Vitesse max en marche arrière
   int64_t DIST_QUAD_AV_2ND_ACC = 6000; // Accélération max en marche avant
   int64_t DIST_QUAD_AV_2ND_DEC = 4000; // Décélération max en marche avant
-  int64_t DIST_QUAD_AV_ANTICIPATION_GAIN_COEF = 80; // Coeff déterminant le début de la rampe de décélération en marche avant
+  int64_t DIST_QUAD_AV_ANTICIPATION_GAIN_COEF = 115; // Coeff déterminant le début de la rampe de décélération en marche avant
   int64_t DIST_QUAD_AR_2ND_ACC = 3000; // Accélération max en marche arrière
   int64_t DIST_QUAD_AR_2ND_DEC = 3000; // Décélération max en marche arrière
-  int64_t DIST_QUAD_AR_ANTICIPATION_GAIN_COEF = 75; // Coeff déterminant le début de la rampe de décélération en marche arrière
+  int64_t DIST_QUAD_AR_ANTICIPATION_GAIN_COEF = 95; // Coeff déterminant le début de la rampe de décélération en marche arrière
   int64_t DIST_TAILLE_FENETRE_ARRIVEE = 200000; // Largeur de la zone où l'on considère être arrivé (UO)
 
   int64_t ANGLE_QUAD_1ST_POS = 700000; // Vitesse max en rotation
