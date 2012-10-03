@@ -99,6 +99,15 @@ void ecouteSerie() {
         //pc.printf("g%lf#%lf\n", consigneValue1, consigneValue2);
         break;
 
+      case 'e': // goto, mais on s'autorise à Enchainer la consigne suivante sans s'arrêter
+        gotoLed = !gotoLed;
+          bufferConsigne = (char*) malloc(64);
+        readLineFromSerie(bufferConsigne, 64);
+          sscanf(bufferConsigne, "%lf#%lf", &consigneValue1, &consigneValue2); //X, Y
+        commandManager->addGoToEnchainement((int64_t) consigneValue1, (int64_t) consigneValue2);
+        //pc.printf("g%lf#%lf\n", consigneValue1, consigneValue2);
+        break;
+
       case 'v': //aVance d'un certain nombre de mm
         bufferConsigne = (char*) malloc(48);
         readLineFromSerie(bufferConsigne, 48);
