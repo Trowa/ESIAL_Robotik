@@ -124,15 +124,8 @@ void CommandManager::computeGoTo(){
   double deltaX = currCMD.value - odometrie->getX(); // Différence entre la cible et le robot selon X
   double deltaY = currCMD.secValue - odometrie->getY();  // Différence entre la cible et le robot selon Y
 
-  // On a besoin de min et max pour le calcul de l'angle entre le cap cible et le cap courant
-  double max = fabs(deltaX)>fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
-  double min = fabs(deltaX)<=fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
-
   // Valeur absolue de la distance à parcourir en allant tout droit pour atteindre la consigne
-  int64_t deltaDist = 0;
-  if (max != 0) {
-    deltaDist = (int64_t)(max * sqrt (1.0 + ( min / max ) * ( min / max ) ));
-  }
+  int64_t deltaDist = computeDeltaDist(deltaX, deltaY);
 
   // La différence entre le thetaCible (= cap à atteindre) et le theta (= cap actuel du robot) donne l'angle à parcourir
   double deltaTheta = computeDeltaTheta(deltaX, deltaY);
@@ -211,6 +204,19 @@ double CommandManager::computeDeltaTheta(double deltaX, double deltaY) {
   }
 
   return deltaTheta;
+}
+
+int64_t CommandManager::computeDeltaDist(double deltaX, double deltaY) {
+  // On a besoin de min et max pour le calcul de la racine carrée
+  double max = fabs(deltaX)>fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
+  double min = fabs(deltaX)<=fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
+
+  // Valeur absolue de la distance à parcourir en allant tout droit pour atteindre la consigne
+  if (max != 0) {
+    return (int64_t)(max * sqrt (1.0 + ( min / max ) * ( min / max ) ));
+  } else {
+    return 0;
+  }
 }
 
 void CommandManager::setEmergencyStop() { //Gestion d'un éventuel arrêt d'urgence

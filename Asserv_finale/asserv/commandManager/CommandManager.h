@@ -43,6 +43,7 @@ class CommandManager {
     bool currentConsignFinished; //signale si la consigne courante est terminée. Reste à vrai tant qu'une nouvelle consigne n'est pas arrivée.
 
     double computeDeltaTheta(double deltaX, double deltaY); // Calcul de l'angle à parcourir
+    int64_t computeDeltaDist(double deltaX, double deltaY); // Calcul de la distance à parcourir
 };
 
 #endif
