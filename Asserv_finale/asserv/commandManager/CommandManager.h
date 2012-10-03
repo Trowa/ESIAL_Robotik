@@ -27,10 +27,6 @@ class CommandManager {
     void calageBordureGros(int sens);
     void calageBordurePetit(int sens);
 
-    // GoTo là où on veut
-    void computeGoTo();
-    void computeGoToAngle();
-
   private:
     CMDList *liste; //File d'attente des commandes
     ConsignController *cnsgCtrl;
@@ -44,6 +40,9 @@ class CommandManager {
 
     double computeDeltaTheta(double deltaX, double deltaY); // Calcul de l'angle à parcourir
     int64_t computeDeltaDist(double deltaX, double deltaY); // Calcul de la distance à parcourir
+    // GoTo là où on veut
+    void computeGoTo();
+    void computeGoToAngle();
 };
 
 #endif
