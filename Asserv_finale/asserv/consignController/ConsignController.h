@@ -39,12 +39,12 @@ public:
     /*
      * Permet d'activer ou de désactiver les QuadRampDerivee
      */
-     void setQuadRamp_Angle(bool on) {
-       angle_regu.setfiltreQuadRampDeriveeON(false);
+     void setQuadRamp_Angle(bool enable) {
+       angle_regu.setfiltreQuadRampDeriveeON(enable);
      }
 
-     void setQuadRamp_Dist(bool on) {
-       dist_regu.setfiltreQuadRampDeriveeON(false);
+     void setQuadRamp_Dist(bool enable) {
+       dist_regu.setfiltreQuadRampDeriveeON(enable);
      }
 
     /*
