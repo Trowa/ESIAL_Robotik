@@ -41,6 +41,10 @@ bool CommandManager::addGoTo(int64_t posXInmm, int64_t posYInmm) {
   return liste->enqueue( CMD_GOTO ,Utils::mmToUO(odometrie, posXInmm) ,Utils::mmToUO(odometrie, posYInmm) );
 }
 
+bool CommandManager::addGoToEnchainement(int64_t posXInmm, int64_t posYInmm) {
+  return liste->enqueue( CMD_GOTOENCHAIN ,Utils::mmToUO(odometrie, posXInmm) ,Utils::mmToUO(odometrie, posYInmm) );
+}
+
 bool CommandManager::addGoToAngle(int64_t posXInmm, int64_t posYInmm) {
   return liste->enqueue( CMD_GOTOANGLE ,Utils::mmToUO(odometrie, posXInmm) ,Utils::mmToUO(odometrie, posYInmm) );
 }
