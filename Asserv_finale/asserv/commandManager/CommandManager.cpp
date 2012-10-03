@@ -76,6 +76,8 @@ void CommandManager::perform() {
       computeGoTo();
     } else if (currCMD.type == CMD_GOTOANGLE) { // On est en plein GoTo en angle, donc on est en train de se planter et on ajuste
       computeGoToAngle();
+    } else if (currCMD.type == CMD_GOTOENCHAIN) { // Là, on est vraiment en train de se planter parce qu'on veut enchainer les consignes
+      computeEnchainement();
     }
 
     if(nextCMD.type == CMD_NULL) { // On a pas chargé de consigne suivante
@@ -116,6 +118,8 @@ void CommandManager::perform() {
       cnsgCtrl->add_angle_consigne(currCMD.value);
     } else if ( currCMD.type == CMD_GOTO ) { // On appel computeGoTo qui se débrouille pour aller en (x,y)
       computeGoTo();
+    } else if ( currCMD.type == CMD_GOTOENCHAIN ) {
+      computeEnchainement(); //On va tenter d'enchainer la consigne suivante
     } else if (currCMD.type == CMD_GOTOANGLE) { // On appel computeGoToAngle qui se débrouille pour s'aligner avec (x,y)
       computeGoToAngle();
     }
@@ -225,6 +229,34 @@ int64_t CommandManager::computeDeltaDist(double deltaX, double deltaY) {
   } else {
     return 0;
   }
+}
+
+void CommandManager::computeEnchainement() {
+
+  // Ok, on est dans un Goto, alors, on calcule le Goto.
+  computeGoTo();
+
+  // Si la consigne suivante n'est pas un GOTO, on ne fait rien.
+  if(nextCMD.type != CMD_GOTO && nextCMD.type != CMD_GOTOENCHAIN) {
+    return;
+  }
+
+  //Bon, maintenant, on va checker notre distance par rapport à la consigne
+  double deltaX = currCMD.value - odometrie->getX(); // Différence entre la cible et le robot selon X
+  double deltaY = currCMD.secValue - odometrie->getY();  // Différence entre la cible et le robot selon Y
+  int64_t deltaDist = computeDeltaDist(deltaX, deltaY);
+
+  if(deltaDist < enchainThreshold) { // On a le droit de passer à la consigne suivante
+    currCMD = nextCMD; // La consigne suivante devient la consigne courante
+    nextCMD = liste->dequeue(); // On essaye de récupérer la prochaine consigne
+
+    // On vient de terminer la consigne courante, on le signale en haut lieu
+    pc.putc('d');
+    pc.putc('\n');
+
+    // Le reste, c'est pas grave, on le calculera à la prochaine itération
+  }
+
 }
 
 void CommandManager::setEmergencyStop() { //Gestion d'un éventuel arrêt d'urgence

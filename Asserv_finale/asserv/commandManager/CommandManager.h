@@ -43,6 +43,7 @@ class CommandManager {
     // GoTo là où on veut
     void computeGoTo();
     void computeGoToAngle();
+    void computeEnchainement(); // Tentative d'enchainement
 };
 
 #endif
