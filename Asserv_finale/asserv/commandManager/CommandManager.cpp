@@ -209,6 +209,8 @@ double CommandManager::computeDeltaTheta(double deltaX, double deltaY) {
   } else if (deltaTheta < -PI){
     deltaTheta += 2.0*PI;
   }
+
+  return deltaTheta;
 }
 
 void CommandManager::setEmergencyStop() { //Gestion d'un éventuel arrêt d'urgence
