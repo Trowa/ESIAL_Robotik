@@ -6,9 +6,9 @@
 /***************************
 *       CommandManager     *
 ****************************/
-  double angleThreshold = 0.1; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
+  double angleThreshold = 0.3; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
   int64_t returnThreshold = 50; // Distance en dessous de laquelle on revient en marche arriere si on dépasse, sinon demi-tour
-
+  int64_t enchainThreshold = 2000000; // Distance au point de consigne à partir de laquelle on va essayer d'enchainer la consigne suivante
 /***************************
 *       ODOMETRIE          *
 ****************************/

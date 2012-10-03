@@ -15,6 +15,7 @@
 ****************************/
   extern double angleThreshold; // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
   extern int64_t returnThreshold; // Distance en dessous de laquelle on revient en marche arriere si on dépasse, sinon demi-tour
+  extern int64_t enchainThreshold; // Distance au point de consigne à partir de laquelle on va essayer d'enchainer la consigne suivante
 
 /***************************
 *       ODOMETRIE          *
