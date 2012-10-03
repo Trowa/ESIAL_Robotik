@@ -30,6 +30,11 @@
   int64_t V_MAX_POS_MOTOR = 90;   // MD22 : 1 a 127, vitesse maximum positive
   int64_t V_MAX_NEG_MOTOR = -90;  // MD22 : -1 a -128, vitesse maximum negative
 
+  // Vitesses à partir desquelles le robot commence à bouger, pour ne pas
+  // envoyer de jus dans des moteurs qui tournent pas
+  int64_t V_MIN_POS_MOTOR = 10;   // MD22 : 1 a 127
+  int64_t V_MIN_NEG_MOTOR = -10;  // MD22 : -1 a -128
+
   //Booléens gerant une éventuelle inversion des moteurs
   bool inverseMoteurG = true;
   bool inverseMoteurD = true;

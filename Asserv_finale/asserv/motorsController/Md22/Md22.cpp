@@ -54,10 +54,14 @@ void Md22::vitesseG(int vitMoteurG)
     }
 
     if(vitMoteurG>V_MAX_POS_MOTOR) {
-        vitMoteurG=V_MAX_POS_MOTOR;
+      vitMoteurG=V_MAX_POS_MOTOR;
+    } else if(vitMoteurG > 0 && vitMoteurG<V_MIN_POS_MOTOR) {
+      vitMoteurG = 0;
     }
     if(vitMoteurG<V_MAX_NEG_MOTOR) {
-        vitMoteurG=V_MAX_NEG_MOTOR;
+      vitMoteurG=V_MAX_NEG_MOTOR;
+    } else if(vitMoteurG < 0 && vitMoteurG>V_MIN_NEG_MOTOR) {
+      vitMoteurG = 0;
     }
 
     i2cLink.start();
@@ -80,10 +84,14 @@ void Md22::vitesseD(int vitMoteurD)
     }
 
     if(vitMoteurD>V_MAX_POS_MOTOR) {
-        vitMoteurD=V_MAX_POS_MOTOR;
+      vitMoteurD=V_MAX_POS_MOTOR;
+    } else if(vitMoteurD > 0 && vitMoteurD<V_MIN_POS_MOTOR) {
+      vitMoteurD = 0;
     }
     if(vitMoteurD<V_MAX_NEG_MOTOR) {
-        vitMoteurD=V_MAX_NEG_MOTOR;
+      vitMoteurD=V_MAX_NEG_MOTOR;
+    } else if(vitMoteurD < 0 && vitMoteurD>V_MIN_NEG_MOTOR) {
+      vitMoteurD = 0;
     }
 
     i2cLink.start();
