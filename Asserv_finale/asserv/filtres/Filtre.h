@@ -4,7 +4,6 @@
 #include "mbed.h"
 #include "../config/config.h"
 
-
 // "interface" représentant les filtres
 
 class Filtre

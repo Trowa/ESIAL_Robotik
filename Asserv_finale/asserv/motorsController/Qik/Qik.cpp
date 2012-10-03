@@ -1,6 +1,10 @@
-
-
 #include "Qik.h"
+
+// Adress definition
+#define VitDposAdress 0x88
+#define VitDnegAdress 0x8A
+#define VitGposAdress 0x8C
+#define VitGnegAdress 0x8E
 
 Qik::Qik(PinName txPinToQik, PinName rxPinToQik)
 
