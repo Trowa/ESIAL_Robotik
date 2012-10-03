@@ -59,6 +59,7 @@ void CommandManager::perform() {
     while(currCMD.type != CMD_NULL) { //On s'assure que la liste des commandes est vide
       currCMD = liste->dequeue();
     }
+    nextCMD.type = CMD_NULL;
     currentConsignFinished = true; //Du coup, on fait comme si la consigne courante était fini
     return;
   }
@@ -77,15 +78,22 @@ void CommandManager::perform() {
       computeGoToAngle();
     }
 
+    if(nextCMD.type == CMD_NULL) { // On a pas chargé de consigne suivante
+      nextCMD = liste->dequeue(); // Du coup, on essaie...
+    }
+
   /*
   * Si on a terminé la QuadRampDerivee, on passe à la commande suivante
   */
   } else {
 
     // ToDo Réfléchir à l'enchainement de commande pour ne pas s'arrêter au moment de calculer la suivante
-    //currCMD = nextCMD; // La consigne suivante devient la consigne courante
-    //nextCMD = liste.dequeue(); // On essaye de récupérer la prochaine consigne
-    currCMD = liste->dequeue(); // On essaye de récupérer la prochaine consigne
+    if(nextCMD.type != CMD_NULL) { //On a déjà chargée une consigne
+      currCMD = nextCMD; // La consigne suivante devient la consigne courante
+      nextCMD = liste->dequeue(); // On essaye de récupérer la prochaine consigne
+    } else {
+      currCMD = liste->dequeue(); // On prend la consigne suivante immédiatement
+    }
 
     // On vient de terminer la consigne courante, on le signale en haut lieu
     if(currentConsignFinished == false) {
