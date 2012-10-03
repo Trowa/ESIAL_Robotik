@@ -6,12 +6,14 @@
 // Internal Structures
 enum typeCMD {
   CMD_NULL, // Erreur....
-  CMD_GO,
-  CMD_TURN,
-  CMD_WAIT,
-  CMD_STOP,
-  CMD_GOTO,
-  CMD_GOTOANGLE,
+  CMD_GO, // Avancer ou reculer d'une certaine distance
+  CMD_TURN, // Tourner d'un certain angle
+  CMD_WAIT, // Attendre un certain temps ('fin, je suppose, c'est pas implémenté...)
+  CMD_STOP, // Bon, là, je sais pas...
+  CMD_GOTO, // Aller à un point précis
+  CMD_GOTOANGLE, // Se tourner vers un point précis
+  CMD_GOTOENCHAIN // Aller vers un point précis, mais si la commande suivante est un GOTO ou
+                  // un GOTOENCHAIN, on s'autorise à ne pas s'arrêter au point de consigne
 };
 
 typedef struct CMD_struct {
