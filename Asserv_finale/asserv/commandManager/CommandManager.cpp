@@ -134,20 +134,8 @@ void CommandManager::computeGoTo(){
     deltaDist = (int64_t)(max * sqrt (1.0 + ( min / max ) * ( min / max ) ));
   }
 
-  // Cap que doit atteindre le robot
-  double thetaCible = atan2(deltaY, deltaX);
-
-
   // La différence entre le thetaCible (= cap à atteindre) et le theta (= cap actuel du robot) donne l'angle à parcourir
-  double deltaTheta = thetaCible - odometrie->getTheta();
-
-  // On ajuste l'angle à parcourir pour ne pas faire plus d'un demi-tour
-  // Exemple, tourner de 340 degrés est plus chiant que de tourner de -20 degrés
-  if ( deltaTheta > PI ){
-    deltaTheta -= 2.0*PI;
-  } else if (deltaTheta < -PI){
-    deltaTheta += 2.0*PI;
-  }
+  double deltaTheta = computeDeltaTheta(deltaX, deltaY);
 
   /*//TODO à tester en conditions réelles et extrêmes de mauvaises utilisations
   if ( fabs(deltaTheta) < angleThreshold ) { // Si on est dans la fenêtre de départ en angle
@@ -174,7 +162,7 @@ void CommandManager::computeGoTo(){
             ) ; //on se met dans la bonne direction
         //pc.printf("dT=%ldd - ",Utils::radToUO(odometrie, deltaTheta) + cnsgCtrl->getAccuAngle());
         //pc.printf("Td=%f - aT=%f\n", fabs( thetaCible - odometrie->getTheta()), angleThreshold);
-        if( fabs( thetaCible - odometrie->getTheta() ) < angleThreshold ) {
+        if( fabs( deltaTheta ) < angleThreshold ) {
             consigne_dist = deltaDist + cnsgCtrl->getAccuDist();
         } else {
             consigne_dist = cnsgCtrl->getAccuDist();
@@ -193,13 +181,23 @@ void CommandManager::computeGoToAngle(){
   double deltaX = currCMD.value - odometrie->getX(); // Différence entre la cible et le robot selon X
   double deltaY = currCMD.secValue - odometrie->getY();  // Différence entre la cible et le robot selon Y
 
-  // On a besoin de min et max pour le calcul de l'angle entre le cap cible et le cap courant
-  double max = fabs(deltaX)>fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
-  double min = fabs(deltaX)<=fabs(deltaY) ? fabs(deltaX) : fabs(deltaY);
+  // Angle à parcourir
+  double deltaTheta = computeDeltaTheta(deltaX, deltaY);
+
+  //TODO a tester en conditions réelles et extrêmes de mauvaises utilisations
+  // La consigne à atteindre en angle est la somme du deltaTheta en UO et de l'accumulateur du régu
+  int64_t consigne_angle = Utils::radToUO(odometrie, deltaTheta) + cnsgCtrl->getAccuAngle();
+  cnsgCtrl->set_angle_consigne( consigne_angle ); // On set la consigne
+
+}
+
+/*
+ * Calcul de l'angle à parcourir par le robot, ça sert souvent...
+ */
+double CommandManager::computeDeltaTheta(double deltaX, double deltaY) {
 
   // Cap que doit atteindre le robot
   double thetaCible = atan2(deltaY, deltaX);
-
 
   // La différence entre le thetaCible (= cap à atteindre) et le theta (= cap actuel du robot) donne l'angle à parcourir
   double deltaTheta = thetaCible - odometrie->getTheta();
@@ -211,12 +209,6 @@ void CommandManager::computeGoToAngle(){
   } else if (deltaTheta < -PI){
     deltaTheta += 2.0*PI;
   }
-
-  //TODO a tester en conditions réelles et extrêmes de mauvaises utilisations
-  // La consigne à atteindre en angle est la somme du deltaTheta en UO et de l'accumulateur du régu
-  int64_t consigne_angle = Utils::radToUO(odometrie, deltaTheta) + cnsgCtrl->getAccuAngle();
-  cnsgCtrl->set_angle_consigne( consigne_angle ); // On set la consigne
-
 }
 
 void CommandManager::setEmergencyStop() { //Gestion d'un éventuel arrêt d'urgence

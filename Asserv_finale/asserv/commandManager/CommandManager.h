@@ -41,6 +41,8 @@ class CommandManager {
     bool emergencyStop; //arrêt d'urgence : si le robot adverse est dans les parages
 
     bool currentConsignFinished; //signale si la consigne courante est terminée. Reste à vrai tant qu'une nouvelle consigne n'est pas arrivée.
+
+    double computeDeltaTheta(double deltaX, double deltaY); // Calcul de l'angle à parcourir
 };
 
 #endif
