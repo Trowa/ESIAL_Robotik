@@ -1,0 +1,79 @@
+#!/bin/bash
+
+export LC_ALL=C
+
+set -o nounset
+set -o errexit
+
+usage() {
+    echo "Ce script permet de monter une image de la carte SD de la Raspberry Pi."
+    echo
+    echo "Utilisation :"
+    echo "Montage   : $0 [-r] <image disque> <point de montage>"
+    echo "Démontage : $0 -u <point de montage>"
+    echo
+    echo "L'option -u permet de démonter une image précedemment montée"
+    echo "L'option -r permet de monter l'image en lecture seule"
+    exit
+}
+
+clean() {
+    umount "$MNTDIR/boot"
+    umount "$MNTDIR/"
+}
+
+MOUNTOPTS=
+UNMOUNT=
+
+if [[ "$#" -ge 1 ]]; then
+    case "$1" in
+    -u)
+        UNMOUNT=1
+        shift ;;
+    -r)
+        MOUNTOPTS=",ro"
+        shift ;;
+    -*)
+        usage ;;
+    esac
+fi
+
+if [[ -n "$UNMOUNT" ]]; then
+    [[ ! "$#" -eq 1 ]] && usage
+    MNTDIR="$1"
+    clean
+    exit
+else
+    [[ ! "$#" -eq 2 ]] && usage
+    IMG="$1"
+    MNTDIR="$2"
+fi
+
+if [[ ! -f "$IMG" ]]; then
+    echo "Fichier '$IMG' introuvable"
+    exit 1
+fi
+
+if ! parted -v &>/dev/null; then
+    echo "Veuillez installer parted."
+    exit 2
+fi
+
+offsets=($(parted "$IMG" -m -s unit b print |
+           awk -F: '/^[[:digit:]]/ { sub("B$", "", $2); print $2; }'))
+
+if [[ "${#offsets[@]}" -gt 2 ]]; then
+    echo "Seulement deux partitions (/boot et /) sont supportées"
+    exit 3
+elif [[ "${#offsets[@]}" -lt 2 ]]; then
+    echo "Partition(s) non trouvée(s)"
+    exit 3
+fi
+
+if ! mkdir -p "$MNTDIR" || ! chmod 777 "$MNTDIR"; then
+    echo "Impossible de créer le point de montage '$MNTDIR'"
+    exit 4
+fi
+
+mount "$IMG" "$MNTDIR" -o "loop,offset=${offsets[1]}${MOUNTOPTS}" || exit 5
+mount "$IMG" "$MNTDIR/boot" -o "loop,offset=${offsets[0]}${MOUNTOPTS}" || { clean; exit 5; }

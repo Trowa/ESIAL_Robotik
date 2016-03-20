@@ -1,0 +1,39 @@
+<?eclipse.ant.import?>
+<project basedir="." default="jars" name="jars">
+    <macrodef name="make-jar">
+        <attribute name="mainclass" />
+        <attribute name="name" />
+        <sequential>
+            <jar destfile="@{name}">
+                <manifest>
+                    <attribute name="Main-Class" value="@{mainclass}"/>
+                </manifest>
+
+                <fileset dir="bin" />
+                <zipfileset src="libs/pi4j-core.jar"/>
+                <zipfileset src="libs/jna.jar"/>
+                <zipfileset src="libs/purejavacomm.jar"/>
+                <zipfileset src="libs/ax12.jar"/>
+            </jar>
+        </sequential>
+    </macrodef>
+
+    <target name="jars" depends="build">
+        <mkdir dir="dist" />
+        <make-jar name="dist/ia2014.jar" mainclass="ia.nancyborg2015.Ia"/>
+        <make-jar name="dist/ia.fetescience.jar" mainclass="ia.fetescience.IA"/>
+        <make-jar name="dist/qik.jar" mainclass="api.tools.QikTool"/>
+        <make-jar name="dist/srf-address.jar" mainclass="api.tools.ChangeSRFAddress"/>
+        <make-jar name="dist/srf.jar" mainclass="api.tools.SRFTool"/>
+        <make-jar name="dist/pololu.jar" mainclass="api.controllers.PololuMaestro"/>
+        <make-jar name="dist/ax12.jar" mainclass="api.tools.AX12Tool"/>
+    </target>
+
+    <target name="upload-jars" depends="jars">
+        <exec executable="sh" failonerror="true">
+            <arg value="-c" />
+            <arg value="rsync dist/* root@pi.local:" />
+        </exec>
+    </target>
+
+</project>

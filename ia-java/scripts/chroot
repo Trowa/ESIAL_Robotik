@@ -1,0 +1,114 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+cd `dirname "$0"`
+
+usage() {
+    echo "Ce script permet de mettre en place un chroot vers le système de fichiers d'une Raspberry Pi"
+    echo
+    echo "Utilisation :"
+    echo "$0 [-r] <fichier de périphérique> [<commande> ...] : lance un chroot dans une carte SD (/dev/mmcblk0 par défaut)"
+    echo "$0 [-r] <image disque> : lance un chroot dans l'image d'une carte SD"
+    echo
+    echo "L'option -r permet de monter de monter le système en lecture seule"
+    exit
+}
+
+clean() {
+    [[ -f "$MNTDIR/etc/resolv.conf.chroot" ]] && mv "$MNTDIR/etc/resolv.conf"{.chroot,}
+    [[ -d "$MNTDIR/dev/pts" ]] && umount "$MNTDIR/dev/pts"
+    [[ -d "$MNTDIR/dev/shm" ]] && umount "$MNTDIR/dev/shm"
+    [[ -d "$MNTDIR/dev" ]] && umount "$MNTDIR/dev"
+    [[ -d "$MNTDIR/sys" ]] && umount "$MNTDIR/sys"
+    [[ -d "$MNTDIR/proc" ]] && umount "$MNTDIR/proc"
+    [[ -d "$MNTDIR/boot" ]] && umount "$MNTDIR/boot"
+    [[ -d "$MNTDIR" ]] && umount "$MNTDIR"
+    echo -1 > /proc/sys/fs/binfmt_misc/arm || true
+}
+
+READONLY=0
+DEV="/dev/mmcblk0"
+MNTDIR="/mnt/rpi"
+USE_IMAGE=0
+
+if [[ "$#" -ge 1 ]]; then
+    case "$1" in
+    -h | -help | --help)
+        usage ;;
+    -r)
+        READONLY=1
+        shift ;;
+    esac
+fi
+
+if [[ "$#" -ge 1 ]]; then
+    if [[ -b "$1" ]]; then
+        USE_IMAGE=0
+        DEV="$1"
+        shift
+    elif [[ -f "$1" ]]; then
+        USE_IMAGE=1
+        IMG="$1"
+        shift
+    fi
+fi
+
+if ! mkdir -p "$MNTDIR" || ! chmod 777 "$MNTDIR"; then
+    echo "Impossible de créer le point de montage '$MNTDIR'."
+    exit 1
+fi
+
+trap clean EXIT
+
+if [[ "$USE_IMAGE" = 1 ]]; then
+    if [[ "$READONLY" -eq 1 ]]; then
+        ./mount_image -r "$IMG" "$MNTDIR"
+    else
+        ./mount_image "$IMG" "$MNTDIR"
+    fi
+else
+    BOOT="${DEV}p1"
+    ROOT="${DEV}p2"
+
+    if [[ ! -b "$BOOT" ]] || [[ ! -r "$BOOT" ]]; then
+        echo "Impossible d'accéder à la partition de boot ($BOOT)"
+        exit 1
+    elif [[ ! -b "$ROOT" ]] || [[ ! -r "$ROOT" ]]; then
+        echo "Impossible d'accéder à la partition système ($ROOT)"
+        exit 1
+    fi
+
+    if [[ "$READONLY" -eq 1 ]]; then
+        mount -o ro "$ROOT" "$MNTDIR"
+        mount -o ro "$BOOT" "$MNTDIR/boot"
+    else
+        dosfsck -a "$BOOT"
+        fsck -a "$ROOT"
+        mount "$ROOT" "$MNTDIR"
+        mount "$BOOT" "$MNTDIR/boot"
+    fi
+fi
+
+mount --bind /dev     "$MNTDIR/dev"
+mount --bind /dev/pts "$MNTDIR/dev/pts"
+mount --bind /dev/shm "$MNTDIR/dev/shm"
+mount --bind /proc    "$MNTDIR/proc"
+mount --bind /sys     "$MNTDIR/sys"
+
+if [[ -w "$MNTDIR/etc/resolv.conf" ]]; then
+    mv "$MNTDIR/etc/resolv.conf"{,.chroot}
+    cp /etc/resolv.conf "$MNTDIR/etc/resolv.conf"
+fi
+
+if [[ ! -f "$MNTDIR/usr/local/bin/qemu-arm-static" ]] && [[ -w "$MNTDIR/usr/local/bin" ]]; then
+    cp -v ./qemu-arm-static "$MNTDIR/usr/local/bin/"
+fi
+
+echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/local/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register || true
+
+if [[ "$#" -eq 0 ]]; then
+    /usr/bin/chroot "$MNTDIR" su -
+else
+    /usr/bin/chroot "$MNTDIR" "$@"
+fi
