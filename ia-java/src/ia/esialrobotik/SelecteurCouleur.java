@@ -1,17 +1,19 @@
 package ia.esialrobotik;
 
+import api.hardware.GPIO;
 
 public class SelecteurCouleur {
-	/*
-	 * JBH TODO
-	 * Gérer directement les GPIOs de la raspberry pi
+	
+	/**
+	 * Le GPIO où est branché le sélecteur
 	 */
+	private GPIO gpio;
 
-	public SelecteurCouleur(/* GPIO gpio */) {
-		// Initialiser un GPIO (prendre en paramètre un objet GPIO ?)
+	public SelecteurCouleur(GPIO gpio) {
+		this.gpio = gpio;
 	}
 
 	public Ia.TeamColor getTeamColor() {
-		return /* Code pour lire le GPIO */ true ? Ia.TeamColor.GREEN : Ia.TeamColor.YELLOW;
+		return gpio.getValue() ? Ia.TeamColor.GREEN : Ia.TeamColor.YELLOW;
 	}
 }

@@ -1,19 +1,20 @@
 package ia.esialrobotik;
 
+import api.hardware.GPIO;
 
 public class Tirette {
 
-	/*
-	 * JBH TODO
-	 * Gérer directement les GPIOs de la raspberry pi
+	/**
+	 * Le GPIO où est branché la tirette
 	 */
+	private GPIO gpio;
 	
-	public Tirette(/* GPIO gpio */) {
-		// Initialiser un GPIO (prendre en paramètre un objet GPIO ?)
+	public Tirette(GPIO gpio) {
+		this.gpio = gpio;
 	}
 
 	public boolean isPulled() {
-		return /* Code pour lire le GPIO */ true;
+		return gpio.getValue();
 	}
 
 	public void wait(boolean pulled) {

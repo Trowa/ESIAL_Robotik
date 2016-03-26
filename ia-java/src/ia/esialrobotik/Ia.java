@@ -2,6 +2,7 @@ package ia.esialrobotik;
 
 import api.asserv.Asserv;
 import api.chrono.Chrono;
+import api.hardware.RaspberryPiGPIO;
 import ia.common.AsservQueue;
 import navigation.Navigation2014;
 import navigation.Point;
@@ -33,8 +34,9 @@ public class Ia {
             System.out.println("COUCOUCOUCOU");
 
             System.out.println("****** Init GPIO");
-            tirette = new Tirette(/* le GPIO qui va bien */);
-            selecteurCouleur  = new SelecteurCouleur(/* le GPIO qui va bien */);
+            // TODO bien définir les GPIOs
+            tirette = new Tirette(new RaspberryPiGPIO(42));
+            selecteurCouleur  = new SelecteurCouleur(new RaspberryPiGPIO(42));
 
             System.out.println("******* ALL INIT DONE");
 
