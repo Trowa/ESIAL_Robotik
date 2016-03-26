@@ -1,6 +1,7 @@
 package ia.esialrobotik;
 
 import api.asserv.Asserv;
+import api.asserv.AsservMbed;
 import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
 import ia.common.AsservQueue;
@@ -30,7 +31,7 @@ public class Ia {
         try {
             // On initialise l'asservissement
             System.out.println("****** Init asserv");
-            asserv = new Asserv("/dev/serial/by-id/usb-MBED_MBED_CMSIS-DAP_101068a5cbdd92814f89f87e9a3fcdbac7ba-if01");
+            asserv = new AsservMbed("/dev/serial/by-id/usb-MBED_MBED_CMSIS-DAP_101068a5cbdd92814f89f87e9a3fcdbac7ba-if01");
             System.out.println("COUCOUCOUCOU");
 
             System.out.println("****** Init GPIO");

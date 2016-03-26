@@ -1,67 +1,57 @@
 package api.asserv;
 
-import api.asserv.actions.Action;
-import api.communication.Serial;
-import gnu.io.NoSuchPortException;
-import gnu.io.PortInUseException;
-import gnu.io.UnsupportedCommOperationException;
-import navigation.Point;
-
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import api.asserv.actions.Action;
+import navigation.Point;
+
 /**
- * Classe permettant de communiquer avec l'asservissement sur MBED et de lui
- * donner tout les ordres nécessaires une fois qu'il est bien réglé.
+ * Interface pour discuter avec une asserv
+ * Le protocole de communication est définie par cette classe, mais
+ * la communication avec une vraie asserv doit être codée dans une classe fille
+ * @author jb
  * 
- * @author GaG <francois.prugniel@esial.net>
- * @author mickael9
+ * TODO vérifier les sections critiques à protéger (mutex)
+ *
  */
 
-public class Asserv {
-	/**
-	 * Liaison série avec la MBED
-	 */
-	private Serial mbed;
-	/**
-	 * Commande à executer
-	 * TODO On doit pouvoir faire plus propre je pense
-	 */
-	private String commande; // Dernière commande
-
-	public boolean isLastCommandFinished() {
-		return lastCommandFinished;
-	}
-
+public abstract class Asserv {
+	
 	/**
 	 * Booléen signalant l'exécution complète de la dernière commande
 	 */
-	private boolean lastCommandFinished;
-	private int lastD = 2;
+	protected boolean lastCommandFinished;
+
 	/**
 	 * Position courante du robot
 	 */
-	private Point nous;
+	protected Point nous;
 	
 	/**
-	 * Checker
+	 * Thread pour parser la sortie de l'asserv
 	 */
 	Thread checker = new Thread(new Runnable() {
 		@Override
 		public void run() {
+			int lastD = 2;
+			
 			while (true) {
 				String check = null;
+				// Lit une ligne
 				try {
-					check = mbed.readLine();
-				} catch (IOException e) {
+					check = readAsservOutput();
+				} catch (Exception e) {
 					e.printStackTrace();
 					return;
 				}
+				
+				// La ligne contient-elle des trucs intéressants ?
 				if (check.isEmpty() || check.charAt(0) != '#') {
 					continue;
 				}
-				//nous = parseCurrentPosition(check);
+				
+				// On parse la ligne
 				try {
 					Pattern p = Pattern.compile("#x([0-9.-]+)y([0-9.-]+)a([0-9.-]+)d([0-2])");
 					Matcher m = p.matcher(check);
@@ -82,154 +72,28 @@ public class Asserv {
 			}
 		}
 	});
-
+	
 	/**
-	 * Constructeur
-	 * 
-	 * @param serie Nom de la liaison serie
-	 * @throws UnsupportedCommOperationException 
-	 * @throws NoSuchPortException 
-	 * @throws PortInUseException 
-	 * @throws IOException 
+	 * Initialise l'asserv
+	 * Le constructeur de la classe fille doit initialiser
+	 * tout ce qu'il faut pour communiquer avec l'asserv,
+	 * puis appeler cette méthode
 	 */
-	public Asserv(String serie) throws IOException, NoSuchPortException, PortInUseException, UnsupportedCommOperationException {
-		System.out.println("Connexion à l'asserv...");
-		commande = "";
-		mbed = new Serial(serie, /*115200*/230400);
-		mbed.sendBreak();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Serie ok");
+	protected void asservInit() {
 		reset();
 		checker.start();
 	}
 	
-	public void reset() throws IOException {
-		mbed.write('R'); // autrefois il y avait un break...
-		lastCommandFinished = true;
-		while(true) {
-			String blabla = mbed.readLine();
-			System.out.println("blabla: " + blabla);
-			if (blabla.endsWith("ok")) {
-				System.out.println("Asserv ready (la salope)");
-				return;
-			} else {
-				System.out.println(blabla);
-			}
-		}
-	}
-
 	/**
-	 * Le robot s'aligne avec la position (x,y) puis y va
+	 * Renvoit un booléen signalant si la dernière commande est totalement
+	 * exécuté
 	 * 
-	 * @param x Abscisse en mm
-	 * @param y Ordonnée en mm
-	 * @param wait Attendre que la commande soit terminée avant de retourner
+	 * @return lastCommandFinished
 	 */
-	public void gotoPosition(double x, double y, boolean wait) {
-		commande = "g"+x+"#"+y+"\n";
-		sendCommand();
-		if (wait)
-			waitForFinish();
+	public boolean isLastCommandFinished() {
+		return lastCommandFinished;
 	}
-
-	/**
-	 * Le robot s'aligne avec la position (x,y) 
-	 * 
-	 * @param x Abscisse en mm
-	 * @param y Ordonnée en mm
-	 * @param wait Attendre que la commande soit terminée avant de retourner
-	 */
-	public void face(double x, double y, boolean wait) {
-		commande = "f"+x+"#"+y+"\n";
-		sendCommand();
-		if (wait)
-			waitForFinish();
-	}
-
-	/**
-	 * Avance tout droit (en arrière si d négatif)
-	 * @param d Distance à parcourir en mm
-	 * @param wait Attendre que la commande soit terminée avant de retourner
-	 */
-	public void go(double d, boolean wait) {
-		commande = "v"+d+"\n";
-		sendCommand();
-		if (wait)
-			waitForFinish();
-	}
-
-	/**
-	 * Tourne
-	 * 
-	 * @param a Angle à parcourir en degrés 
-	 * @param wait Attendre que la commande soit terminée avant de retourner
-	 */
-	public synchronized void turn(double a, boolean wait) {
-		commande = "t"+a+"\n";
-		sendCommand();
-		if (wait)
-			waitForFinish();
-	}
-
-	/**
-	 * Arrêt du robot (en cas de détection)
-	 * Désactive l'asservissement
-	 */
-	public void halt() {
-		System.out.println("JE ME HALT");
-		try {
-			mbed.write("h");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Redémarre l'asservissement après un halt()
-	 */
-	public void resetHalt() {
-		try {
-			mbed.write("r");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Envoie un ordre à l'asservissement
-	 */
-	public synchronized void sendCommand() {
-		System.out.println("sending : " + commande);
-		try {
-			synchronized (this) {
-				mbed.write(commande);
-				lastCommandFinished = false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * On lance le calage bordure
-	 * Cette commande est bloquante
-	 * @param sens Sens du selecteur de couleur
-	 */
-	public void calageBordure(boolean sens) {
-		try {
-			mbed.write("c" + (sens ? "1" : "0") + "g");
-			while (mbed.ready()) {
-				mbed.read();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	/**
 	 * Attend que la dernière commande ait fini son exécution 
 	 */
@@ -242,65 +106,149 @@ public class Asserv {
 			}
 		}
 	}
+	
+	
+	/**
+	 * Le robot s'aligne avec la position (x,y) puis y va
+	 * 
+	 * @param x Abscisse en mm
+	 * @param y Ordonnée en mm
+	 * @param wait Attendre que la commande soit terminée avant de retourner
+	 */
+	public void gotoPosition(double x, double y, boolean wait) {
+		String commande = "g"+x+"#"+y+"\n";
+		synchronized(this) {
+			sendCommand(commande);
+			lastCommandFinished = false;
+		}
+		if (wait)
+			waitForFinish();
+	}
+
 
 	/**
-	 * Renvoit un booléen signalant si la dernière commande est totalement
-	 * exécuté
+	 * Le robot s'aligne avec la position (x,y) 
 	 * 
-	 * @return lastCommandFinished
+	 * @param x Abscisse en mm
+	 * @param y Ordonnée en mm
+	 * @param wait Attendre que la commande soit terminée avant de retourner
 	 */
-	public boolean lastCommandFinished() {
-		return lastCommandFinished;
-	}
-	
-	public void setEnabled(boolean enabled) {
-		try {
-			mbed.write("D" + (enabled ? "0" : "1"));
-		} catch (IOException e) {
-			e.printStackTrace();
+	public void face(double x, double y, boolean wait) {
+		String commande = "f"+x+"#"+y+"\n";
+		synchronized(this) {
+			sendCommand(commande);
+			lastCommandFinished = false;
 		}
+		if (wait)
+			waitForFinish();
 	}
-	
-	public void setMotorSpeed(char moteur, int val) {
-		try {
-			mbed.write("M" + moteur + val + "\n");
-		} catch (IOException e) {
-			e.printStackTrace();
+
+	/**
+	 * Avance tout droit (en arrière si d négatif)
+	 * @param d Distance à parcourir en mm
+	 * @param wait Attendre que la commande soit terminée avant de retourner
+	 */
+	public void go(double d, boolean wait) {
+		String commande = "v"+d+"\n";
+		synchronized(this) {
+			sendCommand(commande);
+			lastCommandFinished = false;
 		}
+		if (wait)
+			waitForFinish();
 	}
-	
-	public Point parseCurrentPosition(String str) {
-		try {
-			System.out.println(str);
-			Pattern p = Pattern.compile("#x([0-9.-]+)y([0-9.-]+)a([0-9.-]+)d([0-2])");
-			Matcher m = p.matcher(str);
-			if (m.find()) {
-				if (m.group(4).equals("1")/* || (!lastCommandFinished) && m.group(4).equals("2")*/) {
-					System.out.println("finished !!");
-					lastCommandFinished = true;
-				}
-				
-				Point point = new Point((int)Double.parseDouble(m.group(1)), (int)Double.parseDouble(m.group(2)));
-				point.setCap((int)Double.parseDouble(m.group(3)));
-				return point;
-			}
-			return nous;
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error on : " + str);
-			return nous;
+
+	/**
+	 * Tourne
+	 * 
+	 * @param a Angle à parcourir en degrés 
+	 * @param wait Attendre que la commande soit terminée avant de retourner
+	 */
+	public synchronized void turn(double a, boolean wait) {
+		String commande = "t"+a+"\n";
+		synchronized(this) {
+			sendCommand(commande);
+			lastCommandFinished = false;
 		}
+		if (wait)
+			waitForFinish();
 	}
 	
+	/**
+	 * Position de notre robot renvoyé par l'asserv
+	 * @return La position du robot
+	 */
 	public Point getCurrentPosition() {
 		return this.nous;
 	}
 
+	/**
+	 * Met une action en file d'attente coté asserv
+	 * @param action L'action à ajouter
+	 */
 	public void addAction(Action action) {
-		try {
-			mbed.write(action.getSerialCommand() + "\n");
-		} catch (IOException e) {
-			e.printStackTrace();
+		sendCommand(action.getSerialCommand() + "\n");
+	}
+	
+	/**
+	 * Arrêt du robot (en cas de détection)
+	 * Désactive l'asservissement
+	 */
+	public void halt() {
+		System.out.println("JE ME HALT");
+		sendCommand("h");
+	}
+	
+	/**
+	 * Redémarre l'asservissement après un halt()
+	 */
+	public void resetHalt() {
+		sendCommand("r");
+	}
+
+	public void setEnabled(boolean enabled) {
+		sendCommand("D" + (enabled ? "0" : "1"));
+	}
+	
+	public void setMotorSpeed(char moteur, int val) {
+		sendCommand("M" + moteur + val + "\n");
+	}
+	
+	/**
+	 * Reset complet de l'asserv
+	 */
+	public void reset() {
+		sendCommand("R"); // autrefois il y avait un break...
+		lastCommandFinished = true;
+		while(true) {
+			String blabla = readAsservOutput();
+			System.out.println("blabla: " + blabla);
+			if (blabla.endsWith("ok")) {
+				System.out.println("Asserv ready (la salope)");
+				return;
+			}
 		}
 	}
+	
+	/**
+	 * On lance le calage bordure
+	 * Cette commande est bloquante
+	 * @param sens Sens du selecteur de couleur
+	 */
+	public void calageBordure(boolean sens) {
+		sendCommand("c" + (sens ? "1" : "0") + "g");
+	}
+	
+	/**
+	 * Envoie la commande, à implémenter dans une classe fille
+	 * @param commande
+	 */
+	protected abstract void sendCommand(String commande);
+	
+	/**
+	 * Lit une ligne renvoyé par l'asserv, à implémenter dans une classe fille
+	 * @return la ligne lue
+	 */
+	protected abstract String readAsservOutput();
+	
 }
