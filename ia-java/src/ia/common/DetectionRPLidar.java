@@ -130,20 +130,11 @@ public class DetectionRPLidar implements Runnable {
 	}
 
 	public static void main(String[] args) throws Exception {
+		/**
+		 * Code pour tester le lidar si besoin
+		 */
+		
 		Ia ia = new Ia();
-		ia.rplidar.start();
-
-		/*System.out.println("go");
-		ia.asserv.go(1500, false);*/
-
-/*			System.out.println("go 0 0 ");
-		ia.asserv.gotoPosition(0, 0, true);
-
-		System.out.println("turn 180");
-		ia.asserv.turn(180, true);
-*/
-/*		while (true)
-			ia.sleep(1000);*/
-
+		
 	}
 }
