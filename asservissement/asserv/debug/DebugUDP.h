@@ -1,6 +1,8 @@
 #ifndef DEBUG_UDP_H
 #define DEBUG_UDP_H
 
+#ifdef DEBUG
+
 #include "LPC1768/if/eth/EthernetNetIf.h"
 #include "LPC1768/api/UDPSocket.h"
 #include "LPC1768/core/host.h"
@@ -8,8 +10,6 @@
 #include "../consignController/ConsignController.h"
 #include "../commandManager/CommandManager.h"
 #include "../config/config.h"
-
-#ifdef DEBUG
 
 extern Odometrie *odometrie;
 extern CommandManager *commandManager;

@@ -10,7 +10,9 @@
 #include "../motorsController/DummyMotorsController.h"
 #include "../consignController/ConsignController.h"
 #include "../commandManager/CommandManager.h"
+#ifdef DEBUG
 #include "../debug/DebugUDP.h"
+#endif
 
 // Ticker pour l'interruption de la boucle d'asserv
 Ticker Live;
