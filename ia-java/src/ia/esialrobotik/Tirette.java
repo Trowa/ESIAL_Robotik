@@ -1,23 +1,19 @@
 package ia.esialrobotik;
 
-import org.mbed.RPC.DigitalIn;
-import org.mbed.RPC.DigitalOut;
 
-/**
- * Created by mickael on 12/05/15.
- */
 public class Tirette {
-	private final DigitalIn in;
-	private final DigitalOut out;
 
-	public Tirette(DigitalIn in, DigitalOut out) {
-		this.in = in;
-		this.out = out;
-		this.out.write(1);
+	/*
+	 * JBH TODO
+	 * Gérer directement les GPIOs de la raspberry pi
+	 */
+	
+	public Tirette(/* GPIO gpio */) {
+		// Initialiser un GPIO (prendre en paramètre un objet GPIO ?)
 	}
 
 	public boolean isPulled() {
-		return in.read() == 0;
+		return /* Code pour lire le GPIO */ true;
 	}
 
 	public void wait(boolean pulled) {

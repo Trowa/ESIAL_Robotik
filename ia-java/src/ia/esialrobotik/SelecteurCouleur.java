@@ -1,22 +1,17 @@
 package ia.esialrobotik;
 
-import org.mbed.RPC.DigitalIn;
-import org.mbed.RPC.DigitalOut;
 
-/**
- * Created by mickael on 12/05/15.
- */
 public class SelecteurCouleur {
-	private final DigitalIn in;
-	private final DigitalOut out;
+	/*
+	 * JBH TODO
+	 * Gérer directement les GPIOs de la raspberry pi
+	 */
 
-	public SelecteurCouleur(DigitalIn in, DigitalOut out) {
-		this.in = in;
-		this.out = out;
-		this.out.write(1);
+	public SelecteurCouleur(/* GPIO gpio */) {
+		// Initialiser un GPIO (prendre en paramètre un objet GPIO ?)
 	}
 
 	public Ia.TeamColor getTeamColor() {
-		return in.read() == 0 ? Ia.TeamColor.GREEN : Ia.TeamColor.YELLOW;
+		return /* Code pour lire le GPIO */ true ? Ia.TeamColor.GREEN : Ia.TeamColor.YELLOW;
 	}
 }
