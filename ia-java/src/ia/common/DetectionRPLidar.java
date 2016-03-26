@@ -1,6 +1,6 @@
 package ia.common;
 
-import ia.nancyborg2015.Ia;
+import ia.esialrobotik.Ia;
 import navigation.Point;
 import roboticinception.rplidar.RpLidarHighLevelDriver;
 import roboticinception.rplidar.RpLidarScan;

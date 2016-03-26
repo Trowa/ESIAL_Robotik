@@ -1,9 +1,9 @@
-package ia.nancyborg2015.objectifs;
+package ia.esialrobotik.objectifs;
 
 import api.asserv.actions.Go;
 import api.asserv.actions.Goto;
 import ia.common.Objectif;
-import ia.nancyborg2015.Ia;
+import ia.esialrobotik.Ia;
 import navigation.Point;
 
 /**

@@ -20,7 +20,7 @@
 
     <target name="jars" depends="build">
         <mkdir dir="dist" />
-        <make-jar name="dist/ia2014.jar" mainclass="ia.nancyborg2015.Ia"/>
+        <make-jar name="dist/ia.coupe.jar" mainclass="ia.esialrobotik.Ia"/>
         <make-jar name="dist/ia.fetescience.jar" mainclass="ia.fetescience.IA"/>
         <make-jar name="dist/qik.jar" mainclass="api.tools.QikTool"/>
         <make-jar name="dist/srf-address.jar" mainclass="api.tools.ChangeSRFAddress"/>

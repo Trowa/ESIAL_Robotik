@@ -1,6 +1,6 @@
 package roboticinception.rplidar;
 
-import ia.nancyborg2015.Ia;
+import ia.esialrobotik.Ia;
 
 import java.util.Arrays;
 

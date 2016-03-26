@@ -1,4 +1,4 @@
-package ia.nancyborg2015;
+package ia.esialrobotik;
 
 import org.mbed.RPC.MbedRPC;
 import org.mbed.RPC.RPCVariable;

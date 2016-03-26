@@ -1,7 +1,7 @@
 package ia.common;
 
 import api.asserv.Asserv;
-import ia.nancyborg2015.Ia;
+import ia.esialrobotik.Ia;
 import navigation.Point;
 
 /**
