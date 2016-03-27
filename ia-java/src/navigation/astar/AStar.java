@@ -1,6 +1,8 @@
 package navigation.astar;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -37,11 +39,6 @@ public class AStar {
 	private PriorityQueue<Node> ouverts;
 	
 	/**
-	 * Les noeuds déjà examiné: une grille de booléen pour aller plus vite
-	 */
-	private boolean[][] fermes;
-	
-	/**
 	 * Crée un calculateur de chemin basé sur l'algo Astar
 	 * @param dimX la taille de la grille en X
 	 * @param dimY la taille de la grille en Y
@@ -62,27 +59,20 @@ public class AStar {
 		
 		System.out.println("Grille initialisée !");
 		
-		ouverts = new PriorityQueue<Node>(dimX * dimY, (Object o1, Object o2) -> {
-			Node n1 = (Node) o1;
-			Node n2 = (Node) o2;
-			
-			return n1.cout - n2.cout;
-		});
+		ouverts = new PriorityQueue<Node>(dimX * dimY);
 		
 		System.out.println("Priority queue initialisée !");
-		
-		fermes = new boolean[dimX][dimY];
-		
-		System.out.println("Fermés initialisés !");
 	}
 	
 	/**
 	 * Controle l'accessibilité d'une case de la grille
+	 * Cette méthode est "définitive": à utiliser à l'init pour définir
+	 * les zones physiquements inaccessibles sur la table, genre bordures et cie.
 	 * @param x 
 	 * @param y
 	 * @param accessible
 	 */
-	public void setAccessible(int x, int y, boolean accessible) {
+	public void setDefinitivelyAccessible(int x, int y, boolean accessible) {
 		
 		//  Si une case n'est pas accessible, on met le noeud correspondant à null
 		if(accessible && grille[x][y] == null) {
@@ -92,9 +82,62 @@ public class AStar {
 		}
 	}
 	
+	/**
+	 * Controle l'accès à un noeud de manière temporaire
+	 * A utiliser juste avant de calculer un chemin, pour définir une zone inaccessible
+	 * parce qu'un robot adverse y est, par exemple...
+	 * @param x
+	 * @param y
+	 * @param accessible
+	 */
+	public void setTemporaryAccessible(int x, int y, boolean accessible) {
+		if(grille[x][y] != null) {
+			grille[x][y].accessible = accessible;
+		}
+	}
+	
+	private Node getNode(int x, int y) {
+		if(x >= 0 && x < dimX && y >= 0 && y < dimY) {
+			return grille[x][y];
+		}
+		return null;
+	}
+	
+	/**
+	 * Cette fonction est à appeler INDISPENSABLEMENT APRÈS avoir défini les zones
+	 * définitivement inaccessible !
+	 * Si c'est appelé avant ou pas appelé, ça fera N'IMPORTE QUOI !
+	 */
+	public void updateVoisinageInfo() {
+		for(int x = 0; x < dimX; x++) {
+			for(int y = 0; y < dimY; y++) {
+				
+				Node node = grille[x][y];
+				
+				if(node == null) {
+					continue;
+				}
+				
+				/*
+				 * Comme on est des oufs, on a une méthode qui renvoie null si le noeud
+				 * n'existe pas, donc on ne vérifie pas les bornes ici.
+				 */
+				node.voisin_n = getNode(x-1,y);
+				node.voisin_s = getNode(x+1,y);
+				node.voisin_e = getNode(x,y-1);
+				node.voisin_w = getNode(x,y+1);
+				node.voisin_ne = getNode(x-1,y-1);
+				node.voisin_nw = getNode(x-1,y+1);
+				node.voisin_se = getNode(x+1,y-1);
+				node.voisin_sw = getNode(x+1,y+1);
+				
+			}
+		}
+	}
+	
 	private void updateCout(Node courant, Node suivant, int cout) {
 		
-		if(suivant == null || fermes[suivant.x][suivant.y]) {
+		if(suivant == null || suivant.ferme || !suivant.accessible) {
 			// Rien à faire
 			return;
 		}
@@ -103,13 +146,12 @@ public class AStar {
 		
 		// Si on n'a pas examiné le point, ou que le chemin améliore le cout...
 		if(!suivant.ouvert || nouveauCout < suivant.cout) {
-			// ... on ajoute aux ouverts si besoin...
-			if(!suivant.ouvert) {
-				ouverts.add(suivant);
-				suivant.ouvert = true;
-			}
 			// ... on met à jour le cout...
 			suivant.cout = nouveauCout;
+			
+			// ... on ajoute aux ouverts...
+			ouverts.add(suivant);
+			suivant.ouvert = true;
 			
 			// ... et on met à jour le chemin
 			suivant.parent = courant;
@@ -122,16 +164,18 @@ public class AStar {
 		
 		// ON VIDE TOUT !!!
 		for(int x = 0; x < dimX; x++) {
+			final int distX = Math.abs(objectifX - x);
+			
 			for(int y = 0; y < dimY; y++) {
 				final Node temp = grille[x][y];
 				
 				if(temp != null) {
 					temp.cout = Integer.MAX_VALUE;
 					temp.parent = null;
-					temp.heuristique = (Math.abs(objectifX - x) + Math.abs(objectifY - y)) * DIST_H_V;
+					temp.heuristique = (distX + Math.abs(objectifY - y)) * DIST_H_V;
 					temp.ouvert = false;
+					temp.ferme = false;
 				}
-				fermes[x][y] = false;
 			}
 		}
 		System.out.println("Astar initialisé, on lance le calcul");
@@ -139,6 +183,7 @@ public class AStar {
 		ouverts.clear();
 		
 		Node courant = null;
+		grille[startX][startY].cout = 0;
 		
 		// On ajoute le noeud de départ à la liste des ouverts
 		ouverts.add(grille[startX][startY]);
@@ -155,8 +200,18 @@ public class AStar {
 				return;
 			}
 			
+			if(courant.ferme) {
+				/*
+				 * Attention, code moche ! Vu qu'on peut ajouter plus d'une fois un noeud
+				 * lorsque que le cout s'améliore, il faut vérifier si on ne sort pas un noeud déjà
+				 * traité. S'il a déjà été traité, il a été traité dans un cas où le cout est inférieur,
+				 * donc on ignore.
+				 */
+				continue;
+			}
+			
 			// On "ferme" le noeud
-			fermes[courant.x][courant.y] = true;
+			courant.ferme = true;
 			courant.ouvert = false;
 			
 			// On vérifie si on arrivé
@@ -165,38 +220,18 @@ public class AStar {
 			}
 			
 			// on vérifie les noeuds adjacents
-			if(courant.x - 1 >= 0) {
-				updateCout(courant, grille[courant.x - 1][courant.y], courant.cout + DIST_H_V);
-				
-				if(courant.y - 1 >= 0) {
-					updateCout(courant, grille[courant.x - 1][courant.y - 1], courant.cout + DIST_DIAGONALE);
-				}
-
-				if(courant.y + 1 < dimY) {
-					updateCout(courant, grille[courant.x - 1][courant.y + 1], courant.cout + DIST_DIAGONALE);
-				}
-            }
+			final int cout_h_v = courant.cout + DIST_H_V;
+			final int cout_diag = courant.cout + DIST_DIAGONALE;
 			
-			if(courant.y - 1 >= 0) {
-				updateCout(courant, grille[courant.x][courant.y - 1], courant.cout + DIST_H_V);
-			}
-
-			if(courant.y + 1 < dimY) {
-				updateCout(courant, grille[courant.x][courant.y + 1], courant.cout + DIST_H_V);
-			}
-
-			if(courant.x + 1 < dimX) {
-				updateCout(courant, grille[courant.x + 1][courant.y], courant.cout + DIST_H_V);
-				
-				if(courant.y - 1 >= 0) {
-					updateCout(courant, grille[courant.x + 1][courant.y - 1], courant.cout + DIST_DIAGONALE);
-				}
-
-				if(courant.y + 1 < dimY) {
-					updateCout(courant, grille[courant.x + 1][courant.y + 1], courant.cout + DIST_DIAGONALE);
-				}
-            }
+			updateCout(courant, courant.voisin_n, cout_h_v);
+			updateCout(courant, courant.voisin_s, cout_h_v);
+			updateCout(courant, courant.voisin_e, cout_h_v);
+			updateCout(courant, courant.voisin_w, cout_h_v);
 			
+			updateCout(courant, courant.voisin_ne, cout_diag);
+			updateCout(courant, courant.voisin_nw, cout_diag);
+			updateCout(courant, courant.voisin_se, cout_diag);
+			updateCout(courant, courant.voisin_sw, cout_diag);			
 		}
 		
 	}
@@ -254,14 +289,16 @@ public class AStar {
 		
 		Stack<Point> chemin = null;
 		
-		//astar.setAccessible(2, 2, false);
+		//astar.setDefinitivelyAccessible(49, 35, false);
+		
+		astar.updateVoisinageInfo();
 		
 		//while(true) {
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
 		//}
 		
 		Point p;
