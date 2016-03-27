@@ -7,8 +7,8 @@ package navigation;
  */
 public class Point {
 
-	private int x;
-	private int y;
+	public int x;
+	public int y;
 	private double cap;
 	
 	/**
