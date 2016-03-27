@@ -62,12 +62,11 @@ public class AStar {
 		
 		System.out.println("Grille initialisée !");
 		
-		ouverts = new PriorityQueue<Node>((Object o1, Object o2) -> {
+		ouverts = new PriorityQueue<Node>(dimX * dimY, (Object o1, Object o2) -> {
 			Node n1 = (Node) o1;
 			Node n2 = (Node) o2;
 			
-			return n1.cout < n2.cout ? -1 : 
-				n1.cout > n2.cout ? 1 : 0;
+			return n1.cout - n2.cout;
 		});
 		
 		System.out.println("Priority queue initialisée !");
@@ -102,13 +101,12 @@ public class AStar {
 		
 		int nouveauCout = suivant.heuristique + cout;
 		
-		boolean dejaOuvert = ouverts.contains(suivant);
-		
 		// Si on n'a pas examiné le point, ou que le chemin améliore le cout...
-		if(!dejaOuvert || nouveauCout < suivant.cout) {
+		if(!suivant.ouvert || nouveauCout < suivant.cout) {
 			// ... on ajoute aux ouverts si besoin...
-			if(!dejaOuvert) {
+			if(!suivant.ouvert) {
 				ouverts.add(suivant);
+				suivant.ouvert = true;
 			}
 			// ... on met à jour le cout...
 			suivant.cout = nouveauCout;
@@ -125,9 +123,13 @@ public class AStar {
 		// ON VIDE TOUT !!!
 		for(int x = 0; x < dimX; x++) {
 			for(int y = 0; y < dimY; y++) {
-				if(grille[x][y] != null) {
-					grille[x][y].cout = Integer.MAX_VALUE;
-					grille[x][y].parent = null;
+				final Node temp = grille[x][y];
+				
+				if(temp != null) {
+					temp.cout = Integer.MAX_VALUE;
+					temp.parent = null;
+					temp.heuristique = (Math.abs(objectifX - x) + Math.abs(objectifY - y)) * DIST_H_V;
+					temp.ouvert = false;
 				}
 				fermes[x][y] = false;
 			}
@@ -140,6 +142,7 @@ public class AStar {
 		
 		// On ajoute le noeud de départ à la liste des ouverts
 		ouverts.add(grille[startX][startY]);
+		grille[startX][startY].ouvert = true;
 		
 		// Boucle de calcul
 		while(true) {
@@ -154,6 +157,7 @@ public class AStar {
 			
 			// On "ferme" le noeud
 			fermes[courant.x][courant.y] = true;
+			courant.ouvert = false;
 			
 			// On vérifie si on arrivé
 			if(courant.equals(grille[objectifX][objectifY])) {
@@ -250,16 +254,22 @@ public class AStar {
 		
 		Stack<Point> chemin = null;
 		
-		astar.setAccessible(2, 2, false);
+		//astar.setAccessible(2, 2, false);
 		
-		chemin = astar.getChemin(new Point(0, 0), new Point(dimX - 1, dimY - 1));
-		/*
+		//while(true) {
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
+			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2 + dimX/3, dimY/2 + dimY/3));
+		//}
+		
 		Point p;
 		int i = 0;
 		while(!chemin.isEmpty()) {
 			System.out.println(" " + (i++) + " : " + chemin.pop());
 		}
-		*/
+
 		System.out.println("Terminé, connard !");
 		
 	}

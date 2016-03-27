@@ -35,14 +35,16 @@ public class Node {
 	public Node parent;
 	
 	/**
+	 * Le noeud est-il ouvert ?
+	 */
+	public boolean ouvert;
+	
+	/**
 	 * Constructeur
 	 */
 	public Node(int x, int y) {
 		this.x = x;
 		this.y = y;
-		cout = 0;
-		heuristique = 0;
-		parent = null;
 	}
 	
 	@Override
