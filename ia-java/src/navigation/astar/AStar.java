@@ -1,8 +1,5 @@
 package navigation.astar;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -45,8 +42,6 @@ public class AStar {
 	 */
 	public AStar(int dimX, int dimY) {
 		
-		System.out.println("Création objet AStar");
-		
 		this.dimX = dimX;
 		this.dimY = dimY;
 		
@@ -57,11 +52,7 @@ public class AStar {
 			}
 		}
 		
-		System.out.println("Grille initialisée !");
-		
 		ouverts = new PriorityQueue<Node>(dimX * dimY);
-		
-		System.out.println("Priority queue initialisée !");
 	}
 	
 	/**
@@ -160,8 +151,6 @@ public class AStar {
 	
 	private void calculChemin(int startX, int startY, int objectifX, int objectifY) {
 		
-		System.out.println("On a lancé le bouzin !");
-		
 		// ON VIDE TOUT !!!
 		for(int x = 0; x < dimX; x++) {
 			final int distX = Math.abs(objectifX - x);
@@ -178,8 +167,6 @@ public class AStar {
 				}
 			}
 		}
-		System.out.println("Astar initialisé, on lance le calcul");
-		
 		ouverts.clear();
 		
 		Node courant = null;
@@ -278,36 +265,5 @@ public class AStar {
 		
 		return leChemin;
 	}
-	
-	
-	public static void main(String args[]) {
-		
-		int dimX = Integer.parseInt(args[0]);
-		int dimY = Integer.parseInt(args[1]);
-		
-		AStar astar = new AStar(dimX, dimY);
-		
-		Stack<Point> chemin = null;
-		
-		//astar.setDefinitivelyAccessible(49, 35, false);
-		
-		astar.updateVoisinageInfo();
-		
-		//while(true) {
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
-			chemin = astar.getChemin(new Point(dimX/2 - dimX/3, dimY/2 - dimY/3), new Point(dimX/2, dimY/2));
-		//}
-		
-		Point p;
-		int i = 0;
-		while(!chemin.isEmpty()) {
-			System.out.println(" " + (i++) + " : " + chemin.pop());
-		}
 
-		System.out.println("Terminé, connard !");
-		
-	}
 }
