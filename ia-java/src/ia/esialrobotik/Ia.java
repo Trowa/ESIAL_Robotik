@@ -5,6 +5,7 @@ import api.asserv.AsservDummy;
 import api.asserv.AsservMbed;
 import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
+import api.hardware.StdinGPIO;
 import ia.common.AsservQueue;
 import navigation.Navigation2014;
 import navigation.Point;
@@ -38,8 +39,8 @@ public class Ia {
 
             System.out.println("****** Init GPIO");
             // TODO bien définir les GPIOs
-            tirette = new Tirette(new RaspberryPiGPIO(42));
-            selecteurCouleur  = new SelecteurCouleur(new RaspberryPiGPIO(42));
+            tirette = new Tirette(new StdinGPIO("Tirette"));
+            selecteurCouleur  = new SelecteurCouleur(new StdinGPIO("SelecteurCouleur"));
 
             System.out.println("******* ALL INIT DONE");
 
