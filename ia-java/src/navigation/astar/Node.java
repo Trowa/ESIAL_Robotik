@@ -19,12 +19,17 @@ public class Node implements Comparable<Node> {
 	public int y;
 	
 	/**
-	 * Cout du noeud
+	 * Cout du noeud: le cout pour atteindre ce noeud depuis le départ
 	 */
 	public int cout;
 	
 	/**
-	 * Heuristique
+	 * Cout heuristique: le cout total estimé du chemin si on passe par ce noeud
+	 */
+	public int coutHeuristique;
+	
+	/**
+	 * Heuristique: le cout estimé entre ce noeud et l'arrivé
 	 */
 	public int heuristique;
 	
@@ -79,9 +84,13 @@ public class Node implements Comparable<Node> {
 		return this.x == ((Node)n).x && this.y == ((Node)n).y;
 	}
 
+	/**
+	 * Comparaison de noeuds: le noeud le plus "petit" est le noeud qui minimise
+	 * le cout total estimé.
+	 */
 	@Override
 	public int compareTo(Node o) {
-		return this.cout - o.cout;
+		return this.coutHeuristique - o.coutHeuristique;
 	}
 
 }

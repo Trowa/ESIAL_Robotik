@@ -145,17 +145,28 @@ public class AStar {
 			// Rien à faire
 			return;
 		}
-		
+		/*
+		 * Nouveau cout = (cout pour aller au noeud suivant)
+		 * 					+ (cout estimé du noeud suivant jusqu'à l'arrivé)
+		 */
 		int nouveauCout = suivant.heuristique + cout;
 		
 		// Si on n'a pas examiné le point, ou que le chemin améliore le cout...
-		if(!suivant.ouvert || nouveauCout < suivant.cout) {
-			// ... on met à jour le cout...
-			suivant.cout = nouveauCout;
+		if(!suivant.ouvert || nouveauCout < suivant.coutHeuristique) {
+			
+			// ... on met à jour les couts...
+			suivant.cout = cout;
+			suivant.coutHeuristique = nouveauCout;
 			
 			// ... on ajoute aux ouverts...
-			ouverts.add(suivant);
 			suivant.ouvert = true;
+			/* Il y a un risque d'ajouter un noeud déjà existant dans la file des ouverts, mais:
+			 * - La file ne se re-trie pas si un noeud est modifié ;
+			 * - Supprimer un noeud existant est lent : temps en O(n) ;
+			 * - La tête de la file est toujours le noeud le moins couteux, même si le reste
+			 *   est moins bien trié.
+			 * Du coup, on ajoute et on s'en cogne. */
+			ouverts.add(suivant);
 			
 			// ... et on met à jour le chemin
 			suivant.parent = courant;
@@ -173,21 +184,26 @@ public class AStar {
 				
 				if(temp != null) {
 					temp.cout = Integer.MAX_VALUE;
+					temp.coutHeuristique = Integer.MAX_VALUE;
 					temp.parent = null;
-					temp.heuristique = (distX + Math.abs(objectifY - y)) * DIST_H_V;
 					temp.ouvert = false;
 					temp.ferme = false;
+					
+					// Cout estimé entre le noeud et l'arrivé: distance de Manhattan
+					temp.heuristique = (distX + Math.abs(objectifY - y)) * DIST_H_V;
 				}
 			}
 		}
 		ouverts.clear();
 		
 		Node courant = null;
-		grille[startX][startY].cout = 0;
+		final Node start = grille[startX][startY];
+		start.cout = 0;
+		start.coutHeuristique = start.heuristique;
 		
 		// On ajoute le noeud de départ à la liste des ouverts
-		ouverts.add(grille[startX][startY]);
-		grille[startX][startY].ouvert = true;
+		ouverts.add(start);
+		start.ouvert = true;
 		
 		// Boucle de calcul
 		while(true) {
@@ -201,12 +217,8 @@ public class AStar {
 			}
 			
 			if(courant.ferme) {
-				/*
-				 * Attention, code moche ! Vu qu'on peut ajouter plus d'une fois un noeud
-				 * lorsque que le cout s'améliore, il faut vérifier si on ne sort pas un noeud déjà
-				 * traité. S'il a déjà été traité, il a été traité dans un cas où le cout est inférieur,
-				 * donc on ignore.
-				 */
+				/* Un même noeud peut être ajouté plusieurs fois dans l'ensemble des ouverts, donc
+				 * on vérifie si on ne l'a pas déjà traité. */
 				continue;
 			}
 			
@@ -215,7 +227,7 @@ public class AStar {
 			courant.ouvert = false;
 			
 			// On vérifie si on arrivé
-			if(courant.equals(grille[objectifX][objectifY])) {
+			if(courant.x == objectifX && courant.y == objectifY) {
 				return;
 			}
 			
