@@ -20,7 +20,6 @@ public class Node implements Comparable<Node> {
 	
 	/**
 	 * Cout du noeud
-	 * convention: cout = -1 indique un noeud inaccessible
 	 */
 	public int cout;
 	

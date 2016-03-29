@@ -87,6 +87,19 @@ public class AStar {
 		}
 	}
 	
+	/**
+	 * Remet toutes les zones temporairements inaccessibles en accessibles
+	 */
+	public void resetTemporaryAccessible() {
+		for(int x = 0; x < dimX; x++) {
+			for(int y = 0; y < dimY; y++) {
+				if(grille[x][y] != null) {
+					grille[x][y].accessible = true;
+				}				
+			}
+		}
+	}
+	
 	private Node getNode(int x, int y) {
 		if(x >= 0 && x < dimX && y >= 0 && y < dimY) {
 			return grille[x][y];
