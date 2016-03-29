@@ -9,21 +9,27 @@ package api.asserv;
 public class AsservDummy extends Asserv {
 	
 	private boolean resetTriggered = false;
+	private boolean commandSent = false;
 	
 	public AsservDummy() {
 		System.out.println("[AsservDummy] Initialisation...");
 		resetTriggered = false;
+		commandSent = false;
 		asservInit();
 	}
 
 	@Override
 	protected void sendCommand(String commande) {
-		System.out.println("[AsservDummy] Envoi de la commande: " + commande);
+		System.out.print("[AsservDummy] Envoi de la commande: " + commande);
+		if(!commande.endsWith("\n")) {
+			System.out.print("\n");
+		}
 		
 		if(commande.equals("R")) {
 			// C'est une commande de reset, il faut envoyer "ok"
 			resetTriggered = true;
 		}
+		commandSent = true;
 	}
 
 	@Override
@@ -33,12 +39,19 @@ public class AsservDummy extends Asserv {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("[AsservDummy] Lecture d'une ligne...");
 		if(resetTriggered) {
 			resetTriggered = false;
 			return "Initialitation ok";
 		} else {
-			return "#x0.0y0.0a0.0d1\n";
+			String toSend = "#x0.0y0.0a0.0d";
+			if(commandSent == true) {
+				toSend += "0\n";
+				commandSent = false;
+			} else {
+				toSend += "2\n";
+			}
+			
+			return toSend;
 		}
 	}
 
