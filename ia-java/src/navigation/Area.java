@@ -3,8 +3,13 @@ package navigation;
 import java.util.List;
 
 /**
- * Created by mickael on 14/05/15.
+ * Interface utilisée pour définir des zones interdites sur la table 
  */
-public abstract class Area {
-	public abstract List<Point> getPoints();
+public interface Area {
+	
+	/**
+	 * Récupère la liste des points contenus dans la forme
+	 * @return la liste des points
+	 */
+	public List<Point> getPoints();
 }
