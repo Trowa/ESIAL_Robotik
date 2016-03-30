@@ -7,7 +7,6 @@ import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
 import api.hardware.StdinGPIO;
 import ia.common.AsservQueue;
-import navigation.Navigation2014;
 import navigation.Point;
 
 import java.io.IOException;
@@ -15,7 +14,6 @@ import java.util.TimerTask;
 
 public class Ia {
 	public Asserv asserv;
-	Navigation2014 nav;
 
 	Tirette tirette;
     SelecteurCouleur selecteurCouleur;
