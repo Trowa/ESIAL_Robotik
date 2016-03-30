@@ -105,6 +105,15 @@ public class Point {
 	public String toString(){
 		return "("+x+";"+y+"; " + getCapDegree() + "°)";
 	}
+	
+	/**
+	 * Calcule la distance à un autre point
+	 * @param to L'autre point
+	 * @return
+	 */
+	public int distance(Point to) {
+		return (int)Math.sqrt((this.x - to.x)*(this.x - to.x) + (this.y - to.y)*(this.y - to.y));
+	}
 
 	@Override
 	public int hashCode() {
