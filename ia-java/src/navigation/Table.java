@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 import navigation.astar.AStar;
+import navigation.astar.LineSimplificator;
 
 /**
  * Une table de jeu, avec des zones inaccessibles et un robot adverse.
@@ -67,7 +68,7 @@ public class Table {
 		
 		if(pileChemin != null) {
 			List<Point> listeChemin = new ArrayList<Point>(pileChemin.size());
-			for(Point p : pileChemin) {
+			for(Point p : LineSimplificator.getSimpleLines(pileChemin)) {
 				listeChemin.add(0, new Point(p.x * PAS_CALCUL, p.y * PAS_CALCUL));
 			}
 			return listeChemin;
