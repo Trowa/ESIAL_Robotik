@@ -1,16 +1,13 @@
 package navigation;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Un rectangle
  * @author jb
  *
  */
-public class Rectangle implements Area {
-	
-	private List<Point> listPoints;
+public class Rectangle extends Area {
 	
 	/**
 	 * Deux points suffisent à définir un rectangle
@@ -45,11 +42,6 @@ public class Rectangle implements Area {
 				listPoints.add(new Point(x, y));
 			}
 		}
-	}
-
-	@Override
-	public List<Point> getPoints() {
-		return listPoints;
 	}
 
 }
