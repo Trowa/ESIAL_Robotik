@@ -42,23 +42,27 @@ public class AStar {
 	 */
 	public AStar(int dimX, int dimY) {
 		
-		this.dimX = dimX;
-		this.dimY = dimY;
+		// Pour une taille N, on stocke les points de coordonnées 0 à N.
+		// Cela fait donc N+1 points
+		this.dimX = dimX + 1;
+		this.dimY = dimY + 1;
 		
-		grille = new Node[dimX][dimY];
-		for(int x = 0; x < dimX; x++) {
-			for(int y = 0; y < dimY; y++) {
+		grille = new Node[this.dimX][this.dimY];
+		for(int x = 0; x < this.dimX; x++) {
+			for(int y = 0; y < this.dimY; y++) {
 				grille[x][y] = new Node(x, y);
 			}
 		}
 		
-		ouverts = new PriorityQueue<Node>(dimX * dimY);
+		ouverts = new PriorityQueue<Node>(this.dimX * this.dimY);
 	}
 	
 	/**
 	 * Controle l'accessibilité d'une case de la grille
 	 * Cette méthode est "définitive": à utiliser à l'init pour définir
 	 * les zones physiquements inaccessibles sur la table, genre bordures et cie.
+	 * 
+	 * Ne pas oublier d'appeler la méthode {@link #updateVoisinageInfo()} après !
 	 * @param x 
 	 * @param y
 	 * @param accessible
