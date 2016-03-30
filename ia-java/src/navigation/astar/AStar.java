@@ -86,8 +86,10 @@ public class AStar {
 	 * @param accessible
 	 */
 	public void setTemporaryAccessible(int x, int y, boolean accessible) {
-		if(grille[x][y] != null) {
-			grille[x][y].accessible = accessible;
+		Node noeud = getNode(x, y);
+		
+		if(noeud != null) {
+			noeud.accessible = accessible;
 		}
 	}
 	
