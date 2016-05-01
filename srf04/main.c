@@ -114,6 +114,8 @@ int main(int argc, char *argv[])
         // On termine la ligne
         printf("\n");
 
+        fflush(stdout);
+
         // On attend pour la prochaine série
         usleep(50000);
     }
