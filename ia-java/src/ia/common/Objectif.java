@@ -1,38 +1,64 @@
 package ia.common;
 
-import api.asserv.Asserv;
-import ia.esialrobotik.Ia;
+import java.util.List;
+
+import api.asserv.actions.Action;
 import navigation.Point;
 
 /**
  * Created by mickael on 13/05/15.
  */
 public abstract class Objectif {
-	protected Ia ia;
-	protected AsservQueue queue;
-	protected Asserv asserv;
-	protected boolean done;
+	
+	private boolean done; // L'objectif est-il rempli ?
+	private Point position; // La position à atteindre pour traiter l'objectif
+	private List<Action> actions; // Les actions à effectuer pour remplir l'objectif
 
-	protected Objectif(Ia ia) {
-		this.ia = ia;
+	/**
+	 * Un nouvel objectif
+	 * @param position La position à atteindre pour traiter l'objectif
+	 * @param actions Les actions à effectuer pour remplir l'objectif
+	 */
+	protected Objectif(Point position) {
+		this.position = position;
+		this.actions = generateListActions();
 		this.done = false;
-		this.asserv = ia.asserv;
-		this.queue = ia.queue;
 	}
 
+	/**
+	 * L'objectif est-il rempli ?
+	 * @return true si l'objectif a déjà été rempli
+	 */
 	public boolean isDone() {
 		return done;
 	}
-
-	public boolean isReachable() {
-		return true;
+	
+	/**
+	 * Indique que l'objectif a été rempli
+	 */
+	public void setDone() {
+		done = true;
 	}
 
-	public float getWeight() {
-		return 1f;
+	/**
+	 * Revoie la position et le cap à atteindre pour traiter l'objectif
+	 * @return La position et le cap à atteindre
+	 */
+	public Point getPosition() {
+		return position;
+	};
+	
+	/**
+	 * Renvoie les actions à effectuer pour remplir l'objectif
+	 * @return la liste des actions
+	 */
+	public List<Action> getActions() {
+		return actions;
 	}
 
-	public abstract void run() throws InterruptedException;
-	public abstract boolean isCancellable();
-	public abstract Point getPosition();
+	/**
+	 * Construit la liste des actions. A implémenter dans une sous-classe
+	 * @return la liste des actions
+	 */
+	protected abstract List<Action> generateListActions();
 }
