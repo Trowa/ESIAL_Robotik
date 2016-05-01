@@ -1,0 +1,28 @@
+PINOUT SRF04 <-> GPIO
+
+I: Input pour la raspberry, output du capteur
+O: Output pour la raspberry, input du capteur
+
+Convention (cf shield):
+
+         SHIFTERS
+
+SRF01   SRF02   SRF03   SRF04
++IO-    +IO-    +IO-    +IO-
+
+SRF01
+    IN: 17
+    OUT:27
+
+SRF02
+    IN: 10
+    OUT:9
+
+SRF03
+    IN: 5
+    OUT:6
+
+SRF04
+    IN: 19
+    OUT:26
+
