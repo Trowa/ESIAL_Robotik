@@ -34,6 +34,12 @@ public class Point {
 		this.y = y;
 	}
 	
+	public Point(int x, int y, int capDegree){
+		this.x = x;
+		this.y = y;
+		this.cap = Math.toRadians(capDegree);
+	}
+	
 	public void setX(int x) {
 		this.x = x;
 	}
