@@ -72,7 +72,6 @@ int main(int argc, char *argv[])
         }
 
         // Un nouveau capteur
-        printf("Création d'un srf, in = %d, out = %d\n", gpio_in, gpio_out);
         capteurs[capteur_index] = srf04_new(gpio_in, gpio_out);
     }
 
@@ -81,7 +80,7 @@ int main(int argc, char *argv[])
     {
         // On va balancer les résultats sur la sortie standard
         // Format de la sortie: une ligne par jeu de mesure, avec sur chaque
-        // ligne, la mesure de tous les capteurs, séparés par le caractère '#'
+        // ligne, la mesure de tous les capteurs, séparés par le caractère ' '
         // Les valeurs seront en mm
         for(capteur_index = 0; capteur_index < nb_capteurs; capteur_index++)
         {
@@ -100,9 +99,9 @@ int main(int argc, char *argv[])
 
             if(capteur_index > 0)
             {
-                // C'est pas le premier capteur, donc on ajoute '#' comme séparateur
+                // C'est pas le premier capteur, donc on ajoute ' ' comme séparateur
                 // avant de renvoyer la mesure
-                printf("#");
+                printf(" ");
             }
 
             // La mesure
