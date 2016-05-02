@@ -186,3 +186,8 @@ sftp-config.json
 
 *.eml
 *.iml
+
+LPC176x/*
+*.bin
+*.elf
+*.hex
