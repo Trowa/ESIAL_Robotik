@@ -1,11 +1,10 @@
 package ia.esialrobotik;
 
 import api.asserv.Asserv;
-import api.asserv.AsservDummy;
 import api.asserv.AsservMbed;
 import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
-import api.hardware.StdinGPIO;
+import api.sensors.DetectionExternalSRF04Thread;
 import ia.common.AsservQueue;
 import navigation.Navigation.TeamColor;
 import navigation.Point;
@@ -22,6 +21,7 @@ public class Ia {
 	public TeamColor teamColor;
 	public int ymult;
 	public AsservQueue queue;
+	public DetectionExternalSRF04Thread detection;
 
 	public Ia() {
         try {
@@ -29,7 +29,6 @@ public class Ia {
             System.out.println("****** Init asserv");
             // TODO vérifier le fichier de périphérique
             asserv = new AsservMbed("/dev/serial/by-id/usb-mbed_Microcontroller_101000000000000000000002F7F2854A-if01");
-            //asserv = new AsservDummy();
             System.out.println("COUCOUCOUCOU");
 
             System.out.println("****** Init GPIO");
@@ -37,11 +36,15 @@ public class Ia {
             tirette = new Tirette(new RaspberryPiGPIO(24, true));
             selecteurCouleur  = new SelecteurCouleur(new RaspberryPiGPIO(23, true));
 
+			System.out.println("******* Init detection");
+			int[] gpioIn = {17, 10, 5, 19};
+			int[] gpioOut = {27, 9, 6, 26};
+			this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 300, this);
+
             System.out.println("******* ALL INIT DONE");
 
             queue = new AsservQueue(asserv);
             queue.start();
-            return;
         } catch (Exception ex) {
             ex.printStackTrace();
 	        System.exit(1);
@@ -77,10 +80,10 @@ public class Ia {
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
 
-		this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
+		//this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
 
 		// Code pour se remettre dans la zone de départ
-		this.goPositionDepart();
+		//this.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
@@ -151,7 +154,7 @@ public class Ia {
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
 		
-		// TODO initialiser l'évitement
+		this.detection.start();
 		
 		// TODO effectuer quelques actions
 	}
@@ -160,9 +163,8 @@ public class Ia {
 		/*
 		 * IA qui roxxe du poney et marque plein de points
 		 */
-		
-		// TODO initialiser l'évitement
-		
+
+		this.detection.start();
 		// TODO effectuer quelques actions
 	}
 	
