@@ -14,6 +14,7 @@
                 <zipfileset src="libs/jna.jar"/>
                 <zipfileset src="libs/purejavacomm.jar"/>
                 <zipfileset src="libs/ax12.jar"/>
+                <zipfileset src="libs/RXTXcomm.jar"/>
             </jar>
         </sequential>
     </macrodef>

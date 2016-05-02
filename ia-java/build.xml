@@ -6,8 +6,8 @@
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="raspberry">
     <property environment="env"/>
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.7"/>
-    <property name="source" value="1.7"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
     <import file="build-jars.xml"/>
     <path id="raspberry.classpath">
         <pathelement location="bin"/>
@@ -15,6 +15,7 @@
         <pathelement location="libs/ax12.jar"/>
         <pathelement location="libs/jna.jar"/>
         <pathelement location="libs/purejavacomm.jar"/>
+    	<pathelement location="libs/RXTXcomm.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
