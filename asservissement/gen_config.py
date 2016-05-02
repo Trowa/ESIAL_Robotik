@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__doc__ = "Met à jour le fichier config.txt passé en paramètre à l'aide du fichier params.h"
+__doc__ = "Met a jour le fichier config.txt passe en parametre a l'aide du fichier params.h"
 
 import sys
 import re
