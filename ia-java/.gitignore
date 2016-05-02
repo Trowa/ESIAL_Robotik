@@ -183,3 +183,6 @@ fabric.properties
 
 # sftp configuration file
 sftp-config.json
+
+*.eml
+*.iml
