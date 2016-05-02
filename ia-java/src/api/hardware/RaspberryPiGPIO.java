@@ -54,6 +54,7 @@ public class RaspberryPiGPIO implements GPIO {
 		try {
 			InputStream valueFile = Files.newInputStream(Paths.get("/sys/class/gpio/gpio" + gpioNum + "/value"), StandardOpenOption.READ);
 			char value = (char) valueFile.read();
+			valueFile.close();
 			if(value == '1')
 			{
 				return true;
