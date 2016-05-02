@@ -21,9 +21,10 @@ public class DeplacementTask extends Thread {
 	private void waitForFinish() {
 		while(true) {
 			ia.sleep(20);
-			if(asserv.lastCommandFinished()) {
-				return;
-			}
+			// todo lol
+//			if(asserv.lastCommandFinished()) {
+//				return;
+//			}
 		}
 	}
 	
@@ -31,7 +32,8 @@ public class DeplacementTask extends Thread {
 	public void run() {
 		System.out.println("C'est parti !");
 		for (Point p : points) {
-			this.asserv.gotoPosition(p.getX(), p.getY(), false);
+			// todo lol
+//			this.asserv.gotoPosition(p.getX(), p.getY(), false);
 			this.waitForFinish();
 		}
 		//ia.objectifAtteint(points.get(points.size()-1));

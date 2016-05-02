@@ -61,7 +61,7 @@ public class ExternalSRF04 {
 	 * Devrait être appelée en boucle dans un thread séparé
 	 * @return
 	 */
-	private int[] getMesures() {
+	public int[] getMesures() {
 		int[] mesures = new int[nbCapteurs];
 		
 		// On récupère les données des capteurs et on les stocke

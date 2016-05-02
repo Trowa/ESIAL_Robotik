@@ -80,7 +80,7 @@ public class Ia {
 		this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
 
 		// Code pour se remettre dans la zone de départ
-		ia.goPositionDepart();
+		this.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
@@ -114,9 +114,13 @@ public class Ia {
 	}
 	
 	private void goPositionDepart() throws IOException {
-		asserv.gotoPosition(250, 935 * ymult, true);
-		asserv.face(1000, 935 * ymult, true);
-		asserv.go(-25, true);
+		try {
+			asserv.gotoPosition(250, 935 * ymult, true);
+			asserv.face(1000, 935 * ymult, true);
+			asserv.go(-25, true);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void nettoyage() throws IOException {
