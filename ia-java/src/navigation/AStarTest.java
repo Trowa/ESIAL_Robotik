@@ -1,6 +1,10 @@
 package navigation;
 
+import ia.common.Objectif;
+
 import java.util.List;
+
+import navigation.Navigation.TeamColor;
 
 /**
  * Classe pour tester le calcul de chemin
@@ -11,37 +15,34 @@ public class AStarTest {
 
 	public static void main(String[] args) {
 		
-		// Une table
-		Table table = new Table();
+		// La navigation
+		Navigation nav = new Navigation();
 		
-		Point robot = new Point(250, 250); // Notre position
-		Point cible = new Point(2000, 1000); // Le point à atteindre
-
-		// On démarre le chrono
-		long elapsedTime = 0;
-		long startTime = System.currentTimeMillis(); 
+		nav.setTeamColor(TeamColor.GREEN);
 		
-		// On met un adversaire sur la table
-		table.setPositionAdversaire(new Point(1500, 400), 400);
-	
-		// On calcule le chemin
-		List<Point> cheminList = table.getCheminToPoint(robot, cible);
+		Point nous = new Point(210, nav.getYmult() * 800);
 		
-		// Temps écoulé ?
-		long stopTime = System.currentTimeMillis();
-		elapsedTime = (stopTime - startTime);
-
-		System.out.println("Chemin calculé en " + elapsedTime + "ms");
+		Objectif o = null;
 		
-		if(cheminList != null) {
-			int i = 0;
-			for(Point p : cheminList) {
-				System.out.println(" " + (i++) + " : " + p);
+		do {
+		
+			o = nav.getObjectifProche(nous);
+			
+			if(o != null) {
+		
+				System.out.println(o.getClass().getName() + " : " + o.getPosition());
+		
+				List<Point> chemin = nav.getChemin(nous, o.getPosition());
+		
+				int i = 0;
+				for(Point p : chemin) {
+					System.out.println((++i) + " : " + p);
+				}
+				
+				nous = chemin.get(chemin.size() - 1);
+				o.setDone();
 			}
-		} else {
-			System.out.println("Pas de chemin !");
-		}
-
+		} while(o != null);
 	}
 
 }
