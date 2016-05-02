@@ -51,15 +51,13 @@ public class Ia {
 	public Point getPosition() {
 		return asserv.getCurrentPosition();
 	}
+
 	public static void main(String[] args) throws Exception {
 
 		System.out.println("############################################################## IA #################################################");
 		final Ia ia = new Ia();
-
-
 		ia.start();
 	}
-
 
 	public void start() throws Exception {
 		// On initialise le chrono
