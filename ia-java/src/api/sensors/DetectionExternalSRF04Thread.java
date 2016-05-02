@@ -36,8 +36,6 @@ public class DetectionExternalSRF04Thread extends Thread {
 			// mesures[2] = Avant gauche
 			// mesures[3] = Arrière
 			int[] mesures = capteurs.getMesures();
-			System.out.print("Mesures: ");
-
 			int droite = mesures[0];
 			int milieu = mesures[1];
 			int gauche = mesures[2];

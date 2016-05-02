@@ -36,11 +36,6 @@ public class Ia {
             tirette = new Tirette(new RaspberryPiGPIO(24, true));
             selecteurCouleur  = new SelecteurCouleur(new RaspberryPiGPIO(23, true));
 
-			System.out.println("******* Init detection");
-			int[] gpioIn = {17, 10, 5, 19};
-			int[] gpioOut = {27, 9, 6, 26};
-			this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 300, this);
-
             System.out.println("******* ALL INIT DONE");
 
             queue = new AsservQueue(asserv);
@@ -154,8 +149,7 @@ public class Ia {
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
 		
-		this.detection.start();
-		
+		this.createAndLaunchDetection();
 		// TODO effectuer quelques actions
 	}
 
@@ -164,7 +158,7 @@ public class Ia {
 		 * IA qui roxxe du poney et marque plein de points
 		 */
 
-		this.detection.start();
+		this.createAndLaunchDetection();
 		// TODO effectuer quelques actions
 	}
 	
@@ -174,6 +168,14 @@ public class Ia {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void createAndLaunchDetection() {
+		System.out.println("******* Init detection");
+		int[] gpioIn = {17, 10, 5, 19};
+		int[] gpioOut = {27, 9, 6, 26};
+		this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 300, this);
+		this.detection.start();
 	}
 
 }
