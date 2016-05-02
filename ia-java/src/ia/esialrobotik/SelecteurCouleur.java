@@ -1,5 +1,6 @@
 package ia.esialrobotik;
 
+import navigation.Navigation.TeamColor;
 import api.hardware.GPIO;
 
 public class SelecteurCouleur {
@@ -13,7 +14,7 @@ public class SelecteurCouleur {
 		this.gpio = gpio;
 	}
 
-	public Ia.TeamColor getTeamColor() {
-		return gpio.getValue() ? Ia.TeamColor.GREEN : Ia.TeamColor.YELLOW;
+	public TeamColor getTeamColor() {
+		return gpio.getValue() ? TeamColor.GREEN : TeamColor.VIOLET;
 	}
 }

@@ -7,6 +7,7 @@ import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
 import api.hardware.StdinGPIO;
 import ia.common.AsservQueue;
+import navigation.Navigation.TeamColor;
 import navigation.Point;
 
 import java.io.IOException;
@@ -22,23 +23,19 @@ public class Ia {
 	public int ymult;
 	public AsservQueue queue;
 
-	public enum TeamColor {
-		GREEN,
-		YELLOW
-	}
-
 	public Ia() {
         try {
             // On initialise l'asservissement
             System.out.println("****** Init asserv");
-            //asserv = new AsservMbed("/dev/serial/by-id/usb-MBED_MBED_CMSIS-DAP_101068a5cbdd92814f89f87e9a3fcdbac7ba-if01");
-            asserv = new AsservDummy();
+            // TODO vérifier le fichier de périphérique
+            asserv = new AsservMbed("/dev/serial/by-id/usb-mbed_Microcontroller_101000000000000000000002F7F2854A-if01");
+            //asserv = new AsservDummy();
             System.out.println("COUCOUCOUCOU");
 
             System.out.println("****** Init GPIO");
             // TODO bien définir les GPIOs
-            tirette = new Tirette(new StdinGPIO("Tirette"));
-            selecteurCouleur  = new SelecteurCouleur(new StdinGPIO("SelecteurCouleur"));
+            tirette = new Tirette(new RaspberryPiGPIO(24, true));
+            selecteurCouleur  = new SelecteurCouleur(new RaspberryPiGPIO(23, true));
 
             System.out.println("******* ALL INIT DONE");
 
@@ -66,7 +63,7 @@ public class Ia {
 
 	public void start() throws Exception {
 		// On initialise le chrono
-		Chrono chrono_stop = new Chrono(88 * 1000);
+		Chrono chrono_stop = new Chrono((int) (2 * 1000));
 
 		System.out.println("Attente tirette présente");
 		tirette.wait(false);
@@ -85,10 +82,9 @@ public class Ia {
 		this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
 
 		// TODO Code pour se remettre dans la zone de départ
-		asserv.gotoPosition(800, 500 * ymult, true);
-		asserv.gotoPosition(800, 1000 * ymult, true);
-		asserv.face(2000, 1000 * ymult, true);
-		asserv.go(-390, true);
+		asserv.gotoPosition(250, 935 * ymult, true);
+		asserv.face(1000, 935 * ymult, true);
+		asserv.go(-25, true);
 
 		System.out.println("Attente remise tirette");
 
@@ -104,11 +100,6 @@ public class Ia {
 			@Override
 			public void run() {
 
-				System.out.println("Fin du match mais on tire un coup quand même");
-				asserv.halt();
-				asserv.resetHalt();
-				asserv.go(-50, false);
-				sleep(1000);
 				asserv.halt();
 				System.out.println("Fin");
 				try {
@@ -120,9 +111,9 @@ public class Ia {
 			}
 		});
 
-		iaTest();
+		//iaTest();
 		//iaHomologation();
-		//iaPrincipale();
+		iaPrincipale();
 		nettoyage();
 	}
 
@@ -139,8 +130,13 @@ public class Ia {
 		/*
 		 * IA de test pour savoir si l'asserv marche
 		 */
-		asserv.gotoPosition(850, (2000 - 1770) * ymult, true);
-		asserv.gotoPosition(1010, (2000 - 1770) * ymult, true);
+		try {
+			asserv.gotoPosition(850, (2000 - 1770) * ymult, true);
+			asserv.gotoPosition(1010, (2000 - 1770) * ymult, true);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		asserv.halt();
 	}
 

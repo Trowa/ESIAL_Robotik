@@ -14,7 +14,7 @@ public class Tirette {
 	}
 
 	public boolean isPulled() {
-		return gpio.getValue();
+		return !gpio.getValue();
 	}
 
 	public void wait(boolean pulled) {
