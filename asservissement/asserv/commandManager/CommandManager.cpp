@@ -316,22 +316,22 @@ void CommandManager::calageBordureGros(int sens)
 
     // On recule 2sec
     cnsgCtrl->add_dist_consigne(Utils::mmToUO(odometrie, -150));
-    wait(2);
+    wait(4);
     cnsgCtrl->angle_Regu_On(false); //on coupe le régu d'angle pour s'aligner avec la bordure
     wait(2); //et on attend encore
 
     // On considère qu'on est contre la bordure, on reset la postion du robot
     odometrie->resetTheta();
     cnsgCtrl->reset_regu_angle();
-    odometrie->resetX(Config::placementOrigine);
+    odometrie->resetX(Config::placementOrigineX);
     cnsgCtrl->reset_regu_dist();
 
     // On remet le regulateur d'angle
     cnsgCtrl->angle_Regu_On(true);
 
     // On avance un peu pour sortir de la zone
-    cnsgCtrl->add_dist_consigne(Utils::mmToUO(odometrie, 140));
-    wait(2);
+    cnsgCtrl->add_dist_consigne(Utils::mmToUO(odometrie, 340));
+    wait(4);
 
     // En fonction de la couleur, on tourne dans un sens ou l'autre
     int mult = sens == 0 ? 1 : -1;
@@ -340,16 +340,16 @@ void CommandManager::calageBordureGros(int sens)
 
     // On recule dans la bordure
     cnsgCtrl->add_dist_consigne(Utils::mmToUO(odometrie, -150));
-    wait(2);
+    wait(4);
     cnsgCtrl->angle_Regu_On(false); //on coupe le régu d'angle pour s'aligner avec la bordure
     wait(4); //et on attend encore
 
     // On reset l'axe Y du robot et on se décolle de la bordure
-    odometrie->resetY(Config::placementOrigine * -mult);
+    odometrie->resetY(Config::placementOrigineY * -mult);
     cnsgCtrl->reset_regu_dist();
     cnsgCtrl->angle_Regu_On(true);
     cnsgCtrl->add_dist_consigne(Utils::mmToUO(odometrie, 150));
-    wait(2);
+    wait(4);
 
     // On remet la marche arrière à vitesse normale
     cnsgCtrl->setLowSpeed(false);
@@ -368,7 +368,7 @@ void CommandManager::calageBordurePetit(int sens)
     // Au bout de 5sec, on considère qu'on est contre la bordure, on reset la postion du robot
     odometrie->resetTheta();
     cnsgCtrl->reset_regu_angle();
-    odometrie->resetX(Config::placementOrigine);
+    odometrie->resetX(Config::placementOrigineX);
     cnsgCtrl->reset_regu_dist();
 
     // On remet le régulateur d'angle
@@ -389,7 +389,7 @@ void CommandManager::calageBordurePetit(int sens)
     wait(5);
 
     // On reset l'axe Y du robot et on se décolle de la bordure
-    odometrie->resetY(Config::placementOrigine * -mult);
+    odometrie->resetY(Config::placementOrigineY * -mult);
     cnsgCtrl->reset_regu_dist();
     cnsgCtrl->angle_Regu_On(true);
     cnsgCtrl->add_dist_consigne(Utils::mmToUO(odometrie, 140));

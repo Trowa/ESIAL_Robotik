@@ -84,8 +84,10 @@ void ConsignController::perform()
 void ConsignController::setLowSpeed(bool b)
 {
     if (b) {
-        dist_regu.setVitesseMarcheArriere(Config::DIST_QUAD_1ST_NEG / 8);
+        dist_regu.setVitesseMarcheArriere(Config::DIST_QUAD_1ST_NEG / 16);
+        dist_regu.setVitesseMarcheAvant(Config::DIST_QUAD_1ST_POS / 6);
     } else {
         dist_regu.setVitesseMarcheArriere(Config::DIST_QUAD_1ST_NEG);
+        dist_regu.setVitesseMarcheAvant(Config::DIST_QUAD_1ST_POS);
     }
 }
