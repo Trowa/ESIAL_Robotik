@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="ax12.jar" scope="COMPILE">
+		<srcroot url="jar://$MODULE_DIR$/libs/ax12.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/libs/ax12.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/ax12.jar!/"/>
+	</lib>
+	<lib name="RXTXcomm.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/RXTXcomm.jar!/"/>
+	</lib>
+	<lib name="jna.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/jna.jar!/"/>
+	</lib>
+	<lib name="pi4j-core.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/pi4j-core.jar!/"/>
+	</lib>
+</component>
