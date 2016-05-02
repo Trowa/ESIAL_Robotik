@@ -281,6 +281,7 @@ void CommandManager::computeEnchainement()
 
         // On vient de terminer la consigne courante, on le signale en haut lieu
         putchar('d');
+        putchar('\r');
         putchar('\n');
 
         // Le reste, c'est pas grave, on le calculera à la prochaine itération
