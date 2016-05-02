@@ -136,4 +136,8 @@ public class Navigation {
 		objectifs.add(new Cabine(cabine2));
 	}
 
+	public Table getTable() {
+		return this.table;
+	}
+
 }

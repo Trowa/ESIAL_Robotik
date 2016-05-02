@@ -61,7 +61,7 @@ public class Ia {
 
 	public void start() throws Exception {
 		// On initialise le chrono
-		Chrono chrono_stop = new Chrono((int) (2 * 1000));
+		Chrono chrono_stop = new Chrono((int) (89 * 1000));
 
 		System.out.println("Attente tirette présente");
 		tirette.wait(false);
@@ -79,10 +79,8 @@ public class Ia {
 
 		this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
 
-		// TODO Code pour se remettre dans la zone de départ
-		asserv.gotoPosition(250, 935 * ymult, true);
-		asserv.face(1000, 935 * ymult, true);
-		asserv.go(-25, true);
+		// Code pour se remettre dans la zone de départ
+		ia.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
@@ -113,6 +111,12 @@ public class Ia {
 		//iaHomologation();
 		iaPrincipale();
 		nettoyage();
+	}
+	
+	private void goPositionDepart() throws IOException {
+		asserv.gotoPosition(250, 935 * ymult, true);
+		asserv.face(1000, 935 * ymult, true);
+		asserv.go(-25, true);
 	}
 
 	private void nettoyage() throws IOException {

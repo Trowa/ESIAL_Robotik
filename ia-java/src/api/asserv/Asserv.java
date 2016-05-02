@@ -27,6 +27,11 @@ public abstract class Asserv implements Runnable {
 	 * Booléen signalant l'interruption de l'asserv
 	 */
 	private boolean interrupted;
+
+	/**
+	 * Booléen signalant qu'on va en marche arrière
+	 */
+	private boolean isBackward;
 	
 	/**
 	 * Position courante du robot
@@ -42,6 +47,8 @@ public abstract class Asserv implements Runnable {
 	protected void asservInit() {
 		reset();
 		
+		this.isBackward = false;
+
 		// On démarre le thread pour parser la sortie de l'asser
 		Thread checker = new Thread(this);
 		checker.start();
@@ -118,6 +125,7 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void gotoPosition(double x, double y, boolean wait) throws InterruptedException {
 		String commande = "g"+x+"#"+y+"\n";
+		this.isBackward = false;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;
@@ -136,6 +144,7 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void face(double x, double y, boolean wait) throws InterruptedException {
 		String commande = "f"+x+"#"+y+"\n";
+		this.isBackward = false;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;
@@ -151,6 +160,7 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void go(double d, boolean wait) throws InterruptedException {
 		String commande = "v"+d+"\n";
+		this.isBackward = d <= 0;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;
@@ -167,6 +177,7 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void turn(double a, boolean wait) throws InterruptedException {
 		String commande = "t"+a+"\n";
+		this.isBackward = false;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;
@@ -267,6 +278,14 @@ public abstract class Asserv implements Runnable {
 	 * @return la ligne lue
 	 */
 	protected abstract String readAsservOutput();
+
+	/**
+	 * Nous dit si on fait une marche arrière ou non
+	 * @return true si marche arrière, false sinon
+	 */
+	public boolean isBackward() {
+		return this.isBackward;
+	}
 	
 	/**
 	 * Le code qui permet de parser la sortie de l'asserv
