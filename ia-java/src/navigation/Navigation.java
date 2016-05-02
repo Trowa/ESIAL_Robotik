@@ -1,182 +1,139 @@
 package navigation;
 
+import ia.common.Objectif;
+import ia.esialrobotik.objectifs.Cabine;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe abstraite gérant la navigation du robot, il suffit de l'étendre chaque année en remplissant les méthodes qui vont bien
+ * Classe gérant la navigation du robot.
+ * Les coordonnées des points sur la table sont en millimètres, comme dans l'asserv
  * @author fprugnie
  *
  */
-public abstract class Navigation {
+public class Navigation {
 	
-	protected DStarLite dStar;
-	protected ArrayList<Point> zonesInterdites;
-	protected ArrayList<Point> zonesInterditesMobiles;
-	protected Point goal;
-	protected ArrayList<Point> objectifs;
-	protected ArrayList<Point> commandes;
-	protected int pas;
+	private Table table; // La table de jeu
+	private List<Objectif> objectifs; // Les objectifs à atteindre
+	private TeamColor couleur; // La couleur de l'équipe
+	private int yMult;
 	
+	public enum TeamColor {
+		GREEN, // Coté droit
+		VIOLET // Coté gauche
+	}
+	
+	/**
+	 * Constructeur
+	 */
 	public Navigation() {
-		this.dStar = new DStarLite();
-		this.zonesInterdites = new ArrayList<Point>();
-		this.zonesInterditesMobiles = new ArrayList<Point>();
-		this.objectifs = new ArrayList<Point>();
-		this.commandes = new ArrayList<Point>();
 		
-		this.init();
-		this.initZonesInterdites();
-		this.initListeObjectifs();
+		// On instancie la table
+		table = new Table();
+		
+		yMult = 0;
 	}
 	
-	protected abstract void init();
+	/**
+	 * Renvoie le multiplicateur pour les coordoonées en Y
+	 * @return 1 ou -1
+	 */
+	public int getYmult() {
+		return yMult;
+	}
 	
 	/**
-	 * Contient les zones interdites fixes
-	 * Attention à bien prendre en compte la largeur du robot dans vos calculs !!
+	 * Définit la couleur de l'équipe
+	 * @param couleur
 	 */
-	protected abstract void initZonesInterdites();
-	
-	/**
-	 * Remplit la zone interdites mobiles à partir de la position de l'adversaire
-	 * @param x Position en X de l'obstacle (prendre en cm l'entier le plus proche)
-	 * @param y Position en Y de l'obstacle (prendre en cm l'entier le plus proche)
-	 */
-	protected abstract void setZonesInterditesMobiles(int x, int y);
-	
-	/**
-	 * Renvoit les extrêmes d'une zone interdites
-	 * @param adversaire Position de l'adversaire (prendre en cm l'entier le plus proche)
-	 * @return Un tableau de deux Point contenant (xmin, ymin) et (xmax, ymax) d'une zone interdite
-	 */
-	public abstract Point[] getExtremeZoneInterdite(Point adversaire);
-	
-	/**
-	 * Remplit la liste d'objectifs
-	 */
-	protected abstract void initListeObjectifs();
-	
-	/**
-	 * On vient de rencontrer un obstacle, on met à jours les zones interdites et on recalcule l'itinéraire
-	 * @param obstacleX Position en X de l'obstacle (prendre en cm l'entier le plus proche)
-	 * @param obstacleY Position en Y de l'obstacle (prendre en cm l'entier le plus proche)
-	 * @param robotX Position en X du robot (prendre en cm l'entier le plus proche)
-	 * @param robotY Position en Y du robot (prendre en cm l'entier le plus proche)
-	 * @return true si l'objectif est encore atteignable, false sinon
-	 */
-	public boolean obstacleMobile(Point adversaire, Point robot) {
-		// On nettoie les anciennes zones interdites
-		this.resetObstacleMobile();
+	public void setTeamColor(TeamColor couleur) {
+		this.couleur = couleur;
 		
-		// On calcule la nouvelle zone et on la stocke
-		this.setZonesInterditesMobiles(adversaire.getX(), adversaire.getY());
+		/* Le coté de la table dépend de la couleur, les coordonnées changent.
+		 * Si on évolue du coté gauche de la table, les Y seront positifs, si c'est
+		 * du côté droit, les Y seront négatifs. On gère ça avec un multiplicateur sur Y.
+		 */
+		yMult = (couleur == TeamColor.GREEN) ? -1 : 1;
 		
-		// On place la nouvelle zone interdite
-		for (Point p : this.zonesInterditesMobiles) {
-			this.dStar.updateCell(p.getX(), p.getY(), -1);
+		// On reparamètre la liste des objectifs
+		initListeObjectifs(couleur);
+	}
+	
+	/**
+	 * Récupère l'objectif à remplir le plus proche de la position donnée
+	 * @param position
+	 * @return un objectif, ou null s'il n'y a plus d'objectif à remplir
+	 */
+	public Objectif getObjectifProche(Point position) {
+		Objectif proche = null;
+		int distance_2 = Integer.MAX_VALUE;
+		
+		// On vérifie les objectifs
+		for(Objectif o : objectifs) {
+			
+			// Si l'objectif est remplit, on s'en fiche
+			if(o.isDone()) {
+				continue;
+			}
+			
+			// On calcule la distance jusqu'à cet objectif
+			final Point positionObjectif = o.getPosition();
+			final int newDistance_2 = (positionObjectif.x - position.x) * (positionObjectif.x - position.x)
+					+ (positionObjectif.y - position.y) * (positionObjectif.y - position.y);
+			
+			// S'il est plus proche, on le sélectionne
+			if(newDistance_2 < distance_2) {
+				proche = o;
+				distance_2 = newDistance_2;
+			}
 		}
 		
-		return calculItineraire(robot);
+		return proche;
 	}
 	
-	public void resetObstacleMobile() {
-		for (Point p : this.zonesInterditesMobiles) {
-			this.dStar.updateCell(p.getX(), p.getY(), 1);
-		}
-		this.zonesInterditesMobiles.clear();
-	}
-	
-	/**
-	 * On déclenche un calcul de l'itinaire à suivre
-	 * @param startX Position en X du robot (prendre en cm l'entier le plus proche)
-	 * @param startY Position en Y du robot (prendre en cm l'entier le plus proche)
-	 * @return true si l'objectif est atteignable, false sinon
-	 */
-	public boolean calculItineraire(Point start) {
-		long time = System.currentTimeMillis();
-		System.out.println("DStar start");		
-		this.dStar.updateStart((int)Math.rint((double)start.getX()/(double)pas), (int)Math.rint((double)start.getY()/(double)pas));
-		System.out.println("updateStart ok : "+start+" - "+(int)Math.rint((double)start.getX()/(double)pas)+";"+(int)Math.rint((double)start.getY()/(double)pas));
-		this.dStar.updateGoal(this.goal.getX(), this.goal.getY());
-		System.out.println("updateGoal ok : "+this.goal);
-		boolean res = this.dStar.replan();
-		System.out.println("DStar end : "+(System.currentTimeMillis()-time)+"ms");
-		return res;
-	}
-	
-	/**
-	 * Permet de récupérer la liste des positions à transmettre à l'asservissement
-	 * @return ArrayList<Point> des positions du parcours
-	 */
-	public ArrayList<Point> getCommandeAsserv() {
-		this.commandes = new ArrayList<Point>();
-		List<State> path = this.dStar.getPathReduced();
+	public List<Point> getChemin(Point nous, Point cible) {
 		
-		for (State i : path) {
-			commandes.add(new Point(i.x,i.y));
-		}
-		System.out.println(commandes);
-		return commandes;
+		Point nousTable = nous;
+		Point cibleTable = cible;
 		
-		// Méthode JBG, semble moins legèrement moins bonne mais plus propre
-		//return this.dStar.getRoute();
+		// Si on doit inverser les Y, il faut le faire maintenant
+		if(yMult == -1) {
+			nousTable = new Point(nous.x , -nous.y);
+			cibleTable = new Point(cible.x, -cible.y);
+		}
+		
+		// On récupère le chemin
+		List<Point> chemin = table.getCheminToPoint(nousTable, cibleTable);
+		
+		if(chemin != null && yMult == -1) {
+			// Il faut inverser Y dans le chemin obtenu
+			for(Point p : chemin) {
+				// On modifie directement les instances des points
+				p.y = -p.y;
+			}
+		}
+		
+		return chemin;
 	}
+	
 	
 	/**
-	 * Permet de récupérer les points de passage sans tout recalculer
-	 * @return ArrayList<Point> this.commandes
+	 * Remplit la liste d'objectifs. Les objectifs peuvent dépendre de la couleur
+	 * de l'équipe
+	 * A modifier chaque année
 	 */
-	public ArrayList<Point> getCachedCommandeAsserv() {
-		return this.commandes;
-	}
-	
-	public void debugZoneInterdites() {
-		System.out.println("================= Debug zones interdites ===================");
-		for (Point state : this.zonesInterdites) {
-			System.out.println(state.getX()+";"+state.getY());
-		}
-		System.out.println("================= Fin debug zones interdites ===================");
-	}
-	
-	public void debugZoneInterditesMobiles() {
-		System.out.println("================= Debug zones interdites mobiles ===================");
-		for (Point state : this.zonesInterditesMobiles) {
-			System.out.println(state.getX()+";"+state.getY());
-		}
-		System.out.println("================= Fin debug zones interdites mobiles ===================");
-	}
-	
-	public ArrayList<Point> getZonesInterdites() {
-		return zonesInterdites;
-	}
-
-	public void setZonesInterdites(ArrayList<Point> zonesInterdites) {
-		this.zonesInterdites = zonesInterdites;
-	}
-
-	public ArrayList<Point> getZonesInterditesMobiles() {
-		return zonesInterditesMobiles;
-	}
-
-	public void setZonesInterditesMobiles(ArrayList<Point> zonesInterditesMobiles) {
-		this.zonesInterditesMobiles = zonesInterditesMobiles;
-	}
-
-	public ArrayList<Point> getObjectifs() {
-		return objectifs;
-	}
-
-	public void setObjectifs(ArrayList<Point> objectifs) {
-		this.objectifs = objectifs;
-	}
-	
-	public Point getGoal() {
-		return this.goal;
-	}
-	
-	public void setGoal(Point goal) {
-		this.goal = goal;
+	private void initListeObjectifs(TeamColor couleur) {
+		objectifs = new ArrayList<Objectif>();
+		
+		// On utilise yMult pour définir les coordonnées des objectifs
+		
+		// Les deux cabines de plages
+		Point cabine1 = new Point(300, 210 * yMult, -90 * yMult);
+		Point cabine2 = new Point(600, 210 * yMult, -90 * yMult);
+		
+		objectifs.add(new Cabine(cabine1));
+		objectifs.add(new Cabine(cabine2));
 	}
 
 }
