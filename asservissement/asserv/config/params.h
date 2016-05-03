@@ -94,7 +94,8 @@ PARAM(int64_t, enchainThreshold)
 //--------------------------//
 
 // Distance entre le point asservit (centre des deux roues) et l'arrière du robot pour mettre le (0,0) au coin de la table
-PARAM(int64_t, placementOrigine)
+PARAM(int64_t, placementOrigineX)
+PARAM(int64_t, placementOrigineY)
 
 // Nombre de tics codeurs en 1m pour codeur gauche
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!

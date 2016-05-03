@@ -5,12 +5,12 @@ extern serial_t stdio_uart;
 
 extern "C" void HardFault_Handler()
 {
-    error("Planté !!\n");
+    error("Planté !!\r\n");
 }
 
 void loadConfig() {
     Config::loadFile("/local/config.txt");
-    printf("Version configuration : %lld\n", Config::configVersion);
+    printf("Version configuration : %lld\r\n", Config::configVersion);
 }
 
 Serial pc(USBTX, USBRX);
@@ -22,8 +22,8 @@ int main()
 /*    serial_init(&stdio_uart, STDIO_UART_TX, STDIO_UART_RX);
     serial_baud(&stdio_uart, 230400); // GaG va être content*/
 
-    printf("--- Asservissement Nancyborg ---\n");
-    printf("Version " GIT_VERSION " - Compilée le " DATE_COMPIL " par " AUTEUR_COMPIL "\n\n");
+    printf("--- Asservissement Nancyborg ---\r\n");
+    printf("Version " GIT_VERSION " - Compilée le " DATE_COMPIL " par " AUTEUR_COMPIL "\r\n\r\n");
 
     LocalFileSystem local("local");
 
@@ -131,7 +131,7 @@ void ecouteSerie()
             break;
 
         case 'p': //retourne la Position et l'angle courants du robot
-            printf("x%lfy%lfa%lf\n", (double)Utils::UOTomm(odometrie, odometrie->getX()),
+            printf("x%lfy%lfa%lf\r\n", (double)Utils::UOTomm(odometrie, odometrie->getX()),
                                      (double)Utils::UOTomm(odometrie, odometrie->getY()),
                                      odometrie->getTheta());
             break;
@@ -211,12 +211,12 @@ void initAsserv() {
     consignController = new ConsignController(odometrie, motorController);
     commandManager = new CommandManager(50, consignController, odometrie);
 
-    printf("ok\n");
+    printf("ok\r\n");
 }
 
 void resetAsserv()
 {
-    printf("Réinitialisation de l'asserv...\n");
+    printf("Réinitialisation de l'asserv...\r\n");
     //On arrête le traitement de l'asserv
     Live.detach();
 
@@ -259,7 +259,7 @@ void Live_isr()
 
 
     if ((mod++) % 20 == 0) {
-        printf("#x%lfy%lfa%lfd%dvg%dvd%d\n", (double)Utils::UOTomm(odometrie, odometrie->getX()),
+        printf("#x%lfy%lfa%lfd%dvg%dvd%d\r\n", (double)Utils::UOTomm(odometrie, odometrie->getX()),
                                    (double)Utils::UOTomm(odometrie, odometrie->getY()),
                                    odometrie->getTheta(),
                                    commandManager->getLastCommandStatus(),

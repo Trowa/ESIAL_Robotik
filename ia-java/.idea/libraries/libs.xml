@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/RXTXcomm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/pi4j-core-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jna.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/pi4j-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/pi4j-core-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/ax12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/purejavacomm.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

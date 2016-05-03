@@ -45,6 +45,10 @@ public:
         filtreQuadRampDerivee.setVitesseMarcheArriere(vitesse);
     }
 
+    void setVitesseMarcheAvant(int64_t vitesse) {
+        filtreQuadRampDerivee.setVitesseMarcheAvant(vitesse);
+    }
+
 private:
     // Filtres utilisés
     QuadRampDerivee filtreQuadRampDerivee;

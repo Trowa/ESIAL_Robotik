@@ -48,7 +48,7 @@ const Parameter* Config::parseConfigLine(std::string line, std::string& name, st
     const Parameter *p = Config::getParam(name);
 
     if (p == NULL) {
-        printf("Attention : Le paramètre '%s' n'existe pas !\n", name.c_str());
+        printf("Attention : Le paramètre '%s' n'existe pas !\r\n", name.c_str());
         return NULL;
     }
     return p;
@@ -56,12 +56,12 @@ const Parameter* Config::parseConfigLine(std::string line, std::string& name, st
 
 void Config::loadFile(const char *filename)
 {
-    printf("Chargement de '%s'...\n", filename);
+    printf("Chargement de '%s'...\r\n", filename);
 
     std::ifstream file(filename);
 
     if (!file) {
-        printf("Erreur : Impossible de charger le fichier '%s'\n", filename);
+        printf("Erreur : Impossible de charger le fichier '%s'\r\n", filename);
         return;
     }
 
@@ -81,19 +81,19 @@ void Config::loadFile(const char *filename)
 }
 
 void Config::saveToFile(const char *template_filename, const char *filename) {
-    printf("Chargement de '%s'...\n", template_filename);
+    printf("Chargement de '%s'...\r\n", template_filename);
     std::ifstream tmpl(template_filename);
 
     if (!tmpl) {
-        printf("Erreur : Impossible de charger le fichier modèle '%s'\n", template_filename);
+        printf("Erreur : Impossible de charger le fichier modèle '%s'\r\n", template_filename);
         return;
     }
 
-    printf("Sauvegarde dans '%s'...\n", filename);
+    printf("Sauvegarde dans '%s'...\r\n", filename);
     std::ofstream file(filename);
 
     if (!file) {
-        printf("Erreur : Impossible d'ouvrir le fichier de sortie '%s'\n", filename);
+        printf("Erreur : Impossible d'ouvrir le fichier de sortie '%s'\r\n", filename);
         tmpl.close();
         return;
     }

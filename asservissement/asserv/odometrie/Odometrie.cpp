@@ -114,7 +114,7 @@ void Odometrie::refresh()
         compteurG += tempCompteG;
 
         //renvoi des résultats sur la série
-        printf("CG=%lld \tCD=%lld\n", compteurG, compteurD);
+        printf("CG=%lld \tCD=%lld\r\n", compteurG, compteurD);
     }
 
     /*
