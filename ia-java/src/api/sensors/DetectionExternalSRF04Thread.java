@@ -5,6 +5,7 @@ import navigation.Navigation;
 import navigation.Point;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 public class DetectionExternalSRF04Thread extends Thread {
 
@@ -18,7 +19,18 @@ public class DetectionExternalSRF04Thread extends Thread {
 		// gpioIn : gpio de sortie des SRF004 ==> Avant Droit, Avant milieu, Avant gauche, Arrière
 		try {
 			String home = System.getenv().get("HOME");
-			this.capteurs = new ExternalSRF04(home + "/srf04/srf04", gpioIn, gpioOut);
+
+			boolean detectorInitialised = false;
+			while (!detectorInitialised) {
+				try {
+					this.capteurs = new ExternalSRF04(home + "/srf04/srf04", gpioIn, gpioOut);
+					int[] mesures = capteurs.getMesures();
+					detectorInitialised = true;
+				} catch (NoSuchElementException e) {
+					// Fail, on recommence
+				}
+			}
+
 			this.seuil = seuil;
 			this.ia = ia;
 			this.detect = true;
@@ -41,6 +53,8 @@ public class DetectionExternalSRF04Thread extends Thread {
 			int gauche = mesures[2];
 			int arriere = mesures[3];
 
+			System.out.println("Detect : " + gauche);
+
 			if (this.detect) {
 
 				// Est qu'on regarde hors de la table ?
@@ -51,27 +65,29 @@ public class DetectionExternalSRF04Thread extends Thread {
 				if (this.ia.asserv.isBackward()) { // En marche arrière
 					if (arriere < seuil) {
 						// Position de l'adversaire en mm
-						int x = (int) (nous.getX() - Math.cos(angle) * arriere);
+						int x = (int) (nous.getX() - 130 - Math.cos(angle) * arriere); // 130mm = décallage du X  entre point du robot et capteur
 						int y = (int) (nous.getY() - Math.sin(angle) * arriere);
 						System.out.println("Detection arrière : " + x + "-" + y);
 						detected = this.iDontGiveAFuckOfDetection(x, y);
 					}
 				} else { // En marche avant
 					if (droite < seuil) {
-						int x = (int) (nous.getX() + Math.cos(angle - Math.PI/3) * droite);
-						int y = (int) (nous.getY() + Math.sin(angle - Math.PI/3) * droite);
+						int x = (int) (nous.getX() + 130 + Math.cos(angle - Math.PI/6) * droite); // 130mm = décallage du X  entre point du robot et capteur
+						int y = (int) (nous.getY() - 140 + Math.sin(angle - Math.PI/6) * droite); // 140mm = décallage du Y  entre point du robot et capteur
 						System.out.println("Detection avant droite : " + x + "-" + y);
 						detected = this.iDontGiveAFuckOfDetection(x, y);
 					}
 					if (milieu < seuil) {
-						int x = (int) (nous.getX() + Math.cos(angle) * milieu);
+						int x = (int) (nous.getX() + 130 + Math.cos(angle) * milieu);  // 130mm = décallage du X  entre point du robot et capteur
 						int y = (int) (nous.getY() + Math.sin(angle) * milieu);
 						System.out.println("Detection avant milieu : " + x + "-" + y);
 						detected = this.iDontGiveAFuckOfDetection(x, y);
 					}
 					if (gauche < seuil) {
-						int x = (int) (nous.getX() + Math.cos(angle + Math.PI/3) * milieu);
-						int y = (int) (nous.getY() + Math.sin(angle + Math.PI/3) * milieu);
+						int x = (int) (nous.getX() + 130 + Math.cos(angle + Math.PI/6) * gauche); // 130mm = décallage du X  entre point du robot et capteur
+						System.out.println("x = " + nous.getX() + "+" + 130 + "+" + (Math.cos(angle + Math.PI/6) * gauche));
+						int y = (int) (nous.getY() + 140 + Math.sin(angle + Math.PI/6) * gauche); // 140mm = décallage du Y  entre point du robot et capteur
+						System.out.println("y = " + nous.getY() + "+" + 140 + "+" + (Math.sin(angle + Math.PI/6) * gauche));
 						System.out.println("Detection avant gauche : " + x + "-" + y);
 						detected = this.iDontGiveAFuckOfDetection(x, y);
 					}

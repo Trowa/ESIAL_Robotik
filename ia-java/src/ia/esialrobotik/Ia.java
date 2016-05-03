@@ -108,7 +108,7 @@ public class Ia {
 		//iaTest();
 		//iaHomologation();
 		iaPrincipale();
-		nettoyage();
+		//nettoyage();
 	}
 	
 	private void goPositionDepart() throws IOException {
@@ -128,6 +128,7 @@ public class Ia {
 		 */
 		
 		// TODO à remplir si nécessaire
+		this.detection.stop();
 	}
 
 	private void iaTest() {
@@ -157,7 +158,6 @@ public class Ia {
 		/*
 		 * IA qui roxxe du poney et marque plein de points
 		 */
-
 		this.createAndLaunchDetection();
 		// TODO effectuer quelques actions
 	}
@@ -174,7 +174,7 @@ public class Ia {
 		System.out.println("******* Init detection");
 		int[] gpioIn = {17, 10, 5, 19};
 		int[] gpioOut = {27, 9, 6, 26};
-		this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 300, this);
+		this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 350, this);
 		this.detection.start();
 	}
 
