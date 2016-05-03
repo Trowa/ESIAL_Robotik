@@ -19,18 +19,7 @@ public class DetectionExternalSRF04Thread extends Thread {
 		// gpioIn : gpio de sortie des SRF004 ==> Avant Droit, Avant milieu, Avant gauche, Arrière
 		try {
 			String home = System.getenv().get("HOME");
-
-			boolean detectorInitialised = false;
-			while (!detectorInitialised) {
-				try {
-					this.capteurs = new ExternalSRF04(home + "/srf04/srf04", gpioIn, gpioOut);
-					int[] mesures = capteurs.getMesures();
-					detectorInitialised = true;
-				} catch (NoSuchElementException e) {
-					// Fail, on recommence
-				}
-			}
-
+			this.capteurs = new ExternalSRF04(home + "/srf04/srf04", gpioIn, gpioOut);
 			this.seuil = seuil;
 			this.ia = ia;
 			this.detect = true;
