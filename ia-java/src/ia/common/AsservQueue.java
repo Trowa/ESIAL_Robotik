@@ -24,6 +24,7 @@ public class AsservQueue extends Thread {
 		synchronized (queue) {
 			queue.clear();
 			this.aborted = true;
+			// todo un petit return de la queue pour la reprendre ce serait cool non ? enfin avec Astar on s'en bas les couilles
 		}
 	}
 

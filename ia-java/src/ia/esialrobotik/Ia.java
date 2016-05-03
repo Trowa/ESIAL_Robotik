@@ -2,6 +2,10 @@ package ia.esialrobotik;
 
 import api.asserv.Asserv;
 import api.asserv.AsservMbed;
+import api.asserv.actions.Action;
+import api.asserv.actions.Face;
+import api.asserv.actions.Go;
+import api.asserv.actions.Goto;
 import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
 import api.sensors.DetectionExternalSRF04Thread;
@@ -75,10 +79,10 @@ public class Ia {
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
 
-		//this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
+		this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
 
 		// Code pour se remettre dans la zone de départ
-		//this.goPositionDepart();
+		this.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
@@ -106,9 +110,9 @@ public class Ia {
 		});
 
 		//iaTest();
-		//iaHomologation();
-		iaPrincipale();
-		//nettoyage();
+		iaHomologation();
+		//iaPrincipale();
+		nettoyage();
 	}
 	
 	private void goPositionDepart() throws IOException {
@@ -129,6 +133,7 @@ public class Ia {
 		
 		// TODO à remplir si nécessaire
 		this.detection.stop();
+		this.queue.stop();
 	}
 
 	private void iaTest() {
@@ -149,9 +154,12 @@ public class Ia {
 		/*
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
-		
 		this.createAndLaunchDetection();
-		// TODO effectuer quelques actions
+		this.queue.addAction(new Goto(500, this.ymult*935));
+		this.queue.addAction(new Goto(450, this.ymult*300));
+		this.queue.addAction(new Face(450, this.ymult*0));
+		this.queue.addAction(new Go(155)); // Faudra ajuster
+		this.queue.addAction(new Go(-200));
 	}
 
 	private void iaPrincipale() throws IOException {
@@ -176,6 +184,10 @@ public class Ia {
 		int[] gpioOut = {27, 9, 6, 26};
 		this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 350, this);
 		this.detection.start();
+	}
+
+	public void detectionAdversaire(Point p) {
+		this.queue.abort();
 	}
 
 }
