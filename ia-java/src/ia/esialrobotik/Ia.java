@@ -70,7 +70,7 @@ public class Ia {
 		this.teamColor = selecteurCouleur.getTeamColor();
 		this.ymult = this.teamColor == TeamColor.GREEN ? -1 : 1;
 
-		System.out.println("IA initialisée. Couleur : " + (this.teamColor == TeamColor.GREEN ? "vert" : "jaune"));
+		System.out.println("IA initialisée. Couleur : " + this.teamColor);
 
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
