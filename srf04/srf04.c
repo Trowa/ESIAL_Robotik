@@ -83,6 +83,9 @@ srf04_t srf04_new(int gpio_in, int gpio_out)
 
     close(fd_export);
 
+    // On attend un peu pour que l'export soit pris en compte
+    usleep(100000);
+
     // On met le GPIO in en "input"
     snprintf(buffer, BUFFER_SIZE, GPIO_DIRECTION, gpio_in);
     fd_direction = open(buffer, O_WRONLY);

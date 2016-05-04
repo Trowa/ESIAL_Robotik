@@ -34,6 +34,12 @@ public class RaspberryPiGPIO implements GPIO {
 			// On ignore: le GPIO est déja exporté
 		}
 		
+		// On attend, pour être sûr que l'export soit pris en compte
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+		}
+		
 		// On s'assure qu'aucune interruption n'est configuré
 		OutputStream edgeFile = Files.newOutputStream(Paths.get("/sys/class/gpio/gpio" + gpioNum + "/edge"), StandardOpenOption.WRITE);
 		edgeFile.write(("none\n").getBytes());
