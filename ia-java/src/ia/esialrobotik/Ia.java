@@ -79,10 +79,10 @@ public class Ia {
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
 
-		this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
+		//this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
 
 		// Code pour se remettre dans la zone de départ
-		this.goPositionDepart();
+		//this.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
@@ -163,7 +163,7 @@ public class Ia {
 		System.out.println("goto 450;300");
 		this.queue.addAction(new Face(450, this.ymult*0));
 		System.out.println("face 450;0");
-		this.queue.addAction(new Go(155)); // Faudra ajuster
+		this.queue.addAction(new Go(165)); // Faudra ajuster
 		System.out.println("go 155");
 		this.queue.addAction(new Go(-200));
 		System.out.println("go -200");
@@ -194,6 +194,7 @@ public class Ia {
 	}
 
 	public void detectionAdversaire(Point p) {
+		this.asserv.halt();
 		this.queue.abort();
 	}
 
