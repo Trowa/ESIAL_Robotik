@@ -125,7 +125,6 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void gotoPosition(double x, double y, boolean wait) throws InterruptedException {
 		String commande = "g"+x+"#"+y+"\n";
-		this.isBackward = false;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;
@@ -144,7 +143,6 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void face(double x, double y, boolean wait) throws InterruptedException {
 		String commande = "f"+x+"#"+y+"\n";
-		this.isBackward = false;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;
@@ -160,7 +158,6 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void go(double d, boolean wait) throws InterruptedException {
 		String commande = "v"+d+"\n";
-		this.isBackward = d <= 0;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;
@@ -177,7 +174,6 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void turn(double a, boolean wait) throws InterruptedException {
 		String commande = "t"+a+"\n";
-		this.isBackward = false;
 		synchronized(this) {
 			sendCommand(commande);
 			lastCommandFinished = false;

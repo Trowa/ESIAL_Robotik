@@ -79,10 +79,10 @@ public class Ia {
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
 
-		//this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
+		this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
 
 		// Code pour se remettre dans la zone de départ
-		//this.goPositionDepart();
+		this.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
@@ -189,7 +189,7 @@ public class Ia {
 		System.out.println("******* Init detection");
 		int[] gpioIn = {17, 10, 5, 19};
 		int[] gpioOut = {27, 9, 6, 26};
-		this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 350, this);
+		this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 400, this);
 		this.detection.start();
 	}
 

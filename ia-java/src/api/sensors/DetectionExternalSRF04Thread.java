@@ -50,39 +50,48 @@ public class DetectionExternalSRF04Thread extends Thread {
 				boolean detected = false;
 				int x = 0, y = 0;
 
-				if (this.ia.asserv.isBackward()) { // En marche arrière
+				if (false && this.ia.asserv.isBackward()) { // En marche arrière
 					if (arriere < seuil) {
 						// Position de l'adversaire en mm
 						x = (int) (nous.getX() - 130 - Math.cos(angle) * arriere); // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() - Math.sin(angle) * arriere);
-						System.out.println("Detection arrière : " + x + "-" + y);
-						detected = this.iDontGiveAFuckOfDetection(x, y);
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection arrière : " + x + "-" + y + ", osef ? " + detected);
 					}
 				} else { // En marche avant
 					if (droite < seuil) {
 						x = (int) (nous.getX() + 130 + Math.cos(angle - Math.PI/6) * droite); // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() - 140 + Math.sin(angle - Math.PI/6) * droite); // 140mm = décallage du Y  entre point du robot et capteur
-						System.out.println("Detection avant droite : " + x + "-" + y);
-						detected = this.iDontGiveAFuckOfDetection(x, y);
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant droite : " + x + "-" + y + ", osef ? " + detected);
+						if (detected) {
+							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							ia.detectionAdversaire(new Point(x, y));
+							return;
+						}
 					}
 					if (milieu < seuil) {
 						x = (int) (nous.getX() + 130 + Math.cos(angle) * milieu);  // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() + Math.sin(angle) * milieu);
-						System.out.println("Detection avant milieu : " + x + "-" + y);
-						detected = this.iDontGiveAFuckOfDetection(x, y);
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant milieu : " + x + "-" + y + ", osef ? " + detected);
+						if (detected) {
+							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							ia.detectionAdversaire(new Point(x, y));
+							return;
+						}
 					}
 					if (gauche < seuil) {
 						x = (int) (nous.getX() + 130 + Math.cos(angle + Math.PI/6) * gauche); // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() + 140 + Math.sin(angle + Math.PI/6) * gauche); // 140mm = décallage du Y  entre point du robot et capteur
-						System.out.println("Detection avant gauche : " + x + "-" + y);
-						detected = this.iDontGiveAFuckOfDetection(x, y);
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + detected);
+						if (detected) {
+							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							ia.detectionAdversaire(new Point(x, y));
+							return;
+						}
 					}
-				}
-
-				if (detected) {
-					System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
-					ia.detectionAdversaire(new Point(x, y));
-					// TODO: oops
 				}
 			}
 		}
@@ -90,7 +99,7 @@ public class DetectionExternalSRF04Thread extends Thread {
 
 	private boolean iDontGiveAFuckOfDetection(int x, int y) {
 		return x < 100  || x > 2900 || Math.abs(y) > 1900
-				|| (ia.teamColor == Navigation.TeamColor.VIOLET && y > -100) || (ia.teamColor != Navigation.TeamColor.VIOLET && y < 100) // faut faire attention si on voit du -100 avec des y positif par exemple
+				|| (ia.ymult == -1 && y > -100) || (ia.ymult == 1 && y < 100) // faut faire attention si on voit du -100 avec des y positif par exemple
 				|| (x > 850 && x < 2150 && Math.abs(y) > 700 && Math.abs(y) < 1400);
 	}
 
