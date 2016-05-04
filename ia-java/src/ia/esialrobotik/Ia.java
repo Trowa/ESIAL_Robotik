@@ -155,7 +155,8 @@ public class Ia {
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
 		this.createAndLaunchDetection();
-		this.queue.addAction(new Goto(500, this.ymult*935));
+		this.queue.addAction(new Goto(900, this.ymult*935));
+		this.queue.addAction(new Go(-400));
 		this.queue.addAction(new Goto(450, this.ymult*300));
 		this.queue.addAction(new Face(450, this.ymult*0));
 		this.queue.addAction(new Go(155)); // Faudra ajuster
