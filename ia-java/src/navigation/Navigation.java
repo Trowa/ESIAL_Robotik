@@ -54,7 +54,7 @@ public class Navigation {
 		 * Si on évolue du coté gauche de la table, les Y seront positifs, si c'est
 		 * du côté droit, les Y seront négatifs. On gère ça avec un multiplicateur sur Y.
 		 */
-		yMult = (couleur == TeamColor.GREEN) ? -1 : 1;
+		yMult = (couleur == TeamColor.VIOLET) ? -1 : 1;
 		
 		// On reparamètre la liste des objectifs
 		initListeObjectifs(couleur);

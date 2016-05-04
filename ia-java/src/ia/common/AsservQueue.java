@@ -66,8 +66,9 @@ public class AsservQueue extends Thread {
 			Action action = null;
 
 			synchronized (queue) {
-				if (queue.size() > 0)
+				if (queue.size() > 0) {
 					action = queue.remove(0);
+				}
 			}
 
 			if (action != null) {

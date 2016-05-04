@@ -90,7 +90,7 @@ public class DetectionExternalSRF04Thread extends Thread {
 
 	private boolean iDontGiveAFuckOfDetection(int x, int y) {
 		return x < 100  || x > 2900 || Math.abs(y) > 1900
-				|| (ia.teamColor == Navigation.TeamColor.GREEN && y > -100) || (ia.teamColor != Navigation.TeamColor.GREEN && y < 100) // faut faire attention si on voit du -100 avec des y positif par exemple
+				|| (ia.teamColor == Navigation.TeamColor.VIOLET && y > -100) || (ia.teamColor != Navigation.TeamColor.VIOLET && y < 100) // faut faire attention si on voit du -100 avec des y positif par exemple
 				|| (x > 850 && x < 2150 && Math.abs(y) > 700 && Math.abs(y) < 1400);
 	}
 

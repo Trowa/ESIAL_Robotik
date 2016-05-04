@@ -15,6 +15,7 @@ public class SelecteurCouleur {
 	}
 
 	public TeamColor getTeamColor() {
+		System.out.println("Selecteur de couleur : " + gpio.getValue());
 		return gpio.getValue() ? TeamColor.GREEN : TeamColor.VIOLET;
 	}
 }

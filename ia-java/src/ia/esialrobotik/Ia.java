@@ -72,14 +72,14 @@ public class Ia {
 		// On attend de virer la tirette
 		tirette.wait(true);
 		this.teamColor = selecteurCouleur.getTeamColor();
-		this.ymult = this.teamColor == TeamColor.GREEN ? -1 : 1;
+		this.ymult = this.teamColor == TeamColor.VIOLET ? -1 : 1;
 
 		System.out.println("IA initialisée. Couleur : " + this.teamColor);
 
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
 
-		this.asserv.calageBordure(this.teamColor != TeamColor.GREEN);
+		this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
 
 		// Code pour se remettre dans la zone de départ
 		this.goPositionDepart();
@@ -112,14 +112,14 @@ public class Ia {
 		//iaTest();
 		iaHomologation();
 		//iaPrincipale();
-		nettoyage();
+		//nettoyage();
 	}
 	
 	private void goPositionDepart() throws IOException {
 		try {
-			asserv.gotoPosition(250, 935 * ymult, true);
-			asserv.face(1000, 935 * ymult, true);
-			asserv.go(-25, true);
+			asserv.gotoPosition(250, 915 * ymult, true);
+			asserv.face(1000, 915 * ymult, true);
+			asserv.go(-100, true);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -156,11 +156,17 @@ public class Ia {
 		 */
 		this.createAndLaunchDetection();
 		this.queue.addAction(new Goto(900, this.ymult*935));
+		System.out.println("goto 900;935");
 		this.queue.addAction(new Go(-400));
+		System.out.println("go -400");
 		this.queue.addAction(new Goto(450, this.ymult*300));
+		System.out.println("goto 450;300");
 		this.queue.addAction(new Face(450, this.ymult*0));
+		System.out.println("face 450;0");
 		this.queue.addAction(new Go(155)); // Faudra ajuster
+		System.out.println("go 155");
 		this.queue.addAction(new Go(-200));
+		System.out.println("go -200");
 	}
 
 	private void iaPrincipale() throws IOException {
