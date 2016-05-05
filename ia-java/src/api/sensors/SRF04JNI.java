@@ -46,12 +46,10 @@ public class SRF04JNI {
     }
 
     public void setFd_in(int fd_in) {
-        System.out.println("############# in " + this.fd_in + " - " + fd_in);
         this.fd_in = fd_in;
     }
 
     public int getFd_out() {
-        System.out.println("############# out " + this.fd_out + " - " + fd_out);
         return fd_out;
     }
 

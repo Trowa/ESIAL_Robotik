@@ -9,96 +9,87 @@ import java.util.NoSuchElementException;
 
 public class DetectionExternalSRF04Thread extends Thread {
 
-	protected ExternalSRF04 capteurs;
-	protected SRF04JNI test;
+	protected SRF04JNI srf04AvantGauche, srf04AvantMilieu, srf04AvantDroit, srf04Arriere;
 	protected int seuil;
 	protected Ia ia;
 	protected boolean detect;
 	
-	public DetectionExternalSRF04Thread(int[] gpioIn, int[] gpioOut, int seuil, Ia ia) {
-		// gpioIn : gpio d'entrée des SRF04 ==> Avant Droit, Avant milieu, Avant gauche, Arrière
-		// gpioIn : gpio de sortie des SRF004 ==> Avant Droit, Avant milieu, Avant gauche, Arrière
-//		try {
-			String home = System.getenv().get("HOME");
-			//this.capteurs = new ExternalSRF04(home + "/srf04/srf04", gpioIn, gpioOut);
-			this.test = new SRF04JNI(17, 27);
-			this.seuil = seuil;
-			this.ia = ia;
-			this.detect = true;
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+	public DetectionExternalSRF04Thread(SRF04JNI srf04AvantGauche, SRF04JNI srf04AvantMilieu, SRF04JNI srf04AvantDroit, SRF04JNI srf04Arriere, int seuil, Ia ia) {
+		this.srf04AvantGauche = srf04AvantGauche;
+		this.srf04AvantMilieu = srf04AvantMilieu;
+		this.srf04AvantDroit = srf04AvantDroit;
+		this.srf04Arriere = srf04Arriere;
+		this.seuil = seuil;
+		this.ia = ia;
+		this.detect = true;
 	}
 	
 	@Override
 	public void run() {
 		super.run();
 		while (true) {
-			System.out.println("YOLOOOOOOOOOOOOOOOOOOOOOOOOO : " + this.test.getMeasure());
 			try {
 				Thread.sleep(12);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			// mesures[0] = Avant droit
-			// mesures[1] = Avant milieu
-			// mesures[2] = Avant gauche
-			// mesures[3] = Arrière
-//			int[] mesures = capteurs.getMesures();
-//			int droite = mesures[0];
-//			int milieu = mesures[1];
-//			int gauche = mesures[2];
-//			int arriere = mesures[3];
-//
-//			if (this.detect) {
-//
-//				// Est qu'on regarde hors de la table ?
-//				Point nous = ia.getPosition();
-//				double angle = nous.getCap();
-//				boolean detected = false;
-//				int x = 0, y = 0;
-//
-//				if (false && this.ia.asserv.isBackward()) { // En marche arrière
-//					if (arriere < seuil) {
-//						// Position de l'adversaire en mm
-//						x = (int) (nous.getX() - 130 - Math.cos(angle) * arriere); // 130mm = décallage du X  entre point du robot et capteur
-//						y = (int) (nous.getY() - Math.sin(angle) * arriere);
-//						detected = !this.iDontGiveAFuckOfDetection(x, y);
-//						System.out.println("Detection arrière : " + x + "-" + y + ", osef ? " + detected);
-//					}
-//				} else { // En marche avant
-//					if (droite < seuil) {
-//						x = (int) (nous.getX() + 130 + Math.cos(angle - Math.PI/6) * droite); // 130mm = décallage du X  entre point du robot et capteur
-//						y = (int) (nous.getY() - 140 + Math.sin(angle - Math.PI/6) * droite); // 140mm = décallage du Y  entre point du robot et capteur
-//						detected = !this.iDontGiveAFuckOfDetection(x, y);
-//						System.out.println("Detection avant droite : " + x + "-" + y + ", osef ? " + detected);
-//						if (detected) {
-//							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
-//							ia.detectionAdversaire(new Point(x, y));
-//						}
-//					}
-//					if (milieu < seuil) {
-//						x = (int) (nous.getX() + 130 + Math.cos(angle) * milieu);  // 130mm = décallage du X  entre point du robot et capteur
-//						y = (int) (nous.getY() + Math.sin(angle) * milieu);
-//						detected = !this.iDontGiveAFuckOfDetection(x, y);
-//						System.out.println("Detection avant milieu : " + x + "-" + y + ", osef ? " + detected);
-//						if (detected) {
-//							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
-//							ia.detectionAdversaire(new Point(x, y));
-//						}
-//					}
-//					if (gauche < seuil) {
-//						x = (int) (nous.getX() + 130 + Math.cos(angle + Math.PI/6) * gauche); // 130mm = décallage du X  entre point du robot et capteur
-//						y = (int) (nous.getY() + 140 + Math.sin(angle + Math.PI/6) * gauche); // 140mm = décallage du Y  entre point du robot et capteur
-//						detected = !this.iDontGiveAFuckOfDetection(x, y);
-//						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + detected);
-//						if (detected) {
-//							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
-//							ia.detectionAdversaire(new Point(x, y));
-//						}
-//					}
-//				}
-//			}
+
+			if (this.detect) {
+				// Est qu'on regarde hors de la table ?
+				Point nous = ia.getPosition();
+				double angle = nous.getCap();
+				boolean detected = false;
+				int x = 0, y = 0;
+
+				if (false && this.ia.asserv.isBackward()) { // En marche arrière
+					int arriere = (int)this.srf04Arriere.getMeasure();
+					if (arriere < seuil) {
+						// Position de l'adversaire en mm
+						x = (int) (nous.getX() - 130 - Math.cos(angle) * arriere); // 130mm = décallage du X  entre point du robot et capteur
+						y = (int) (nous.getY() - Math.sin(angle) * arriere);
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection arrière : " + x + "-" + y + ", osef ? " + detected);
+						if (detected) {
+							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							ia.detectionAdversaire(new Point(x, y));
+						}
+					}
+				} else { // En marche avant
+					int droite = (int)this.srf04AvantDroit.getMeasure();
+					if (droite < seuil) {
+						x = (int) (nous.getX() + 130 + Math.cos(angle - Math.PI/6) * droite); // 130mm = décallage du X  entre point du robot et capteur
+						y = (int) (nous.getY() - 140 + Math.sin(angle - Math.PI/6) * droite); // 140mm = décallage du Y  entre point du robot et capteur
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant droite : " + x + "-" + y + ", osef ? " + detected);
+						if (detected) {
+							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							ia.detectionAdversaire(new Point(x, y));
+						}
+					}
+					int milieu = (int)this.srf04AvantMilieu.getMeasure();
+					if (milieu < seuil) {
+						x = (int) (nous.getX() + 130 + Math.cos(angle) * milieu);  // 130mm = décallage du X  entre point du robot et capteur
+						y = (int) (nous.getY() + Math.sin(angle) * milieu);
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant milieu : " + x + "-" + y + ", osef ? " + detected);
+						if (detected) {
+							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							ia.detectionAdversaire(new Point(x, y));
+						}
+					}
+					int gauche = (int)this.srf04AvantGauche.getMeasure();
+					if (gauche < seuil) {
+						x = (int) (nous.getX() + 130 + Math.cos(angle + Math.PI/6) * gauche); // 130mm = décallage du X  entre point du robot et capteur
+						y = (int) (nous.getY() + 140 + Math.sin(angle + Math.PI/6) * gauche); // 140mm = décallage du Y  entre point du robot et capteur
+						detected = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + detected);
+						if (detected) {
+							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							ia.detectionAdversaire(new Point(x, y));
+						}
+					}
+				}
+			}
 		}
 	}
 

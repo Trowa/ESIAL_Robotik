@@ -9,6 +9,7 @@ import api.asserv.actions.Goto;
 import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
 import api.sensors.DetectionExternalSRF04Thread;
+import api.sensors.SRF04JNI;
 import ia.common.AsservQueue;
 import navigation.Navigation.TeamColor;
 import navigation.Point;
@@ -66,11 +67,11 @@ public class Ia {
 		Chrono chrono_stop = new Chrono((int) (89 * 1000));
 
 		System.out.println("Attente tirette présente");
-		//tirette.wait(false);
+		tirette.wait(false);
 
 		System.out.println("Attente enlevage tirette");
 		// On attend de virer la tirette
-		//tirette.wait(true);
+		tirette.wait(true);
 		this.teamColor = selecteurCouleur.getTeamColor();
 		this.ymult = this.teamColor == TeamColor.VIOLET ? -1 : 1;
 
@@ -79,19 +80,19 @@ public class Ia {
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
 
-		//this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
+		this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
 
 		// Code pour se remettre dans la zone de départ
-		//this.goPositionDepart();
+		this.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
 		// On attend de remettre la tirette
-		//tirette.wait(false);
+		tirette.wait(false);
 
 		// On attend de virer la tirette
 		System.out.println("Attente enlevage tirette pour départ");
-		//tirette.wait(true);
+		tirette.wait(true);
 		System.out.println("Gooo");
 
 		chrono_stop.startChrono(new TimerTask() {
@@ -159,7 +160,7 @@ public class Ia {
 		System.out.println("goto 900;935");
 		this.queue.addAction(new Go(-400));
 		System.out.println("go -400");
-		this.queue.addAction(new Goto(450, this.ymult*300));
+		this.queue.addAction(new Goto(450, this.ymult*280));
 		System.out.println("goto 450;300");
 		this.queue.addAction(new Face(450, this.ymult*0));
 		System.out.println("face 450;0");
@@ -187,9 +188,11 @@ public class Ia {
 
 	public void createAndLaunchDetection() {
 		System.out.println("******* Init detection");
-		int[] gpioIn = {17, 10, 5, 19};
-		int[] gpioOut = {27, 9, 6, 26};
-		this.detection = new DetectionExternalSRF04Thread(gpioIn, gpioOut, 400, this);
+		SRF04JNI srf04AvantDroit = new SRF04JNI(17, 27);
+		SRF04JNI srf04AvantMilieu = new SRF04JNI(10, 9);
+		SRF04JNI srf04AvantGauche = new SRF04JNI(5, 6);
+		SRF04JNI srf04Arriere = new SRF04JNI(19, 26);
+		this.detection = new DetectionExternalSRF04Thread(srf04AvantGauche, srf04AvantMilieu, srf04AvantDroit, srf04Arriere, 400, this);
 		this.detection.start();
 	}
 
