@@ -70,7 +70,7 @@ public class DetectionExternalSRF04Thread extends Thread {
 						}
 					}
 					try {
-						Thread.sleep(12);
+						Thread.sleep(24);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -86,26 +86,26 @@ public class DetectionExternalSRF04Thread extends Thread {
 						}
 					}
 					try {
-						Thread.sleep(12);
+						Thread.sleep(24);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					int gauche = (int)this.srf04AvantGauche.getMeasure();
-					if (gauche < seuil) {
-						x = (int) (nous.getX() + 130 + Math.cos(angle + Math.PI/6) * gauche); // 130mm = décallage du X  entre point du robot et capteur
-						y = (int) (nous.getY() + 140 + Math.sin(angle + Math.PI/6) * gauche); // 140mm = décallage du Y  entre point du robot et capteur
-						detectedAvantGauche = !this.iDontGiveAFuckOfDetection(x, y);
-						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + !detectedAvantGauche);
-						if (detectedAvantGauche) {
-							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
-							ia.detectionAdversaire(new Point(x, y));
-						}
-					}
-					try {
-						Thread.sleep(12);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+//					int gauche = (int)this.srf04AvantGauche.getMeasure();
+//					if (gauche < seuil) {
+//						x = (int) (nous.getX() + 130 + Math.cos(angle + Math.PI/6) * gauche); // 130mm = décallage du X  entre point du robot et capteur
+//						y = (int) (nous.getY() + 140 + Math.sin(angle + Math.PI/6) * gauche); // 140mm = décallage du Y  entre point du robot et capteur
+//						detectedAvantGauche = !this.iDontGiveAFuckOfDetection(x, y);
+//						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + !detectedAvantGauche);
+//						if (detectedAvantGauche) {
+//							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+//							ia.detectionAdversaire(new Point(x, y));
+//						}
+//					}
+//					try {
+//						Thread.sleep(24);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
 					if (!detectedArriere && !detectedAvantDroit && !detectedAvantMilieu && !detectedAvantGauche) {
 						ia.pasdadversaire();
 					}

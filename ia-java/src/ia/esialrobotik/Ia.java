@@ -221,9 +221,9 @@ public class Ia {
 
 		// On sort de a zone de départ et on pousse le premier chateau dans la zone de construction
 		this.asservQueue.addAction(new Goto(450, this.ymult*920));
-		this.asservQueue.addAction(new Goto(900, this.ymult*1000));
+		this.asservQueue.addAction(new Goto(1200, this.ymult*1000));
 		// On quitte la zone de construction
-		this.asservQueue.addAction(new Go(-400));
+		this.asservQueue.addAction(new Go(-700));
 		// On va en face des cabines et on s'alignes
 		this.asservQueue.addAction(new Goto(450, this.ymult*280));
 		this.asservQueue.addAction(new Face(450, this.ymult*0));
