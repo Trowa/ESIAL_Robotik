@@ -66,11 +66,11 @@ public class Ia {
 		Chrono chrono_stop = new Chrono((int) (89 * 1000));
 
 		System.out.println("Attente tirette présente");
-		tirette.wait(false);
+		//tirette.wait(false);
 
 		System.out.println("Attente enlevage tirette");
 		// On attend de virer la tirette
-		tirette.wait(true);
+		//tirette.wait(true);
 		this.teamColor = selecteurCouleur.getTeamColor();
 		this.ymult = this.teamColor == TeamColor.VIOLET ? -1 : 1;
 
@@ -79,19 +79,19 @@ public class Ia {
 		// On lance le callage bordure
 		System.out.println("Calage bordure");
 
-		this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
+		//this.asserv.calageBordure(this.teamColor != TeamColor.VIOLET);
 
 		// Code pour se remettre dans la zone de départ
-		this.goPositionDepart();
+		//this.goPositionDepart();
 
 		System.out.println("Attente remise tirette");
 
 		// On attend de remettre la tirette
-		tirette.wait(false);
+		//tirette.wait(false);
 
 		// On attend de virer la tirette
 		System.out.println("Attente enlevage tirette pour départ");
-		tirette.wait(true);
+		//tirette.wait(true);
 		System.out.println("Gooo");
 
 		chrono_stop.startChrono(new TimerTask() {

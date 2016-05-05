@@ -1,3 +1,4 @@
+#include <jni.h>
 #include "srf04.h"
 
 #include <stdio.h>
@@ -57,19 +58,20 @@ static int wait_value(int fd, char value)
     return 0;
 }
 
-/**
- * Constructeur, parce qu'on fait du C orienté objet
- */
-srf04_t srf04_new(int gpio_in, int gpio_out)
-{
-    srf04_t srf04 = NULL;
+JNIEXPORT void JNICALL Java_api_sensors_SRF04JNI_initSRF
+  (JNIEnv * env, jobject object){
+  	jclass srf04 = (*env)->GetObjectClass(env, object);
+  	jmethodID getIn = (*env)->GetMethodID(env, srf04, "getGpio_in", "()I");
+  	jmethodID getOut = (*env)->GetMethodID(env, srf04, "getGpio_out", "()I");
+  	jmethodID setFdIn = (*env)->GetMethodID(env, srf04, "setFd_in", "(I)V");
+  	jmethodID setFdOut = (*env)->GetMethodID(env, srf04, "setFd_out", "(I)V");
+  	int gpio_in = (*env)->CallIntMethod(env, object, getIn);
+  	int gpio_out = (*env)->CallIntMethod(env, object, getOut);
+
     int     fd_export = -1;
     int     fd_direction = -1;
     int     fd_edge = -1;
     char    buffer[BUFFER_SIZE];
-
-    // La mémoire pour l'objet
-    srf04 = malloc(sizeof(struct s_srf04));
 
     // Il faut "exporter" les GPIOs
     fd_export = open(GPIO_EXPORT, O_WRONLY);
@@ -83,7 +85,6 @@ srf04_t srf04_new(int gpio_in, int gpio_out)
 
     close(fd_export);
 
-    // On attend un peu pour que l'export soit pris en compte
     usleep(100000);
 
     // On met le GPIO in en "input"
@@ -112,14 +113,15 @@ srf04_t srf04_new(int gpio_in, int gpio_out)
 
     // On ouvre enfin les fichiers "value"
     snprintf(buffer, BUFFER_SIZE, GPIO_VALUE, gpio_in);
-    srf04->fd_gpio_in = open(buffer, O_RDONLY);
+    int fd_gpio_in = open(buffer, O_RDONLY);
 
     snprintf(buffer, BUFFER_SIZE, GPIO_VALUE, gpio_out);
-    srf04->fd_gpio_out = open(buffer, O_WRONLY);
+    int fd_gpio_out = open(buffer, O_WRONLY);
     // On met la sortie à 0
-    write(srf04->fd_gpio_out, "0\n", strlen("0\n"));
+    write(fd_gpio_out, "0\n", strlen("0\n"));
 
-    return srf04;
+    (*env)->CallVoidMethod(env, object, setFdIn, fd_gpio_in);
+    (*env)->CallVoidMethod(env, object, setFdOut, fd_gpio_out);
 }
 
 /**
@@ -127,8 +129,14 @@ srf04_t srf04_new(int gpio_in, int gpio_out)
  * C'est la mesure brute, en nanosecondes. D'après la doc, il faut diviser
  * par 5800 pour avoir une valeur en mm.
  */
-long srf04_get_mesure(srf04_t srf04)
-{
+JNIEXPORT jlong JNICALL Java_api_sensors_SRF04JNI_getMeasure
+  (JNIEnv * env, jobject object){
+  	jclass srf04 = (*env)->GetObjectClass(env, object);
+  	jmethodID getFdIn = (*env)->GetMethodID(env, srf04, "getFd_in", "()I");
+  	jmethodID getFdOut = (*env)->GetMethodID(env, srf04, "getFd_out", "()I");
+  	int fd_in = (*env)->CallIntMethod(env, object, getFdIn);
+  	int fd_out = (*env)->CallIntMethod(env, object, getFdOut);
+
     long mesure = -1;
     int  error_code = 0;
 
@@ -151,12 +159,12 @@ long srf04_get_mesure(srf04_t srf04)
      */
 
     // Activation de la GPIO "out"
-    write(srf04->fd_gpio_out, "1\n", strlen("1\n"));
+    write(fd_out, "1\n", strlen("1\n"));
     usleep(15); // Petite pause...
-    write(srf04->fd_gpio_out, "0\n", strlen("0\n")); // Et on coupe !
+    write(fd_out, "0\n", strlen("0\n")); // Et on coupe !
 
     // On attend le front montant
-    error_code = wait_value(srf04->fd_gpio_in, '1');
+    error_code = wait_value(fd_in, '1');
     if(error_code < 0)
     {
         // Erreur !
@@ -167,7 +175,7 @@ long srf04_get_mesure(srf04_t srf04)
     clock_gettime(CLOCK_MONOTONIC_RAW, &time_start);
 
     // Et on réattend le front descendant!
-    error_code = wait_value(srf04->fd_gpio_in, '0');
+    error_code = wait_value(fd_in, '0');
     if(error_code < 0)
     {
         // Erreur !
@@ -190,5 +198,8 @@ long srf04_get_mesure(srf04_t srf04)
     mesure = 1000000000 * diff_seconds;
     mesure += (time_end.tv_nsec - time_start.tv_nsec);
 
-    return mesure;
+    if(mesure <= 0){
+    	return 0;
+    }
+    return mesure / 5800;
 }
