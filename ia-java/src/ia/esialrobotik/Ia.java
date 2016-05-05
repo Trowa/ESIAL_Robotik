@@ -17,9 +17,9 @@ import java.util.TimerTask;
 public class Ia {
 	public Asserv asserv;
 
-	Tirette tirette;
-    SelecteurCouleur selecteurCouleur;
-	AsservQueue asservQueue;
+	public Tirette tirette;
+    public SelecteurCouleur selecteurCouleur;
+	public AsservQueue asservQueue;
 
 	public TeamColor teamColor;
 	public int ymult;
@@ -199,7 +199,7 @@ public class Ia {
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
 		this.createAndLaunchDetection(100);
-		this.asservQueue = new AsservQueue(this.asserv);
+		this.asservQueue = new AsservQueue(this.asserv, this);
 		this.asservQueue.start();
 
 		// On force contre la bordure avec timeout
@@ -216,12 +216,12 @@ public class Ia {
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
 		this.createAndLaunchDetection(300);
-		this.asservQueue = new AsservQueue(this.asserv);
+		this.asservQueue = new AsservQueue(this.asserv, this);
 		this.asservQueue.start();
 
 		// On sort de a zone de départ et on pousse le premier chateau dans la zone de construction
 		this.asservQueue.addAction(new Goto(450, this.ymult*920));
-		this.asservQueue.addAction(new Goto(900, this.ymult*970));
+		this.asservQueue.addAction(new Goto(900, this.ymult*1000));
 		// On quitte la zone de construction
 		this.asservQueue.addAction(new Go(-400));
 		// On va en face des cabines et on s'alignes
