@@ -55,8 +55,23 @@ public class Ia {
 
 		System.out.println("############################################################## IA #################################################");
 		final Ia ia = new Ia();
-		if (args.length > 0 && args[0].equals("debug")) {
-			ia.setDebugMode(true);
+		if (args.length > 0) {
+			for (String arg : args) {
+				switch (args[0]) {
+					case "debug" :
+						ia.setDebugMode(true);
+
+					case "color-green" :
+						ia.teamColor = TeamColor.GREEN;
+						ia.ymult = 1;
+						break;
+
+					case "color-violet" :
+						ia.teamColor = TeamColor.VIOLET;
+						ia.ymult = -1;
+						break;
+				}
+			}
 		}
 		ia.start();
 	}
