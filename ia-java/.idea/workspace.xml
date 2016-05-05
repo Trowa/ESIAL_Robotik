@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72fdfaa8-b85c-41cc-85e8-efdeee0f2063" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/asserv/Asserv.java" afterPath="$PROJECT_DIR$/src/api/asserv/Asserv.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/asserv/actions/Action.java" afterPath="$PROJECT_DIR$/src/api/asserv/actions/Action.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/sensors/DetectionExternalSRF04Thread.java" afterPath="$PROJECT_DIR$/src/api/sensors/DetectionExternalSRF04Thread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ia/common/AsservQueue.java" afterPath="$PROJECT_DIR$/src/ia/common/AsservQueue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ia/esialrobotik/Ia.java" afterPath="$PROJECT_DIR$/src/ia/esialrobotik/Ia.java" />
     </list>
     <ignored path="ia-java.iws" />
@@ -27,8 +32,8 @@
       <file leaf-file-name="DetectionExternalSRF04Thread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/sensors/DetectionExternalSRF04Thread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="94" column="51" selection-start-line="94" selection-start-column="51" selection-end-line="94" selection-end-column="51" />
+            <state relative-caret-position="287">
+              <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -44,29 +49,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ia.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Ia.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ia/esialrobotik/Ia.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
+              <caret line="210" column="54" selection-start-line="210" selection-start-column="54" selection-end-line="210" selection-end-column="54" />
               <folding>
-                <element signature="e#6462#6463#0" expanded="true" />
-                <element signature="e#6487#6488#0" expanded="true" />
-                <element signature="e#6520#6521#0" expanded="true" />
-                <element signature="e#6543#6544#0" expanded="true" />
-                <element signature="e#6591#6592#0" expanded="true" />
-                <element signature="e#6624#6625#0" expanded="true" />
+                <element signature="e#9525#9526#0" expanded="true" />
+                <element signature="e#9548#9549#0" expanded="true" />
+                <element signature="e#9596#9597#0" expanded="true" />
+                <element signature="e#9629#9630#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsservMbed.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/asserv/AsservMbed.java">
+      <file leaf-file-name="WaitAndCancel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/asserv/actions/WaitAndCancel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+            <state relative-caret-position="100">
+              <caret line="13" column="19" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="19" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsservQueue.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ia/common/AsservQueue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
+              <folding>
+                <element signature="e#2160#2161#0" expanded="true" />
+                <element signature="e#2181#2182#0" expanded="true" />
+                <element signature="e#2225#2226#0" expanded="true" />
+                <element signature="e#2254#2255#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,9 +92,12 @@
       <file leaf-file-name="Asserv.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/asserv/Asserv.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="294">
+              <caret line="85" column="13" selection-start-line="78" selection-start-column="12" selection-end-line="85" selection-end-column="13" />
+              <folding>
+                <element signature="e#7810#7811#0" expanded="true" />
+                <element signature="e#7863#7864#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,15 +122,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ia/common/AsservQueue.java" />
         <option value="$PROJECT_DIR$/src/api/sensors/DetectionSRFThread.java" />
         <option value="$PROJECT_DIR$/src/ia/esialrobotik/SelecteurCouleur.java" />
         <option value="$PROJECT_DIR$/src/navigation/Navigation.java" />
-        <option value="$PROJECT_DIR$/src/api/asserv/actions/WaitAndCancel.java" />
         <option value="$PROJECT_DIR$/src/api/sensors/SRF04JNI.java" />
+        <option value="$PROJECT_DIR$/src/api/asserv/actions/Action.java" />
+        <option value="$PROJECT_DIR$/src/api/asserv/actions/WaitAndCancel.java" />
         <option value="$PROJECT_DIR$/src/api/sensors/DetectionExternalSRF04Thread.java" />
-        <option value="$PROJECT_DIR$/src/api/asserv/Asserv.java" />
         <option value="$PROJECT_DIR$/src/ia/esialrobotik/Ia.java" />
+        <option value="$PROJECT_DIR$/src/api/asserv/Asserv.java" />
+        <option value="$PROJECT_DIR$/src/ia/common/AsservQueue.java" />
       </list>
     </option>
   </component>
@@ -300,7 +322,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build.xml" />
-    <property name="SearchEverywhereHistoryKey" value="asserv&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/api/asserv/AsservMbed.java&#10;srf&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/api/sensors/SRF04JNI.java&#10;IA&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/ia/esialrobotik/Ia.java&#10;mbe&#9;PSI&#9;JAVA://api.asserv.AsservMbed&#10;ia&#9;PSI&#9;JAVA://ia.esialrobotik.Ia" />
+    <property name="SearchEverywhereHistoryKey" value="wait&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/api/asserv/actions/WaitAndCancel.java&#10;actio&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/api/asserv/actions/Action.java&#10;asserv&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/ia/common/AsservQueue.java&#10;srf&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/api/sensors/SRF04JNI.java&#10;IA&#9;FILE&#9;file://C:/Users/Trowa/Desktop/git/ESIALRobotik/ia-java/src/ia/esialrobotik/Ia.java&#10;mbe&#9;PSI&#9;JAVA://api.asserv.AsservMbed&#10;ia&#9;PSI&#9;JAVA://ia.esialrobotik.Ia" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -510,14 +532,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/api/asserv/Asserv.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3281">
-          <caret line="205" column="41" selection-start-line="205" selection-start-column="41" selection-end-line="205" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/asserv/AsservMbed.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -561,12 +575,10 @@
         <state relative-caret-position="1309">
           <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
           <folding>
-            <element signature="e#6462#6463#0" expanded="true" />
-            <element signature="e#6487#6488#0" expanded="true" />
-            <element signature="e#6520#6521#0" expanded="true" />
-            <element signature="e#6543#6544#0" expanded="true" />
-            <element signature="e#6591#6592#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#9525#9526#0" expanded="true" />
+            <element signature="e#9548#9549#0" expanded="true" />
+            <element signature="e#9596#9597#0" expanded="true" />
+            <element signature="e#9629#9630#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -687,12 +699,10 @@
         <state relative-caret-position="1275">
           <caret line="91" column="39" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="39" />
           <folding>
-            <element signature="e#6462#6463#0" expanded="true" />
-            <element signature="e#6487#6488#0" expanded="true" />
-            <element signature="e#6520#6521#0" expanded="true" />
-            <element signature="e#6543#6544#0" expanded="true" />
-            <element signature="e#6591#6592#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#9525#9526#0" expanded="true" />
+            <element signature="e#9548#9549#0" expanded="true" />
+            <element signature="e#9596#9597#0" expanded="true" />
+            <element signature="e#9629#9630#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -813,12 +823,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6462#6463#0" expanded="true" />
-            <element signature="e#6487#6488#0" expanded="true" />
-            <element signature="e#6520#6521#0" expanded="true" />
-            <element signature="e#6543#6544#0" expanded="true" />
-            <element signature="e#6591#6592#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#9525#9526#0" expanded="true" />
+            <element signature="e#9548#9549#0" expanded="true" />
+            <element signature="e#9596#9597#0" expanded="true" />
+            <element signature="e#9629#9630#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -874,12 +882,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6462#6463#0" expanded="true" />
-            <element signature="e#6487#6488#0" expanded="true" />
-            <element signature="e#6520#6521#0" expanded="true" />
-            <element signature="e#6543#6544#0" expanded="true" />
-            <element signature="e#6591#6592#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#9525#9526#0" expanded="true" />
+            <element signature="e#9548#9549#0" expanded="true" />
+            <element signature="e#9596#9597#0" expanded="true" />
+            <element signature="e#9629#9630#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1001,33 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ia/common/AsservQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="82" column="17" selection-start-line="76" selection-start-column="16" selection-end-line="82" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/asserv/actions/Action.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="e#226#227#0" expanded="false" />
-            <element signature="e#247#248#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/asserv/actions/WaitAndCancel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -1044,6 +1023,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/asserv/actions/WaitAndCancel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="959" column="19" selection-start-line="959" selection-start-column="19" selection-end-line="959" selection-end-column="19" />
+          <folding>
+            <element signature="e#37073#37074#0" expanded="true" />
+            <element signature="e#37116#37117#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/asserv/AsservMbed.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
@@ -1052,18 +1050,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/asserv/Asserv.java">
+    <entry file="file://$PROJECT_DIR$/src/api/asserv/actions/Action.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="245">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding>
+            <element signature="e#498#499#0" expanded="true" />
+            <element signature="e#519#520#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/api/sensors/DetectionExternalSRF04Thread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="94" column="51" selection-start-line="94" selection-start-column="51" selection-end-line="94" selection-end-column="51" />
+        <state relative-caret-position="287">
+          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1071,14 +1076,36 @@
     <entry file="file://$PROJECT_DIR$/src/ia/esialrobotik/Ia.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
+          <caret line="210" column="54" selection-start-line="210" selection-start-column="54" selection-end-line="210" selection-end-column="54" />
           <folding>
-            <element signature="e#6462#6463#0" expanded="true" />
-            <element signature="e#6487#6488#0" expanded="true" />
-            <element signature="e#6520#6521#0" expanded="true" />
-            <element signature="e#6543#6544#0" expanded="true" />
-            <element signature="e#6591#6592#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#9525#9526#0" expanded="true" />
+            <element signature="e#9548#9549#0" expanded="true" />
+            <element signature="e#9596#9597#0" expanded="true" />
+            <element signature="e#9629#9630#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/asserv/Asserv.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="85" column="13" selection-start-line="78" selection-start-column="12" selection-end-line="85" selection-end-column="13" />
+          <folding>
+            <element signature="e#7810#7811#0" expanded="true" />
+            <element signature="e#7863#7864#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ia/common/AsservQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
+          <folding>
+            <element signature="e#2160#2161#0" expanded="true" />
+            <element signature="e#2181#2182#0" expanded="true" />
+            <element signature="e#2225#2226#0" expanded="true" />
+            <element signature="e#2254#2255#0" expanded="true" />
           </folding>
         </state>
       </provider>

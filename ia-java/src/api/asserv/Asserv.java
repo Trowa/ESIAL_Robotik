@@ -205,7 +205,7 @@ public abstract class Asserv implements Runnable {
 	 */
 	public void halt() {
 		System.out.println("JE ME HALT");
-		
+
 		// On réserve le moniteur de l'asserv
 		synchronized(this) {
 			sendCommand("h");
@@ -312,12 +312,7 @@ public abstract class Asserv implements Runnable {
 				if (m.find()) {
 					if (m.group(4).equals("1") || (lastD == 0 && m.group(4).equals("2"))) {
 						System.out.println("finished !!");
-						
-						synchronized(this) {
-							lastCommandFinished = true;
-							this.notifyAll();
-						}
-						
+						lastCommandFinished = true;
 					}
 					
 					Point point = new Point((int)Double.parseDouble(m.group(1)), (int)Double.parseDouble(m.group(2)));
@@ -329,6 +324,10 @@ public abstract class Asserv implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void setLastCommandFinished(boolean lastCommandFinished) {
+		this.lastCommandFinished = lastCommandFinished;
 	}
 	
 }

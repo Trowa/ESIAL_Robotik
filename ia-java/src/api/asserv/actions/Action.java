@@ -5,12 +5,31 @@ package api.asserv.actions;
  */
 public class Action {
 	private final String command;
+	private boolean blockingCommand;
 
+	/**
+	 * Par defaut, une commande est blaquante
+	 * @param command
+     */
 	protected Action(String command) {
 		this.command = command;
+		this.blockingCommand = true;
+	}
+
+	protected Action(String command, boolean blockingCommand){
+		this.command = command;
+		this.blockingCommand = blockingCommand;
 	}
 
 	public String getSerialCommand() {
 		return command;
+	}
+
+	public boolean isBlockingCommand() {
+		return blockingCommand;
+	}
+
+	public void setBlockingCommand(boolean blockingCommand) {
+		this.blockingCommand = blockingCommand;
 	}
 }

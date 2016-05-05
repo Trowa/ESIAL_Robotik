@@ -19,12 +19,14 @@ public class Ia {
 
 	Tirette tirette;
     SelecteurCouleur selecteurCouleur;
+	AsservQueue asservQueue;
 
 	public TeamColor teamColor;
 	public int ymult;
 	public DetectionExternalSRF04Thread detection;
 
 	public boolean debugMode = false;
+	public String iaMode = "";
 
 	public Ia() {
         try {
@@ -57,18 +59,30 @@ public class Ia {
 		final Ia ia = new Ia();
 		if (args.length > 0) {
 			for (String arg : args) {
-				switch (args[0]) {
+				switch (arg) {
 					case "debug" :
+						System.out.println("Debug mode POWAAAAAAAAAAAAAAAA !!! Donc l'init on s'en bas les couilles");
 						ia.setDebugMode(true);
+						break;
 
 					case "color-green" :
+						System.out.println("On joue vert, comme Hulk");
 						ia.teamColor = TeamColor.GREEN;
 						ia.ymult = 1;
 						break;
 
 					case "color-violet" :
+						System.out.println("On joue violet, comme... je sais pas qui");
 						ia.teamColor = TeamColor.VIOLET;
 						ia.ymult = -1;
+						break;
+
+					case "iaTest" :
+						ia.iaMode = "iaTest";
+						break;
+
+					case "iaTestQueue" :
+						ia.iaMode = "iaTestQueue";
 						break;
 				}
 			}
@@ -102,8 +116,19 @@ public class Ia {
 			}
 		});
 
-//		iaTest();
-		iaHomologation();
+		switch (this.iaMode) {
+			case "iaTest" :
+				iaTest();
+				break;
+			case "iaTestQueue" :
+				iaTestAsservQueue();
+				break;
+			case "":
+			default:
+				//iaHomologation();
+				iaHomologationAsservQueue();
+				break;
+		}
 		//iaPrincipale();
 		//nettoyage();
 	}
@@ -150,13 +175,14 @@ public class Ia {
 		 * pour larguer des éléments de jeu
 		 */
 		this.detection.stop();
+		this.asservQueue.stop();
 	}
 
 	private void iaTest() {
 		/*
 		 * IA de test pour savoir si l'asserv marche
 		 */
-		this.createAndLaunchDetection();
+		//this.createAndLaunchDetection();
 		this.asserv.go(200, false);
 		try {
 			Thread.sleep(1000);
@@ -165,14 +191,67 @@ public class Ia {
 		}
 		System.out.println("J'ai timeout chef");
 		this.asserv.halt();
-		this.asserv.reset();
+		this.asserv.resetHalt();
+	}
+
+	private void iaTestAsservQueue() throws IOException {
+		/*
+		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
+		 */
+		this.createAndLaunchDetection(100);
+		this.asservQueue = new AsservQueue(this.asserv);
+		this.asservQueue.start();
+
+		// On force contre la bordure avec timeout
+		Action go = new Go(200);
+		go.setBlockingCommand(false);
+		this.asservQueue.addAction(go);
+		this.asservQueue.addAction(new WaitAndCancel(1000));
+		this.asservQueue.addAction(new Goto(420,420));
+		this.asservQueue.addAction(new Goto(500,500));
+	}
+
+	private void iaHomologationAsservQueue() throws IOException {
+		/*
+		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
+		 */
+		this.createAndLaunchDetection(300);
+		this.asservQueue = new AsservQueue(this.asserv);
+		this.asservQueue.start();
+
+		// On sort de a zone de départ et on pousse le premier chateau dans la zone de construction
+		this.asservQueue.addAction(new Goto(450, this.ymult*920));
+		this.asservQueue.addAction(new Goto(900, this.ymult*970));
+		// On quitte la zone de construction
+		this.asservQueue.addAction(new Go(-400));
+		// On va en face des cabines et on s'alignes
+		this.asservQueue.addAction(new Goto(450, this.ymult*280));
+		this.asservQueue.addAction(new Face(450, this.ymult*0));
+		// On force contre la bordure avec timeout
+		Action go = new Go(200);
+		go.setBlockingCommand(false);
+		this.asservQueue.addAction(go);
+		this.asservQueue.addAction(new WaitAndCancel(1000));
+		// Suite au timeout, on recule
+		this.asservQueue.addAction(new Go(-200));
+		// On se positionne entre les deux coquillages les plus haut et on fait une boucle pour en chopper un max
+		this.asservQueue.addAction(new Goto(425, 1250));
+		this.asservQueue.addAction(new Goto(1050, 1250));
+		this.asservQueue.addAction(new Goto(1050, 1735));
+		this.asservQueue.addAction(new Goto(450, 1735));
+		this.asservQueue.addAction(new Goto(200, 1650));
+		this.asservQueue.addAction(new Goto(200, 900));
+		this.asservQueue.addAction(new Go(-550));
+		this.asservQueue.addAction(new Goto(425, 1250));
+		this.asservQueue.addAction(new Goto(200, 900));
+		this.asservQueue.addAction(new Go(-100));
 	}
 
 	private void iaHomologation() throws IOException {
 		/*
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
-		this.createAndLaunchDetection();
+		this.createAndLaunchDetection(300);
 
 		// On sort de a zone de départ et on pousse le premier chateau dans la zone de construction
 		this.asserv.gotoPosition(450, this.ymult*920, true);
@@ -190,7 +269,7 @@ public class Ia {
 			e.printStackTrace();
 		}
 		this.asserv.halt();
-		this.asserv.reset();
+		this.asserv.resetHalt();
 		// Suite au timeout, on recule
 		this.asserv.go(-200, true);
 		// On se positionne entre les deux coquillages les plus haut et on fait une boucle pour en chopper un max
@@ -210,7 +289,7 @@ public class Ia {
 		/*
 		 * IA qui roxxe du poney et marque plein de points
 		 */
-		this.createAndLaunchDetection();
+		this.createAndLaunchDetection(300);
 		// TODO effectuer quelques actions
 	}
 	
@@ -222,18 +301,26 @@ public class Ia {
 		}
 	}
 
-	public void createAndLaunchDetection() {
+	public void createAndLaunchDetection(int seuil) {
 		System.out.println("******* Init detection");
 		SRF04JNI srf04AvantDroit = new SRF04JNI(17, 27);
 		SRF04JNI srf04AvantMilieu = new SRF04JNI(10, 9);
 		SRF04JNI srf04AvantGauche = new SRF04JNI(5, 6);
 		SRF04JNI srf04Arriere = new SRF04JNI(19, 26);
-		this.detection = new DetectionExternalSRF04Thread(srf04AvantGauche, srf04AvantMilieu, srf04AvantDroit, srf04Arriere, 250, this);
+		this.detection = new DetectionExternalSRF04Thread(srf04AvantGauche, srf04AvantMilieu, srf04AvantDroit, srf04Arriere, seuil, this);
 		this.detection.start();
 	}
 
 	public void detectionAdversaire(Point p) {
 		this.asserv.halt();
+		this.asservQueue.abort();
+	}
+
+	public void pasdadversaire() {
+		if (this.asservQueue.isAborted()) {
+			this.asserv.resetHalt();
+			this.asservQueue.reset();
+		}
 	}
 
 	public boolean isDebugMode() {

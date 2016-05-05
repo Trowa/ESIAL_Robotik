@@ -9,9 +9,11 @@ import java.util.ArrayList;
  * Created by mickael on 13/05/15.
  */
 public class AsservQueue extends Thread {
-	private ArrayList<Action> queue = new ArrayList<>();
+	private Action currentAction = null;
+	private final ArrayList<Action> queue = new ArrayList<>();
 	private Asserv asserv;
 	private boolean aborted = false;
+	private boolean rerunCommand = false;
 
 	public AsservQueue(Asserv asserv) {
 		this.asserv = asserv;
@@ -22,9 +24,7 @@ public class AsservQueue extends Thread {
 	 */
 	public void abort() {
 		synchronized (queue) {
-			queue.clear();
 			this.aborted = true;
-			// todo un petit return de la queue pour la reprendre ce serait cool non ? enfin avec Astar on s'en bas les couilles
 		}
 	}
 
@@ -36,58 +36,72 @@ public class AsservQueue extends Thread {
 
 	public void reset() {
 		synchronized (queue) {
-			queue.clear();
 			this.aborted = false;
-		}
-	}
-
-	public void waitEnd() throws InterruptedException {
-		while (true) {
-			synchronized (queue) {
-				if (queue.isEmpty())
-					return;
-
-				if (aborted) {
-					throw new InterruptedException();
-				}
-			}
-
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			Action action = null;
-
-			synchronized (queue) {
-				if (queue.size() > 0) {
-					action = queue.remove(0);
+			if (!this.aborted) {
+				System.out.println("not aborted");
+				if (!this.rerunCommand) {
+					synchronized (queue) {
+						if (queue.size() > 0) {
+							this.currentAction = queue.remove(0);
+						} else {
+							try {
+								Thread.sleep(100);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				} else {
+					System.out.println("rerun");
+					this.rerunCommand = false;
 				}
-			}
 
-			if (action != null) {
-				asserv.addAction(action);
-
-				while (!asserv.isLastCommandFinished() && !this.aborted) {
+				if (this.currentAction != null) {
+					System.out.println(this.currentAction.getSerialCommand());
+					asserv.addAction(this.currentAction);
+					asserv.setLastCommandFinished(false);
+					if (this.currentAction.isBlockingCommand()) {
+						System.out.println("wait for finish");
+						while (!asserv.isLastCommandFinished() && !this.aborted) {
+							try {
+								Thread.sleep(10);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+						if (this.aborted) {
+							this.rerunCommand = true;
+						}
+						System.out.println("queue : finished");
+					}
+				} else {
 					try {
-						Thread.sleep(10);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
-			}
-
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			} else {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
+	}
+
+	public boolean isAborted() {
+		return aborted;
+	}
+
+	public void setAborted(boolean aborted) {
+		this.aborted = aborted;
 	}
 }

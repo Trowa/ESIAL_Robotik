@@ -38,7 +38,10 @@ public class DetectionExternalSRF04Thread extends Thread {
 				// Est qu'on regarde hors de la table ?
 				Point nous = ia.getPosition();
 				double angle = nous.getCap();
-				boolean detected = false;
+				boolean detectedArriere  = false;
+				boolean detectedAvantDroit = false;
+				boolean detectedAvantMilieu = false;
+				boolean detectedAvantGauche = false;
 				int x = 0, y = 0;
 
 				if (false && this.ia.asserv.isBackward()) { // En marche arrière
@@ -47,9 +50,9 @@ public class DetectionExternalSRF04Thread extends Thread {
 						// Position de l'adversaire en mm
 						x = (int) (nous.getX() - 130 - Math.cos(angle) * arriere); // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() - Math.sin(angle) * arriere);
-						detected = !this.iDontGiveAFuckOfDetection(x, y);
-						System.out.println("Detection arrière : " + x + "-" + y + ", osef ? " + !detected);
-						if (detected) {
+						detectedArriere = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection arrière : " + x + "-" + y + ", osef ? " + !detectedArriere);
+						if (detectedArriere) {
 							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
 							ia.detectionAdversaire(new Point(x, y));
 						}
@@ -59,9 +62,9 @@ public class DetectionExternalSRF04Thread extends Thread {
 					if (droite < seuil) {
 						x = (int) (nous.getX() + 130 + Math.cos(angle - Math.PI/6) * droite); // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() - 140 + Math.sin(angle - Math.PI/6) * droite); // 140mm = décallage du Y  entre point du robot et capteur
-						detected = !this.iDontGiveAFuckOfDetection(x, y);
-						System.out.println("Detection avant droite : " + x + "-" + y + ", osef ? " + !detected);
-						if (detected) {
+						detectedAvantDroit = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant droite : " + x + "-" + y + ", osef ? " + !detectedAvantDroit);
+						if (detectedAvantDroit) {
 							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
 							ia.detectionAdversaire(new Point(x, y));
 						}
@@ -75,9 +78,9 @@ public class DetectionExternalSRF04Thread extends Thread {
 					if (milieu < seuil) {
 						x = (int) (nous.getX() + 130 + Math.cos(angle) * milieu);  // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() + Math.sin(angle) * milieu);
-						detected = !this.iDontGiveAFuckOfDetection(x, y);
-						System.out.println("Detection avant milieu : " + x + "-" + y + ", osef ? " + !detected);
-						if (detected) {
+						detectedAvantMilieu = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant milieu : " + x + "-" + y + ", osef ? " + !detectedAvantMilieu);
+						if (detectedAvantMilieu) {
 							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
 							ia.detectionAdversaire(new Point(x, y));
 						}
@@ -91,9 +94,9 @@ public class DetectionExternalSRF04Thread extends Thread {
 					if (gauche < seuil) {
 						x = (int) (nous.getX() + 130 + Math.cos(angle + Math.PI/6) * gauche); // 130mm = décallage du X  entre point du robot et capteur
 						y = (int) (nous.getY() + 140 + Math.sin(angle + Math.PI/6) * gauche); // 140mm = décallage du Y  entre point du robot et capteur
-						detected = !this.iDontGiveAFuckOfDetection(x, y);
-						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + !detected);
-						if (detected) {
+						detectedAvantGauche = !this.iDontGiveAFuckOfDetection(x, y);
+						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + !detectedAvantGauche);
+						if (detectedAvantGauche) {
 							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
 							ia.detectionAdversaire(new Point(x, y));
 						}
@@ -102,6 +105,9 @@ public class DetectionExternalSRF04Thread extends Thread {
 						Thread.sleep(12);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
+					}
+					if (!detectedArriere && !detectedAvantDroit && !detectedAvantMilieu && !detectedAvantGauche) {
+						ia.pasdadversaire();
 					}
 				}
 			}
@@ -137,5 +143,5 @@ public class DetectionExternalSRF04Thread extends Thread {
 	public void setDetect(boolean detect) {
 		this.detect = detect;
 	}
-	
+
 }
