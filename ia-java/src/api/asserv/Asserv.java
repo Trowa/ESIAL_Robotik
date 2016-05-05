@@ -73,15 +73,16 @@ public abstract class Asserv implements Runnable {
 	/**
 	 * Attend que la dernière commande ait fini son exécution 
 	 */
-	public void waitForFinish() throws InterruptedException {
+	public void waitForFinish() {
 		
 		synchronized(this) {
-			while (!lastCommandFinished && !interrupted) {
-				this.wait();
-				System.out.println("Réveil asserv!");
-			}
-			if(interrupted) {
-				throw new InterruptedException("Pas eu le temps de finir la commande!");
+			while (!lastCommandFinished) {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				//System.out.println("Réveil asserv!");
 			}
 		}
 	}
@@ -123,7 +124,7 @@ public abstract class Asserv implements Runnable {
 	 * @param y Ordonnée en mm
 	 * @param wait Attendre que la commande soit terminée avant de retourner
 	 */
-	public void gotoPosition(double x, double y, boolean wait) throws InterruptedException {
+	public void gotoPosition(double x, double y, boolean wait) {
 		String commande = "g"+x+"#"+y+"\n";
 		synchronized(this) {
 			sendCommand(commande);
@@ -141,7 +142,7 @@ public abstract class Asserv implements Runnable {
 	 * @param y Ordonnée en mm
 	 * @param wait Attendre que la commande soit terminée avant de retourner
 	 */
-	public void face(double x, double y, boolean wait) throws InterruptedException {
+	public void face(double x, double y, boolean wait) {
 		String commande = "f"+x+"#"+y+"\n";
 		synchronized(this) {
 			sendCommand(commande);
@@ -156,7 +157,7 @@ public abstract class Asserv implements Runnable {
 	 * @param d Distance à parcourir en mm
 	 * @param wait Attendre que la commande soit terminée avant de retourner
 	 */
-	public void go(double d, boolean wait) throws InterruptedException {
+	public void go(double d, boolean wait) {
 		String commande = "v"+d+"\n";
 		synchronized(this) {
 			sendCommand(commande);
@@ -172,7 +173,7 @@ public abstract class Asserv implements Runnable {
 	 * @param a Angle à parcourir en degrés 
 	 * @param wait Attendre que la commande soit terminée avant de retourner
 	 */
-	public void turn(double a, boolean wait) throws InterruptedException {
+	public void turn(double a, boolean wait) {
 		String commande = "t"+a+"\n";
 		synchronized(this) {
 			sendCommand(commande);
@@ -246,7 +247,7 @@ public abstract class Asserv implements Runnable {
 		interrupted = false;
 		while(true) {
 			String blabla = readAsservOutput();
-			System.out.println("blabla: " + blabla);
+			//System.out.println("blabla: " + blabla);
 			if (blabla.contains("ok")) {
 				System.out.println("Asserv ready (la salope)");
 				return;

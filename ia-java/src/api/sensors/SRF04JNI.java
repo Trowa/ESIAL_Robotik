@@ -23,6 +23,11 @@ public class SRF04JNI {
 
 
     public native void initSRF();
+
+    /**
+     * WARNING !!! Attender 12ms entre 2 mesures, même sur des capteurs différents pour ne pas capter des echos foireux
+     * @return mesure du télémètre en mm
+     */
     public native long getMeasure();
 
     public int getGpio_out() {
