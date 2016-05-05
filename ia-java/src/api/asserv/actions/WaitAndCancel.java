@@ -12,7 +12,6 @@ public class WaitAndCancel extends Action {
 	public WaitAndCancel(int timeoutInMs) {
 		// La commande: un Halt suivi d'un Reset
 		super("h\nr");
-		
 		this.timeoutInMs = timeoutInMs;
 	}
 	

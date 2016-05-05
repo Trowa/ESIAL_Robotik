@@ -2,10 +2,7 @@ package ia.esialrobotik;
 
 import api.asserv.Asserv;
 import api.asserv.AsservMbed;
-import api.asserv.actions.Action;
-import api.asserv.actions.Face;
-import api.asserv.actions.Go;
-import api.asserv.actions.Goto;
+import api.asserv.actions.*;
 import api.chrono.Chrono;
 import api.hardware.RaspberryPiGPIO;
 import api.sensors.DetectionExternalSRF04Thread;
@@ -156,18 +153,31 @@ public class Ia {
 		 * IA d'homologation, simple : marquer un point tout en évitant l'adversaire
 		 */
 		this.createAndLaunchDetection();
-		this.queue.addAction(new Goto(900, this.ymult*935));
-		System.out.println("goto 900;935");
+
+		// On sort de a zone de départ et on pousse le premier chateau dans la zone de construction
+		this.queue.addAction(new Goto(450, this.ymult*920));
+		this.queue.addAction(new Goto(900, this.ymult*920));
+		// On quitte la zone de construction
 		this.queue.addAction(new Go(-400));
-		System.out.println("go -400");
+		// On va en face des cabines et on s'alignes
 		this.queue.addAction(new Goto(450, this.ymult*280));
-		System.out.println("goto 450;300");
 		this.queue.addAction(new Face(450, this.ymult*0));
-		System.out.println("face 450;0");
-		this.queue.addAction(new Go(165)); // Faudra ajuster
-		System.out.println("go 155");
+		// On force contre la bordure avec timeout
+		this.queue.addAction(new Go(200));
+		this.queue.addAction(new WaitAndCancel(1000));
+		// Suite au timeout, on recule
 		this.queue.addAction(new Go(-200));
-		System.out.println("go -200");
+		// On se positionne entre les deux coquillages les plus haut et on fait une boucle pour en chopper un max
+		this.queue.addAction(new Goto(425, 1250));
+		this.queue.addAction(new Goto(1050, 1250));
+		this.queue.addAction(new Goto(1050, 1735));
+		this.queue.addAction(new Goto(450, 1735));
+		this.queue.addAction(new Goto(200, 1650));
+		this.queue.addAction(new Goto(200, 900));
+		this.queue.addAction(new Go(-550));
+		this.queue.addAction(new Goto(425, 1250));
+		this.queue.addAction(new Goto(200, 900));
+		this.queue.addAction(new Go(-100));
 	}
 
 	private void iaPrincipale() throws IOException {
