@@ -1,5 +1,8 @@
 package api.asserv.actions;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by mickael on 13/05/15.
  */
@@ -22,7 +25,9 @@ public class Action {
 	}
 
 	public String getSerialCommand() {
-		System.out.println("getSerialCommand " + this.command + " : " + System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date(System.currentTimeMillis());
+		System.out.println("getSerialCommand " + this.command + " : " + format.format(date));
 		return command;
 	}
 

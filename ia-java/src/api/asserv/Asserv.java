@@ -1,5 +1,7 @@
 package api.asserv;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -204,7 +206,9 @@ public abstract class Asserv implements Runnable {
 	 * Désactive l'asservissement
 	 */
 	public void halt() {
-		System.out.println("JE ME HALT : " +  + System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date(System.currentTimeMillis());
+		System.out.println("JE ME HALT : " + format.format(date));
 
 		// On réserve le moniteur de l'asserv
 		synchronized(this) {

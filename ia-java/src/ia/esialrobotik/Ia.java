@@ -12,6 +12,8 @@ import navigation.Navigation.TeamColor;
 import navigation.Point;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimerTask;
 
 public class Ia {
@@ -99,13 +101,17 @@ public class Ia {
 			this.initialisationIA();
 		}
 
-		System.out.println("Gooo : " + System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date(System.currentTimeMillis());
+		System.out.println("Gooo : " + format.format(date));
 
 		chrono_stop.startChrono(new TimerTask() {
 			@Override
 			public void run() {
 
-				System.out.println("Fin du chrono : " + System.currentTimeMillis());
+				SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+				Date date = new Date(System.currentTimeMillis());
+				System.out.println("Fin du chrono : " + format.format(date));
 				asserv.halt();
 				System.out.println("Allez, on plie les gaules et dodo");
 				try {
@@ -236,16 +242,13 @@ public class Ia {
 		// Suite au timeout, on recule
 		this.asservQueue.addAction(new Go(-200));
 		// On se positionne entre les deux coquillages les plus haut et on fait une boucle pour en chopper un max
-		this.asservQueue.addAction(new Goto(425, 1250));
-		this.asservQueue.addAction(new Goto(1050, 1250));
-		this.asservQueue.addAction(new Goto(1050, 1735));
-		this.asservQueue.addAction(new Goto(450, 1735));
-		this.asservQueue.addAction(new Goto(200, 1400));
-		this.asservQueue.addAction(new Goto(200, 600));
+		this.asservQueue.addAction(new Goto(425, this.ymult*1250));
+		this.asservQueue.addAction(new Goto(1050, this.ymult*1250));
+		this.asservQueue.addAction(new Goto(1050, this.ymult*1735));
+		this.asservQueue.addAction(new Goto(450, this.ymult*1735));
+		this.asservQueue.addAction(new Goto(300, this.ymult*1400));
+		this.asservQueue.addAction(new Goto(250, this.ymult*1000));
 		this.asservQueue.addAction(new Go(-300));
-		this.asservQueue.addAction(new Goto(425, 600));
-		this.asservQueue.addAction(new Goto(200, 600));
-		this.asservQueue.addAction(new Go(-100));
 	}
 
 	private void iaHomologation() throws IOException {
