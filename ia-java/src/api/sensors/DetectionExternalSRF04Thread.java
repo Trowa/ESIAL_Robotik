@@ -58,22 +58,23 @@ public class DetectionExternalSRF04Thread extends Thread {
 						}
 					}
 				} else { // En marche avant
-					int droite = (int)this.srf04AvantDroit.getMeasure();
-					if (droite < seuil) {
-						x = (int) (nous.getX() + 130 + Math.cos(angle - Math.PI/6) * droite); // 130mm = décallage du X  entre point du robot et capteur
-						y = (int) (nous.getY() - 140 + Math.sin(angle - Math.PI/6) * droite); // 140mm = décallage du Y  entre point du robot et capteur
-						detectedAvantDroit = !this.iDontGiveAFuckOfDetection(x, y);
-						System.out.println("Detection avant droite : " + x + "-" + y + ", osef ? " + !detectedAvantDroit);
-						if (detectedAvantDroit) {
-							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
-							ia.detectionAdversaire(new Point(x, y));
-						}
-					}
-					try {
-						Thread.sleep(24);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+//					int droite = (int)this.srf04AvantDroit.getMeasure();
+//					if (droite < seuil) {
+//						x = (int) (nous.getX() + 130 + Math.cos(angle - Math.PI/6) * droite); // 130mm = décallage du X  entre point du robot et capteur
+//						y = (int) (nous.getY() - 140 + Math.sin(angle - Math.PI/6) * droite); // 140mm = décallage du Y  entre point du robot et capteur
+//						detectedAvantDroit = !this.iDontGiveAFuckOfDetection(x, y);
+//						System.out.println("Detection avant droite : " + x + "-" + y + ", osef ? " + !detectedAvantDroit);
+//						if (detectedAvantDroit) {
+//							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+//							System.out.println("Nous : " + nous.toString() + " - Eux : " + x + ";" + y);
+//							ia.detectionAdversaire(new Point(x, y));
+//						}
+//					}
+//					try {
+//						Thread.sleep(24);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
 					int milieu = (int)this.srf04AvantMilieu.getMeasure();
 					if (milieu < seuil) {
 						x = (int) (nous.getX() + 130 + Math.cos(angle) * milieu);  // 130mm = décallage du X  entre point du robot et capteur
@@ -82,11 +83,12 @@ public class DetectionExternalSRF04Thread extends Thread {
 						System.out.println("Detection avant milieu : " + x + "-" + y + ", osef ? " + !detectedAvantMilieu);
 						if (detectedAvantMilieu) {
 							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+							System.out.println("Nous : " + nous.toString() + " - Eux : " + x + ";" + y);
 							ia.detectionAdversaire(new Point(x, y));
 						}
 					}
 					try {
-						Thread.sleep(24);
+						Thread.sleep(48);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -98,6 +100,7 @@ public class DetectionExternalSRF04Thread extends Thread {
 //						System.out.println("Detection avant gauche : " + x + "-" + y + ", osef ? " + !detectedAvantGauche);
 //						if (detectedAvantGauche) {
 //							System.out.println("STOOOOOOOOOOOOOOOOOOOOOOOOOOP");
+//							System.out.println("Nous : " + nous.toString() + " - Eux : " + x + ";" + y);
 //							ia.detectionAdversaire(new Point(x, y));
 //						}
 //					}

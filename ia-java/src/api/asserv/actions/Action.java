@@ -22,6 +22,7 @@ public class Action {
 	}
 
 	public String getSerialCommand() {
+		System.out.println("getSerialCommand " + this.command + " : " + System.currentTimeMillis());
 		return command;
 	}
 

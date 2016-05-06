@@ -204,7 +204,7 @@ public abstract class Asserv implements Runnable {
 	 * Désactive l'asservissement
 	 */
 	public void halt() {
-		System.out.println("JE ME HALT");
+		System.out.println("JE ME HALT : " +  + System.currentTimeMillis());
 
 		// On réserve le moniteur de l'asserv
 		synchronized(this) {

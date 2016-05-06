@@ -99,14 +99,15 @@ public class Ia {
 			this.initialisationIA();
 		}
 
-		System.out.println("Gooo");
+		System.out.println("Gooo : " + System.currentTimeMillis());
 
 		chrono_stop.startChrono(new TimerTask() {
 			@Override
 			public void run() {
 
+				System.out.println("Fin du chrono : " + System.currentTimeMillis());
 				asserv.halt();
-				System.out.println("Fin");
+				System.out.println("Allez, on plie les gaules et dodo");
 				try {
 					nettoyage();
 				} catch (IOException e) {
@@ -239,11 +240,11 @@ public class Ia {
 		this.asservQueue.addAction(new Goto(1050, 1250));
 		this.asservQueue.addAction(new Goto(1050, 1735));
 		this.asservQueue.addAction(new Goto(450, 1735));
-		this.asservQueue.addAction(new Goto(200, 1650));
-		this.asservQueue.addAction(new Goto(200, 900));
-		this.asservQueue.addAction(new Go(-550));
-		this.asservQueue.addAction(new Goto(425, 1250));
-		this.asservQueue.addAction(new Goto(200, 900));
+		this.asservQueue.addAction(new Goto(200, 1400));
+		this.asservQueue.addAction(new Goto(200, 600));
+		this.asservQueue.addAction(new Go(-300));
+		this.asservQueue.addAction(new Goto(425, 600));
+		this.asservQueue.addAction(new Goto(200, 600));
 		this.asservQueue.addAction(new Go(-100));
 	}
 
