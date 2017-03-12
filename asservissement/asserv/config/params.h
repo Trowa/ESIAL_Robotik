@@ -61,7 +61,7 @@ PARAM(int32_t, configVersion)
 // Désactivation du command manager (le robot n'est plus asservi)
 PARAM(bool, disableAsserv)
 
-// Réglage des codeurs (on affiche simplement les valeurs des codeurs)
+// Réglage des codeurs (on affiche simplement les valeurs des codeurs et on desactive le calcul odometrique)
 PARAM(bool, reglageCodeurs)
 
 // Désactiver la QuadRampDérivée en distance

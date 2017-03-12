@@ -28,10 +28,10 @@ public:
     /*
     * La classe Utils contient les méthodes de conversions pour que les mesures soient humainement compréhensible
     */
-    int32_t getX() {
+    int64_t getX() {
         return x;   // Renvoie la position en X par rapport au point de départ
     }
-    int32_t getY() {
+    int64_t getY() {
         return y;   // Renvoie la position en Y par rapport au point de départ
     }
     double getTheta() {
@@ -42,7 +42,7 @@ public:
     double getDeltaTheta() {
         return deltaTheta;    // Variation du cap du robot
     }
-    int32_t getDeltaDist() {
+    int64_t getDeltaDist() {
         return deltaDist;    // Variation de la distance du robot
     }
     int32_t getDeltaThetaBrut() {
@@ -72,16 +72,16 @@ private:
 
     // Données sur les codeurs
     double frontParMetre; // Nombre de tics codeurs pour un mètre parcouru
-    int32_t distanceRouesUO; // Distance entre les roues en UO
+    int64_t distanceRouesUO; // Distance entre les roues en UO
     double ratioCodeurs; // Ratio frontParMetreCodeurMax / frontParMetreCodeurMin pour compenser la différence physique entre codeur
     bool applyRatioOnG; // Si vrai, le ratio s'applique au codeur Gauche, sinon le Droit
 
     // Position actuelle
-    int32_t  x, y; //En UO
+    int64_t  x, y; //En UO
     double theta; //En radian
 
     // Variation pour la mise a jour en cours
-    int32_t deltaDist; // En UO
+    int64_t deltaDist; // En UO
     double deltaTheta; //En radian
     int32_t compteurG; // Nombre de tics codeur G depuis dernier refresh
     int32_t compteurD; // Nombre de tics codeur D depuis dernier refresh

@@ -39,7 +39,7 @@ void CodeursDirects::getCounts(int32_t* countG, int32_t* countD)
 	// On ajuste le sens des codeurs en cas de problème de cablage
 	if (Config::swapCodeurs)
 	{ //inversion des deux codeurs
-		int64_t temp = *countG;
+		int32_t temp = *countG;
 		*countG = *countD;
 		*countD = temp;
 	}

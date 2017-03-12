@@ -12,9 +12,13 @@
 #include "../debug/DebugUDP.h"
 #endif
 
+#define ASSERV_FREQ 0.002 //en s
+
 // Ticker pour l'interruption de la boucle d'asserv
 Ticker Live;
 void Live_isr(void);
+
+int leftSpeed;
 
 // Méthodes utiles
 int main();
@@ -22,6 +26,8 @@ void initAsserv();
 void resetAsserv();
 void ecouteSeriePC();
 void ecouteSerie();
+void ecouteI2c();
+void ecouteI2cConfig();
 
 // Objets qui vont bien pour asservir le bestiau
 Odometrie *odometrie;

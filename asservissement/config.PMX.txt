@@ -14,7 +14,7 @@ configVersion = 2017031201
 // Désactivation du command manager (le robot n'est plus asservi)
 disableAsserv = false
 
-// Réglage des codeurs (on affiche simplement les valeurs des codeurs)
+// Réglage des codeurs (on affiche simplement les valeurs des codeurs et on desactive le calcul odometrique)
 reglageCodeurs = false
 
 // Désactiver la QuadRampDérivée en distance
@@ -34,13 +34,13 @@ disableAngleRegu = false
 //--------------------------//
 
 // Fenêtre de l'angle dans lequel on considère que le GoTo peut commencer à avancer
-angleThreshold = 0
+angleThreshold = 0.1
 
 // Distance en dessous de laquelle on revient en marche arriere si on dépasse, sinon demi-tour
-returnThreshold = 0
+returnThreshold = 10
 
 // Distance au point de consigne à partir de laquelle on va essayer d'enchainer la consigne suivante
-enchainThreshold = 0
+enchainThreshold = 2000000
 
 //--------------------------//
 //        Odométrie         //
@@ -52,57 +52,57 @@ placementOrigineY = 0
 
 // Nombre de tics codeurs en 1m pour codeur gauche
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!
-frontParMetreCodeurG = 0
+frontParMetreCodeurG = 21730.0
 
 // Nombre de tics codeurs en 1m pour codeur droite
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!
-frontParMetreCodeurD = 0
+frontParMetreCodeurD = 21730.0
 
 // Distance entre les roues codeuses en mm
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!
-distRoues = 0
+distRoues = 283
 
 // Nombre d'UO pour un tic de codeur
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!
-uOParFront = 0
+uOParFront = 2048
 
 // Inversion du sens du codeur gauche
-inverseCodeurG = 1
+inverseCodeurG = false
 
 // Inversion du sens du codeur droit
-inverseCodeurD = 0
+inverseCodeurD = false
 
 // Échange des codeurs
-swapCodeurs = 0
+swapCodeurs = false
 
 //--------------------------//
 //         Moteurs          //
 //--------------------------//
 
 // Vitesse maximum en sens positif (MD22 : 1 à 127)
-V_MAX_POS_MOTOR = 0
+V_MAX_POS_MOTOR = 127
 
 // Vitesse maximum en sens négatif (MD22 : 1 à 127)
-V_MAX_NEG_MOTOR = 0
+V_MAX_NEG_MOTOR = -128
 
 
 // Vitesses à partir desquelles le robot commence à bouger, pour ne pas
 // envoyer de jus dans des moteurs qui ne tournent pas
 
 // MD22 : 1 a 127
-V_MIN_POS_MOTOR = 0
+V_MIN_POS_MOTOR = 1
 
 // MD22 : -1 a -128
-V_MIN_NEG_MOTOR = 0
+V_MIN_NEG_MOTOR = -1
 
 // Inversion du sens du moteur gauche
-inverseMoteurG = 0
+inverseMoteurG = false
 
 // Inversion du sens du moteur droit
-inverseMoteurD = 0
+inverseMoteurD = false
 
 // Échange des moteurs
-swapMoteurs = 0
+swapMoteurs = false
 
 
 //--------------------------//
@@ -114,19 +114,19 @@ swapMoteurs = 0
 
 
 // Coeff proportionelle
-DIST_KP = 0
+DIST_KP = 30
 
 // Coeff intégrale
 DIST_KI = 0
 
 // Coeff dérivée
-DIST_KD = 0
+DIST_KD = 500
 
 // Coeff permettant de diminuer les valeurs du PID
-DIST_OUT_RATIO = 0
+DIST_OUT_RATIO = 0.000001
 
 // Valeur de sortie maximum pour le moteur
-DIST_MAX_OUTPUT = 0
+DIST_MAX_OUTPUT = 125
 
 // Valeur maximum de l'intégrale (0 = filtre PD)
 DIST_MAX_INTEGRAL = 0
@@ -136,19 +136,19 @@ DIST_MAX_INTEGRAL = 0
 
 
 // Coeff proportionelle
-ANGLE_KP = 0
+ANGLE_KP = 10
 
 // Coeff intégrale
 ANGLE_KI = 0
 
 // Coeff dérivée
-ANGLE_KD = 0
+ANGLE_KD = 400
 
 // Coeff permettant de diminuer les valeurs du PID
-ANGLE_OUT_RATIO = 0
+ANGLE_OUT_RATIO = 0.000001
 
 // Valeur de sortie maximum pour le moteur
-ANGLE_MAX_OUTPUT = 0
+ANGLE_MAX_OUTPUT = 125
 
 // Valeur maximum de l'intégrale (0 = filtre PD)
 ANGLE_MAX_INTEGRAL = 0
@@ -201,4 +201,3 @@ ANGLE_QUAD_ANTICIPATION_GAIN_COEF = 0
 
 // Largeur de la zone où l'on considère être arrivé (UO)
 ANGLE_TAILLE_FENETRE_ARRIVEE = 0
-

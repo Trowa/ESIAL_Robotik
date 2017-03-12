@@ -16,25 +16,51 @@ Md25ctrl::Md25ctrl(PinName I2CsdaPin, PinName I2CsclPin) :
 
 	// Communication I2C entre la Mbed et la MD25
 	i2cLink_.frequency(400000); //Hz
-	i2cLink_.start();
+	//i2cLink_.start();
+	int soft = md_.software_rev_num_get();
 
 	int bat = md_.bat_voltage_get();
-	int soft = md_.software_rev_num_get();
+
 	md_.encoder_reset();
 	int enc2 = md_.encoder2_get();
 	int enc1 = md_.encoder1_get();
 	int cur1 = md_.motor1_current_get();
 	int cur2 = md_.motor2_current_get();
 
-	printf(
-			"MD25 -- soft=%d \tbat=%d \tenc1=%d \tenc2=%d \tcur1=%d \tcur2=%d\r\n",
-			soft, bat, enc1, enc2, cur1, cur2);
+	printf("MD25 -- soft=%d \tbat=%d \tenc1=%d \tenc2=%d \tcur1=%d \tcur2=%d\r\n", soft, bat, enc1,
+			enc2, cur1, cur2);
 
-	md_.mode_set(MODE_1);
-	md_.acceleration_set(10);
-	md_.auto_speed_set(true);
-	md_.speed1_set(0);
-	md_.speed2_set(0);
+	int r = 0;
+	r = md_.mode_set(MODE_1);
+	if (r == -1)
+	{
+		printf("ERROR MD25 Mode not set %d\r\n", r);
+		ErrorLed = 1;
+	}
+	r = md_.acceleration_set(10);
+	if (r == -1)
+	{
+		printf("ERROR MD25 acceleration not set %d\r\n", r);
+		ErrorLed = 1;
+	}
+	r = md_.auto_speed_set(true);
+	if (r == -1)
+	{
+		printf("ERROR MD25 auto_speed not set %d\r\n", r);
+		ErrorLed = 1;
+	}
+	r = md_.speed1_set(0);
+	if (r == -1)
+	{
+		printf("ERROR MD25 speed1_set not set %d\r\n", r);
+		ErrorLed = 1;
+	}
+	r = md_.speed2_set(0);
+	if (r == -1)
+	{
+		printf("ERROR MD25 speed2_set not set %d\r\n", r);
+		ErrorLed = 1;
+	}
 
 }
 

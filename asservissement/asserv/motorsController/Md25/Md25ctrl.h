@@ -16,6 +16,7 @@
 
 #define ADDR_MD25 0xB0
 
+DigitalOut ErrorLed(LED1);
 
 
 class Md25ctrl : public MotorsController

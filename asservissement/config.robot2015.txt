@@ -14,7 +14,7 @@ configVersion = 2015051101
 // Désactivation du command manager (le robot n'est plus asservi)
 disableAsserv = 0
 
-// Réglage des codeurs (on affiche simplement les valeurs des codeurs)
+// Réglage des codeurs (on affiche simplement les valeurs des codeurs et on desactive le calcul odometrique)
 reglageCodeurs = 0
 
 // Désactiver la QuadRampDérivée en distance

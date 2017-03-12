@@ -59,6 +59,7 @@ int MD25::write(char reg_addr, char *data, int bytes)
 	{
 		return -1;
 	}
+	wait_us(100); //tested with min 75us
 
 	/* Return success */
 	return 0;
@@ -76,6 +77,7 @@ int MD25::read(char reg_addr, char *data, int bytes)
 	/* Setup register to read */
 	if (!i2c_interface->write(i2c_address + I2C_WRITE_BIT, &reg_addr, 1, true))
 	{
+
 		/* Read register */
 		if (i2c_interface->read(i2c_address + I2C_READ_BIT, data, bytes, false))
 		{
