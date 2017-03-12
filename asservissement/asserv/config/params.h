@@ -52,7 +52,7 @@
 
 // Version du fichier ce configuration (date, mois, jour, puis révision entre 01 et 99)
 // Exemple : 2013030801 : révision 01 le 08/03/2013
-PARAM(int64_t, configVersion)
+PARAM(int32_t, configVersion)
 
 //--------------------------//
 //     Modes de réglage     //
@@ -84,18 +84,18 @@ PARAM(bool, disableAngleRegu)
 PARAM(double, angleThreshold)
 
 // Distance en dessous de laquelle on revient en marche arriere si on dépasse, sinon demi-tour
-PARAM(int64_t, returnThreshold)
+PARAM(int32_t, returnThreshold)
 
 // Distance au point de consigne à partir de laquelle on va essayer d'enchainer la consigne suivante
-PARAM(int64_t, enchainThreshold)
+PARAM(int32_t, enchainThreshold)
 
 //--------------------------//
 //        Odométrie         //
 //--------------------------//
 
 // Distance entre le point asservit (centre des deux roues) et l'arrière du robot pour mettre le (0,0) au coin de la table
-PARAM(int64_t, placementOrigineX)
-PARAM(int64_t, placementOrigineY)
+PARAM(int32_t, placementOrigineX)
+PARAM(int32_t, placementOrigineY)
 
 // Nombre de tics codeurs en 1m pour codeur gauche
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!
@@ -107,11 +107,11 @@ PARAM(double, frontParMetreCodeurD)
 
 // Distance entre les roues codeuses en mm
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!
-PARAM(int64_t, distRoues)
+PARAM(int32_t, distRoues)
 
 // Nombre d'UO pour un tic de codeur
 // !!! ATTENTION : redémarrer l'asserv pour prendre en compte les changements !!
-PARAM(int64_t, uOParFront)
+PARAM(int32_t, uOParFront)
 
 // Inversion du sens du codeur gauche
 PARAM(bool, inverseCodeurG)
@@ -127,20 +127,20 @@ PARAM(bool, swapCodeurs)
 //--------------------------//
 
 // Vitesse maximum en sens positif (MD22 : 1 à 127)
-PARAM(int64_t, V_MAX_POS_MOTOR)
+PARAM(int32_t, V_MAX_POS_MOTOR)
 
 // Vitesse maximum en sens négatif (MD22 : 1 à 127)
-PARAM(int64_t, V_MAX_NEG_MOTOR)
+PARAM(int32_t, V_MAX_NEG_MOTOR)
 
 
 // Vitesses à partir desquelles le robot commence à bouger, pour ne pas
 // envoyer de jus dans des moteurs qui ne tournent pas
 
 // MD22 : 1 a 127
-PARAM(int64_t, V_MIN_POS_MOTOR)
+PARAM(int32_t, V_MIN_POS_MOTOR)
 
 // MD22 : -1 a -128
-PARAM(int64_t, V_MIN_NEG_MOTOR)
+PARAM(int32_t, V_MIN_NEG_MOTOR)
 
 // Inversion du sens du moteur gauche
 PARAM(bool, inverseMoteurG)
@@ -161,92 +161,92 @@ PARAM(bool, swapMoteurs)
 
 
 // Coeff proportionelle
-PARAM(int64_t, DIST_KP)
+PARAM(int32_t, DIST_KP)
 
 // Coeff intégrale
-PARAM(int64_t, DIST_KI)
+PARAM(int32_t, DIST_KI)
 
 // Coeff dérivée
-PARAM(int64_t, DIST_KD)
+PARAM(int32_t, DIST_KD)
 
 // Coeff permettant de diminuer les valeurs du PID
 PARAM(double, DIST_OUT_RATIO)
 
 // Valeur de sortie maximum pour le moteur
-PARAM(int64_t, DIST_MAX_OUTPUT)
+PARAM(int32_t, DIST_MAX_OUTPUT)
 
 // Valeur maximum de l'intégrale (0 = filtre PD)
-PARAM(int64_t, DIST_MAX_INTEGRAL)
+PARAM(int32_t, DIST_MAX_INTEGRAL)
 
 
 // PID en angle
 
 
 // Coeff proportionelle
-PARAM(int64_t, ANGLE_KP)
+PARAM(int32_t, ANGLE_KP)
 
 // Coeff intégrale
-PARAM(int64_t, ANGLE_KI)
+PARAM(int32_t, ANGLE_KI)
 
 // Coeff dérivée
-PARAM(int64_t, ANGLE_KD)
+PARAM(int32_t, ANGLE_KD)
 
 // Coeff permettant de diminuer les valeurs du PID
 PARAM(double, ANGLE_OUT_RATIO)
 
 // Valeur de sortie maximum pour le moteur
-PARAM(int64_t, ANGLE_MAX_OUTPUT)
+PARAM(int32_t, ANGLE_MAX_OUTPUT)
 
 // Valeur maximum de l'intégrale (0 = filtre PD)
-PARAM(int64_t, ANGLE_MAX_INTEGRAL)
+PARAM(int32_t, ANGLE_MAX_INTEGRAL)
 
 
 // QUADRAMPDerivee (distance)
 
 // Vitesse max en marche avant
-PARAM(int64_t, DIST_QUAD_1ST_POS)
+PARAM(int32_t, DIST_QUAD_1ST_POS)
 
 // Vitesse max en marche arrière
-PARAM(int64_t, DIST_QUAD_1ST_NEG)
+PARAM(int32_t, DIST_QUAD_1ST_NEG)
 
 // Accélération max en marche avant
-PARAM(int64_t, DIST_QUAD_AV_2ND_ACC)
+PARAM(int32_t, DIST_QUAD_AV_2ND_ACC)
 
 // Décélération max en marche avant
-PARAM(int64_t, DIST_QUAD_AV_2ND_DEC)
+PARAM(int32_t, DIST_QUAD_AV_2ND_DEC)
 
 // Coeff déterminant le début de la rampe de décélération en marche avant
-PARAM(int64_t, DIST_QUAD_AV_ANTICIPATION_GAIN_COEF)
+PARAM(int32_t, DIST_QUAD_AV_ANTICIPATION_GAIN_COEF)
 
 // Accélération max en marche arrière
-PARAM(int64_t, DIST_QUAD_AR_2ND_ACC)
+PARAM(int32_t, DIST_QUAD_AR_2ND_ACC)
 
 // Décélération max en marche arrière
-PARAM(int64_t, DIST_QUAD_AR_2ND_DEC)
+PARAM(int32_t, DIST_QUAD_AR_2ND_DEC)
 
 // Coeff déterminant le début de la rampe de décélération en marche arrière
-PARAM(int64_t, DIST_QUAD_AR_ANTICIPATION_GAIN_COEF)
+PARAM(int32_t, DIST_QUAD_AR_ANTICIPATION_GAIN_COEF)
 
 // Largeur de la zone où l'on considère être arrivé (UO)
-PARAM(int64_t, DIST_TAILLE_FENETRE_ARRIVEE)
+PARAM(int32_t, DIST_TAILLE_FENETRE_ARRIVEE)
 
 
 // QUADRAMPDerivee (angle)
 
 
 // Vitesse max en rotation
-PARAM(int64_t, ANGLE_QUAD_1ST_POS)
+PARAM(int32_t, ANGLE_QUAD_1ST_POS)
 
 // Accélération max en rotation
-PARAM(int64_t, ANGLE_QUAD_2ND_ACC)
+PARAM(int32_t, ANGLE_QUAD_2ND_ACC)
 
 // Décélération max en rotation
-PARAM(int64_t, ANGLE_QUAD_2ND_DEC)
+PARAM(int32_t, ANGLE_QUAD_2ND_DEC)
 
 // Coeff déterminant le début de la rampe de décélération en rotation
-PARAM(int64_t, ANGLE_QUAD_ANTICIPATION_GAIN_COEF)
+PARAM(int32_t, ANGLE_QUAD_ANTICIPATION_GAIN_COEF)
 
 // Largeur de la zone où l'on considère être arrivé (UO)
-PARAM(int64_t, ANGLE_TAILLE_FENETRE_ARRIVEE)
+PARAM(int32_t, ANGLE_TAILLE_FENETRE_ARRIVEE)
 
 #undef PARAM

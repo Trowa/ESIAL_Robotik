@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/LPC_DEPLOY/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/LPC_DEPLOY/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/LPC_DEPLOY/value=cp LPC1768/Asservissement.bin /media/pmx/MBED/ ;cp config.PMX.txt /media/pmx/MBED/config.txt; sync
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/PATH/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/PATH/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/PATH/value=/home/pmx/git/gcc4mbed/gcc-arm-none-eabi/bin\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/usr/games\:/usr/local/games\:/usr/lib/jvm/java-8-oracle/bin\:/usr/lib/jvm/java-8-oracle/db/bin\:/usr/lib/jvm/java-8-oracle/jre/bin
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.14405730/appendContributed=true

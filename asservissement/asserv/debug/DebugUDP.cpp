@@ -1,6 +1,6 @@
 #include "DebugUDP.h"
 
-#ifdef DEBUG
+#ifdef DEBUG_UDP
 
 #include <string>
 #include <list>

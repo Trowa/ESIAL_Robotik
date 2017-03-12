@@ -1,7 +1,7 @@
 #include "ConsignController.h"
 
 //#define DEBUG
-#ifdef DEBUG
+#ifdef DEBUG_UDP
 #include "../debug/DebugUDP.h"
 #endif
 
@@ -55,8 +55,8 @@ void ConsignController::set_dist_consigne(int64_t consigneUO)
 void ConsignController::perform()
 {
 
-    int64_t dist_output = 0; // Calcul de la sortie moteur en distance
-    int64_t angle_output = 0; // Calcul de la sortie moteur en angle
+	int32_t dist_output = 0; // Calcul de la sortie moteur en distance
+	int32_t angle_output = 0; // Calcul de la sortie moteur en angle
 
     // Si le régulateur d'angle est actif, il doit calculer la consigne angulaire en fonction de la différence des tics codeurs (variation d'angle en UO)
     if (angle_regu_on && !Config::disableAngleRegu) {
@@ -69,15 +69,15 @@ void ConsignController::perform()
     }
 
     //Calcul des vitesses à appliquer en les bornant évidemment
-    int64_t VmoteurD = Utils::constrain(dist_output + angle_output , Config::V_MAX_NEG_MOTOR , Config::V_MAX_POS_MOTOR);
-    int64_t VmoteurG = Utils::constrain(dist_output - angle_output, Config::V_MAX_NEG_MOTOR , Config::V_MAX_POS_MOTOR);
+    int32_t VmoteurD = Utils::constrain(dist_output + angle_output , Config::V_MAX_NEG_MOTOR , Config::V_MAX_POS_MOTOR);
+    int32_t VmoteurG = Utils::constrain(dist_output - angle_output, Config::V_MAX_NEG_MOTOR , Config::V_MAX_POS_MOTOR);
 
     // On donne l'ordre aux moteurs et roulez jeunesse !!
     motors->vitesseG(VmoteurG);
     motors->vitesseD(VmoteurD);
 
-    //printf("VG=%d  ", VmoteurG);
-    //printf("VD=%d\n", VmoteurD);
+    //printf("VG=%ld  \tVD=%ld\r\n", VmoteurG, VmoteurD);
+
 }
 
 

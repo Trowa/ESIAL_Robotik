@@ -18,7 +18,7 @@ LIBS_SUFFIX=
 GPFLAGS=-DDATE_COMPIL='"$(shell date)"' -DAUTEUR_COMPIL='"$(USER)"' -DGIT_VERSION='"$(shell git describe --dirty --always)"'
 PYTHON?=/usr/bin/python
 NEWLIB_NANO=0
-
+GCC4MBED_DIR=../../gcc4mbed
 include $(GCC4MBED_DIR)/build/gcc4mbed.mk
 
 configs: $(wildcard config.*.txt)

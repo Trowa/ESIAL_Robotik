@@ -14,11 +14,14 @@ class CodeursDirects : public CodeursInterface
 public:
     CodeursDirects(PinName pinChanA_G, PinName pinChanB_G, PinName pinChanA_D, PinName pinChanB_D);
     ~CodeursDirects();
-    virtual void getCounts(int64_t* countG, int64_t* countD);
+    virtual void getCounts(int32_t* countG, int32_t* countD);
 
 private:
     Codeur codeurG;
     Codeur codeurD;
+
+    int32_t lastCountD_;
+    int32_t lastCountG_;
 
 };
 

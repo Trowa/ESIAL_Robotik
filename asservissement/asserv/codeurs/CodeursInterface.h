@@ -9,7 +9,7 @@ class CodeursInterface
 
 public:
     virtual ~CodeursInterface() { }
-    virtual void getCounts(int64_t* countG, int64_t* countD) = 0;
+    virtual void getCounts(int32_t* countG, int32_t* countD) = 0;
 
 };
 

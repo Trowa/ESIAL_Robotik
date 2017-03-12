@@ -58,7 +58,7 @@ private:
     // Permet de connaitre l'état de la consigne actuelle ( on est arrivée ou non... )
     bool arrivee;
 
-#ifdef DEBUG
+#ifdef DEBUG_UDP
     bool isDistance; //permet de savoir si cette instance de la quadramp est utilisée pour la régulation de distance
 #endif
 };

@@ -21,7 +21,7 @@ void Codeur::reset(void)
 }
 
 
-int Codeur::getCount(void)
+long Codeur::getCount(void)
 {
     return count;
 }

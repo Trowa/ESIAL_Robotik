@@ -1,7 +1,7 @@
 #ifndef DEBUG_UDP_H
 #define DEBUG_UDP_H
 
-#ifdef DEBUG
+#ifdef DEBUG_UDP
 
 #include "LPC1768/if/eth/EthernetNetIf.h"
 #include "LPC1768/api/UDPSocket.h"

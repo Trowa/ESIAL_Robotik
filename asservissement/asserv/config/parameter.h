@@ -6,12 +6,12 @@
 
 struct Parameter {
     enum Type {
-        INT64,
+        INT32,
         BOOL,
         DOUBLE
     };
 
-    Parameter(std::string name, int64_t *ptr) : name(name), ptr(ptr), type(INT64) { *int_ptr = 0; }
+    Parameter(std::string name, int32_t *ptr) : name(name), ptr(ptr), type(INT32) { *int_ptr = 0; }
     Parameter(std::string name, bool *ptr) : name(name), ptr(ptr), type(BOOL) { *bool_ptr = false; }
     Parameter(std::string name, double *ptr) : name(name), ptr(ptr), type(DOUBLE) { *double_ptr = 0; }
 
@@ -22,7 +22,7 @@ struct Parameter {
 
     void setFromString(std::string value) const {
         switch (type)  {
-            case INT64:
+            case INT32:
                 *int_ptr = atoll(value.c_str());
                 break;
             case BOOL:
@@ -37,7 +37,7 @@ struct Parameter {
     std::string toString() const {
         std::stringstream out;
         switch (type) {
-            case INT64:
+            case INT32:
                 out << get<int64_t>();
                 break;
 
@@ -68,7 +68,7 @@ struct Parameter {
     const std::string name;
     const union {
         void *ptr;
-        int64_t *int_ptr;
+        int32_t *int_ptr;
         bool *bool_ptr;
         double *double_ptr;
     };

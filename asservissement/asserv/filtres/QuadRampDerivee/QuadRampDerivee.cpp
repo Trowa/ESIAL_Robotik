@@ -1,6 +1,6 @@
 #include "QuadRampDerivee.h"
 
-#ifdef DEBUG
+#ifdef DEBUG_UDP
 #include "../../debug/DebugUDP.h"
 extern DebugUDP *debugUdp;
 #endif
@@ -11,7 +11,7 @@ extern DebugUDP *debugUdp;
 QuadRampDerivee::QuadRampDerivee(bool isDistance)
 {
 
-#ifdef DEBUG
+#ifdef DEBUG_UDP
     this->isDistance = isDistance;
 #endif
 
@@ -98,7 +98,7 @@ int64_t QuadRampDerivee::filtre(int64_t consigne, int64_t position_actuelle , in
     prevConsigneVitesse = consigneVitesse;
 
     //Du debug
-#ifdef DEBUG
+#ifdef DEBUG_UDP
 
     char name[32];
 
